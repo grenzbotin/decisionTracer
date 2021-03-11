@@ -1,5 +1,5 @@
-import useTranslation from "next-translate/useTranslation";
 import Head from "next/head";
+import i18next from "i18next";
 import { useRouter } from "next/router";
 
 const publicUrl = "https://something.de";
@@ -12,7 +12,6 @@ interface Props {
 
 const HtmlHeader: React.FC<Props> = ({ title, description, keywords }) => {
   const { pathname } = useRouter();
-  const { lang } = useTranslation();
 
   return (
     <Head>
@@ -23,12 +22,12 @@ const HtmlHeader: React.FC<Props> = ({ title, description, keywords }) => {
       <meta name="twitter:card" content="summary" key="twcard" />
       <meta
         property="og:url"
-        content={`${publicUrl}/${lang}${pathname}`}
+        content={`${publicUrl}/${i18next.language}${pathname}`}
         key="ogurl"
       />
       <meta
         property="og:image"
-        content={`${publicUrl}/images/vulpis_og.png`}
+        content={`${publicUrl}/images/og.png`}
         key="ogimage"
       />
       <meta property="og:title" content={title} key="ogtitle" />

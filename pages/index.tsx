@@ -1,22 +1,16 @@
-import React from 'react';
-import useTranslation from 'next-translate/useTranslation';
-import dynamic from 'next/dynamic';
-
-const HtmlHeader = dynamic(() => import('../components/HtmlHeader'));
-const Calculator = dynamic(() => import('../components/Calculator'));
-const Result = dynamic(() => import('../components/Result'));
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import i18next from "i18next";
 
 export default function Home() {
-  const { t } = useTranslation('home');
-  return (
-    <>
-      <HtmlHeader
-        title={t('meta.title')}
-        description={t('meta.description')}
-        keywords={t('meta.keywords')}
-      />
-      <Calculator />
-      <Result />
-    </>
-  );
+  const router = useRouter();
+
+  useEffect(() => {
+    const { pathname } = router;
+    if (pathname == "/") {
+      router.push("/" + i18next.language.substring(0, 2));
+    }
+  });
+
+  return null;
 }

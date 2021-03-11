@@ -1,0 +1,16 @@
+{
+  "home": {
+    "meta": {
+      "title": "Decision Tracer | Home",
+      "description": "Finde einfach und mit Substanz zu Deiner Entscheidung",
+      "keywords": "Rechner, Entscheidungshilfe, Corona"
+    }
+  },
+  "common": {
+    "navbar": {
+    },
+    "heading": {
+      "logo": "Willkommen auf Decision Tracer"
+    }
+  }
+}

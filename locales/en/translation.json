@@ -1,0 +1,16 @@
+{
+  "home": {
+    "meta": {
+      "title": "Decision Tracer | Home",
+      "description": "Make the right choice with ease",
+      "keywords": "Calculator, Decision helper, Corona"
+    }
+  },
+  "common": {
+    "navbar": {
+    },
+    "heading": {
+      "logo": "Welcome to Decision Tracer"
+    }
+  }
+}
