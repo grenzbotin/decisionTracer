@@ -6,22 +6,34 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2.3.1
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
         with:
           persist-credentials: false
 
-      - name: Install and Build
+      - name: Cache  💾
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-v3-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install and Build 🔧
         uses: actions/setup-node@v1
+        with:
+          node-version: "14"
       - run: npm install
       - run: npm run build
         env:
-          CI: true
-          DEPLOY_TARGET: gh-pages
+          CI: false
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@3.7.1
+      - name: Deploy 🚀
+        if: github.ref == 'refs/heads/main'
+        uses: JamesIves/github-pages-deploy-action@3.6.2
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
