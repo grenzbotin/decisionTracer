@@ -1,0 +1,15 @@
+{
+  "short_name": "Decision Tracer",
+  "name": "Get to your decisions in a rational way",
+  "gcm_sender_id": "",
+  "gcm_user_visible_only": true,
+  "permissions": [
+    "gcm"
+  ],
+  "start_url": "/",
+  "scope": "/",
+  "orientation": "portrait",
+  "display": "standalone",
+  "theme_color": "#65a88b",
+  "background_color": "#e3e3e3"
+}
