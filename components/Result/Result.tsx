@@ -1,52 +1,49 @@
-import React, { useContext } from "react";
-import dynamic from "next/dynamic";
-import {
-  Decision,
-  GlobalDecisionContext,
-} from "../../hooks/GlobalDecisionsContextProvider";
-import { Paper } from "@material-ui/core";
-import { generateColors } from "../theme";
+import React, { useContext } from 'react';
+import dynamic from 'next/dynamic';
+import { Decision, GlobalDecisionContext } from '../../hooks/GlobalDecisionsContextProvider';
+import { Paper } from '@material-ui/core';
+import { generateColors } from '../theme';
 
-const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 const defaultOptions = {
   chart: {
-    id: "basicValues",
-    type: "bar",
+    id: 'basicValues',
+    type: 'bar'
   },
   plotOptions: {
     bar: {
       borderRadius: 6,
-      endingShape: "rounded",
-      distributed: true,
-    },
+      endingShape: 'rounded',
+      distributed: true
+    }
   },
   grid: {
     row: {
-      colors: ["#fff", "#f2f2f2"],
-    },
+      colors: ['#fff', '#f2f2f2']
+    }
   },
   yaxis: {
     title: {
-      text: "Nutzwert",
-    },
+      text: 'Nutzwert'
+    }
   },
   dataLabels: {
-    enabled: false,
+    enabled: false
   },
   legend: {
-    show: false,
+    show: false
   },
   annotations: {
     yaxis: [
       {
         y: 0,
         strokeDashArray: 0,
-        borderColor: "#919191",
-        borderWidth: 2,
-      },
-    ],
-  },
+        borderColor: '#919191',
+        borderWidth: 2
+      }
+    ]
+  }
 };
 
 function getResults(decisions: Array<Decision>): Array<number | boolean> {
@@ -71,18 +68,22 @@ function Result(): JSX.Element {
   return (
     <Paper
       style={{
-        minWidth: "200px",
-        padding: "1rem",
-        marginTop: "1rem",
+        minWidth: '200px',
+        padding: '1rem',
+        marginTop: '1rem'
       }}
     >
-      <Chart
-        options={{ ...defaultOptions, colors, xaxis: { categories } }}
-        series={[{ name: "Nutzwert", data: results }]}
-        type="bar"
-        height={300}
-        width="100%"
-      />
+      {decisions.length > 0 ? (
+        <Chart
+          options={{ ...defaultOptions, colors, xaxis: { categories } }}
+          series={[{ name: 'Nutzwert', data: results }]}
+          type="bar"
+          height={300}
+          width="100%"
+        />
+      ) : (
+        'Keine Entscheidungen angegeben'
+      )}
     </Paper>
   );
 }

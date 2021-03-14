@@ -1,40 +1,37 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Slider } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
-import { GlobalDecisionContext } from "../../hooks/GlobalDecisionsContextProvider";
+import React, { useContext, useEffect, useState } from 'react';
+import { Box, Slider } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import SentimentDissatisfiedOutlinedIcon from '@material-ui/icons/SentimentDissatisfiedOutlined';
+import SentimentSatisfiedOutlinedIcon from '@material-ui/icons/SentimentSatisfiedOutlined';
+
+import { GlobalDecisionContext } from '../../hooks/GlobalDecisionsContextProvider';
+import { RED, GREEN } from '../theme';
 
 interface Props {
   itemKey: number;
   decisionKey: number;
   value: number;
-  style: { color: string };
 }
 
 const CustomSlider = withStyles({
   rail: {
     opacity: 0.7,
-    backgroundImage:
-      "linear-gradient(90deg, rgba(208,0,0,1) 0%, rgba(191,199,0,1) 50%, rgba(128,255,53,1) 100%)",
+    backgroundImage: `linear-gradient(90deg, rgb(${RED}) 0%, rgba(191,199,0,1) 50%, rgb(${GREEN}) 100%)`
   },
   track: {
-    color: "transparent",
-    backgroundImage: "transparent",
-  },
+    color: 'transparent',
+    backgroundImage: 'transparent'
+  }
 })(Slider);
 
 const DESIRED_MIN_DIFFERENCE = 2000;
 const GROW_LEVEL = 100;
 
-const GrowingSlider: React.FC<Props> = ({
-  itemKey,
-  decisionKey,
-  value,
-  style,
-}) => {
+const GrowingSlider: React.FC<Props> = ({ itemKey, decisionKey, value }) => {
   const { setValueChange } = useContext(GlobalDecisionContext);
   const [minMax, setMinMax] = useState<{ min: number; max: number }>({
     min: -1000,
-    max: 1000,
+    max: 1000
   });
 
   useEffect(() => {
@@ -63,17 +60,21 @@ const GrowingSlider: React.FC<Props> = ({
   }, [value, minMax]);
 
   return (
-    <CustomSlider
-      id={`value-${decisionKey}-${itemKey}`}
-      value={value}
-      aria-labelledby="value"
-      min={minMax.min}
-      max={minMax.max}
-      step={10}
-      style={style}
-      valueLabelDisplay="auto"
-      onChange={(_e, value) => setValueChange(decisionKey, itemKey, value)}
-    />
+    <Box style={{ display: 'flex' }}>
+      <SentimentDissatisfiedOutlinedIcon style={{ color: `rgb(${RED})`, marginRight: '.2rem' }} />
+      <CustomSlider
+        id={`value-${decisionKey}-${itemKey}`}
+        value={value}
+        aria-labelledby="value"
+        min={minMax.min}
+        max={minMax.max}
+        step={10}
+        style={{ color: 'rgb(94, 94, 94)' }}
+        valueLabelDisplay="auto"
+        onChange={(_e, value) => setValueChange(decisionKey, itemKey, value)}
+      />
+      <SentimentSatisfiedOutlinedIcon style={{ color: `rgb(${GREEN})`, marginLeft: '.2rem' }} />
+    </Box>
   );
 };
 

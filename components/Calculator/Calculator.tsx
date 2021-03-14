@@ -1,39 +1,29 @@
-import {
-  Card,
-  Grid,
-  Paper,
-  CardContent,
-  Typography,
-  Slider,
-  Button,
-} from "@material-ui/core";
-import React, { useContext } from "react";
-import {
-  Decision,
-  GlobalDecisionContext,
-} from "../../hooks/GlobalDecisionsContextProvider";
-import IconButton from "@material-ui/core/IconButton";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
+import { Card, Grid, Paper, CardContent, Typography, Slider, Button } from '@material-ui/core';
+import React, { useContext } from 'react';
+import { Decision, GlobalDecisionContext } from '../../hooks/GlobalDecisionsContextProvider';
+import IconButton from '@material-ui/core/IconButton';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
-import { generateColors } from "../theme";
-import EditableTitle from "./EditableTitle";
-import NonLinearSlider from "./NonLinearSlider";
-import ValidatedInputField from "./ValidatedInputField";
-import GrowingSlider from "./GrowingSlider";
+import { generateColors } from '../theme';
+import EditableTitle from './EditableTitle';
+import NonLinearSlider from './NonLinearSlider';
+import ValidatedInputField from './ValidatedInputField';
+import GrowingSlider from './GrowingSlider';
 
 const marks = [
   {
     value: 0,
-    label: "0%",
+    label: '0%'
   },
   {
     value: 50,
-    label: "50%",
+    label: '50%'
   },
   {
     value: 100,
-    label: "100%",
-  },
+    label: '100%'
+  }
 ];
 
 function valuetext(value: number): string {
@@ -72,29 +62,21 @@ export default function Calculator(): JSX.Element {
     setNewScenario,
     editDecisionName,
     editScenarioName,
+    removeDecision,
+    removeScenario
   } = useContext(GlobalDecisionContext);
 
   const colors = generateColors(decisions.length);
 
   return (
     <Grid container spacing={2}>
-      <Grid
-        container
-        item
-        xs={12}
-        style={{ display: "flex", justifyContent: "space-between" }}
-      >
+      <Grid container item xs={12} style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Grid item md={6} xs={12}>
           <Typography variant="h4" component="h1" gutterBottom>
             Sollte ich mich impfen lassen?
           </Typography>
         </Grid>
-        <Grid
-          item
-          md={6}
-          xs={12}
-          style={{ alignSelf: "center", textAlign: "right" }}
-        >
+        <Grid item md={6} xs={12} style={{ alignSelf: 'center', textAlign: 'right' }}>
           <Button
             variant="contained"
             color="primary"
@@ -109,28 +91,33 @@ export default function Calculator(): JSX.Element {
         <Grid key={decision.key} item xs>
           <Paper
             style={{
-              minWidth: "200px",
-              padding: "1rem",
-              borderTop: `5px solid ${colors[decision.key]}`,
+              minWidth: '200px',
+              padding: '1rem',
+              borderTop: `5px solid ${colors[decision.key]}`
             }}
           >
             <div
               style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: ".5rem",
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: '.5rem'
               }}
             >
               <EditableTitle
                 title={decision.title}
-                onChange={(title: string) =>
-                  editDecisionName(title, decision.key)
-                }
+                onChange={(title: string) => editDecisionName(title, decision.key)}
                 variant="h5"
                 component="h2"
               />
               <div style={{ color: colors[decision.key] }}>
+                <IconButton
+                  aria-label="remove scenario"
+                  component="span"
+                  onClick={() => removeDecision(decision.key)}
+                >
+                  <DeleteForeverIcon fontSize="small" color="inherit" />
+                </IconButton>
                 <IconButton
                   color="inherit"
                   aria-label="add scenario"
@@ -144,23 +131,32 @@ export default function Calculator(): JSX.Element {
             <Grid container spacing={2}>
               {decision.cases.map((item) => (
                 <Grid key={item.key} item xs>
-                  <Card variant="outlined" style={{ padding: ".5rem" }}>
+                  <Card variant="outlined" style={{ padding: '.5rem', minWidth: '250px' }}>
                     <CardContent>
-                      <EditableTitle
-                        title={item.title}
-                        onChange={(title: string) =>
-                          editScenarioName(title, decision.key, item.key)
-                        }
-                        variant="h6"
-                        component="h3"
-                      />
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <EditableTitle
+                          title={item.title}
+                          onChange={(title: string) =>
+                            editScenarioName(title, decision.key, item.key)
+                          }
+                          variant="h6"
+                          component="h3"
+                        />
+                        <IconButton
+                          aria-label="remove scenario"
+                          component="span"
+                          onClick={() => removeScenario(decision.key, item.key)}
+                        >
+                          <DeleteForeverIcon fontSize="small" color="inherit" />
+                        </IconButton>
+                      </div>
                       <Typography
                         variant="caption"
                         gutterBottom
                         style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "space-between",
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between'
                         }}
                       >
                         <ValidatedInputField
@@ -177,20 +173,18 @@ export default function Calculator(): JSX.Element {
                         marks={marks}
                         style={{ color: colors[decision.key] }}
                         valueLabelDisplay="auto"
-                        onChange={(_e, value) =>
-                          setProbabiltyChange(decision.key, item.key, value)
-                        }
+                        onChange={(_e, value) => setProbabiltyChange(decision.key, item.key, value)}
                       />
                       <br />
                       <NonLinearSlider
                         marks={[
-                          { value: 0 },
+                          { value: 0, label: 0 },
                           { value: 5, label: 5 },
                           { value: 10, label: 10 },
                           { value: 15, label: 15 },
                           { value: 20, label: 20 },
                           { value: 50, label: 50 },
-                          { value: 100, label: 100 },
+                          { value: 100, label: 100 }
                         ]}
                         steps={1000}
                         onChange={(value: number) =>
@@ -208,7 +202,6 @@ export default function Calculator(): JSX.Element {
                         itemKey={item.key}
                         decisionKey={decision.key}
                         value={item.value}
-                        style={{ color: colors[decision.key] }}
                       />
                     </CardContent>
                   </Card>
@@ -217,18 +210,18 @@ export default function Calculator(): JSX.Element {
             </Grid>
             <div
               style={{
-                marginTop: "1rem",
-                display: "flex",
-                alignItems: "center",
+                marginTop: '1rem',
+                display: 'flex',
+                alignItems: 'center'
               }}
             >
               <span
                 style={{
-                  width: "1rem",
-                  height: "1rem",
-                  display: "inline-block",
-                  marginRight: ".5rem",
-                  background: colors[decision.key],
+                  width: '1rem',
+                  height: '1rem',
+                  display: 'inline-block',
+                  marginRight: '.5rem',
+                  background: colors[decision.key]
                 }}
               />
               Gesamtnutzen: {getResult(decision)}

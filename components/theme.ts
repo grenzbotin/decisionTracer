@@ -6,6 +6,10 @@ export const PRIMARY = '#3A808A';
 export const SECONDARY = '#FFA333';
 export const FOOTER_BACKGROUND = '#284D5B';
 
+export const GREEN = '113, 195, 60';
+export const RED = '195, 74, 60';
+
+
 export const GRAPH_COLORS = [PRIMARY, SECONDARY];
 
 export const generateColors = (value: number): string[] => (

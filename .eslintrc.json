@@ -27,7 +27,7 @@
       "rules": {
         // We will use TypeScript"s types for component props instead
         "react/prop-types": "off",
-        "max-len": ["error", 100, 2],
+        "max-len": ["error", 120, 2],
 
         // No need to import React when using Next.js
         "react/react-in-jsx-scope": "off",
