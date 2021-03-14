@@ -8,7 +8,9 @@ export const FOOTER_BACKGROUND = '#284D5B';
 
 export const GRAPH_COLORS = [PRIMARY, SECONDARY];
 
-export const generateColors = (value) => chroma.scale([PRIMARY, SECONDARY, FOOTER_BACKGROUND]).mode('lch').colors(value);
+export const generateColors = (value: number): string[] => (
+  chroma.scale([PRIMARY, SECONDARY, FOOTER_BACKGROUND]).mode('lch').colors(value)
+);
 
 
 const theme = createMuiTheme({

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import i18next from "i18next";
 
-export default function Home() {
+export default function Home(): void {
   const router = useRouter();
 
   useEffect(() => {

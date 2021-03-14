@@ -37,7 +37,8 @@ const detection = {
 	caches: ['localStorage', 'cookie'],
 	excludeCacheFor: ['cimode'], // languages to not persist (cookie, localStorage)
 
-	// optional set cookie options, reference:[MDN Set-Cookie docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie)
+	// optional set cookie options, reference:
+	// [MDN Set-Cookie docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie)
 	cookieOptions: { path: '/', sameSite: 'strict' },
 };
 

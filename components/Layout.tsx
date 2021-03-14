@@ -88,16 +88,16 @@ interface Props {
   children: React.ReactNode;
 }
 
-export default function Layout({ children }: Props) {
+export default function Layout({ children }: Props): JSX.Element {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
-  const handleDrawerOpen = () => {
+  const handleDrawerOpen = (): void => {
     setOpen(true);
   };
 
-  const handleDrawerClose = () => {
+  const handleDrawerClose = (): void => {
     setOpen(false);
   };
 

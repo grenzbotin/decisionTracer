@@ -7,7 +7,7 @@ const HtmlHeader = dynamic(() => import("../../components/HtmlHeader"));
 const Calculator = dynamic(() => import("../../components/Calculator"));
 const Result = dynamic(() => import("../../components/Result"));
 
-export default function LangIndex() {
+export default function LangIndex(): JSX.Element {
   return (
     <>
       <HtmlHeader
@@ -21,7 +21,16 @@ export default function LangIndex() {
   );
 }
 
-export async function getStaticPaths() {
+interface StaticPathProps {
+  paths: Array<{
+    params: {
+      lang: string;
+    };
+  }>;
+  fallback: boolean;
+}
+
+export async function getStaticPaths(): Promise<StaticPathProps> {
   const paths = getAllLanguageSlugs();
   return {
     paths,
@@ -29,7 +38,19 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params }) {
+interface StaticProps {
+  props: {
+    language: string;
+  };
+}
+
+interface Params {
+  params: {
+    lang: string;
+  };
+}
+
+export async function getStaticProps({ params }: Params): Promise<StaticProps> {
   const language = getLanguage(params.lang);
   return {
     props: {
