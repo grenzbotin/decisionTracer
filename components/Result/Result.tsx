@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import dynamic from "next/dynamic";
 import { Decision, GlobalDecisionContext } from "../../hooks/GlobalDecisionsContextProvider";
-import { Grid, Paper } from "@material-ui/core";
+import { Grid, Paper, Typography } from "@material-ui/core";
 import { generateColors } from "../theme";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
@@ -93,6 +93,9 @@ function Result(): JSX.Element {
             padding: "1rem"
           }}
         >
+          <Typography variant="h5" component="h2">
+            Beospieltitel
+          </Typography>
           Platz für Erklärungen
         </Paper>
       </Grid>
