@@ -1,62 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from 'react';
-import T from 'prop-types';
-
-export interface Decision {
-  key: number;
-  title: string;
-  cases: Array<{
-    key: number;
-    title: string;
-    probability: number;
-    value: number;
-  }>;
-}
-
-const defaultState = [
-  {
-    key: 0,
-    title: 'Impfen',
-    cases: [
-      {
-        key: 0,
-        title: 'Gesund',
-        probability: 99,
-        value: 1000
-      },
-      {
-        key: 1,
-        title: 'Tod',
-        probability: 1,
-        value: -1000
-      }
-    ]
-  },
-  {
-    key: 1,
-    title: 'Nicht impfen',
-    cases: [
-      {
-        key: 0,
-        title: 'Gesund',
-        probability: 20,
-        value: 20
-      },
-      {
-        key: 1,
-        title: 'Krank',
-        probability: 70,
-        value: -100
-      },
-      {
-        key: 2,
-        title: 'Tod',
-        probability: 10,
-        value: -1000
-      }
-    ]
-  }
-];
+import React, { useState } from "react";
+import T from "prop-types";
+import { Decision, PRESETS, Resource } from "../lib/presets";
 
 const getNewProbabilty = (
   itemProbabilty: number,
@@ -78,16 +23,13 @@ const getNewProbabilty = (
 
 // Context for defining the global scope: UI Settings
 export const GlobalDecisionContext = React.createContext({
-  decisions: defaultState,
-  setProbabiltyChange: (_decisionKey: number, _itemKey: number, _value: number | number[]) =>
-    undefined,
-  setValueChange: (_decisionKey: number, _itemKey: number, _value: number | number[]) => undefined,
-  setNewDecision: () => undefined,
-  setNewScenario: (_decisionKey: number) => undefined,
-  editDecisionName: (_title: string, _id: number) => undefined,
-  editScenarioName: (_title: string, _id: number, _caseId: number) => undefined,
-  removeDecision: (_decisionKey: number) => undefined,
-  removeScenario: (_decisionKey: number, _caseId: number) => undefined
+  active: PRESETS[0],
+  setTitle: (_title: string, _decKey?: string, _subKey?: string, _caseKey?: string) => undefined,
+  setValue: (_value: number | number[], _decKey: string, _subKey: string, _caseKey?: string) => undefined,
+  setProbability: (_value: number | number[], _decKey: string, _subKey: string, _caseKey?: string) => undefined,
+  removeItem: (_decKey: string, _subKey?: string, _caseKey?: string) => undefined,
+  addItem: (_decKey?: string, _subKey?: string) => undefined,
+  createNewPreset: (_title: string, _icon?: string, _resources?: Resource[], _decisions?: Decision[]) => undefined
 });
 
 interface T {
@@ -95,150 +37,299 @@ interface T {
 }
 
 export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
-  const [state, setState] = useState({ decisions: defaultState });
+  const [state, setState] = useState({ active: PRESETS[0] });
+  const root = state.active;
 
-  const setProbabiltyChange = (
-    decisionKey: number,
-    itemKey: number,
-    value: number | number[]
-  ): void => {
-    // Get information about changed case
-    const targetCase = state.decisions[decisionKey].cases.find((c) => c.key === itemKey);
-    const targetChange = typeof value === 'number' && value - targetCase.probability;
-
-    // Get all other cases that need to change according to the total change
-    const nonTargetCases = state.decisions[decisionKey].cases.filter((c) => c.key !== itemKey);
-    const probabiltySum = nonTargetCases.map((c) => c.probability).reduce((a, b) => a + b, 0);
-    const rest =
-      typeof value === 'number' && 100 - value - probabiltySum >= 0
-        ? 100 - value - probabiltySum
-        : 0;
-    const equal = rest / nonTargetCases.length;
-
-    setState({
-      ...state,
-      decisions: [
-        ...state.decisions.slice(0, decisionKey),
-        {
-          ...state.decisions[decisionKey],
-          cases: state.decisions[decisionKey].cases.map((c) =>
-            c.key === itemKey
+  // Name changes
+  const setTitle = (title: string, decKey?: string, subKey?: string, caseKey?: string): void => {
+    if (caseKey) {
+      setState({
+        ...state,
+        active: {
+          ...state.active,
+          decisions: root.decisions.map((decision) =>
+            decision.key === decKey
               ? {
-                  ...c,
-                  probability: typeof value === 'number' && parseFloat(value.toFixed(3))
-                }
-              : {
-                  ...c,
-                  probability: parseFloat(
-                    getNewProbabilty(c.probability, equal, probabiltySum, targetChange).toFixed(3)
+                  ...decision,
+                  sub: decision.sub.map((sub) =>
+                    sub.key === subKey
+                      ? { ...sub, cases: sub.cases.map((c) => (c.key === caseKey ? { ...c, title } : c)) }
+                      : sub
                   )
                 }
+              : decision
           )
-        },
-        ...state.decisions.slice(decisionKey + 1)
-      ]
-    });
-  };
-
-  const setValueChange = (decisionKey: number, itemKey: number, value: number | number[]): void => {
-    setState({
-      ...state,
-      decisions: [
-        ...state.decisions.slice(0, decisionKey),
-        {
-          ...state.decisions[decisionKey],
-          cases: state.decisions[decisionKey].cases.map((c) =>
-            c.key === itemKey ? { ...c, value: typeof value === 'number' && value } : c
-          )
-        },
-        ...state.decisions.slice(decisionKey + 1)
-      ]
-    });
-  };
-
-  const setNewDecision = (): void => {
-    setState({
-      ...state,
-      decisions: [...state.decisions, { key: state.decisions.length, title: 'new', cases: [] }]
-    });
-  };
-
-  const removeDecision = (decisionKey: number): void => {
-    setState({
-      ...state,
-      decisions: state.decisions.filter((decision) => decision.key !== decisionKey)
-    });
-  };
-
-  const removeScenario = (decisionKey: number, itemKey: number): void => {
-    const targetCase = state.decisions[decisionKey].cases.find((c) => c.key === itemKey);
-    const restProbability = -targetCase.probability;
-
-    const nonTargetCases = state.decisions[decisionKey].cases.filter((c) => c.key !== itemKey);
-    const probabiltySum = nonTargetCases.map((c) => c.probability).reduce((a, b) => a + b, 0);
-
-    setState({
-      ...state,
-      decisions: [
-        ...state.decisions.slice(0, decisionKey),
-        {
-          ...state.decisions[decisionKey],
-          cases: state.decisions[decisionKey].cases
-            .filter((c) => c.key !== itemKey)
-            .map((c) => ({
-              ...c,
-              probability: parseFloat(
-                getNewProbabilty(c.probability, 0, probabiltySum, restProbability).toFixed(3)
-              )
-            }))
-        },
-        ...state.decisions.slice(decisionKey + 1)
-      ]
-    });
-  };
-
-  const setNewScenario = (decisionKey: number): void => {
-    setState({
-      ...state,
-      decisions: [
-        ...state.decisions.slice(0, decisionKey),
-        {
-          ...state.decisions[decisionKey],
-          cases: [
-            ...state.decisions[decisionKey].cases,
-            {
-              key: state.decisions[decisionKey].cases.length,
-              title: 'new',
-              probability: 0,
-              value: 0
-            }
-          ]
-        },
-        ...state.decisions.slice(decisionKey + 1)
-      ]
-    });
-  };
-
-  const editDecisionName = (title: string, id: number): void => {
-    setState({
-      ...state,
-      decisions: state.decisions.map((item) => (item.key === id ? { ...item, title } : item))
-    });
-  };
-
-  const editScenarioName = (title: string, id: number, caseId: number): void => {
-    setState({
-      ...state,
-      decisions: state.decisions.map((item) => {
-        if (item.key === id) {
-          return {
-            ...item,
-            cases: item.cases.map((itemC) => (itemC.key === caseId ? { ...itemC, title } : itemC))
-          };
         }
+      });
+    } else if (subKey) {
+      setState({
+        ...state,
+        active: {
+          ...state.active,
+          decisions: root.decisions.map((decision) =>
+            decision.key === decKey
+              ? { ...decision, sub: decision.sub.map((sub) => (sub.key === subKey ? { ...sub, title } : sub)) }
+              : decision
+          )
+        }
+      });
+    } else if (decKey) {
+      setState({
+        ...state,
+        active: {
+          ...state.active,
+          decisions: root.decisions.map((decision) => (decision.key === decKey ? { ...decision, title } : decision))
+        }
+      });
+    } else {
+      setState({ ...state, active: { ...state.active, title } });
+    }
+  };
 
-        return item;
-      })
+  // Value changes
+  const setValue = (value: number | number[], decKey: string, subKey: string, caseKey?: string): void => {
+    if (caseKey) {
+      setState({
+        ...state,
+        active: {
+          ...state.active,
+          decisions: root.decisions.map((decision) =>
+            decision.key === decKey
+              ? {
+                  ...decision,
+                  sub: decision.sub.map((sub) =>
+                    sub.key === subKey
+                      ? {
+                          ...sub,
+                          cases: sub.cases.map((c) =>
+                            c.key === caseKey ? { ...c, value: typeof value === "number" && value } : c
+                          )
+                        }
+                      : sub
+                  )
+                }
+              : decision
+          )
+        }
+      });
+    } else if (subKey) {
+      setState({
+        ...state,
+        active: {
+          ...state.active,
+          decisions: root.decisions.map((decision) =>
+            decision.key === decKey
+              ? {
+                  ...decision,
+                  sub: decision.sub.map((sub) =>
+                    sub.key === subKey ? { ...sub, value: typeof value === "number" && value } : sub
+                  )
+                }
+              : decision
+          )
+        }
+      });
+    }
+  };
+
+  // Set probability
+  const setProbability = (value: number | number[], decKey: string, subKey: string, caseKey?: string): void => {
+    if (caseKey) {
+      // Get information about changed case
+      const targetCase = root.decisions.find((item) => item.key === decKey).sub.find((sub) => sub.key === subKey).cases;
+      const targetCaseItem = targetCase.find((c) => c.key === caseKey);
+      const targetChange = typeof value === "number" && value - targetCaseItem.probability;
+
+      // Get all other decisions that need to change according to the total change
+      const nonTargets = targetCase.filter((sc) => sc.key !== caseKey);
+      const probabiltySum = nonTargets.map((d) => d.probability).reduce((a: number, b: number) => a + b, 0);
+      const rest = typeof value === "number" && 100 - value - probabiltySum >= 0 ? 100 - value - probabiltySum : 0;
+      const equal = rest / nonTargets.length;
+
+      setState({
+        ...state,
+        active: {
+          ...state.active,
+          decisions: root.decisions.map((decision) =>
+            decision.key === decKey
+              ? {
+                  ...decision,
+                  sub: decision.sub.map((sub) =>
+                    sub.key === subKey
+                      ? {
+                          ...sub,
+                          cases: sub.cases.map((c) =>
+                            c.key === caseKey
+                              ? { ...c, probability: typeof value === "number" && parseFloat(value.toFixed(3)) }
+                              : {
+                                  ...c,
+                                  probability: parseFloat(
+                                    getNewProbabilty(c.probability, equal, probabiltySum, targetChange).toFixed(3)
+                                  )
+                                }
+                          )
+                        }
+                      : sub
+                  )
+                }
+              : decision
+          )
+        }
+      });
+    } else if (subKey) {
+      // Get information about changed case
+      const targetSubs = root.decisions.find((item) => item.key === decKey).sub;
+      const targetSubItem = targetSubs.find((sub) => sub.key === subKey);
+      const targetChange = typeof value === "number" && value - targetSubItem.probability;
+
+      // Get all other decisions that need to change according to the total change
+      const nonTargets = targetSubs.filter((sc) => sc.key !== subKey);
+      const probabiltySum = nonTargets.map((d) => d.probability).reduce((a: number, b: number) => a + b, 0);
+      const rest = typeof value === "number" && 100 - value - probabiltySum >= 0 ? 100 - value - probabiltySum : 0;
+      const equal = rest / nonTargets.length;
+
+      setState({
+        ...state,
+        active: {
+          ...state.active,
+          decisions: root.decisions.map((decision) =>
+            decision.key === decKey
+              ? {
+                  ...decision,
+                  sub: decision.sub.map((sub) =>
+                    sub.key === subKey
+                      ? { ...sub, probability: typeof value === "number" && parseFloat(value.toFixed(3)) }
+                      : {
+                          ...sub,
+                          probability: parseFloat(
+                            getNewProbabilty(sub.probability, equal, probabiltySum, targetChange).toFixed(3)
+                          )
+                        }
+                  )
+                }
+              : decision
+          )
+        }
+      });
+    }
+  };
+
+  // Remove
+  const removeItem = (decKey: string, subKey?: string, caseKey?: string): void => {
+    if (caseKey) {
+      setState({
+        ...state,
+        active: {
+          ...state.active,
+          decisions: root.decisions.map((decision) =>
+            decision.key === decKey
+              ? {
+                  ...decision,
+                  sub: decision.sub.map((sub) =>
+                    sub.key === subKey ? { ...sub, cases: sub.cases.filter((c) => c.key !== caseKey) } : sub
+                  )
+                }
+              : decision
+          )
+        }
+      });
+    } else if (subKey) {
+      setState({
+        ...state,
+        active: {
+          ...state.active,
+          decisions: root.decisions.map((decision) =>
+            decision.key === decKey ? { ...decision, sub: decision.sub.filter((sub) => sub.key !== subKey) } : decision
+          )
+        }
+      });
+    } else {
+      setState({
+        ...state,
+        active: {
+          ...state.active,
+          decisions: root.decisions.filter((dec) => dec.key !== decKey)
+        }
+      });
+    }
+  };
+
+  const addItem = (decKey?: string, subKey?: string): void => {
+    if (subKey) {
+      setState({
+        ...state,
+        active: {
+          ...state.active,
+          decisions: root.decisions.map((decision) =>
+            decision.key === decKey
+              ? {
+                  ...decision,
+                  sub: decision.sub.map((sub) =>
+                    sub.key === subKey
+                      ? {
+                          ...sub,
+                          cases: [
+                            ...sub.cases,
+                            { key: new Date().getUTCMilliseconds().toString(), title: "new", probability: 0, value: 0 }
+                          ]
+                        }
+                      : sub
+                  )
+                }
+              : decision
+          )
+        }
+      });
+    } else if (decKey) {
+      setState({
+        ...state,
+        active: {
+          ...state.active,
+          decisions: root.decisions.map((decision) =>
+            decision.key === decKey
+              ? {
+                  ...decision,
+                  sub: [
+                    ...decision.sub,
+                    {
+                      key: new Date().getUTCMilliseconds().toString(),
+                      title: "new",
+                      probability: 0,
+                      value: 0,
+                      cases: []
+                    }
+                  ]
+                }
+              : decision
+          )
+        }
+      });
+    } else {
+      setState({
+        ...state,
+        active: {
+          ...state.active,
+          decisions: [...root.decisions, { key: new Date().getUTCMilliseconds().toString(), title: "new", sub: [] }]
+        }
+      });
+    }
+  };
+
+  const createNewPreset = (
+    title: string,
+    icon: string = null,
+    resources: Resource[] = [],
+    decisions: Decision[] = []
+  ): void => {
+    setState({
+      ...state,
+      active: {
+        ...state.active,
+        title,
+        icon,
+        resources,
+        decisions
+      }
     });
   };
 
@@ -246,14 +337,12 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
     <GlobalDecisionContext.Provider
       value={{
         ...state,
-        setProbabiltyChange,
-        setValueChange,
-        setNewDecision,
-        setNewScenario,
-        editDecisionName,
-        editScenarioName,
-        removeDecision,
-        removeScenario
+        setTitle,
+        setValue,
+        setProbability,
+        removeItem,
+        addItem,
+        createNewPreset
       }}
     >
       {state && children}

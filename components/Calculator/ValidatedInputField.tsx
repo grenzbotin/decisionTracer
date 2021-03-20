@@ -1,10 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import {
-  FormControl,
-  Input,
-  InputAdornment,
-  InputLabel,
-} from "@material-ui/core";
+import { FormControl, Input, InputAdornment, InputLabel } from "@material-ui/core";
 import { GlobalDecisionContext } from "../../hooks/GlobalDecisionsContextProvider";
 
 function regex(value: string): boolean {
@@ -20,17 +15,13 @@ function usePrevious(value: number): number {
 }
 
 interface Props {
-  itemKey: number;
-  decisionKey: number;
+  itemKey: string;
+  decisionKey: string;
   value: number;
 }
 
-const ValidatedInputField: React.FC<Props> = ({
-  itemKey,
-  decisionKey,
-  value,
-}) => {
-  const { setProbabiltyChange } = useContext(GlobalDecisionContext);
+const ValidatedInputField: React.FC<Props> = ({ itemKey, decisionKey, value }) => {
+  const { setProbability } = useContext(GlobalDecisionContext);
   const prevValue = usePrevious(value);
   const [localValue, setLocalValue] = useState<number | string>(value);
   const [error, setError] = useState(false);
@@ -43,23 +34,17 @@ const ValidatedInputField: React.FC<Props> = ({
     }
   }, [value, prevValue]);
 
-  const handleProbabiltyChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void => {
+  const handleProbabiltyChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const probability = e.target.value;
     setLocalValue(probability);
 
     // set error if value is empty, float number regex not matching or value bigger than 100
     // if valid, set probability in global state
-    if (
-      probability === "" ||
-      !regex(probability) ||
-      parseFloat(probability.replace(",", ".")) > 100
-    ) {
+    if (probability === "" || !regex(probability) || parseFloat(probability.replace(",", ".")) > 100) {
       setError(true);
     } else {
       setError(false);
-      setProbabiltyChange(decisionKey, itemKey, parseFloat(probability));
+      setProbability(parseFloat(probability), decisionKey, itemKey);
     }
   };
 

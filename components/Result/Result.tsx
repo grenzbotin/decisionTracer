@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import dynamic from "next/dynamic";
-import { Decision, GlobalDecisionContext } from "../../hooks/GlobalDecisionsContextProvider";
+import { GlobalDecisionContext } from "../../hooks/GlobalDecisionsContextProvider";
 import { Grid, Paper, Typography } from "@material-ui/core";
 import { generateColors } from "../theme";
+import { Decision } from "@/../lib/presets";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -49,7 +50,7 @@ const defaultOptions = {
 function getResults(decisions: Array<Decision>): Array<number | boolean> {
   const results = decisions.map((decision) => {
     let total = 0;
-    decision.cases.forEach((item) => {
+    decision.sub.forEach((item) => {
       total += item.value * (item.probability / 100);
     });
 
@@ -60,7 +61,9 @@ function getResults(decisions: Array<Decision>): Array<number | boolean> {
 }
 
 function Result(): JSX.Element {
-  const { decisions } = useContext(GlobalDecisionContext);
+  const {
+    active: { decisions }
+  } = useContext(GlobalDecisionContext);
   const categories = decisions.map((decision) => decision.title);
   const results = getResults(decisions);
   const colors = generateColors(decisions.length);
@@ -94,7 +97,7 @@ function Result(): JSX.Element {
           }}
         >
           <Typography variant="h5" component="h2">
-            Beospieltitel
+            Beispieltitel
           </Typography>
           Platz für Erklärungen
         </Paper>

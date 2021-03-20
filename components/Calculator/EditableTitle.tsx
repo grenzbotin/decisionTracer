@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  IconButton,
-  Popover,
-  TextField,
-  Typography,
-} from "@material-ui/core";
+import { Box, IconButton, Popover, TextField, Typography } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import SaveIcon from "@material-ui/icons/Save";
 import CancelIcon from "@material-ui/icons/Cancel";
@@ -14,7 +8,7 @@ function DecisionTitle({
   title,
   onChange,
   variant,
-  component,
+  component
 }: {
   title: string;
   onChange: (_title: string) => void;
@@ -32,9 +26,7 @@ function DecisionTitle({
     setAnchorEl(e.currentTarget);
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     setLocalTitle(e.currentTarget.value);
   };
 
@@ -58,16 +50,11 @@ function DecisionTitle({
   const popoverId = open ? "edit-name" : undefined;
 
   return (
-    <div style={{ display: "flex", alignItems: "center" }}>
-      <Typography variant={variant} component={component} noWrap>
+    <div style={{ display: "flex", alignItems: "baseline", overflow: "hidden" }}>
+      <Typography variant={variant} component={component} style={{ wordBreak: "break-all" }}>
         {title}
       </Typography>
-      <IconButton
-        color="inherit"
-        aria-label="edit name"
-        onClick={handleClick}
-        style={{ marginLeft: ".5rem" }}
-      >
+      <IconButton color="inherit" aria-label="edit name" onClick={handleClick} style={{ marginLeft: ".5rem" }}>
         <EditIcon fontSize="small" />
       </IconButton>
       <Popover
@@ -77,11 +64,11 @@ function DecisionTitle({
         onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "center",
+          horizontal: "center"
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "center",
+          horizontal: "center"
         }}
       >
         <Box p={2} style={{ display: "flex", alignItems: "center" }}>
@@ -103,12 +90,7 @@ function DecisionTitle({
           >
             <SaveIcon fontSize="small" />
           </IconButton>
-          <IconButton
-            color="inherit"
-            aria-label="edit name"
-            style={{ marginLeft: ".5rem" }}
-            onClick={handleClose}
-          >
+          <IconButton color="inherit" aria-label="edit name" style={{ marginLeft: ".5rem" }} onClick={handleClose}>
             <CancelIcon fontSize="small" />
           </IconButton>
         </Box>

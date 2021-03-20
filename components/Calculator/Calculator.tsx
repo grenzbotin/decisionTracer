@@ -1,6 +1,5 @@
 import { Card, Grid, Paper, CardContent, Typography, Button } from "@material-ui/core";
 import React, { useContext } from "react";
-import { Decision, GlobalDecisionContext } from "../../hooks/GlobalDecisionsContextProvider";
 import IconButton from "@material-ui/core/IconButton";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
@@ -10,10 +9,12 @@ import EditableTitle from "./EditableTitle";
 import NonLinearSlider from "./NonLinearSlider";
 import ValidatedInputField from "./ValidatedInputField";
 import GrowingSlider from "./GrowingSlider";
+import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
+import { Decision } from "@/../lib/presets";
 
 function getResult(decision: Decision): number | string {
   let total = 0;
-  decision.cases.forEach((item) => {
+  decision.sub.forEach((item) => {
     total += item.value * (item.probability / 100);
   });
 
@@ -21,40 +22,31 @@ function getResult(decision: Decision): number | string {
 }
 
 export default function Calculator(): JSX.Element {
-  const {
-    setProbabiltyChange,
-    decisions,
-    setNewDecision,
-    setNewScenario,
-    editDecisionName,
-    editScenarioName,
-    removeDecision,
-    removeScenario
-  } = useContext(GlobalDecisionContext);
+  const { active, setTitle, setProbability, removeItem, addItem } = useContext(GlobalDecisionContext);
 
-  const colors = generateColors(decisions.length);
+  const colors = generateColors(active.decisions.length);
+  const decisions = active.decisions;
 
   return (
     <Grid container spacing={2}>
       <Grid container item xs={12} style={{ display: "flex", justifyContent: "space-between" }}>
         <Grid item md={6} xs={12}>
           <Typography variant="h4" component="h1" gutterBottom>
-            Sollte ich mich impfen lassen?
+            {active.title}
           </Typography>
         </Grid>
         <Grid item md={6} xs={12} style={{ alignSelf: "center", textAlign: "right" }}>
-          <Button variant="contained" color="primary" onClick={setNewDecision} startIcon={<AddCircleIcon />}>
+          <Button variant="contained" color="primary" onClick={() => addItem()} startIcon={<AddCircleIcon />}>
             Entscheidung
           </Button>
         </Grid>
       </Grid>
-      {decisions.map((decision) => (
+      {decisions.map((decision, key) => (
         <Grid key={decision.key} item xs>
           <Paper
             style={{
-              minWidth: "200px",
               padding: "1rem",
-              borderTop: `5px solid ${colors[decision.key]}`
+              borderTop: `5px solid ${colors[key]}`
             }}
           >
             <div
@@ -67,40 +59,40 @@ export default function Calculator(): JSX.Element {
             >
               <EditableTitle
                 title={decision.title}
-                onChange={(title: string) => editDecisionName(title, decision.key)}
+                onChange={(title: string) => setTitle(title, decision.key)}
                 variant="h5"
                 component="h2"
               />
-              <div style={{ color: colors[decision.key] }}>
-                <IconButton aria-label="remove scenario" component="span" onClick={() => removeDecision(decision.key)}>
+              <div style={{ color: colors[decision.key], display: "flex", alignSelf: "baseline" }}>
+                <IconButton aria-label="remove scenario" component="span" onClick={() => removeItem(decision.key)}>
                   <DeleteForeverIcon fontSize="small" color="inherit" />
                 </IconButton>
                 <IconButton
                   color="inherit"
                   aria-label="add scenario"
                   component="span"
-                  onClick={() => setNewScenario(decision.key)}
+                  onClick={() => addItem(decision.key)}
                 >
                   <AddCircleIcon />
                 </IconButton>
               </div>
             </div>
             <Grid container spacing={2}>
-              {decision.cases.map((item) => (
+              {decision.sub.map((item) => (
                 <Grid key={item.key} item xs>
                   <Card variant="outlined" style={{ padding: ".5rem", minWidth: "250px" }}>
                     <CardContent>
-                      <div style={{ display: "flex", justifyContent: "space-between" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
                         <EditableTitle
                           title={item.title}
-                          onChange={(title: string) => editScenarioName(title, decision.key, item.key)}
+                          onChange={(title: string) => setTitle(title, decision.key, item.key)}
                           variant="h6"
                           component="h3"
                         />
                         <IconButton
                           aria-label="remove scenario"
                           component="span"
-                          onClick={() => removeScenario(decision.key, item.key)}
+                          onClick={() => removeItem(decision.key, item.key)}
                         >
                           <DeleteForeverIcon fontSize="small" color="inherit" />
                         </IconButton>
@@ -127,7 +119,7 @@ export default function Calculator(): JSX.Element {
                           { value: 100, label: 100 }
                         ]}
                         steps={1000}
-                        onChange={(value: number) => setProbabiltyChange(decision.key, item.key, value)}
+                        onChange={(value: number) => setProbability(value, decision.key, item.key)}
                         style={{ color: colors[decision.key] }}
                         value={item.probability}
                         numFormatter={(val: number) => Math.round(val)}

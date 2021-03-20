@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Box, Slider } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import SentimentDissatisfiedOutlinedIcon from "@material-ui/icons/SentimentDissatisfiedOutlined";
@@ -8,8 +8,8 @@ import { GlobalDecisionContext } from "../../hooks/GlobalDecisionsContextProvide
 import { SECONDARY, PRIMARY } from "../theme";
 
 interface Props {
-  itemKey: number;
-  decisionKey: number;
+  itemKey: string;
+  decisionKey: string;
   value: number;
 }
 
@@ -24,54 +24,59 @@ const CustomSlider = withStyles({
   }
 })(Slider);
 
-const DESIRED_MIN_DIFFERENCE = 2000;
 const GROW_LEVEL = 100;
+const MULTIPLIER = 0.05;
+const THRESHOLD = 0.3;
 
 const GrowingSlider: React.FC<Props> = ({ itemKey, decisionKey, value }) => {
-  const { setValueChange } = useContext(GlobalDecisionContext);
+  const { setValue } = useContext(GlobalDecisionContext);
   const [minMax, setMinMax] = useState<{ min: number; max: number }>({
-    min: -1000,
-    max: 1000
+    min: value - 500,
+    max: value + 500
   });
+  const [localValue, setLocalValue] = useState(value);
 
-  useEffect(() => {
-    if (value <= minMax.min + -0.1 * minMax.min) {
-      setMinMax({ ...minMax, min: minMax.min - GROW_LEVEL });
+  // Local handling of max/min
+  const handleChange = (value: number | number[]): void => {
+    if (typeof value === "number") {
+      setLocalValue(value);
+      if (value <= (minMax.min < 0 ? minMax.min + -THRESHOLD * minMax.min : minMax.min + THRESHOLD * minMax.min)) {
+        setMinMax({
+          max: minMax.max < 0 ? minMax.max + -MULTIPLIER * GROW_LEVEL : minMax.max - MULTIPLIER * GROW_LEVEL,
+          min: minMax.min - MULTIPLIER * GROW_LEVEL
+        });
+      }
+      if (value >= (minMax.max > 0 ? minMax.max + -THRESHOLD * minMax.max : minMax.max + THRESHOLD * minMax.max)) {
+        setMinMax({
+          max: minMax.max + MULTIPLIER * GROW_LEVEL,
+          min: minMax.min + MULTIPLIER * GROW_LEVEL
+        });
+      }
     }
-    if (value >= minMax.max + -0.1 * minMax.max) {
-      setMinMax({ ...minMax, max: minMax.max + GROW_LEVEL });
-    }
+  };
 
-    if (
-      value > minMax.min + -0.5 * minMax.min &&
-      minMax.max - minMax.min + GROW_LEVEL > DESIRED_MIN_DIFFERENCE &&
-      minMax.min + GROW_LEVEL <= 0
-    ) {
-      setMinMax({ ...minMax, min: minMax.min + GROW_LEVEL });
+  // Push to global state on commit
+  const handleChangeCommit = (value: number | number[]): void => {
+    if (typeof value === "number") {
+      setLocalValue(value);
+      setValue(value, decisionKey, itemKey);
     }
-
-    if (
-      value < minMax.max + -0.5 * minMax.max &&
-      minMax.max - GROW_LEVEL - minMax.min > DESIRED_MIN_DIFFERENCE &&
-      minMax.max - GROW_LEVEL >= 0
-    ) {
-      setMinMax({ ...minMax, max: minMax.max - GROW_LEVEL });
-    }
-  }, [value, minMax]);
+  };
 
   return (
     <Box style={{ display: "flex" }}>
       <SentimentDissatisfiedOutlinedIcon style={{ color: SECONDARY, marginRight: ".2rem" }} />
       <CustomSlider
         id={`value-${decisionKey}-${itemKey}`}
-        value={value}
+        value={localValue}
         aria-labelledby="value"
         min={minMax.min}
         max={minMax.max}
         step={10}
         style={{ color: "rgb(94, 94, 94)" }}
-        valueLabelDisplay="off"
-        onChange={(_e, value) => setValueChange(decisionKey, itemKey, value)}
+        valueLabelDisplay="auto"
+        onChange={(_e, value) => handleChange(value)}
+        onChangeCommitted={(_e, value) => handleChangeCommit(value)}
       />
       <SentimentSatisfiedOutlinedIcon style={{ color: PRIMARY, marginLeft: ".2rem" }} />
     </Box>
