@@ -12,5 +12,11 @@
     "heading": {
       "logo": "Willkommen auf Decision Tracer"
     }
+  },
+  "calculator": {
+    "probability": "Wahrscheinlichkeit",
+    "value": "Nutzwert",
+    "expected_utility": "Erwartungsnutzen",
+    "subcases": "Sub-Szenarien"
   }
 }

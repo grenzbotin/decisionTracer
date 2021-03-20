@@ -4,16 +4,18 @@ import EditIcon from "@material-ui/icons/Edit";
 import SaveIcon from "@material-ui/icons/Save";
 import CancelIcon from "@material-ui/icons/Cancel";
 
-function DecisionTitle({
+function EditableTitle({
   title,
   onChange,
   variant,
-  component
+  component,
+  alignItems = "baseline"
 }: {
   title: string;
   onChange: (_title: string) => void;
-  variant: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  variant: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "subtitle2";
   component: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  alignItems?: "baseline" | "center";
 }): JSX.Element {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [localTitle, setLocalTitle] = useState<string>("");
@@ -23,6 +25,7 @@ function DecisionTitle({
   }, [title]);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    e.stopPropagation();
     setAnchorEl(e.currentTarget);
   };
 
@@ -30,19 +33,20 @@ function DecisionTitle({
     setLocalTitle(e.currentTarget.value);
   };
 
-  const handleClose = (): void => {
+  const handleClose = (e?: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLDivElement>): void => {
+    e.stopPropagation();
     setAnchorEl(null);
   };
 
-  const handleSave = (): void => {
+  const handleSave = (e?: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLDivElement>): void => {
     onChange(localTitle);
-    handleClose();
+    handleClose(e);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>): void => {
     if (e.key === "Enter") {
       e.preventDefault();
-      handleSave();
+      handleSave(e);
     }
   };
 
@@ -50,7 +54,7 @@ function DecisionTitle({
   const popoverId = open ? "edit-name" : undefined;
 
   return (
-    <div style={{ display: "flex", alignItems: "baseline", overflow: "hidden" }}>
+    <div style={{ display: "flex", alignItems: alignItems, overflow: "hidden" }}>
       <Typography variant={variant} component={component} style={{ wordBreak: "break-all" }}>
         {title}
       </Typography>
@@ -71,7 +75,7 @@ function DecisionTitle({
           horizontal: "center"
         }}
       >
-        <Box p={2} style={{ display: "flex", alignItems: "center" }}>
+        <Box p={2} style={{ display: "flex", alignItems: "center" }} onClick={(e) => e.stopPropagation()}>
           <TextField
             id="standard-basic"
             label="Name"
@@ -99,4 +103,4 @@ function DecisionTitle({
   );
 }
 
-export default DecisionTitle;
+export default EditableTitle;

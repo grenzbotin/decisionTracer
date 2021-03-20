@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { FormControl, Input, InputAdornment, InputLabel } from "@material-ui/core";
-import { GlobalDecisionContext } from "../../hooks/GlobalDecisionsContextProvider";
+import React, { useEffect, useRef, useState } from "react";
+import { FormControl, Input, InputAdornment } from "@material-ui/core";
 
 function regex(value: string): boolean {
   return /^[+]?\d+([.,]\d+)?$/.test(value);
@@ -15,13 +14,11 @@ function usePrevious(value: number): number {
 }
 
 interface Props {
-  itemKey: string;
-  decisionKey: string;
+  onChange: (_value: number) => void;
   value: number;
 }
 
-const ValidatedInputField: React.FC<Props> = ({ itemKey, decisionKey, value }) => {
-  const { setProbability } = useContext(GlobalDecisionContext);
+const ValidatedInputField: React.FC<Props> = ({ onChange, value }) => {
   const prevValue = usePrevious(value);
   const [localValue, setLocalValue] = useState<number | string>(value);
   const [error, setError] = useState(false);
@@ -44,19 +41,26 @@ const ValidatedInputField: React.FC<Props> = ({ itemKey, decisionKey, value }) =
       setError(true);
     } else {
       setError(false);
-      setProbability(parseFloat(probability), decisionKey, itemKey);
+      onChange(parseFloat(probability));
     }
   };
 
   return (
-    <FormControl size="small">
-      <InputLabel htmlFor="Probability">Probability</InputLabel>
+    <FormControl size="small" style={{ maxWidth: "65px" }}>
       <Input
-        id={`probability-${decisionKey}-${itemKey}`}
         error={error}
         value={localValue}
         onChange={handleProbabiltyChange}
-        endAdornment={<InputAdornment position="end">%</InputAdornment>}
+        endAdornment={
+          <InputAdornment disableTypography position="end" style={{ fontSize: "0.8rem" }}>
+            %
+          </InputAdornment>
+        }
+        inputProps={{
+          style: {
+            fontSize: ".8rem"
+          }
+        }}
       />
     </FormControl>
   );

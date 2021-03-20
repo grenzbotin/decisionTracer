@@ -12,5 +12,11 @@
     "heading": {
       "logo": "Welcome to Decision Tracer"
     }
+  },
+  "calculator": {
+    "probability": "Occurence probability",
+    "value": "Utility",
+    "expected_utility": "Expected utility",
+    "subcases": "Sub cases"
   }
 }

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import dynamic from "next/dynamic";
+import i18next from "i18next";
 import { GlobalDecisionContext } from "../../hooks/GlobalDecisionsContextProvider";
 import { Grid, Paper, Typography } from "@material-ui/core";
 import { generateColors } from "../theme";
@@ -26,7 +27,7 @@ const defaultOptions = {
   },
   yaxis: {
     title: {
-      text: "Nutzwert"
+      text: i18next.t("calculator.expected_utility")
     }
   },
   dataLabels: {
@@ -51,7 +52,15 @@ function getResults(decisions: Array<Decision>): Array<number | boolean> {
   const results = decisions.map((decision) => {
     let total = 0;
     decision.sub.forEach((item) => {
-      total += item.value * (item.probability / 100);
+      if (item.cases.length !== 0) {
+        let subs = 0;
+        item.cases.map((c) => {
+          subs += c.value * (c.probability / 100);
+        });
+        total += subs * (item.probability / 100);
+      } else {
+        total += item.value * (item.probability / 100);
+      }
     });
 
     return Math.round((total * 100) / 100);
@@ -80,7 +89,7 @@ function Result(): JSX.Element {
           {decisions.length > 0 ? (
             <Chart
               options={{ ...defaultOptions, colors, xaxis: { categories } }}
-              series={[{ name: "Nutzwert", data: results }]}
+              series={[{ name: i18next.t("calculator.expected_utility"), data: results }]}
               type="bar"
               height={300}
               width="100%"

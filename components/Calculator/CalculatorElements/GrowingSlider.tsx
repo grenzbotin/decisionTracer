@@ -1,15 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Box, Slider } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import SentimentDissatisfiedOutlinedIcon from "@material-ui/icons/SentimentDissatisfiedOutlined";
 import SentimentSatisfiedOutlinedIcon from "@material-ui/icons/SentimentSatisfiedOutlined";
 
-import { GlobalDecisionContext } from "../../hooks/GlobalDecisionsContextProvider";
-import { SECONDARY, PRIMARY } from "../theme";
+import { SECONDARY, PRIMARY } from "../../theme";
 
 interface Props {
-  itemKey: string;
-  decisionKey: string;
+  onChange: (_value: number) => void;
   value: number;
 }
 
@@ -28,11 +26,10 @@ const GROW_LEVEL = 100;
 const MULTIPLIER = 0.05;
 const THRESHOLD = 0.3;
 
-const GrowingSlider: React.FC<Props> = ({ itemKey, decisionKey, value }) => {
-  const { setValue } = useContext(GlobalDecisionContext);
+const GrowingSlider: React.FC<Props> = ({ value, onChange }) => {
   const [minMax, setMinMax] = useState<{ min: number; max: number }>({
-    min: value - 500,
-    max: value + 500
+    min: -1000,
+    max: 1000
   });
   const [localValue, setLocalValue] = useState(value);
 
@@ -59,7 +56,7 @@ const GrowingSlider: React.FC<Props> = ({ itemKey, decisionKey, value }) => {
   const handleChangeCommit = (value: number | number[]): void => {
     if (typeof value === "number") {
       setLocalValue(value);
-      setValue(value, decisionKey, itemKey);
+      onChange(value);
     }
   };
 
@@ -67,7 +64,6 @@ const GrowingSlider: React.FC<Props> = ({ itemKey, decisionKey, value }) => {
     <Box style={{ display: "flex" }}>
       <SentimentDissatisfiedOutlinedIcon style={{ color: SECONDARY, marginRight: ".2rem" }} />
       <CustomSlider
-        id={`value-${decisionKey}-${itemKey}`}
         value={localValue}
         aria-labelledby="value"
         min={minMax.min}

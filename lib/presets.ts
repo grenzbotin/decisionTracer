@@ -5,7 +5,7 @@ interface CaseItem {
   value: number;
 }
 
-interface SubItem {
+export interface SubItem {
   key: string;
   title: string;
   probability: number;
