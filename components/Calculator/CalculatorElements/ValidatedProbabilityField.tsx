@@ -18,7 +18,7 @@ interface Props {
   value: number;
 }
 
-const ValidatedInputField: React.FC<Props> = ({ onChange, value }) => {
+const ValidatedProbabilityField: React.FC<Props> = ({ onChange, value }) => {
   const prevValue = usePrevious(value);
   const [localValue, setLocalValue] = useState<number | string>(value);
   const [error, setError] = useState(false);
@@ -46,7 +46,7 @@ const ValidatedInputField: React.FC<Props> = ({ onChange, value }) => {
   };
 
   return (
-    <FormControl size="small" style={{ maxWidth: "65px" }}>
+    <FormControl size="small" style={{ maxWidth: "75px" }}>
       <Input
         error={error}
         value={localValue}
@@ -66,4 +66,4 @@ const ValidatedInputField: React.FC<Props> = ({ onChange, value }) => {
   );
 };
 
-export default ValidatedInputField;
+export default ValidatedProbabilityField;

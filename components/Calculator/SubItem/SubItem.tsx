@@ -8,7 +8,7 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { SubItem as SubItemType } from "@/../lib/presets";
 import EditableTitle from "../CalculatorElements/EditableTitle";
-import ValidatedInputField from "../CalculatorElements/ValidatedInputField";
+import ValidatedProbabilityField from "../CalculatorElements/ValidatedProbabilityField";
 import NonLinearSlider from "../CalculatorElements/NonLinearSlider";
 import GrowingSlider from "../CalculatorElements/GrowingSlider";
 import CaseItem from "../CaseItem";
@@ -63,7 +63,7 @@ export default function SubItem({
           </div>
           <div style={{ display: "flex", marginTop: "2rem", justifyContent: "space-between", alignItems: "flex-end" }}>
             <Typography variant="caption">{i18next.t("calculator.probability")}</Typography>
-            <ValidatedInputField onChange={handleProbabilityChange} value={item.probability} />
+            <ValidatedProbabilityField onChange={handleProbabilityChange} value={item.probability} />
           </div>
           <NonLinearSlider
             marks={[
@@ -83,9 +83,21 @@ export default function SubItem({
           />
           {item.cases.length === 0 ? (
             <>
-              <Typography variant="caption" display="block" style={{ marginTop: "1.5rem" }} gutterBottom>
-                {i18next.t("calculator.value")}
-              </Typography>
+              <div
+                style={{
+                  display: "flex",
+                  margin: "1.5rem 0 .5rem 0",
+                  justifyContent: "space-between",
+                  alignItems: "flex-end"
+                }}
+              >
+                <Typography variant="caption" display="block" gutterBottom>
+                  {i18next.t("calculator.value")}
+                </Typography>
+                <Typography variant="caption" display="block" gutterBottom>
+                  {item.value}
+                </Typography>
+              </div>
               <GrowingSlider onChange={handleValueChange} value={item.value} />
             </>
           ) : (

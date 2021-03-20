@@ -11,7 +11,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { SubItem as SubItemType } from "@/../lib/presets";
 import EditableTitle from "../CalculatorElements/EditableTitle";
-import ValidatedInputField from "../CalculatorElements/ValidatedInputField";
+import ValidatedProbabilityField from "../CalculatorElements/ValidatedProbabilityField";
 import NonLinearSlider from "../CalculatorElements/NonLinearSlider";
 import GrowingSlider from "../CalculatorElements/GrowingSlider";
 
@@ -93,7 +93,7 @@ export default function CaseItem({
       <AccordionDetails style={{ flexDirection: "column", padding: "1rem 2rem" }}>
         <div style={{ display: "flex", marginTop: "2rem", justifyContent: "space-between", alignItems: "flex-end" }}>
           <Typography variant="caption">{i18next.t("calculator.probability")}</Typography>
-          <ValidatedInputField value={caseItem.probability} onChange={handleProbabilityChange} />
+          <ValidatedProbabilityField value={caseItem.probability} onChange={handleProbabilityChange} />
         </div>
         <NonLinearSlider
           marks={[
@@ -111,9 +111,14 @@ export default function CaseItem({
           value={caseItem.probability}
           numFormatter={(val: number) => Math.round(val)}
         />
-        <Typography variant="caption" display="block" style={{ marginTop: "1.5rem" }} gutterBottom>
-          {i18next.t("calculator.value")}
-        </Typography>
+        <div style={{ display: "flex", marginTop: "1.5rem", justifyContent: "space-between", alignItems: "flex-end" }}>
+          <Typography variant="caption" display="block" gutterBottom>
+            {i18next.t("calculator.value")}
+          </Typography>
+          <Typography variant="caption" display="block" gutterBottom>
+            {caseItem.value}
+          </Typography>
+        </div>
         <GrowingSlider value={caseItem.value} onChange={handleValueChange} />
       </AccordionDetails>
     </Accordion>
