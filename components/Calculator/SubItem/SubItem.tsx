@@ -62,7 +62,7 @@ export default function SubItem({
                 {
                   text: i18next.t("calculator.independent"),
                   icon: item.isIndependent ? (
-                    <CheckBoxIcon fontSize="small" />
+                    <CheckBoxIcon style={{ color: color }} fontSize="small" />
                   ) : (
                     <CheckBoxOutlineBlankIcon fontSize="small" />
                   ),

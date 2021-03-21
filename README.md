@@ -15,10 +15,10 @@ Make your decisions based on rational thoughts
 - [x] Growing slider for utility settings (let user get as high/low as he wishes)
 - [x] Localisation setup
 - [x] Icons for presets
-- [-] Adding multiple presets
-- [-] Have mask to choose between presets in sub menu
-- [-] Entry page
-- [-] Save changes via local storage
+- [] Adding multiple presets
+- [] Have mask to choose between presets in sub menu
+- [] Entry page
+- [] Save changes via local storage
 
 ### Icons
 
