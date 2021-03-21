@@ -78,7 +78,7 @@ export default function CaseItem({
           alignItems="center"
           title={caseItem.title}
           onChange={(title: string) => setTitle(title, decisionKey, itemKey, caseItem.key)}
-          variant="subtitle2"
+          variant="body2"
           component="h4"
         />
         <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", flex: 1 }}>
@@ -104,7 +104,7 @@ export default function CaseItem({
         </div>
       </AccordionSummary>
       <AccordionDetails style={{ flexDirection: "column", padding: "1rem 2rem" }}>
-        <div style={{ display: "flex", marginTop: "2rem", justifyContent: "space-between", alignItems: "flex-end" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
           <Typography variant="caption">{i18next.t("calculator.probability")}</Typography>
           <ValidatedProbabilityField value={caseItem.probability} onChange={handleProbabilityChange} />
         </div>

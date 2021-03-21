@@ -72,7 +72,7 @@ export default function Decision({ decision, color }: { decision: DecisionType; 
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            marginBottom: ".5rem",
+            marginBottom: "1rem",
             marginLeft: "calc(1rem + 50px)"
           }}
         >

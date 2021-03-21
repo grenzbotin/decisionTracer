@@ -20,23 +20,11 @@ const HtmlHeader: React.FC<Props> = ({ title, description, keywords }) => {
       <meta name="keywords" content={keywords} />
 
       <meta name="twitter:card" content="summary" key="twcard" />
-      <meta
-        property="og:url"
-        content={`${publicUrl}/${i18next.language}${pathname}`}
-        key="ogurl"
-      />
-      <meta
-        property="og:image"
-        content={`${publicUrl}/images/og.png`}
-        key="ogimage"
-      />
+      <meta property="og:url" content={`${publicUrl}/${i18next.language}${pathname}`} key="ogurl" />
+      <meta property="og:image" content={`${publicUrl}/images/og.png`} key="ogimage" />
       <meta property="og:title" content={title} key="ogtitle" />
       <meta property="og:description" content={description} key="ogdesc" />
-      <meta
-        property="og:site_name"
-        content="Decision Tracer"
-        key="ogsitename"
-      />
+      <meta property="og:site_name" content="Decision Tracer" key="ogsitename" />
 
       <meta httpEquiv="Content-Type" content="text/html" charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -62,6 +50,7 @@ const HtmlHeader: React.FC<Props> = ({ title, description, keywords }) => {
 
       <link rel="icon" href="/favicon.ico" />
       <link href="/manifest.json" rel="manifest" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
     </Head>
   );
 };

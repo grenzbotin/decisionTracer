@@ -1,4 +1,6 @@
 import { Card, Grid, CardContent, Typography } from "@material-ui/core";
+import MuiCardHeader from "@material-ui/core/CardHeader";
+import { withStyles } from "@material-ui/core/styles";
 import i18next from "i18next";
 import React, { useContext } from "react";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
@@ -14,6 +16,17 @@ import NonLinearSlider from "../CalculatorElements/NonLinearSlider";
 import GrowingSlider from "../CalculatorElements/GrowingSlider";
 import CaseItem from "../CaseItem";
 import CardMenu from "../CalculatorElements/CardMenu";
+
+const CardHeader = withStyles({
+  root: {
+    backgroundColor: "rgba(0, 0, 0, .03)",
+    borderBottom: "1px solid rgba(0, 0, 0, .125)",
+    padding: "0rem 1rem"
+  },
+  action: {
+    marginTop: 0
+  }
+})(MuiCardHeader);
 
 export default function SubItem({
   item,
@@ -39,14 +52,17 @@ export default function SubItem({
   return (
     <Grid key={item.key} item xs>
       <Card variant="outlined" style={{ minWidth: "250px" }}>
-        <CardContent>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+        <CardHeader
+          title={
             <EditableTitle
+              alignItems="center"
               title={item.title}
               onChange={(title: string) => setTitle(title, decisionKey, item.key)}
-              variant="h6"
+              variant="subtitle1"
               component="h3"
             />
+          }
+          action={
             <CardMenu
               listContent={[
                 {
@@ -70,8 +86,13 @@ export default function SubItem({
                 }
               ]}
             />
-          </div>
-          <div style={{ display: "flex", marginTop: "2rem", justifyContent: "space-between", alignItems: "flex-end" }}>
+          }
+          style={{
+            borderLeft: `10px solid ${color}`
+          }}
+        />
+        <CardContent>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
             <Typography variant="caption">{i18next.t("calculator.probability")}</Typography>
             <ValidatedProbabilityField onChange={handleProbabilityChange} value={item.probability} />
           </div>
