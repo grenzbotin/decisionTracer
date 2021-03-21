@@ -17,6 +17,12 @@
     "probability": "Occurence probability",
     "value": "Utility",
     "expected_utility": "Expected utility",
-    "subcases": "Sub cases"
+    "subcases": "Sub cases",
+    "add_scenario": "Add scenario",
+    "add_case": "Add sub scenario",
+    "remove_scenario": "Delete scenario",
+    "remove_case": "Delete sub scenario",
+    "remove_decision": "Delete decision",
+    "independent": "independent"
   }
 }

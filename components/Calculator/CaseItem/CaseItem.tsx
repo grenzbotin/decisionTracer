@@ -4,9 +4,10 @@ import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
 import i18next from "i18next";
 import { withStyles } from "@material-ui/core/styles";
 import React, { useContext } from "react";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import CheckBoxIcon from "@material-ui/icons/CheckBox";
+import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { SubItem as SubItemType } from "@/../lib/presets";
@@ -14,6 +15,7 @@ import EditableTitle from "../CalculatorElements/EditableTitle";
 import ValidatedProbabilityField from "../CalculatorElements/ValidatedProbabilityField";
 import NonLinearSlider from "../CalculatorElements/NonLinearSlider";
 import GrowingSlider from "../CalculatorElements/GrowingSlider";
+import CardMenu from "../CalculatorElements/CardMenu";
 
 const Accordion = withStyles({
   root: {
@@ -59,7 +61,7 @@ export default function CaseItem({
   decisionKey: string;
   color: string;
 }): JSX.Element {
-  const { setTitle, setProbability, setValue, removeItem } = useContext(GlobalDecisionContext);
+  const { setTitle, setProbability, setValue, removeItem, toggleIndependent } = useContext(GlobalDecisionContext);
 
   const handleProbabilityChange = (value: number): void => {
     setProbability(value, decisionKey, itemKey, caseItem.key);
@@ -81,13 +83,24 @@ export default function CaseItem({
         />
         <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", flex: 1 }}>
           {caseItem.value} ({caseItem.probability.toFixed(3)}%)
-          <IconButton
-            aria-label="remove scenario"
-            component="span"
-            onClick={() => removeItem(decisionKey, itemKey, caseItem.key)}
-          >
-            <DeleteForeverIcon fontSize="small" color="inherit" />
-          </IconButton>
+          <CardMenu
+            listContent={[
+              {
+                text: i18next.t("calculator.remove_scenario"),
+                icon: <DeleteIcon fontSize="small" />,
+                onClick: () => removeItem(decisionKey, itemKey, caseItem.key)
+              },
+              {
+                text: i18next.t("calculator.independent"),
+                icon: caseItem.isIndependent ? (
+                  <CheckBoxIcon style={{ color: color }} fontSize="small" />
+                ) : (
+                  <CheckBoxOutlineBlankIcon fontSize="small" />
+                ),
+                onClick: () => toggleIndependent(decisionKey, itemKey, caseItem.key)
+              }
+            ]}
+          />
         </div>
       </AccordionSummary>
       <AccordionDetails style={{ flexDirection: "column", padding: "1rem 2rem" }}>

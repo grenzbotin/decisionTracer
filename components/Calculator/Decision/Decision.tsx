@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
 import { Grid, Paper } from "@material-ui/core";
 import i18next from "i18next";
-import IconButton from "@material-ui/core/IconButton";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { Decision as DecisionType } from "@/../lib/presets";
 import EditableTitle from "../CalculatorElements/EditableTitle";
 import SubItem from "../SubItem";
+import CustomIcon from "@/../assets/CustomIcon";
+import CardMenu from "../CalculatorElements/CardMenu";
 
 function getResult(decision: DecisionType): number | string {
   let total = 0;
@@ -31,10 +32,38 @@ export default function Decision({ decision, color }: { decision: DecisionType; 
   const { setTitle, removeItem, addItem } = useContext(GlobalDecisionContext);
 
   return (
-    <Grid key={decision.key} item xs>
+    <Grid key={decision.key} item xs style={{ position: "relative" }}>
+      <div
+        style={{
+          position: "absolute",
+          left: "24px",
+          height: "50px",
+          width: "50px",
+          background: color,
+          borderRadius: "4px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        <div
+          style={{
+            backgroundColor: "rgba(255,255,255,.9)",
+            border: "2px solid rgba(0,0,0,.1)",
+            height: "30px",
+            width: "30px",
+            borderRadius: "15px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
+          {decision.icon && <CustomIcon fontSize="small" name={decision.icon} />}
+        </div>
+      </div>
       <Paper
         style={{
-          padding: "1rem",
+          padding: "0.5rem 1rem",
           borderTop: `5px solid ${color}`
         }}
       >
@@ -43,7 +72,8 @@ export default function Decision({ decision, color }: { decision: DecisionType; 
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            marginBottom: ".5rem"
+            marginBottom: ".5rem",
+            marginLeft: "calc(1rem + 50px)"
           }}
         >
           <EditableTitle
@@ -52,19 +82,20 @@ export default function Decision({ decision, color }: { decision: DecisionType; 
             variant="h5"
             component="h2"
           />
-          <div style={{ color: color, display: "flex", alignSelf: "baseline" }}>
-            <IconButton aria-label="remove scenario" component="span" onClick={() => removeItem(decision.key)}>
-              <DeleteForeverIcon fontSize="small" color="inherit" />
-            </IconButton>
-            <IconButton
-              color="inherit"
-              aria-label="add scenario"
-              component="span"
-              onClick={() => addItem(decision.key)}
-            >
-              <AddCircleIcon />
-            </IconButton>
-          </div>
+          <CardMenu
+            listContent={[
+              {
+                text: i18next.t("calculator.add_scenario"),
+                icon: <AddCircleIcon fontSize="small" />,
+                onClick: () => addItem(decision.key)
+              },
+              {
+                text: i18next.t("calculator.remove_scenario"),
+                icon: <DeleteIcon fontSize="small" />,
+                onClick: () => removeItem(decision.key)
+              }
+            ]}
+          />
         </div>
         <Grid container spacing={2}>
           {decision.sub.map((item) => (
@@ -84,7 +115,8 @@ export default function Decision({ decision, color }: { decision: DecisionType; 
               height: "1rem",
               display: "inline-block",
               marginRight: ".5rem",
-              background: color
+              background: color,
+              borderRadius: "4px"
             }}
           />
           {i18next.t("calculator.expected_utility")} {getResult(decision)}

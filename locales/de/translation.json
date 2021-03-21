@@ -17,6 +17,12 @@
     "probability": "Wahrscheinlichkeit",
     "value": "Nutzwert",
     "expected_utility": "Erwartungsnutzen",
-    "subcases": "Sub-Szenarien"
+    "subcases": "Sub-Szenarien",
+    "add_scenario": "Szenario hinzufügen",
+    "add_case": "Sub-Szenario hinzufügen",
+    "remove_scenario": "Szenario löschen",
+    "remove_case": "Sub-Szenario löschen",
+    "remove_decision": "Entscheidung löschen",
+    "independent": "Unabhängig"
   }
 }

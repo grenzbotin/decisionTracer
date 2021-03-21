@@ -1,9 +1,10 @@
 import { Card, Grid, CardContent, Typography } from "@material-ui/core";
 import i18next from "i18next";
 import React, { useContext } from "react";
-import IconButton from "@material-ui/core/IconButton";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import DeleteIcon from "@material-ui/icons/Delete";
+import CheckBoxIcon from "@material-ui/icons/CheckBox";
+import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { SubItem as SubItemType } from "@/../lib/presets";
@@ -12,6 +13,7 @@ import ValidatedProbabilityField from "../CalculatorElements/ValidatedProbabilit
 import NonLinearSlider from "../CalculatorElements/NonLinearSlider";
 import GrowingSlider from "../CalculatorElements/GrowingSlider";
 import CaseItem from "../CaseItem";
+import CardMenu from "../CalculatorElements/CardMenu";
 
 export default function SubItem({
   item,
@@ -22,7 +24,9 @@ export default function SubItem({
   decisionKey: string;
   color: string;
 }): JSX.Element {
-  const { setTitle, setProbability, setValue, removeItem, addItem } = useContext(GlobalDecisionContext);
+  const { setTitle, setProbability, setValue, removeItem, addItem, toggleIndependent } = useContext(
+    GlobalDecisionContext
+  );
 
   const handleProbabilityChange = (value: number): void => {
     setProbability(value, decisionKey, item.key);
@@ -34,7 +38,7 @@ export default function SubItem({
 
   return (
     <Grid key={item.key} item xs>
-      <Card variant="outlined" style={{ padding: ".5rem", minWidth: "250px" }}>
+      <Card variant="outlined" style={{ minWidth: "250px" }}>
         <CardContent>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
             <EditableTitle
@@ -43,23 +47,29 @@ export default function SubItem({
               variant="h6"
               component="h3"
             />
-            <div style={{ color: color, display: "flex", alignSelf: "baseline" }}>
-              <IconButton
-                aria-label="remove scenario"
-                component="span"
-                onClick={() => removeItem(decisionKey, item.key)}
-              >
-                <DeleteForeverIcon fontSize="small" color="inherit" />
-              </IconButton>
-              <IconButton
-                color="inherit"
-                aria-label="add scenario"
-                component="span"
-                onClick={() => addItem(decisionKey, item.key)}
-              >
-                <AddCircleIcon />
-              </IconButton>
-            </div>
+            <CardMenu
+              listContent={[
+                {
+                  text: i18next.t("calculator.add_case"),
+                  icon: <AddCircleIcon fontSize="small" />,
+                  onClick: () => addItem(decisionKey, item.key)
+                },
+                {
+                  text: i18next.t("calculator.remove_case"),
+                  icon: <DeleteIcon fontSize="small" />,
+                  onClick: () => removeItem(decisionKey, item.key)
+                },
+                {
+                  text: i18next.t("calculator.independent"),
+                  icon: item.isIndependent ? (
+                    <CheckBoxIcon fontSize="small" />
+                  ) : (
+                    <CheckBoxOutlineBlankIcon fontSize="small" />
+                  ),
+                  onClick: () => toggleIndependent(decisionKey, item.key)
+                }
+              ]}
+            />
           </div>
           <div style={{ display: "flex", marginTop: "2rem", justifyContent: "space-between", alignItems: "flex-end" }}>
             <Typography variant="caption">{i18next.t("calculator.probability")}</Typography>

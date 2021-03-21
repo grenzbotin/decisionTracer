@@ -3,6 +3,7 @@ interface CaseItem {
   title: string;
   probability: number;
   value: number;
+  isIndependent?: boolean;
 }
 
 export interface SubItem {
@@ -10,6 +11,7 @@ export interface SubItem {
   title: string;
   probability: number;
   value: number;
+  isIndependent?: boolean;
   cases?: Array<CaseItem>;
 }
 
@@ -37,13 +39,13 @@ const PRESETS = <Preset[]> [
   {
     title: "Soll ich mich impfen lassen?",
     decription: "Entscheidungshilfe",
-    icon: null as string,
+    icon:'virus',
     resources: [{ title: "title", link: "link" }],
     decisions: [
       {
         key: "main-0",
         title: "Impfen",
-        icon: null as string,
+        icon: 'vaccination',
         sub: [
           {
             key: "sub-0",
@@ -71,7 +73,7 @@ const PRESETS = <Preset[]> [
       {
         key: "main-1",
         title: "Nicht impfen",
-        icon: null as string,
+        icon: 'noVaccination',
         sub: [
           {
             key: "main-1-sub-0",

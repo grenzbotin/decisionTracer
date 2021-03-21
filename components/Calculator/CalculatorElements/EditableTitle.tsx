@@ -75,7 +75,11 @@ function EditableTitle({
           horizontal: "center"
         }}
       >
-        <Box p={2} style={{ display: "flex", alignItems: "center" }} onClick={(e) => e.stopPropagation()}>
+        <Box
+          p={2}
+          style={{ display: "flex", alignItems: "center", padding: ".5rem" }}
+          onClick={(e) => e.stopPropagation()}
+        >
           <TextField
             id="standard-basic"
             label="Name"
