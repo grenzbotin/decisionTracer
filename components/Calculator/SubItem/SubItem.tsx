@@ -117,7 +117,7 @@ export default function SubItem({
               <div
                 style={{
                   display: "flex",
-                  margin: "1.5rem 0 .5rem 0",
+                  margin: "1rem 0 .5rem 0",
                   justifyContent: "space-between",
                   alignItems: "flex-end"
                 }}
@@ -133,7 +133,7 @@ export default function SubItem({
             </>
           ) : (
             <>
-              <Typography variant="caption" display="block" style={{ marginTop: "1.5rem" }} gutterBottom>
+              <Typography variant="caption" display="block" style={{ marginTop: "1rem" }} gutterBottom>
                 {i18next.t("calculator.subcases")}
               </Typography>
               {item.cases.map((caseItem) => (
