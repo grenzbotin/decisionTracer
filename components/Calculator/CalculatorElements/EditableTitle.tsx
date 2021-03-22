@@ -13,7 +13,7 @@ function EditableTitle({
 }: {
   title: string;
   onChange: (_title: string) => void;
-  variant: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "subtitle1" | "subtitle2" | "body2";
+  variant: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "subtitle1" | "subtitle2" | "body2" | "caption";
   component: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   alignItems?: "baseline" | "center";
 }): JSX.Element {
@@ -58,7 +58,13 @@ function EditableTitle({
       <Typography variant={variant} component={component} style={{ wordBreak: "break-all" }}>
         {title}
       </Typography>
-      <IconButton color="inherit" aria-label="edit name" onClick={handleClick} style={{ marginLeft: ".5rem" }}>
+      <IconButton
+        color="inherit"
+        size={variant === "caption" ? "small" : "medium"}
+        aria-label="edit name"
+        onClick={handleClick}
+        style={{ marginLeft: ".5rem" }}
+      >
         <EditIcon fontSize="small" />
       </IconButton>
       <Popover

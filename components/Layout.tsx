@@ -1,11 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import clsx from "clsx";
-import {
-  makeStyles,
-  useTheme,
-  Theme,
-  createStyles,
-} from "@material-ui/core/styles";
+import { makeStyles, useTheme, Theme, createStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -22,40 +17,44 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import Container from "@material-ui/core/Container";
 import Footer from "./Footer";
+import CustomIcon from "../assets/CustomIcon";
+import { GlobalDecisionContext } from "../hooks/GlobalDecisionsContextProvider";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: "flex",
+      display: "flex"
     },
     appBar: {
       transition: theme.transitions.create(["margin", "width"], {
         easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
+        duration: theme.transitions.duration.leavingScreen
+      })
     },
     appBarShift: {
       width: `calc(100% - ${drawerWidth}px)`,
       transition: theme.transitions.create(["margin", "width"], {
         easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
+        duration: theme.transitions.duration.enteringScreen
       }),
-      marginRight: drawerWidth,
+      marginRight: drawerWidth
     },
     title: {
       flexGrow: 1,
+      display: "flex",
+      alignItems: "center"
     },
     hide: {
-      display: "none",
+      display: "none"
     },
     drawer: {
       width: drawerWidth,
-      flexShrink: 0,
+      flexShrink: 0
     },
     drawerPaper: {
-      width: drawerWidth,
+      width: drawerWidth
     },
     drawerHeader: {
       display: "flex",
@@ -63,24 +62,24 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(0, 1),
       // necessary for content to be below app bar
       ...theme.mixins.toolbar,
-      justifyContent: "flex-start",
+      justifyContent: "flex-start"
     },
     content: {
       flexGrow: 1,
       padding: theme.spacing(3),
       transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
+        duration: theme.transitions.duration.leavingScreen
       }),
-      marginRight: -drawerWidth,
+      marginRight: -drawerWidth
     },
     contentShift: {
       transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
+        duration: theme.transitions.duration.enteringScreen
       }),
-      marginRight: 0,
-    },
+      marginRight: 0
+    }
   })
 );
 
@@ -91,6 +90,7 @@ interface Props {
 export default function Layout({ children }: Props): JSX.Element {
   const classes = useStyles();
   const theme = useTheme();
+  const { active } = useContext(GlobalDecisionContext);
   const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = (): void => {
@@ -106,12 +106,13 @@ export default function Layout({ children }: Props): JSX.Element {
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
+          [classes.appBarShift]: open
         })}
       >
         <Toolbar>
           <Typography variant="h6" noWrap className={classes.title}>
-            Impfi
+            {active.icon && <CustomIcon name={active.icon} fontSize="large" style={{ marginRight: "2rem" }} />}{" "}
+            {active.title}
           </Typography>
           <IconButton
             color="inherit"
@@ -126,7 +127,7 @@ export default function Layout({ children }: Props): JSX.Element {
       </AppBar>
       <div
         className={clsx(classes.content, {
-          [classes.contentShift]: open,
+          [classes.contentShift]: open
         })}
       >
         <main>
@@ -143,16 +144,12 @@ export default function Layout({ children }: Props): JSX.Element {
         anchor="right"
         open={open}
         classes={{
-          paper: classes.drawerPaper,
+          paper: classes.drawerPaper
         }}
       >
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
+            {theme.direction === "rtl" ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </div>
         <Divider />

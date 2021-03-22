@@ -78,12 +78,15 @@ export default function CaseItem({
           alignItems="center"
           title={caseItem.title}
           onChange={(title: string) => setTitle(title, decisionKey, itemKey, caseItem.key)}
-          variant="body2"
+          variant="caption"
           component="h4"
         />
         <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", flex: 1 }}>
-          {caseItem.value} ({caseItem.probability.toFixed(3)}%)
+          <Typography variant="caption" display="block">
+            {caseItem.value} ({caseItem.probability.toFixed(3)}%)
+          </Typography>
           <CardMenu
+            size="small"
             listContent={[
               {
                 text: i18next.t("calculator.remove_scenario"),

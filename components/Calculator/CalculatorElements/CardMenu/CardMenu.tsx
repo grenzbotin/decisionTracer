@@ -8,7 +8,13 @@ interface ListContent {
   onClick: () => void;
 }
 
-function CardMenu({ listContent }: { listContent: Array<ListContent> }): JSX.Element {
+function CardMenu({
+  listContent,
+  size = "medium"
+}: {
+  listContent: Array<ListContent>;
+  size?: "small" | "medium";
+}): JSX.Element {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
@@ -34,7 +40,7 @@ function CardMenu({ listContent }: { listContent: Array<ListContent> }): JSX.Ele
 
   return (
     <div>
-      <IconButton aria-label="edit name" onClick={handleClick} style={{ marginLeft: ".5rem" }}>
+      <IconButton aria-label="edit name" size={size} onClick={handleClick} style={{ marginLeft: ".5rem" }}>
         <SettingsIcon fontSize="small" />
       </IconButton>
       <Popover

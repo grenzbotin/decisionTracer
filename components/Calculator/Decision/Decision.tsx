@@ -48,7 +48,7 @@ export default function Decision({ decision, color }: { decision: DecisionType; 
       >
         <div
           style={{
-            backgroundColor: "rgba(255,255,255,.9)",
+            backgroundColor: "rgba(255,255,255,.8)",
             border: "2px solid rgba(0,0,0,.1)",
             height: "30px",
             width: "30px",
@@ -58,7 +58,7 @@ export default function Decision({ decision, color }: { decision: DecisionType; 
             justifyContent: "center"
           }}
         >
-          {decision.icon && <CustomIcon fontSize="small" name={decision.icon} />}
+          {decision.icon && <CustomIcon fontSize="large" name={decision.icon} />}
         </div>
       </div>
       <Paper
