@@ -106,7 +106,7 @@ export default function CaseItem({
           />
         </div>
       </AccordionSummary>
-      <AccordionDetails style={{ flexDirection: "column", padding: "1rem 2rem" }}>
+      <AccordionDetails style={{ flexDirection: "column", padding: "1rem" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
           <Typography variant="caption">{i18next.t("calculator.probability")}</Typography>
           <ValidatedProbabilityField value={caseItem.probability} onChange={handleProbabilityChange} />

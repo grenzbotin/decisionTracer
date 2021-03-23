@@ -60,7 +60,7 @@ function CardMenu({
         <Paper>
           <MenuList autoFocusItem={open} id="menu-list-grow">
             {listContent.map((item) => (
-              <MenuItem key={item.text} onClick={(e) => handleAction(e, item.onClick)}>
+              <MenuItem key={item.text} dense onClick={(e) => handleAction(e, item.onClick)}>
                 {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>} {item.text}
               </MenuItem>
             ))}
