@@ -1,19 +1,30 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import chroma from 'chroma-js';
 
 const BACKGROUND = '#F6F0EC';
 export const PRIMARY = '#3A808A';
 export const SECONDARY = '#FFA333';
 export const FOOTER_BACKGROUND = '#284D5B';
+const SAND = '#E3DDCA';
 
 export const GREEN = '113, 195, 60';
 export const RED = '195, 74, 60';
 
 
 export const GRAPH_COLORS = [PRIMARY, SECONDARY];
+const DECISION_COLORS = [PRIMARY, SECONDARY, FOOTER_BACKGROUND, SAND];
+
+function repeatFor(arr: Array<string>, size: number): Array<string> {
+  const newArr = new Array(size);
+
+  for(let i = 0; i < size; i++) {
+    newArr[i] = arr[i % arr.length];
+  }
+
+  return newArr;
+}
 
 export const generateColors = (value: number): string[] => (
-  chroma.scale([PRIMARY, SECONDARY, FOOTER_BACKGROUND]).mode('lch').colors(value)
+  repeatFor(DECISION_COLORS, value)
 );
 
 

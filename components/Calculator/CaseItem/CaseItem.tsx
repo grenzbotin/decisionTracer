@@ -16,6 +16,7 @@ import ValidatedProbabilityField from "../CalculatorElements/ValidatedProbabilit
 import NonLinearSlider from "../CalculatorElements/NonLinearSlider";
 import GrowingSlider from "../CalculatorElements/GrowingSlider";
 import CardMenu from "../CalculatorElements/CardMenu";
+import ValidatedValueField from "../CalculatorElements/ValidatedValueField";
 
 const Accordion = withStyles({
   root: {
@@ -89,7 +90,7 @@ export default function CaseItem({
             size="small"
             listContent={[
               {
-                text: i18next.t("calculator.remove_scenario"),
+                text: i18next.t("calculator.remove_case"),
                 icon: <DeleteIcon fontSize="small" />,
                 onClick: () => removeItem(decisionKey, itemKey, caseItem.key)
               },
@@ -131,9 +132,7 @@ export default function CaseItem({
           <Typography variant="caption" display="block" gutterBottom>
             {i18next.t("calculator.value")}
           </Typography>
-          <Typography variant="caption" display="block" gutterBottom>
-            {caseItem.value}
-          </Typography>
+          <ValidatedValueField onChange={handleValueChange} value={caseItem.value} />
         </div>
         <GrowingSlider value={caseItem.value} onChange={handleValueChange} />
       </AccordionDetails>

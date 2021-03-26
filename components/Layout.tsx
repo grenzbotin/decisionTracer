@@ -44,7 +44,8 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       flexGrow: 1,
       display: "flex",
-      alignItems: "center"
+      alignItems: "center",
+      fontWeight: 500
     },
     hide: {
       display: "none"
@@ -110,7 +111,7 @@ export default function Layout({ children }: Props): JSX.Element {
         })}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap className={classes.title}>
+          <Typography component="h1" variant="body1" noWrap className={classes.title}>
             {active.icon && <CustomIcon name={active.icon} fontSize="large" style={{ marginRight: "2rem" }} />}{" "}
             {active.title}
           </Typography>

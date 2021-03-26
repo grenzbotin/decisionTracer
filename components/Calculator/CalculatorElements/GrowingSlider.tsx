@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Box, Slider } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import SentimentDissatisfiedOutlinedIcon from "@material-ui/icons/SentimentDissatisfiedOutlined";
 import SentimentSatisfiedOutlinedIcon from "@material-ui/icons/SentimentSatisfiedOutlined";
 
 import { SECONDARY, PRIMARY } from "../../theme";
+
+function usePrevious(value: number): number {
+  const ref = useRef<number>();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
 
 interface Props {
   onChange: (_value: number) => void;
@@ -27,6 +35,7 @@ const MULTIPLIER = 0.05;
 const THRESHOLD = 0.3;
 
 const GrowingSlider: React.FC<Props> = ({ value, onChange }) => {
+  const prevValue = usePrevious(value);
   const [minMax, setMinMax] = useState<{ min: number; max: number }>({
     min: -1000,
     max: 1000
@@ -51,6 +60,19 @@ const GrowingSlider: React.FC<Props> = ({ value, onChange }) => {
       }
     }
   };
+
+  // Take over new value from global state
+  useEffect(() => {
+    if (prevValue !== value) {
+      if (value <= minMax.min) {
+        setMinMax({ max: value + 2000, min: value });
+      }
+      if (value >= minMax.max) {
+        setMinMax({ max: value, min: value - 2000 });
+      }
+      setLocalValue(value);
+    }
+  }, [value, prevValue, minMax.max, minMax.min]);
 
   // Push to global state on commit
   const handleChangeCommit = (value: number | number[]): void => {

@@ -16,6 +16,7 @@ import NonLinearSlider from "../CalculatorElements/NonLinearSlider";
 import GrowingSlider from "../CalculatorElements/GrowingSlider";
 import CaseItem from "../CaseItem";
 import CardMenu from "../CalculatorElements/CardMenu";
+import ValidatedValueField from "../CalculatorElements/ValidatedValueField";
 
 const CardHeader = withStyles({
   root: {
@@ -71,7 +72,7 @@ export default function SubItem({
                   onClick: () => addItem(decisionKey, item.key)
                 },
                 {
-                  text: i18next.t("calculator.remove_case"),
+                  text: i18next.t("calculator.remove_scenario"),
                   icon: <DeleteIcon fontSize="small" />,
                   onClick: () => removeItem(decisionKey, item.key)
                 },
@@ -125,9 +126,7 @@ export default function SubItem({
                 <Typography variant="caption" display="block" gutterBottom>
                   {i18next.t("calculator.value")}
                 </Typography>
-                <Typography variant="caption" display="block" gutterBottom>
-                  {item.value}
-                </Typography>
+                <ValidatedValueField onChange={handleValueChange} value={item.value} />
               </div>
               <GrowingSlider onChange={handleValueChange} value={item.value} />
             </>

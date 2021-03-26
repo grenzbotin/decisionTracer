@@ -1,5 +1,6 @@
 import { Grid, Button } from "@material-ui/core";
 import React, { useContext } from "react";
+import i18next from "i18next";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 import { generateColors } from "../theme";
@@ -14,9 +15,9 @@ export default function Calculator(): JSX.Element {
 
   return (
     <Grid container spacing={2}>
-      <Grid container item xs={12} style={{ display: "flex", justifyContent: "right" }}>
+      <Grid container item xs={12} style={{ display: "flex", justifyContent: "flex-end" }}>
         <Button variant="contained" color="primary" onClick={() => addItem()} startIcon={<AddCircleIcon />}>
-          Entscheidung
+          {i18next.t("calculator.new_decision")}
         </Button>
       </Grid>
       {decisions.map((decision, key) => (

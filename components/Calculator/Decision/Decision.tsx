@@ -90,7 +90,7 @@ export default function Decision({ decision, color }: { decision: DecisionType; 
                 onClick: () => addItem(decision.key)
               },
               {
-                text: i18next.t("calculator.remove_scenario"),
+                text: i18next.t("calculator.remove_decision"),
                 icon: <DeleteIcon fontSize="small" />,
                 onClick: () => removeItem(decision.key)
               }

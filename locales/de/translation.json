@@ -14,6 +14,7 @@
     }
   },
   "calculator": {
+    "new_decision": "Entscheidung",
     "probability": "Wahrscheinlichkeit",
     "value": "Nutzwert",
     "expected_utility": "Erwartungsnutzen",
