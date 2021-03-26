@@ -24,6 +24,7 @@
     "remove_scenario": "Delete scenario",
     "remove_case": "Delete sub scenario",
     "remove_decision": "Delete decision",
-    "independent": "independent"
+    "independent": "independent",
+    "results": "Result"
   }
 }

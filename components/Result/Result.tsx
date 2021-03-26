@@ -2,8 +2,11 @@ import React, { useContext } from "react";
 import dynamic from "next/dynamic";
 import i18next from "i18next";
 import { GlobalDecisionContext } from "../../hooks/GlobalDecisionsContextProvider";
-import { Grid, Paper, Typography } from "@material-ui/core";
-import { generateColors } from "../theme";
+import { Card, makeStyles, Typography } from "@material-ui/core";
+import SentimentDissatisfiedOutlinedIcon from "@material-ui/icons/SentimentDissatisfiedOutlined";
+import SentimentSatisfiedOutlinedIcon from "@material-ui/icons/SentimentSatisfiedOutlined";
+
+import { generateColors, PRIMARY, SECONDARY } from "../theme";
 import { Decision } from "@/../lib/presets";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
@@ -69,49 +72,51 @@ function getResults(decisions: Array<Decision>): Array<number | boolean> {
   return results;
 }
 
-function Result(): JSX.Element {
+const useStyles = makeStyles({
+  root: {
+    position: "sticky",
+    top: "calc(1rem + 60px)"
+  }
+});
+
+function Result({ height = 300, mobile = false }: { height?: number; mobile?: boolean }): JSX.Element {
   const {
     active: { decisions }
   } = useContext(GlobalDecisionContext);
+  const classes = useStyles();
   const categories = decisions.map((decision) => decision.title);
   const results = getResults(decisions);
   const colors = generateColors(decisions.length);
 
   return (
-    <Grid container spacing={2} style={{ marginTop: "1rem" }}>
-      <Grid item xs={12} md={6}>
-        <Paper
-          style={{
-            minWidth: "200px",
-            padding: "1rem"
-          }}
-        >
-          {decisions.length > 0 ? (
-            <Chart
-              options={{ ...defaultOptions, colors, xaxis: { categories } }}
-              series={[{ name: i18next.t("calculator.expected_utility"), data: results }]}
-              type="bar"
-              height={300}
-              width="100%"
-            />
-          ) : (
-            "Keine Entscheidungen angegeben"
-          )}
-        </Paper>
-      </Grid>
-      <Grid item xs={12} md={6}>
-        <Paper
-          style={{
-            padding: "1rem"
-          }}
-        >
-          <Typography variant="h5" component="h2">
-            Beispieltitel
-          </Typography>
-          Platz für Erklärungen
-        </Paper>
-      </Grid>
-    </Grid>
+    <Card className={classes.root} style={{ padding: mobile ? ".5rem 1rem 0 1rem" : "1rem" }}>
+      {!mobile && (
+        <Typography variant="h5" component="h3" gutterBottom>
+          {i18next.t("calculator.result")}
+        </Typography>
+      )}
+      {decisions.length > 0 ? (
+        <div style={{ position: "relative" }}>
+          <SentimentSatisfiedOutlinedIcon
+            fontSize="small"
+            style={{ color: PRIMARY, position: "absolute", left: "3rem", top: "0rem" }}
+          />
+          <SentimentDissatisfiedOutlinedIcon
+            fontSize="small"
+            style={{ color: SECONDARY, position: "absolute", left: "3rem", bottom: "1.5rem" }}
+          />
+          <Chart
+            options={{ ...defaultOptions, colors, xaxis: { categories } }}
+            series={[{ name: i18next.t("calculator.expected_utility"), data: results }]}
+            type="bar"
+            height={height}
+            width="100%"
+          />
+        </div>
+      ) : (
+        "Keine Entscheidungen angegeben"
+      )}
+    </Card>
   );
 }
 

@@ -16,7 +16,6 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import Container from "@material-ui/core/Container";
-import Footer from "./Footer";
 import CustomIcon from "../assets/CustomIcon";
 import { GlobalDecisionContext } from "../hooks/GlobalDecisionsContextProvider";
 
@@ -137,7 +136,7 @@ export default function Layout({ children }: Props): JSX.Element {
             {children}
           </Container>
         </main>
-        <Footer />
+        {/* <Footer /> */}
       </div>
       <Drawer
         className={classes.drawer}

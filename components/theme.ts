@@ -1,6 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
-const BACKGROUND = '#F6F0EC';
+export const BACKGROUND = '#F6F0EC';
 export const PRIMARY = '#3A808A';
 export const SECONDARY = '#FFA333';
 export const FOOTER_BACKGROUND = '#284D5B';

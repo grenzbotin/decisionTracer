@@ -24,6 +24,7 @@
     "remove_scenario": "Szenario löschen",
     "remove_case": "Sub-Szenario löschen",
     "remove_decision": "Entscheidung löschen",
-    "independent": "Unabhängig"
+    "independent": "Unabhängig",
+    "result": "Ergebnis"
   }
 }

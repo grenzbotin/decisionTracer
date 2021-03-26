@@ -1,3 +1,5 @@
+import FooterResult from "@/../components/Result/FooterResult";
+import { Grid, Hidden } from "@material-ui/core";
 import i18next from "i18next";
 import dynamic from "next/dynamic";
 
@@ -15,8 +17,19 @@ export default function LangIndex(): JSX.Element {
         description={i18next.t("home.meta.description")}
         keywords={i18next.t("home.meta.keywords")}
       />
-      <Calculator />
-      <Result />
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={8}>
+          <Calculator />
+        </Grid>
+        <Hidden smDown>
+          <Grid item xs={12} md={4} style={{ position: "relative" }}>
+            <Result />
+          </Grid>
+        </Hidden>
+        <Hidden mdUp>
+          <FooterResult />
+        </Hidden>
+      </Grid>
     </>
   );
 }
@@ -34,7 +47,7 @@ export async function getStaticPaths(): Promise<StaticPathProps> {
   const paths = getAllLanguageSlugs();
   return {
     paths,
-    fallback: false,
+    fallback: false
   };
 }
 
@@ -54,7 +67,7 @@ export async function getStaticProps({ params }: Params): Promise<StaticProps> {
   const language = getLanguage(params.lang);
   return {
     props: {
-      language,
-    },
+      language
+    }
   };
 }
