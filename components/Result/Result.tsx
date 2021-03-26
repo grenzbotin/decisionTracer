@@ -99,11 +99,11 @@ function Result({ height = 300, mobile = false }: { height?: number; mobile?: bo
         <div style={{ position: "relative" }}>
           <SentimentSatisfiedOutlinedIcon
             fontSize="small"
-            style={{ color: PRIMARY, position: "absolute", left: "3rem", top: "0rem" }}
+            style={{ color: PRIMARY, position: "absolute", left: "2rem", top: "0rem" }}
           />
           <SentimentDissatisfiedOutlinedIcon
             fontSize="small"
-            style={{ color: SECONDARY, position: "absolute", left: "3rem", bottom: "1.5rem" }}
+            style={{ color: SECONDARY, position: "absolute", left: "2rem", bottom: "1.5rem" }}
           />
           <Chart
             options={{ ...defaultOptions, colors, xaxis: { categories } }}

@@ -136,7 +136,6 @@ export default function Layout({ children }: Props): JSX.Element {
             {children}
           </Container>
         </main>
-        {/* <Footer /> */}
       </div>
       <Drawer
         className={classes.drawer}

@@ -23,7 +23,7 @@ function FooterResult(): JSX.Element {
 
   return (
     <AppBar position="fixed" color="primary" className={classes.appBar}>
-      <div style={{ display: "flex", justifyContent: "space-between", padding: ".2rem 1rem", alignItems: "center" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", padding: ".5rem 1rem", alignItems: "center" }}>
         <Typography variant="subtitle2" component="h3">
           {i18next.t("calculator.result")}
         </Typography>
