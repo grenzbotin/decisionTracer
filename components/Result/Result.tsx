@@ -89,7 +89,7 @@ function Result({ height = 300, mobile = false }: { height?: number; mobile?: bo
   const colors = generateColors(decisions.length);
 
   return (
-    <Card className={classes.root} style={{ padding: mobile ? ".5rem 1rem 0 1rem" : "1rem" }}>
+    <Card className={classes.root} style={{ padding: mobile ? ".5rem .5rem 0 .2rem" : "1rem" }}>
       {!mobile && (
         <Typography variant="h5" component="h3" gutterBottom>
           {i18next.t("calculator.result")}

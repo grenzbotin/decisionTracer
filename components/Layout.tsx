@@ -131,7 +131,7 @@ export default function Layout({ children }: Props): JSX.Element {
         })}
       >
         <main>
-          <Container maxWidth="xl">
+          <Container maxWidth="xl" style={{ padding: 0 }}>
             <div className={classes.drawerHeader} />
             {children}
           </Container>
