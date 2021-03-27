@@ -1,5 +1,8 @@
+import React, { useContext } from "react";
 import FooterResult from "@/../components/Result/FooterResult";
-import { Grid, Hidden } from "@material-ui/core";
+import { GlobalUiContext } from "@/../hooks/GlobalUiContextProvider";
+import { Grid, Hidden, useMediaQuery } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
 import i18next from "i18next";
 import dynamic from "next/dynamic";
 
@@ -10,6 +13,10 @@ const Calculator = dynamic(() => import("../../components/Calculator"));
 const Result = dynamic(() => import("../../components/Result"));
 
 export default function LangIndex(): JSX.Element {
+  const { mobileFooter } = useContext(GlobalUiContext);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <>
       <HtmlHeader
@@ -18,7 +25,7 @@ export default function LangIndex(): JSX.Element {
         keywords={i18next.t("home.meta.keywords")}
       />
       <Grid container spacing={2}>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={8} style={{ marginBottom: mobileFooter && isMobile ? "220px" : "50px" }}>
           <Calculator />
         </Grid>
         <Hidden smDown>

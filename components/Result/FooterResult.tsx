@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import i18next from "i18next";
 import { AppBar, IconButton, makeStyles, Typography } from "@material-ui/core";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
 import Result from "./Result";
+import { GlobalUiContext } from "@/../hooks/GlobalUiContextProvider";
 
 const useStyles = makeStyles({
   appBar: {
@@ -15,10 +16,10 @@ const useStyles = makeStyles({
 
 function FooterResult(): JSX.Element {
   const classes = useStyles();
-  const [open, setOpen] = useState(true);
+  const { mobileFooter, toggleMobileFooter } = useContext(GlobalUiContext);
 
   const handleToggleClick = (): void => {
-    setOpen(!open);
+    toggleMobileFooter();
   };
 
   return (
@@ -28,10 +29,10 @@ function FooterResult(): JSX.Element {
           {i18next.t("calculator.result")}
         </Typography>
         <IconButton color="inherit" aria-label="toggle results" size="small" edge="end" onClick={handleToggleClick}>
-          {open ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
+          {mobileFooter ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
         </IconButton>
       </div>
-      {open && <Result mobile height={150} />}
+      {mobileFooter && <Result mobile height={150} />}
     </AppBar>
   );
 }

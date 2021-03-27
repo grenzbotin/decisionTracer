@@ -31,7 +31,12 @@ const CustomIcon = ({
 }): JSX.Element => {
   const icon = ICONS[name] || ICONS["virus"];
   return (
-    <SvgIcon component={icon.path} fontSize={fontSize} width="0" height="0" viewBox={icon.viewbox} style={style} />
+    <SvgIcon
+      component={icon.path}
+      fontSize={fontSize}
+      viewBox={icon.viewbox}
+      style={style}
+    />
   );
 };
 
