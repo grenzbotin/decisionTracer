@@ -59,8 +59,8 @@ function EditableTitle({
         {title}
       </Typography>
       <IconButton
-        color="inherit"
-        size={variant === "caption" ? "small" : "medium"}
+        color="default"
+        size="small"
         aria-label="edit name"
         onClick={handleClick}
         style={{ marginLeft: ".5rem" }}

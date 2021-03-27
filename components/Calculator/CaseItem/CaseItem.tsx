@@ -84,7 +84,7 @@ export default function CaseItem({
         />
         <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", flex: 1 }}>
           <Typography variant="caption" display="block">
-            {caseItem.value} ({caseItem.probability.toFixed(3)}%)
+            {((caseItem.value * caseItem.probability) / 100).toFixed(1)}
           </Typography>
           <CardMenu
             size="small"

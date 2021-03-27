@@ -83,7 +83,7 @@ const GrowingSlider: React.FC<Props> = ({ value, onChange }) => {
   };
 
   return (
-    <Box style={{ display: "flex" }}>
+    <Box style={{ display: "flex", alignItems: "center" }}>
       <SentimentDissatisfiedOutlinedIcon style={{ color: SECONDARY, marginRight: ".2rem" }} />
       <CustomSlider
         value={localValue}

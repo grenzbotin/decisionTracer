@@ -17,6 +17,7 @@ import GrowingSlider from "../CalculatorElements/GrowingSlider";
 import CaseItem from "../CaseItem";
 import CardMenu from "../CalculatorElements/CardMenu";
 import ValidatedValueField from "../CalculatorElements/ValidatedValueField";
+import { getUniqueNumber } from "@/../lib/helpers";
 
 const CardHeader = withStyles({
   root: {
@@ -51,7 +52,7 @@ export default function SubItem({
   };
 
   return (
-    <Grid key={item.key} item xs>
+    <Grid id={item.key} key={item.key} item xs>
       <Card variant="outlined" style={{ minWidth: "250px" }}>
         <CardHeader
           title={
@@ -59,7 +60,7 @@ export default function SubItem({
               alignItems="center"
               title={item.title}
               onChange={(title: string) => setTitle(title, decisionKey, item.key)}
-              variant="subtitle1"
+              variant="body2"
               component="h3"
             />
           }
@@ -69,7 +70,7 @@ export default function SubItem({
                 {
                   text: i18next.t("calculator.add_case"),
                   icon: <AddCircleIcon fontSize="small" />,
-                  onClick: () => addItem(decisionKey, item.key)
+                  onClick: () => addItem(getUniqueNumber(), decisionKey, item.key)
                 },
                 {
                   text: i18next.t("calculator.remove_scenario"),

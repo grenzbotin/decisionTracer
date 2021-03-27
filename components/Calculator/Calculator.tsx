@@ -1,22 +1,38 @@
 import { Grid, Button } from "@material-ui/core";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import i18next from "i18next";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 import { generateColors } from "../theme";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import Decision from "./Decision";
+import { getUniqueNumber, scrollToTargetOffset } from "@/../lib/helpers";
 
 export default function Calculator(): JSX.Element {
   const { active, addItem } = useContext(GlobalDecisionContext);
+  const [lastAddedDecision, setLastAddedDecision] = useState(null);
 
   const colors = generateColors(active.decisions.length);
   const decisions = active.decisions;
 
+  const handleClickAddItem = (): void => {
+    const uniqueNumber = getUniqueNumber();
+    setLastAddedDecision(uniqueNumber);
+    addItem(uniqueNumber);
+  };
+
+  // Scroll to last added decision
+  useEffect(() => {
+    if (active.decisions.find((item) => item.key === lastAddedDecision)) {
+      scrollToTargetOffset(lastAddedDecision);
+      setLastAddedDecision(null);
+    }
+  }, [active, lastAddedDecision]);
+
   return (
     <Grid container spacing={2}>
       <Grid container item xs={12} style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button variant="contained" color="primary" onClick={() => addItem()} startIcon={<AddCircleIcon />}>
+        <Button variant="contained" color="primary" onClick={handleClickAddItem} startIcon={<AddCircleIcon />}>
           {i18next.t("calculator.new_decision")}
         </Button>
       </Grid>

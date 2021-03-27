@@ -28,7 +28,7 @@ export const GlobalDecisionContext = React.createContext({
   setValue: (_value: number | number[], _decKey: string, _subKey: string, _caseKey?: string) => undefined,
   setProbability: (_value: number | number[], _decKey: string, _subKey: string, _caseKey?: string) => undefined,
   removeItem: (_decKey: string, _subKey?: string, _caseKey?: string) => undefined,
-  addItem: (_decKey?: string, _subKey?: string) => undefined,
+  addItem: (newKey: string, _decKey?: string, _subKey?: string) => undefined,
   toggleIndependent: (_decKey: string, _subKey?: string, _caseKey?: string) => undefined,
   createNewPreset: (_title: string, _icon?: string, _resources?: Resource[], _decisions?: Decision[]) => undefined
 });
@@ -334,7 +334,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
     }
   };
 
-  const addItem = (decKey?: string, subKey?: string): void => {
+  const addItem = (newKey: string, decKey?: string, subKey?: string): void => {
     if (subKey) {
       setState({
         ...state,
@@ -348,10 +348,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                     sub.key === subKey
                       ? {
                           ...sub,
-                          cases: [
-                            ...sub.cases,
-                            { key: new Date().getUTCMilliseconds().toString(), title: "new", probability: 0, value: 0 }
-                          ]
+                          cases: [...sub.cases, { key: newKey, title: "new", probability: 0, value: 0 }]
                         }
                       : sub
                   )
@@ -372,7 +369,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                   sub: [
                     ...decision.sub,
                     {
-                      key: new Date().getUTCMilliseconds().toString(),
+                      key: newKey,
                       title: "new",
                       probability: 0,
                       value: 0,
@@ -389,7 +386,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
         ...state,
         active: {
           ...state.active,
-          decisions: [...root.decisions, { key: new Date().getUTCMilliseconds().toString(), title: "new", sub: [] }]
+          decisions: [...root.decisions, { key: newKey, title: "new", sub: [] }]
         }
       });
     }

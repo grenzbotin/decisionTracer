@@ -2,7 +2,7 @@ import Head from "next/head";
 import i18next from "i18next";
 import { useRouter } from "next/router";
 
-const publicUrl = "https://something.de";
+const publicUrl = "https://grenzbotin.github.io/decisionTracer";
 
 interface Props {
   title: string;
@@ -45,11 +45,11 @@ const HtmlHeader: React.FC<Props> = ({ title, description, keywords }) => {
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
-      <meta name="msapplication-navbutton-color" content="#65a88b" />
-      <meta name="msapplication-TileColor" content="#e3e3e3" />
+      <meta name="msapplication-navbutton-color" content="#3A808A" />
+      <meta name="msapplication-TileColor" content="#F6F0EC" />
 
-      <link rel="icon" href="/favicon.ico" />
-      <link href="/manifest.json" rel="manifest" />
+      <link rel="icon" href={`${publicUrl}/favicon.ico`} />
+      <link href={`${publicUrl}/manifest.json`} rel="manifest" />
     </Head>
   );
 };
