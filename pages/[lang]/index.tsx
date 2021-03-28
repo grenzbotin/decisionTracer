@@ -1,21 +1,22 @@
-import React, { useContext } from "react";
-import FooterResult from "@/../components/Result/FooterResult";
-import { GlobalUiContext } from "@/../hooks/GlobalUiContextProvider";
-import { Grid, Hidden, useMediaQuery } from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
+import React, { useContext, useEffect } from "react";
+import { Grid } from "@material-ui/core";
 import i18next from "i18next";
 import dynamic from "next/dynamic";
 
 import { getAllLanguageSlugs, getLanguage } from "../../lib/lang";
+import { PRESETS } from "@/../lib/presets";
+import PresetCard from "@/../components/PresetCard";
+import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 
 const HtmlHeader = dynamic(() => import("../../components/HtmlHeader"));
-const Calculator = dynamic(() => import("../../components/Calculator"));
-const Result = dynamic(() => import("../../components/Result"));
 
 export default function LangIndex(): JSX.Element {
-  const { mobileFooter } = useContext(GlobalUiContext);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const { active, setActiveFromPreset } = useContext(GlobalDecisionContext);
+  useEffect(() => {
+    if (active) {
+      setActiveFromPreset(null);
+    }
+  }, [active, setActiveFromPreset]);
 
   return (
     <>
@@ -25,17 +26,11 @@ export default function LangIndex(): JSX.Element {
         keywords={i18next.t("home.meta.keywords")}
       />
       <Grid container spacing={2}>
-        <Grid item xs={12} md={8} style={{ marginBottom: mobileFooter && isMobile ? "220px" : "50px" }}>
-          <Calculator />
-        </Grid>
-        <Hidden smDown>
-          <Grid item xs={12} md={4} style={{ position: "relative" }}>
-            <Result />
+        {PRESETS.map((preset) => (
+          <Grid key={preset.key} md={4} sm={6} lg={3} xs={12} item>
+            <PresetCard preset={preset} />
           </Grid>
-        </Hidden>
-        <Hidden mdUp>
-          <FooterResult />
-        </Hidden>
+        ))}
       </Grid>
     </>
   );

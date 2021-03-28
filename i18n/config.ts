@@ -1,2 +1,2 @@
 export const languages = ['en', 'de'];
-export const defaultLanguage = 'en';
+export const defaultLanguage = 'de';

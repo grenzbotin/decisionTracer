@@ -5,8 +5,8 @@ const compose = (...fns) => (...args) => fns.reduceRight((y, f) => f(y), ...args
 
 const nextConfig = {
   include: path.resolve(__dirname, 'assets/svg'),
-  basePath: '/decisionTracer',
-  assetPrefix: '/decisionTracer/',
+  // basePath: '/decisionTracer',
+  // assetPrefix: '/decisionTracer/',
 }
 
 

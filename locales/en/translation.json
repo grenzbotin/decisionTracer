@@ -8,9 +8,16 @@
   },
   "common": {
     "navbar": {
+      "home": "Overview"
     },
     "heading": {
       "logo": "Welcome to Decision Tracer"
+    }
+  },
+  "presets": {
+    "corona": {
+      "title": "Corona",
+      "question": "Should I get vaccinated?"
     }
   },
   "calculator": {

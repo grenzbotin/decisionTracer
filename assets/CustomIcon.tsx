@@ -4,6 +4,7 @@ import React from "react";
 import Virus from "./svg/virus.svg";
 import Vaccination from "./svg/vaccination.svg";
 import NoVaccination from "./svg/noVaccination.svg";
+import Question from "./svg/question.svg";
 
 const ICONS = {
   virus: {
@@ -17,6 +18,10 @@ const ICONS = {
   noVaccination: {
     path: NoVaccination,
     viewbox: "0 0 512 512"
+  },
+  question: {
+    path: Question,
+    viewbox: "0 0 512.001 512.001"
   }
 };
 
@@ -30,14 +35,7 @@ const CustomIcon = ({
   style?: Record<string, string | number>;
 }): JSX.Element => {
   const icon = ICONS[name] || ICONS["virus"];
-  return (
-    <SvgIcon
-      component={icon.path}
-      fontSize={fontSize}
-      viewBox={icon.viewbox}
-      style={style}
-    />
-  );
+  return <SvgIcon component={icon.path} fontSize={fontSize} viewBox={icon.viewbox} style={style} />;
 };
 
 export default CustomIcon;

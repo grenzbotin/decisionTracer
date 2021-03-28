@@ -28,18 +28,24 @@ export interface Resource {
 }
 
 export interface Preset {
+  key: string;
   title: string;
   decription: string;
   icon?: string;
+  url?: string;
+  question?: string;
   resources?: Resource[];
   decisions: Decision[];
 }
 
 const PRESETS = <Preset[]> [
   {
-    title: "Soll ich mich impfen lassen?",
-    decription: "Entscheidungshilfe",
+    key: 'corona',
+    title: "presets.corona.title",
+    url: 'corona',
     icon:'virus',
+    question: "presets.corona.question",
+    decription: "Entscheidungshilfe",
     resources: [{ title: "title", link: "link" }],
     decisions: [
       {
@@ -104,5 +110,4 @@ const PRESETS = <Preset[]> [
 
 export {
   PRESETS,
-  
 }

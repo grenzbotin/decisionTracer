@@ -23,3 +23,7 @@ Make your decisions based on rational thoughts
 ### Icons
 
 <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
+### Photos
+
+- Corona virus 1 Photo by CDC on Unsplash

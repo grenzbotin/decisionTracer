@@ -1,25 +1,18 @@
 import React, { useContext, useState } from "react";
 import clsx from "clsx";
-import { makeStyles, useTheme, Theme, createStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
+import i18next from "i18next";
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
 import Container from "@material-ui/core/Container";
+
 import CustomIcon from "../assets/CustomIcon";
 import { GlobalDecisionContext } from "../hooks/GlobalDecisionsContextProvider";
-
-const drawerWidth = 240;
+import { DRAWER_WIDTH } from "./theme";
+import SideBar from "./SideBar";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,12 +26,12 @@ const useStyles = makeStyles((theme: Theme) =>
       })
     },
     appBarShift: {
-      width: `calc(100% - ${drawerWidth}px)`,
+      width: `calc(100% - ${DRAWER_WIDTH}px)`,
       transition: theme.transitions.create(["margin", "width"], {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen
       }),
-      marginRight: drawerWidth
+      marginRight: DRAWER_WIDTH
     },
     title: {
       flexGrow: 1,
@@ -50,11 +43,11 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "none"
     },
     drawer: {
-      width: drawerWidth,
+      width: DRAWER_WIDTH,
       flexShrink: 0
     },
     drawerPaper: {
-      width: drawerWidth
+      width: DRAWER_WIDTH
     },
     drawerHeader: {
       display: "flex",
@@ -71,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) =>
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen
       }),
-      marginRight: -drawerWidth
+      marginRight: -DRAWER_WIDTH
     },
     contentShift: {
       transition: theme.transitions.create("margin", {
@@ -89,7 +82,6 @@ interface Props {
 
 export default function Layout({ children }: Props): JSX.Element {
   const classes = useStyles();
-  const theme = useTheme();
   const { active } = useContext(GlobalDecisionContext);
   const [open, setOpen] = useState(false);
 
@@ -99,6 +91,11 @@ export default function Layout({ children }: Props): JSX.Element {
 
   const handleDrawerClose = (): void => {
     setOpen(false);
+  };
+
+  const pageAttrs = {
+    icon: active ? active.icon : "question",
+    title: active ? i18next.t(active.question) : "Decision Tracer"
   };
 
   return (
@@ -111,8 +108,8 @@ export default function Layout({ children }: Props): JSX.Element {
       >
         <Toolbar>
           <Typography component="h1" variant="body1" noWrap className={classes.title}>
-            {active.icon && <CustomIcon name={active.icon} fontSize="large" style={{ marginRight: "2rem" }} />}{" "}
-            {active.title}
+            <CustomIcon name={pageAttrs.icon} fontSize="large" style={{ marginRight: "2rem" }} />
+            {pageAttrs.title}
           </Typography>
           <IconButton
             color="inherit"
@@ -137,31 +134,7 @@ export default function Layout({ children }: Props): JSX.Element {
           </Container>
         </main>
       </div>
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="right"
-        open={open}
-        classes={{
-          paper: classes.drawerPaper
-        }}
-      >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          <ListItem button>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="some text" />
-          </ListItem>
-        </List>
-        <Divider />
-      </Drawer>
+      <SideBar open={open} handleClose={handleDrawerClose} />
     </div>
   );
 }
