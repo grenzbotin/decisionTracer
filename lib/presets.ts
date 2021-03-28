@@ -64,7 +64,7 @@ const PRESETS = <Preset[]> [
             key: "sub-1",
             title: "Krank",
             probability: 10,
-            value: 1000,
+            value: -100,
             cases: [] as CaseItem[]
           },
           {
@@ -85,7 +85,7 @@ const PRESETS = <Preset[]> [
             key: "main-1-sub-0",
             title: "Gesund",
             probability: 20,
-            value: 20,
+            value: 1000,
             cases: [] as CaseItem[]
           },
           {

@@ -102,45 +102,32 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
   // Value changes
   const setValue = (value: number | number[], decKey: string, subKey: string, caseKey?: string): void => {
     if (instanceOfPreset(root)) {
+      let title = "";
+
       if (caseKey) {
-        setState({
-          ...state,
-          active: {
-            ...state.active,
-            decisions: root.decisions.map((decision) =>
-              decision.key === decKey
-                ? {
-                    ...decision,
-                    sub: decision.sub.map((sub) =>
-                      sub.key === subKey
-                        ? {
-                            ...sub,
-                            cases: sub.cases.map((c) =>
-                              c.key === caseKey ? { ...c, value: typeof value === "number" && value } : c
-                            )
-                          }
-                        : sub
-                    )
-                  }
-                : decision
-            )
-          }
-        });
+        title = root.decisions
+          .find((decision) => decision.key === decKey)
+          .sub.find((sub) => sub.key === subKey)
+          .cases.find((c) => c.key === caseKey).title;
       } else if (subKey) {
+        title = root.decisions.find((decision) => decision.key === decKey).sub.find((sub) => sub.key === subKey).title;
+      }
+
+      if (title) {
         setState({
           ...state,
           active: {
-            ...state.active,
-            decisions: root.decisions.map((decision) =>
-              decision.key === decKey
-                ? {
-                    ...decision,
-                    sub: decision.sub.map((sub) =>
-                      sub.key === subKey ? { ...sub, value: typeof value === "number" && value } : sub
-                    )
-                  }
-                : decision
-            )
+            ...root,
+            decisions: root.decisions.map((decision) => ({
+              ...decision,
+              sub: decision.sub.map((sub) => ({
+                ...sub,
+                value: sub.title === title && typeof value === "number" ? value : sub.value,
+                cases: sub.cases.map((c) =>
+                  c.title === title ? { ...c, value: typeof value === "number" && value } : c
+                )
+              }))
+            }))
           }
         });
       }
