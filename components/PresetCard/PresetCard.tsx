@@ -57,7 +57,7 @@ export default function PresetCard({ preset }: { preset: Preset }): JSX.Element 
           }
           title={i18next.t(preset.title)}
         />
-        <CardMedia className={classes.media} image="/images/virus.jpg" title={i18next.t(preset.title)} />
+        <CardMedia className={classes.media} image="./images/virus.jpg" title={i18next.t(preset.title)} />
         <CardContent className={classes.content}>
           <div>
             <Typography variant="body2" component="p">
