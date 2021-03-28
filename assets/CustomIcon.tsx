@@ -5,6 +5,8 @@ import Virus from "./svg/virus.svg";
 import Vaccination from "./svg/vaccination.svg";
 import NoVaccination from "./svg/noVaccination.svg";
 import Question from "./svg/question.svg";
+import DeFlag from "./svg/de.svg";
+import EnFlag from "./svg/en.svg";
 
 const ICONS = {
   virus: {
@@ -22,6 +24,14 @@ const ICONS = {
   question: {
     path: Question,
     viewbox: "0 0 512.001 512.001"
+  },
+  en: {
+    path: EnFlag,
+    viewbox: "0 0 60 30"
+  },
+  de: {
+    path: DeFlag,
+    viewbox: "0 0 5 3"
   }
 };
 

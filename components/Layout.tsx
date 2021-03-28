@@ -13,6 +13,7 @@ import CustomIcon from "../assets/CustomIcon";
 import { GlobalDecisionContext } from "../hooks/GlobalDecisionsContextProvider";
 import { DRAWER_WIDTH } from "./theme";
 import SideBar from "./SideBar";
+import LanguageToggle from "./LanguageToggle";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -111,6 +112,7 @@ export default function Layout({ children }: Props): JSX.Element {
             <CustomIcon name={pageAttrs.icon} fontSize="large" style={{ marginRight: "2rem" }} />
             {pageAttrs.title}
           </Typography>
+          <LanguageToggle />
           <IconButton
             color="inherit"
             aria-label="open drawer"
