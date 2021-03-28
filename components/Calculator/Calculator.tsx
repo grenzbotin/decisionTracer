@@ -7,13 +7,14 @@ import { generateColors } from "../theme";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import Decision from "./Decision";
 import { getUniqueNumber, scrollToTargetOffset } from "@/../lib/helpers";
+import { Decision as DecisionType } from "@/../lib/presets";
 
 export default function Calculator(): JSX.Element {
   const { active, addItem } = useContext(GlobalDecisionContext);
   const [lastAddedDecision, setLastAddedDecision] = useState(null);
 
-  const colors = generateColors(active.decisions.length);
-  const decisions = active.decisions;
+  const decisions = active.decisions as DecisionType[];
+  const colors = generateColors(decisions.length);
 
   const handleClickAddItem = (): void => {
     const uniqueNumber = getUniqueNumber();
@@ -23,11 +24,11 @@ export default function Calculator(): JSX.Element {
 
   // Scroll to last added decision
   useEffect(() => {
-    if (active.decisions.find((item) => item.key === lastAddedDecision)) {
+    if (decisions.find((item) => item.key === lastAddedDecision)) {
       scrollToTargetOffset(lastAddedDecision);
       setLastAddedDecision(null);
     }
-  }, [active, lastAddedDecision]);
+  }, [decisions, lastAddedDecision]);
 
   return (
     <Grid container spacing={2}>

@@ -7,7 +7,7 @@ import SentimentDissatisfiedOutlinedIcon from "@material-ui/icons/SentimentDissa
 import SentimentSatisfiedOutlinedIcon from "@material-ui/icons/SentimentSatisfiedOutlined";
 
 import { generateColors, PRIMARY, SECONDARY } from "../theme";
-import { Decision } from "@/../lib/presets";
+import { Decision as DecisionType } from "@/../lib/presets";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -51,7 +51,7 @@ const defaultOptions = {
   }
 };
 
-function getResults(decisions: Array<Decision>): Array<number | boolean> {
+function getResults(decisions: Array<DecisionType>): Array<number | boolean> {
   const results = decisions.map((decision) => {
     let total = 0;
     decision.sub.forEach((item) => {
@@ -80,10 +80,9 @@ const useStyles = makeStyles({
 });
 
 function Result({ height = 300, mobile = false }: { height?: number; mobile?: boolean }): JSX.Element {
-  const {
-    active: { decisions }
-  } = useContext(GlobalDecisionContext);
+  const { active } = useContext(GlobalDecisionContext);
   const classes = useStyles();
+  const decisions = active.decisions as DecisionType[];
   const categories = decisions.map((decision) => decision.title);
   const results = getResults(decisions);
   const colors = generateColors(decisions.length);
