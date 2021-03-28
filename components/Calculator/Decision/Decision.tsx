@@ -49,7 +49,7 @@ export default function Decision({ decision, color }: { decision: DecisionType; 
   }, [decision, lastAddedSub]);
 
   return (
-    <Grid id={decision.key} item xs={12} sm={12} md={6} lg={6} xl={4} style={{ position: "relative" }}>
+    <Grid id={decision.key} item xs={12} sm={12} md={6} style={{ position: "relative" }}>
       <div
         style={{
           position: "absolute",

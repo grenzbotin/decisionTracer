@@ -223,7 +223,7 @@ const CORONA_PRESET_2 = {
                   value: 0,
                 },
                 {
-                  key: "main-0-sub-1-case-1-subcase-0",
+                  key: "main-0-sub-1-case-1-subcase-2",
                   title: "presets.corona-2.decisions.0.sub.1.cases.1.subcases.2.title",
                   probability: 0,
                   value: 0,
@@ -249,7 +249,7 @@ const CORONA_PRESET_2 = {
                   value: 0,
                 },
                 {
-                  key: "main-0-sub-1-case-2-subcase-0",
+                  key: "main-0-sub-1-case-2-subcase-2",
                   title: "presets.corona-2.decisions.0.sub.1.cases.2.subcases.2.title",
                   probability: 0,
                   value: 0,
@@ -327,7 +327,7 @@ const CORONA_PRESET_2 = {
                   value: 0,
                 },
                 {
-                  key: "main-1-sub-1-case-2-subcase-0",
+                  key: "main-1-sub-1-case-2-subcase-2",
                   title: "presets.corona-2.decisions.1.sub.1.cases.1.subcases.2.title",
                   probability: 0,
                   value: 0,
@@ -353,7 +353,7 @@ const CORONA_PRESET_2 = {
                   value: 0,
                 },
                 {
-                  key: "main-1-sub-1-case-2-subcase-0",
+                  key: "main-1-sub-1-case-2-subcase-2",
                   title: "presets.corona-2.decisions.1.sub.1.cases.2.subcases.2.title",
                   probability: 0,
                   value: 0,
