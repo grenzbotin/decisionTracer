@@ -20,8 +20,8 @@ export default function LangIndex(): JSX.Element {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
-    if (!active || active.key !== "corona") {
-      setActiveFromPreset("corona");
+    if (!active || active.key !== "corona-2") {
+      setActiveFromPreset("corona-2");
     }
   }, [active, setActiveFromPreset]);
 
@@ -29,9 +29,9 @@ export default function LangIndex(): JSX.Element {
     active && (
       <>
         <HtmlHeader
-          title={i18next.t("presets.corona.meta.title")}
-          description={i18next.t("presets.corona.meta.description")}
-          keywords={i18next.t("presetss.corona.meta.keywords")}
+          title={i18next.t("presets.corona-2.meta.title")}
+          description={i18next.t("presets.corona-2.meta.description")}
+          keywords={i18next.t("presetss.corona-2.meta.keywords")}
         />
         <Grid container spacing={2}>
           <Grid item xs={12} md={8} style={{ marginBottom: mobileFooter && isMobile ? "220px" : "50px" }}>

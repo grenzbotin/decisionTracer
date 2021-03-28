@@ -1,12 +1,12 @@
-import { Card, Grid, CardContent, Typography } from "@material-ui/core";
+import { Card, Grid, CardContent, Typography, IconButton, useMediaQuery, useTheme } from "@material-ui/core";
 import MuiCardHeader from "@material-ui/core/CardHeader";
 import { withStyles } from "@material-ui/core/styles";
 import i18next from "i18next";
 import React, { useContext } from "react";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
-import CheckBoxIcon from "@material-ui/icons/CheckBox";
-import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
+import LockOpenIcon from "@material-ui/icons/LockOpen";
+import LockIcon from "@material-ui/icons/Lock";
 
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { SubItem as SubItemType } from "@/../lib/presets";
@@ -39,9 +39,11 @@ export default function SubItem({
   decisionKey: string;
   color: string;
 }): JSX.Element {
-  const { setTitle, setProbability, setValue, removeItem, addItem, toggleIndependent } = useContext(
+  const { setTitle, setProbability, setValue, removeItem, addItem, toggleIndependent, toggleClose } = useContext(
     GlobalDecisionContext
   );
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleProbabilityChange = (value: number): void => {
     setProbability(value, decisionKey, item.key);
@@ -76,15 +78,6 @@ export default function SubItem({
                   text: i18next.t("calculator.remove_scenario"),
                   icon: <DeleteIcon fontSize="small" />,
                   onClick: () => removeItem(decisionKey, item.key)
-                },
-                {
-                  text: i18next.t("calculator.independent"),
-                  icon: item.isIndependent ? (
-                    <CheckBoxIcon style={{ color: color }} fontSize="small" />
-                  ) : (
-                    <CheckBoxOutlineBlankIcon fontSize="small" />
-                  ),
-                  onClick: () => toggleIndependent(decisionKey, item.key)
                 }
               ]}
             />
@@ -94,9 +87,24 @@ export default function SubItem({
           }}
         />
         <CardContent>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
-            <Typography variant="caption">{i18next.t("calculator.probability")}</Typography>
-            <ValidatedProbabilityField onChange={handleProbabilityChange} value={item.probability} />
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <Typography variant="caption">
+              {i18next.t(isMobile ? "calculator.probability_short" : "calculator.probability")}
+            </Typography>
+            <div style={{ display: "flex" }}>
+              <IconButton
+                onClick={() => toggleIndependent(decisionKey, item.key)}
+                size="small"
+                style={{ marginRight: ".2rem" }}
+              >
+                {item.isIndependent ? (
+                  <LockIcon fontSize="small" style={{ color: color }} />
+                ) : (
+                  <LockOpenIcon fontSize="small" />
+                )}
+              </IconButton>
+              <ValidatedProbabilityField onChange={handleProbabilityChange} value={item.probability} />
+            </div>
           </div>
           <NonLinearSlider
             marks={[
@@ -127,7 +135,20 @@ export default function SubItem({
                 <Typography variant="caption" display="block" gutterBottom>
                   {i18next.t("calculator.value")}
                 </Typography>
-                <ValidatedValueField onChange={handleValueChange} value={item.value} />
+                <div style={{ display: "flex" }}>
+                  <IconButton
+                    onClick={() => toggleClose(decisionKey, item.key)}
+                    size="small"
+                    style={{ marginRight: ".2rem" }}
+                  >
+                    {item.isClosed ? (
+                      <LockIcon fontSize="small" style={{ color: color }} />
+                    ) : (
+                      <LockOpenIcon fontSize="small" />
+                    )}
+                  </IconButton>
+                  <ValidatedValueField onChange={handleValueChange} value={item.value} />
+                </div>
               </div>
               <GrowingSlider onChange={handleValueChange} value={item.value} />
             </>

@@ -1,9 +1,20 @@
-interface CaseItem {
+export interface SubCaseItem {
   key: string;
   title: string;
   probability: number;
   value: number;
   isIndependent?: boolean;
+  isClosed?: boolean,
+}
+
+export interface CaseItem {
+  key: string;
+  title: string;
+  probability: number;
+  value: number;
+  isIndependent?: boolean;
+  isClosed?: boolean,
+  subCases?: SubCaseItem[], 
 }
 
 export interface SubItem {
@@ -12,7 +23,8 @@ export interface SubItem {
   probability: number;
   value: number;
   isIndependent?: boolean;
-  cases?: Array<CaseItem>;
+  isClosed?: boolean,
+  cases?: CaseItem[];
 }
 
 export interface Decision {
@@ -30,7 +42,7 @@ export interface Resource {
 export interface Preset {
   key: string;
   title: string;
-  decription: string;
+  description: string;
   icon?: string;
   url?: string;
   question?: string;
@@ -38,74 +50,371 @@ export interface Preset {
   decisions: Decision[];
 }
 
+const CORONA_PRESET = {
+  key: 'corona',
+  title: "presets.corona.title",
+  url: 'corona',
+  icon:'virus',
+  question: "presets.corona.question",
+  description: "presets.corona.description",
+  resources: [{ title: "title", link: "link" }],
+  decisions: [
+    {
+      key: "main-0",
+      title: "presets.corona.decisions.0.title",
+      icon: 'noVaccination',
+      sub: [
+        {
+          key: "main-0-sub-0",
+          title: "presets.corona.decisions.0.sub.0.title",
+          probability: 0,
+          value: 0,
+          cases: [] as CaseItem[]
+        },
+        {
+          key: "main-0-sub-1",
+          title: "presets.corona.decisions.0.sub.1.title",
+          probability: 0,
+          value: 0,
+          cases: [
+            {
+              key: "main-0-sub-1-case-0",
+              title: "presets.corona.decisions.0.sub.1.cases.0.title",
+              probability: 0,
+              value: 0,
+              subCases: [] as SubCaseItem[],
+            },
+            {
+              key: "main-0-sub-1-case-1",
+              title: "presets.corona.decisions.0.sub.1.cases.1.title",
+              probability: 0,
+              value: 0,
+              subCases: [] as SubCaseItem[],
+            },
+            {
+              key: "main-0-sub-1-case-2",
+              title: "presets.corona.decisions.0.sub.1.cases.2.title",
+              probability: 0,
+              value: 0,
+              subCases: [] as SubCaseItem[],
+            },
+            {
+              key: "main-0-sub-1-case-3",
+              title: "presets.corona.decisions.0.sub.1.cases.3.title",
+              probability: 0,
+              value: 0,
+              subCases: [] as SubCaseItem[],
+            }
+          ]
+        }
+      ]
+    },
+    {
+      key: "main-1",
+      title: "presets.corona.decisions.1.title",
+      icon: 'vaccination',
+      sub: [
+        {
+          key: "main-1-sub-0",
+          title: "presets.corona.decisions.1.sub.0.title",
+          probability: 0,
+          value: 1000,
+          cases: [] as CaseItem[]
+        },
+        {
+          key: "main-1-sub-1",
+          title: "presets.corona.decisions.1.sub.1.title",
+          probability: 0,
+          value: 0,
+          cases: [
+            {
+              key: "main-1-sub-1-case-0",
+              title: "presets.corona.decisions.0.sub.1.cases.0.title",
+              probability: 0,
+              value: 0,
+              subCases: [] as SubCaseItem[],
+            },
+            {
+              key: "main-1-sub-1-case-1",
+              title: "presets.corona.decisions.0.sub.1.cases.1.title",
+              probability: 0,
+              value: 0,
+              subCases: [] as SubCaseItem[],
+            },
+            {
+              key: "main-1-sub-1-case-2",
+              title: "presets.corona.decisions.0.sub.1.cases.2.title",
+              probability: 0,
+              value: 0,
+              subCases: [] as SubCaseItem[],
+            },
+            {
+              key: "main-1-sub-1-case-3",
+              title: "presets.corona.decisions.0.sub.1.cases.3.title",
+              probability: 0,
+              value: 0,
+              subCases: [] as SubCaseItem[],
+            }
+          ]
+        },
+        {
+          key: "main-1-sub-2",
+          title: "presets.corona.decisions.1.sub.2.title",
+          probability: 0,
+          value: 0,
+          isIndependent: true,
+          cases: [] as CaseItem[]
+        },
+      ]
+    }
+  ]
+};
+
+const CORONA_PRESET_2 = {
+  key: 'corona-2',
+  title: "presets.corona-2.title",
+  url: 'corona-2',
+  icon:'virus',
+  question: "presets.corona-2.question",
+  description: "presets.corona-2.description",
+  resources: [{ title: "title", link: "link" }],
+  decisions: [
+    {
+      key: "main-0",
+      title: "presets.corona-2.decisions.0.title",
+      icon: 'noVaccination',
+      sub: [
+        {
+          key: "main-0-sub-0",
+          title: "presets.corona-2.decisions.0.sub.0.title",
+          probability: 0,
+          value: 0,
+          cases: [] as CaseItem[]
+        },
+        {
+          key: "main-0-sub-1",
+          title: "presets.corona-2.decisions.0.sub.1.title",
+          probability: 0,
+          value: 0,
+          cases: [
+            {
+              key: "main-0-sub-1-case-0",
+              title: "presets.corona-2.decisions.0.sub.1.cases.0.title",
+              probability: 0,
+              value: 0,
+              subCases: [] as SubCaseItem[],
+            },
+            {
+              key: "main-0-sub-1-case-1",
+              title: "presets.corona-2.decisions.0.sub.1.cases.1.title",
+              probability: 0,
+              value: 0,
+              subCases: [
+                {
+                  key: "main-0-sub-1-case-1-subcase-0",
+                  title: "presets.corona-2.decisions.0.sub.1.cases.1.subcases.0.title",
+                  probability: 0,
+                  value: 0,
+                },
+                {
+                  key: "main-0-sub-1-case-1-subcase-1",
+                  title: "presets.corona-2.decisions.0.sub.1.cases.1.subcases.1.title",
+                  probability: 0,
+                  value: 0,
+                },
+                {
+                  key: "main-0-sub-1-case-1-subcase-0",
+                  title: "presets.corona-2.decisions.0.sub.1.cases.1.subcases.2.title",
+                  probability: 0,
+                  value: 0,
+                }
+              ],
+            },
+            {
+              key: "main-0-sub-1-case-2",
+              title: "presets.corona-2.decisions.0.sub.1.cases.2.title",
+              probability: 0,
+              value: 0,
+              subCases: [
+                {
+                  key: "main-0-sub-1-case-2-subcase-0",
+                  title: "presets.corona-2.decisions.0.sub.1.cases.2.subcases.0.title",
+                  probability: 0,
+                  value: 0,
+                },
+                {
+                  key: "main-0-sub-1-case-2-subcase-1",
+                  title: "presets.corona-2.decisions.0.sub.1.cases.2.subcases.1.title",
+                  probability: 0,
+                  value: 0,
+                },
+                {
+                  key: "main-0-sub-1-case-2-subcase-0",
+                  title: "presets.corona-2.decisions.0.sub.1.cases.2.subcases.2.title",
+                  probability: 0,
+                  value: 0,
+                }
+              ],
+            },
+            {
+              key: "main-0-sub-1-case-3",
+              title: "presets.corona-2.decisions.0.sub.1.cases.3.title",
+              probability: 0,
+              value: 0,
+              subCases: [] as SubCaseItem[],
+            }
+          ]
+        },
+        {
+          key: "main-0-sub-2",
+          title: "presets.corona-2.decisions.0.sub.2.title",
+          probability: 0,
+          value: 0,
+          isIndependent: true,
+          cases: [] as CaseItem[]
+        },
+        {
+          key: "main-0-sub-3",
+          title: "presets.corona-2.decisions.0.sub.3.title",
+          probability: 0,
+          value: 0,
+          isIndependent: true,
+          cases: [] as CaseItem[]
+        },
+      ]
+    },
+    {
+      key: "main-1",
+      title: "presets.corona-2.decisions.1.title",
+      icon: 'vaccination',
+      sub: [
+        {
+          key: "main-1-sub-0",
+          title: "presets.corona-2.decisions.1.sub.0.title",
+          probability: 0,
+          value: 0,
+          cases: [] as CaseItem[]
+        },
+        {
+          key: "main-1-sub-1",
+          title: "presets.corona-2.decisions.1.sub.1.title",
+          probability: 0,
+          value: 0,
+          cases: [
+            {
+              key: "main-1-sub-1-case-0",
+              title: "presets.corona-2.decisions.0.sub.1.cases.0.title",
+              probability: 0,
+              value: 0,
+              subCases: [] as SubCaseItem[],
+            },
+            {
+              key: "main-1-sub-1-case-1",
+              title: "presets.corona-2.decisions.0.sub.1.cases.1.title",
+              probability: 0,
+              value: 0,
+              subCases: [
+                {
+                  key: "main-1-sub-1-case-2-subcase-0",
+                  title: "presets.corona-2.decisions.1.sub.1.cases.1.subcases.0.title",
+                  probability: 0,
+                  value: 0,
+                },
+                {
+                  key: "main-1-sub-1-case-2-subcase-1",
+                  title: "presets.corona-2.decisions.1.sub.1.cases.1.subcases.1.title",
+                  probability: 0,
+                  value: 0,
+                },
+                {
+                  key: "main-1-sub-1-case-2-subcase-0",
+                  title: "presets.corona-2.decisions.1.sub.1.cases.1.subcases.2.title",
+                  probability: 0,
+                  value: 0,
+                }
+              ],
+            },
+            {
+              key: "main-1-sub-1-case-2",
+              title: "presets.corona-2.decisions.0.sub.1.cases.2.title",
+              probability: 0,
+              value: 0,
+              subCases: [
+                {
+                  key: "main-1-sub-1-case-2-subcase-0",
+                  title: "presets.corona-2.decisions.1.sub.1.cases.2.subcases.0.title",
+                  probability: 0,
+                  value: 0,
+                },
+                {
+                  key: "main-1-sub-1-case-2-subcase-1",
+                  title: "presets.corona-2.decisions.1.sub.1.cases.2.subcases.1.title",
+                  probability: 0,
+                  value: 0,
+                },
+                {
+                  key: "main-1-sub-1-case-2-subcase-0",
+                  title: "presets.corona-2.decisions.1.sub.1.cases.2.subcases.2.title",
+                  probability: 0,
+                  value: 0,
+                }
+              ],
+            },
+            {
+              key: "main-1-sub-1-case-3",
+              title: "presets.corona-2.decisions.0.sub.1.cases.3.title",
+              probability: 0,
+              value: 0,
+              subCases: [] as SubCaseItem[],
+            }
+          ]
+        },
+        {
+          key: "main-1-sub-2",
+          title: "presets.corona-2.decisions.1.sub.2.title",
+          probability: 0,
+          value: 0,
+          cases: [] as CaseItem[]
+        },
+        {
+          key: "main-0-sub-3",
+          title: "presets.corona-2.decisions.1.sub.3.title",
+          probability: 0,
+          value: 0,
+          isIndependent: true,
+          cases: [] as CaseItem[]
+        },
+        {
+          key: "main-0-sub-4",
+          title: "presets.corona-2.decisions.1.sub.4.title",
+          probability: 0,
+          value: 0,
+          isIndependent: true,
+          cases: [] as CaseItem[]
+        },
+        {
+          key: "main-1-sub-5",
+          title: "presets.corona-2.decisions.1.sub.5.title",
+          probability: 0,
+          value: 0,
+          isIndependent: true,
+          cases: [] as CaseItem[]
+        },
+        {
+          key: "main-0-sub-6",
+          title: "presets.corona-2.decisions.1.sub.6.title",
+          probability: 0,
+          value: 0,
+          cases: [] as CaseItem[]
+        },
+      ]
+    }
+  ]
+};
+
 const PRESETS = <Preset[]> [
-  {
-    key: 'corona',
-    title: "presets.corona.title",
-    url: 'corona',
-    icon:'virus',
-    question: "presets.corona.question",
-    decription: "Entscheidungshilfe",
-    resources: [{ title: "title", link: "link" }],
-    decisions: [
-      {
-        key: "main-0",
-        title: "Impfen",
-        icon: 'vaccination',
-        sub: [
-          {
-            key: "sub-0",
-            title: "Gesund",
-            probability: 89,
-            value: 1000,
-            cases: [] as CaseItem[]
-          },
-          {
-            key: "sub-1",
-            title: "Krank",
-            probability: 10,
-            value: -100,
-            cases: [] as CaseItem[]
-          },
-          {
-            key: "sub-3",
-            title: "Tod",
-            probability: 1,
-            value: -1000,
-            cases: [] as CaseItem[]
-          }
-        ]
-      },
-      {
-        key: "main-1",
-        title: "Nicht impfen",
-        icon: 'noVaccination',
-        sub: [
-          {
-            key: "main-1-sub-0",
-            title: "Gesund",
-            probability: 20,
-            value: 1000,
-            cases: [] as CaseItem[]
-          },
-          {
-            key: "main-1-sub-1",
-            title: "Krank",
-            probability: 70,
-            value: -100,
-            cases: [] as CaseItem[]
-          },
-          {
-            key: "main-1-sub-2",
-            title: "Tod",
-            probability: 10,
-            value: -1000,
-            cases: [] as CaseItem[]
-          }
-        ]
-      }
-    ]
-  }
+  CORONA_PRESET,
+  CORONA_PRESET_2
 ];
 
 export {

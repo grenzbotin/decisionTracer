@@ -16,20 +16,212 @@
   },
   "presets": {
     "corona": {
+      "meta": {
+        "title": "Should I get vaccinated? | Decision Tracer",
+        "description": "Vaccination: Yes or no? Are disadvantages of a vaccination higher than the benefits?",
+        "keywords": "Corona, vaccination, decision, help, calculator"
+      },
       "title": "Corona",
-      "question": "Should I get vaccinated?"
+      "question": "Should I get vaccinated?",
+      "description": "Simple decision guidance",
+      "decisions": {
+        "0": {
+          "title": "No vaccination",
+          "sub": {
+            "0": {
+              "title": "No infection"
+            },
+            "1": {
+              "title": "Corona",
+              "cases": {
+                "0": {
+                  "title": "Asymptomatic"
+                },
+                "1": {
+                  "title": "Mild progression"
+                },
+                "2": {
+                  "title": "Difficult progression"
+                },
+                "3": {
+                  "title": "Death"
+                }
+              }
+            }
+          }
+        },
+        "1": {
+          "title": "Vaccination",
+          "sub": {
+            "0": {
+              "title": "No infection"
+            },
+            "1": {
+              "title": "Corona",
+              "cases": {
+                "0": {
+                  "title": "Asymptomatic"
+                },
+                "1": {
+                  "title": "Mild progression"
+                },
+                "2": {
+                  "title": "Difficult progression"
+                },
+                "3": {
+                  "title": "Death"
+                }
+              }
+            },
+            "2": {
+              "title": "Vaccination damage"
+            }
+          }
+        }
+      }
+    },
+    "corona-2": {
+      "meta": {
+        "title": "Should I get vaccinated? | Decision Tracer",
+        "description": "Vaccination: Yes or no? Are disadvantages of a vaccination higher than the benefits?",
+        "keywords": "Corona, vaccination, decision, help, calculator, complex"
+      },
+      "title": "Corona (complex)",
+      "question": "Should I get vaccinated?",
+      "description": "Decision guidance with complex decision tree",
+      "decisions": {
+        "0": {
+          "title": "No vaccination",
+          "sub": {
+            "0": {
+              "title": "No infection"
+            },
+            "1": {
+              "title": "Corona",
+              "cases": {
+                "0": {
+                  "title": "Asymptomatic"
+                },
+                "1": {
+                  "title": "Mild progression",
+                  "subcases": {
+                    "0": {
+                      "title": "Long Covid"
+                    },
+                    "1": {
+                      "title": "Unforeseeable consequences "
+                    },
+                    "2": {
+                      "title": "Complete Healing"
+                    }
+                  }
+                },
+                "2": {
+                  "title": "Difficult progression",
+                  "subcases": {
+                    "0": {
+                      "title": "Long Covid"
+                    },
+                    "1": {
+                      "title": "Unforeseeable consequences"
+                    },
+                    "2": {
+                      "title": "Complete healing"
+                    }
+                  }
+                },
+                "3": {
+                  "title": "Death"
+                }
+              }
+            },
+            "2": {
+              "title": "Infect other people"
+            },
+            "3": {
+              "title": "Positive or negative gut feeling"
+            }
+          }
+        },
+        "1": {
+          "title": "Vaccination",
+          "sub": {
+            "0": {
+              "title": "No infection"
+            },
+            "1": {
+              "title": "Corona",
+              "cases": {
+                "0": {
+                  "title": "Asymptomatic"
+                },
+                "1": {
+                  "title": "Mild progression",
+                  "subcases": {
+                    "0": {
+                      "title": "Long Covid"
+                    },
+                    "1": {
+                      "title": "Unforeseeable consequences"
+                    },
+                    "2": {
+                      "title": "Complete Healing"
+                    }
+                  }
+                },
+                "2": {
+                  "title": "schwerer Verlauf",
+                  "subcases": {
+                    "0": {
+                      "title": "Long Covid"
+                    },
+                    "1": {
+                      "title": "Unforeseeable consequences"
+                    },
+                    "2": {
+                      "title": "Complete Healing"
+                    }
+                  }
+                },
+                "3": {
+                  "title": "Death"
+                }
+              }
+            },
+            "2": {
+              "title": "Infect other people"
+            },
+            "3": {
+              "title": "Positive or negative gut feeling"
+            },
+            "4": {
+              "title": "Usual vaccine reaction"
+            },
+            "5": {
+              "title": "Severe vaccine reaction"
+            },
+            "6": {
+              "title": "Unforeseeable consequences"
+            }
+          }
+        }
+      }
     }
   },
   "calculator": {
     "new_decision": "Decision",
     "probability": "Occurence probability",
+    "probability_short": "Prob. (𝑝)",
     "value": "Utility",
     "expected_utility": "Expected utility",
-    "subcases": "Sub cases",
+    "subcases": "Cases",
+    "subCasesItems": "Sub cases",
     "add_scenario": "Add scenario",
-    "add_case": "Add sub scenario",
+    "add_case": "Add case",
+    "add_sub_case": "Add sub case",
     "remove_scenario": "Delete scenario",
-    "remove_case": "Delete sub scenario",
+    "remove_sub_case": "Delete sub case",
+    "remove_case": "Delete case",
     "remove_decision": "Delete decision",
     "independent": "independent",
     "result": "Result"

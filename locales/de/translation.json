@@ -16,20 +16,212 @@
   },
   "presets": {
     "corona": {
-      "title": "Corona",
-      "question": "Soll ich mich impfen lassen?"
+      "meta": {
+        "title": "Soll ich mich impfen lassen? | Decision Tracer",
+        "description": "Impfung: Ja oder nein? Sind die Nachteile einer Impfung es wert, nicht geimpft zu werden?",
+        "keywords": "Corona, Impfung, Entscheidung, Hilfe, Rechner"
+      },
+      "title": "Corona (einfach)",
+      "question": "Soll ich mich impfen lassen?",
+      "description": "Einfache Entscheidungshilfe",
+      "decisions": {
+        "0": {
+          "title": "Nicht impfen",
+          "sub": {
+            "0": {
+              "title": "Keine Ansteckung"
+            },
+            "1": {
+              "title": "Corona",
+              "cases": {
+                "0": {
+                  "title": "asymptomatisch"
+                },
+                "1": {
+                  "title": "milder Verlauf"
+                },
+                "2": {
+                  "title": "schwerer Verlauf"
+                },
+                "3": {
+                  "title": "Tod"
+                }
+              }
+            }
+          }
+        },
+        "1": {
+          "title": "Impfen",
+          "sub": {
+            "0": {
+              "title": "Keine Ansteckung"
+            },
+            "1": {
+              "title": "Corona",
+              "cases": {
+                "0": {
+                  "title": "asymptomatisch"
+                },
+                "1": {
+                  "title": "milder Verlauf"
+                },
+                "2": {
+                  "title": "schwerer Verlauf"
+                },
+                "3": {
+                  "title": "Tod"
+                }
+              }
+            },
+            "2": {
+              "title": "Impfschaden"
+            }
+          }
+        }
+      }
+    },
+    "corona-2": {
+      "meta": {
+        "title": "Soll ich mich impfen lassen? | Decision Tracer",
+        "description": "Impfung: Ja oder nein? Sind die Nachteile einer Impfung es wert, nicht geimpft zu werden?",
+        "keywords": "Corona, Impfung, Entscheidung, Hilfe, Rechner, kompliziert"
+      },
+      "title": "Corona (kompliziert)",
+      "question": "Soll ich mich impfen lassen?",
+      "description": "Entscheidungshilfe mit komplexem Baum",
+      "decisions": {
+        "0": {
+          "title": "Nicht impfen",
+          "sub": {
+            "0": {
+              "title": "Keine Ansteckung"
+            },
+            "1": {
+              "title": "Corona",
+              "cases": {
+                "0": {
+                  "title": "Asymptomatisch"
+                },
+                "1": {
+                  "title": "Milder Verlauf",
+                  "subcases": {
+                    "0": {
+                      "title": "Long Covid"
+                    },
+                    "1": {
+                      "title": "Unabsehbare Spätfolgen"
+                    },
+                    "2": {
+                      "title": "Vollständige Heilung"
+                    }
+                  }
+                },
+                "2": {
+                  "title": "Schwerer Verlauf",
+                  "subcases": {
+                    "0": {
+                      "title": "Long Covid"
+                    },
+                    "1": {
+                      "title": "Unabsehbare Spätfolgen"
+                    },
+                    "2": {
+                      "title": "Vollständige Heilung"
+                    }
+                  }
+                },
+                "3": {
+                  "title": "Tod"
+                }
+              }
+            },
+            "2": {
+              "title": "Anderen Menschen anstecken"
+            },
+            "3": {
+              "title": "Positives oder negatives Bauchgefühl"
+            }
+          }
+        },
+        "1": {
+          "title": "Impfen",
+          "sub": {
+            "0": {
+              "title": "Keine Ansteckung"
+            },
+            "1": {
+              "title": "Corona",
+              "cases": {
+                "0": {
+                  "title": "Asymptomatisch"
+                },
+                "1": {
+                  "title": "Milder Verlauf",
+                  "subcases": {
+                    "0": {
+                      "title": "Long Covid"
+                    },
+                    "1": {
+                      "title": "Unabsehbare Spätfolgen"
+                    },
+                    "2": {
+                      "title": "Vollständige Heilung"
+                    }
+                  }
+                },
+                "2": {
+                  "title": "Schwerer Verlauf",
+                  "subcases": {
+                    "0": {
+                      "title": "Long Covid"
+                    },
+                    "1": {
+                      "title": "Unabsehbare Spätfolgen"
+                    },
+                    "2": {
+                      "title": "Vollständige Heilung"
+                    }
+                  }
+                },
+                "3": {
+                  "title": "Tod"
+                }
+              }
+            },
+            "2": {
+              "title": "Anderen Menschen anstecken"
+            },
+            "3": {
+              "title": "Positives oder negatives Bauchgefühl"
+            },
+            "4": {
+              "title": "Normale Impfreaktion"
+            },
+            "5": {
+              "title": "Schwerer Impfschaden"
+            },
+            "6": {
+              "title": "Unabsehbare Impf-Spätfolgen"
+            }
+          }
+        }
+      }
     }
   },
   "calculator": {
     "new_decision": "Entscheidung",
     "probability": "Wahrscheinlichkeit",
+    "probability_short": "Ws (𝑝)",
     "value": "Nutzwert",
     "expected_utility": "Erwartungsnutzen",
     "subcases": "Sub-Szenarien",
+    "subCasesItems": "Fälle",
     "add_scenario": "Szenario hinzufügen",
     "add_case": "Sub-Szenario hinzufügen",
+    "add_sub_case": "Fall hinzufügen",
     "remove_scenario": "Szenario löschen",
     "remove_case": "Sub-Szenario löschen",
+    "remove_sub_case": "Fall löschen",
     "remove_decision": "Entscheidung löschen",
     "independent": "Unabhängig",
     "result": "Ergebnis"

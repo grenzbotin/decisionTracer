@@ -64,9 +64,14 @@ export default function PresetCard({ preset }: { preset: Preset }): JSX.Element 
           <Image src="/assets/images/virus.jpg" layout="fill" className={classes.image} />
         </div>
         <CardContent className={classes.content}>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {i18next.t(preset.question)}
-          </Typography>
+          <div>
+            <Typography variant="body2" component="p">
+              {i18next.t(preset.question)}
+            </Typography>
+            <Typography variant="caption" color="textSecondary" component="p">
+              {i18next.t(preset.description)}
+            </Typography>
+          </div>
           <IconButton color="primary" aria-label="go to preset">
             <ArrowForwardIosIcon fontSize="small" />
           </IconButton>

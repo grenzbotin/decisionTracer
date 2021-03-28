@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import T from "prop-types";
 import { Decision, PRESETS, Preset, Resource } from "../lib/presets";
+import i18next from "i18next";
 
 const getNewProbabilty = (
   itemProbabilty: number,
@@ -24,12 +25,20 @@ const getNewProbabilty = (
 // Context for defining the global scope: UI Settings
 export const GlobalDecisionContext = React.createContext({
   active: null,
-  setTitle: (_title: string, _decKey?: string, _subKey?: string, _caseKey?: string) => undefined,
-  setValue: (_value: number | number[], _decKey: string, _subKey: string, _caseKey?: string) => undefined,
-  setProbability: (_value: number | number[], _decKey: string, _subKey: string, _caseKey?: string) => undefined,
-  removeItem: (_decKey: string, _subKey?: string, _caseKey?: string) => undefined,
-  addItem: (newKey: string, _decKey?: string, _subKey?: string) => undefined,
-  toggleIndependent: (_decKey: string, _subKey?: string, _caseKey?: string) => undefined,
+  setTitle: (_title: string, _decKey?: string, _subKey?: string, _caseKey?: string, _subCaseKey?: string) => undefined,
+  setValue: (_value: number | number[], _decKey: string, _subKey: string, _caseKey?: string, _subCaseKey?: string) =>
+    undefined,
+  setProbability: (
+    _value: number | number[],
+    _decKey: string,
+    _subKey: string,
+    _caseKey?: string,
+    _subCaseKey?: string
+  ) => undefined,
+  removeItem: (_decKey: string, _subKey?: string, _caseKey?: string, _subCaseKey?: string) => undefined,
+  addItem: (_newKey: string, _decKey?: string, _subKey?: string, _caseKey?: string) => undefined,
+  toggleIndependent: (_decKey: string, _subKey?: string, _caseKey?: string, _subCaseKey?: string) => undefined,
+  toggleClose: (_decKey: string, _subKey?: string, _caseKey?: string, _subCaseKey?: string) => undefined,
   createNewPreset: (_title: string, _icon?: string, _resources?: Resource[], _decisions?: Decision[]) => undefined,
   setActiveFromPreset: (_key?: string) => undefined
 });
@@ -48,13 +57,70 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
   const root = state.active;
 
   const setActiveFromPreset = (key: string): void => {
-    setState({ active: key ? PRESETS.find((item) => item.key === key) : null });
+    let translatedPreset = null;
+    const preset = key ? PRESETS.find((item) => item.key === key) : null;
+
+    // need to translate all preset titles
+    if (preset) {
+      translatedPreset = {
+        ...preset,
+        decisions: preset.decisions.map((decision) => ({
+          ...decision,
+          title: i18next.t(decision.title),
+          sub: decision.sub.map((sub) => ({
+            ...sub,
+            title: i18next.t(sub.title),
+            cases: sub.cases.map((c) => ({
+              ...c,
+              title: i18next.t(c.title),
+              subCases: c.subCases.map((sc) => ({
+                ...sc,
+                title: i18next.t(sc.title)
+              }))
+            }))
+          }))
+        }))
+      };
+    }
+
+    setState({ active: translatedPreset });
   };
 
   // Name changes
-  const setTitle = (title: string, decKey?: string, subKey?: string, caseKey?: string): void => {
+  const setTitle = (title: string, decKey?: string, subKey?: string, caseKey?: string, subCaseKey?: string): void => {
     if (instanceOfPreset(root)) {
-      if (caseKey) {
+      if (subCaseKey) {
+        setState({
+          ...state,
+          active: {
+            ...state.active,
+            decisions: root.decisions.map((decision) =>
+              decision.key === decKey
+                ? {
+                    ...decision,
+                    sub: decision.sub.map((sub) =>
+                      sub.key === subKey
+                        ? {
+                            ...sub,
+                            cases: sub.cases.map((c) =>
+                              c.key === caseKey
+                                ? {
+                                    ...c,
+                                    subCases: c.subCases.map((sc) =>
+                                      sc.key === subCaseKey ? { ...sc, title: title } : sc
+                                    )
+                                  }
+                                : c
+                            )
+                          }
+                        : sub
+                    )
+                  }
+                : decision
+            )
+          }
+        });
+      } else if (caseKey) {
         setState({
           ...state,
           active: {
@@ -100,44 +166,156 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
   };
 
   // Value changes
-  const setValue = (value: number | number[], decKey: string, subKey: string, caseKey?: string): void => {
+  // All scenarios, cases, subcases with same title should have same value
+  const setValue = (
+    value: number | number[],
+    decKey: string,
+    subKey: string,
+    caseKey?: string,
+    subCaseKey?: string
+  ): void => {
     if (instanceOfPreset(root)) {
       let title = "";
+      let isClosed = false;
 
-      if (caseKey) {
-        title = root.decisions
+      if (subCaseKey) {
+        const item = root.decisions
           .find((decision) => decision.key === decKey)
           .sub.find((sub) => sub.key === subKey)
-          .cases.find((c) => c.key === caseKey).title;
+          .cases.find((c) => c.key === caseKey)
+          .subCases.find((sc) => sc.key === subCaseKey);
+        title = item.title;
+        isClosed = item.isClosed;
+      } else if (caseKey) {
+        const item = root.decisions
+          .find((decision) => decision.key === decKey)
+          .sub.find((sub) => sub.key === subKey)
+          .cases.find((c) => c.key === caseKey);
+
+        title = item.title;
+        isClosed = item.isClosed;
       } else if (subKey) {
-        title = root.decisions.find((decision) => decision.key === decKey).sub.find((sub) => sub.key === subKey).title;
+        const item = root.decisions.find((decision) => decision.key === decKey).sub.find((sub) => sub.key === subKey);
+
+        title = item.title;
+        isClosed = item.isClosed;
       }
 
-      if (title) {
-        setState({
-          ...state,
-          active: {
-            ...root,
-            decisions: root.decisions.map((decision) => ({
-              ...decision,
-              sub: decision.sub.map((sub) => ({
-                ...sub,
-                value: sub.title === title && typeof value === "number" ? value : sub.value,
-                cases: sub.cases.map((c) =>
-                  c.title === title ? { ...c, value: typeof value === "number" && value } : c
-                )
+      setState({
+        ...state,
+        active: {
+          ...state.active,
+          decisions: root.decisions.map((decision) => ({
+            ...decision,
+            sub: decision.sub.map((sub) => ({
+              ...sub,
+              value:
+                sub.title === title && ((!isClosed && !sub.isClosed) || sub.key === subKey) && typeof value === "number"
+                  ? value
+                  : sub.value,
+              cases: sub.cases.map((c) => ({
+                ...c,
+                value:
+                  c.title === title && ((!isClosed && !c.isClosed) || c.key === caseKey) && typeof value === "number"
+                    ? value
+                    : c.value,
+                subCases: c.subCases.map((sc) => ({
+                  ...sc,
+                  value:
+                    sc.title === title &&
+                    ((!isClosed && !sc.isClosed) || sub.key === subCaseKey) &&
+                    typeof value === "number"
+                      ? value
+                      : sc.value
+                }))
               }))
             }))
-          }
-        });
-      }
+          }))
+        }
+      });
     }
   };
 
   // Set probability
-  const setProbability = (value: number | number[], decKey: string, subKey: string, caseKey?: string): void => {
+  const setProbability = (
+    value: number | number[],
+    decKey: string,
+    subKey: string,
+    caseKey?: string,
+    subCaseKey?: string
+  ): void => {
     if (instanceOfPreset(root)) {
-      if (caseKey) {
+      if (subCaseKey) {
+        // Get information about changed subcase
+        const targetSubCases = root.decisions
+          .find((item) => item.key === decKey)
+          .sub.find((sub) => sub.key === subKey)
+          .cases.find((c) => c.key === caseKey).subCases;
+        const targetSubCaseItem = targetSubCases.find((sc) => sc.key === subCaseKey);
+        const isIndependent = targetSubCaseItem.isIndependent;
+        const targetChange = typeof value === "number" && value - targetSubCaseItem.probability;
+
+        // Get all other decisions that need to change according to the total change
+        const nonTargets = targetSubCases.filter((sc) => sc.key !== subCaseKey && !sc.isIndependent);
+        const probabiltySum = !isIndependent
+          ? nonTargets.map((d) => d.probability).reduce((a: number, b: number) => a + b, 0)
+          : 0;
+        const rest = !isIndependent
+          ? typeof value === "number" && 100 - value - probabiltySum >= 0
+            ? 100 - value - probabiltySum
+            : 0
+          : 0;
+        const equal = !isIndependent ? rest / nonTargets.length : 0;
+
+        setState({
+          ...state,
+          active: {
+            ...state.active,
+            decisions: root.decisions.map((decision) =>
+              decision.key === decKey
+                ? {
+                    ...decision,
+                    sub: decision.sub.map((sub) =>
+                      sub.key === subKey
+                        ? {
+                            ...sub,
+                            cases: sub.cases.map((c) =>
+                              c.key === caseKey
+                                ? {
+                                    ...c,
+                                    subCases: c.subCases.map((sc) =>
+                                      sc.key === subCaseKey
+                                        ? {
+                                            ...sc,
+                                            probability: typeof value === "number" && parseFloat(value.toFixed(3))
+                                          }
+                                        : {
+                                            ...sc,
+                                            probability:
+                                              !isIndependent && !sc.isIndependent
+                                                ? parseFloat(
+                                                    getNewProbabilty(
+                                                      sc.probability,
+                                                      equal,
+                                                      probabiltySum,
+                                                      targetChange
+                                                    ).toFixed(3)
+                                                  )
+                                                : sc.probability
+                                          }
+                                    )
+                                  }
+                                : c
+                            )
+                          }
+                        : sub
+                    )
+                  }
+                : decision
+            )
+          }
+        });
+      } else if (caseKey) {
         // Get information about changed case
         const targetCases = root.decisions.find((item) => item.key === decKey).sub.find((sub) => sub.key === subKey)
           .cases;
@@ -242,9 +420,46 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
   };
 
   // Independent settings
-  const toggleIndependent = (decKey: string, subKey: string, caseKey?: string): void => {
+  const toggleIndependent = (decKey: string, subKey: string, caseKey?: string, subCaseKey?: string): void => {
     if (instanceOfPreset(root)) {
-      if (caseKey) {
+      if (subCaseKey) {
+        setState({
+          ...state,
+          active: {
+            ...state.active,
+            decisions: root.decisions.map((decision) =>
+              decision.key === decKey
+                ? {
+                    ...decision,
+                    sub: decision.sub.map((sub) =>
+                      sub.key === subKey
+                        ? {
+                            ...sub,
+                            cases: sub.cases.map((c) =>
+                              c.key === caseKey
+                                ? {
+                                    ...c,
+                                    subCases: c.subCases.map((sc) =>
+                                      sc.key === subCaseKey
+                                        ? {
+                                            ...sc,
+                                            isIndependent: !sc.isIndependent,
+                                            probability: sc.isIndependent ? 0 : sc.probability
+                                          }
+                                        : sc
+                                    )
+                                  }
+                                : c
+                            )
+                          }
+                        : sub
+                    )
+                  }
+                : decision
+            )
+          }
+        });
+      } else if (caseKey) {
         setState({
           ...state,
           active: {
@@ -301,10 +516,130 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
     }
   };
 
-  // Remove
-  const removeItem = (decKey: string, subKey?: string, caseKey?: string): void => {
+  // Independent settings
+  const toggleClose = (decKey: string, subKey: string, caseKey?: string, subCaseKey?: string): void => {
     if (instanceOfPreset(root)) {
-      if (caseKey) {
+      if (subCaseKey) {
+        setState({
+          ...state,
+          active: {
+            ...state.active,
+            decisions: root.decisions.map((decision) =>
+              decision.key === decKey
+                ? {
+                    ...decision,
+                    sub: decision.sub.map((sub) =>
+                      sub.key === subKey
+                        ? {
+                            ...sub,
+                            cases: sub.cases.map((c) =>
+                              c.key === caseKey
+                                ? {
+                                    ...c,
+                                    subCases: c.subCases.map((sc) =>
+                                      sc.key === subCaseKey
+                                        ? {
+                                            ...sc,
+                                            isClosed: !sc.isClosed
+                                          }
+                                        : sc
+                                    )
+                                  }
+                                : c
+                            )
+                          }
+                        : sub
+                    )
+                  }
+                : decision
+            )
+          }
+        });
+      } else if (caseKey) {
+        setState({
+          ...state,
+          active: {
+            ...state.active,
+            decisions: root.decisions.map((decision) =>
+              decision.key === decKey
+                ? {
+                    ...decision,
+                    sub: decision.sub.map((sub) =>
+                      sub.key === subKey
+                        ? {
+                            ...sub,
+                            cases: sub.cases.map((c) =>
+                              c.key === caseKey
+                                ? {
+                                    ...c,
+                                    isClosed: !c.isClosed
+                                  }
+                                : c
+                            )
+                          }
+                        : sub
+                    )
+                  }
+                : decision
+            )
+          }
+        });
+      } else if (subKey) {
+        setState({
+          ...state,
+          active: {
+            ...state.active,
+            decisions: root.decisions.map((decision) =>
+              decision.key === decKey
+                ? {
+                    ...decision,
+                    sub: decision.sub.map((sub) =>
+                      sub.key === subKey
+                        ? {
+                            ...sub,
+                            isClosed: !sub.isClosed
+                          }
+                        : sub
+                    )
+                  }
+                : decision
+            )
+          }
+        });
+      }
+    }
+  };
+
+  // Remove
+  const removeItem = (decKey: string, subKey?: string, caseKey?: string, subCaseKey?: string): void => {
+    if (instanceOfPreset(root)) {
+      if (subCaseKey) {
+        setState({
+          ...state,
+          active: {
+            ...state.active,
+            decisions: root.decisions.map((decision) =>
+              decision.key === decKey
+                ? {
+                    ...decision,
+                    sub: decision.sub.map((sub) =>
+                      sub.key === subKey
+                        ? {
+                            ...sub,
+                            cases: sub.cases.map((c) =>
+                              c.key === caseKey
+                                ? { ...c, subCases: c.subCases.filter((sc) => sc.key !== subCaseKey) }
+                                : c
+                            )
+                          }
+                        : sub
+                    )
+                  }
+                : decision
+            )
+          }
+        });
+      } else if (caseKey) {
         setState({
           ...state,
           active: {
@@ -345,9 +680,9 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
     }
   };
 
-  const addItem = (newKey: string, decKey?: string, subKey?: string): void => {
+  const addItem = (newKey: string, decKey?: string, subKey?: string, caseKey?: string): void => {
     if (instanceOfPreset(root)) {
-      if (subKey) {
+      if (caseKey) {
         setState({
           ...state,
           active: {
@@ -360,7 +695,36 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                       sub.key === subKey
                         ? {
                             ...sub,
-                            cases: [...sub.cases, { key: newKey, title: "new", probability: 0, value: 0 }]
+                            cases: sub.cases.map((c) =>
+                              c.key === caseKey
+                                ? {
+                                    ...c,
+                                    subCases: [...c.subCases, { key: newKey, title: "new", probability: 0, value: 0 }]
+                                  }
+                                : c
+                            )
+                          }
+                        : sub
+                    )
+                  }
+                : decision
+            )
+          }
+        });
+      } else if (subKey) {
+        setState({
+          ...state,
+          active: {
+            ...state.active,
+            decisions: root.decisions.map((decision) =>
+              decision.key === decKey
+                ? {
+                    ...decision,
+                    sub: decision.sub.map((sub) =>
+                      sub.key === subKey
+                        ? {
+                            ...sub,
+                            cases: [...sub.cases, { key: newKey, title: "new", probability: 0, value: 0, subCases: [] }]
                           }
                         : sub
                     )
@@ -434,7 +798,8 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
         addItem,
         toggleIndependent,
         createNewPreset,
-        setActiveFromPreset
+        setActiveFromPreset,
+        toggleClose
       }}
     >
       {state && children}

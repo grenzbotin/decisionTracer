@@ -5,9 +5,8 @@ export function getUniqueNumber(): string {
 
 export function scrollToTargetOffset(id: string): void {
     const element = document.getElementById(id);
-    const headerOffset = 100;
     const elementPosition = element.getBoundingClientRect().top;
-    const offsetPosition = elementPosition - headerOffset;
+    const offsetPosition = elementPosition + window.pageYOffset;
 
     window.scrollTo({
          top: offsetPosition,
