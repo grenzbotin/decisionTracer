@@ -1,11 +1,19 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import i18next from "i18next";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 
 import { Preset } from "@/../lib/presets";
-import { Avatar, Card, CardContent, CardHeader, IconButton, makeStyles, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  Card,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  IconButton,
+  makeStyles,
+  Typography
+} from "@material-ui/core";
 import CustomIcon from "@/../assets/CustomIcon";
 import { PRIMARY } from "../theme";
 
@@ -16,19 +24,9 @@ const useStyles = makeStyles({
   avatar: {
     backgroundColor: PRIMARY
   },
-  imageContainer: {
-    width: "100%",
-    maxHeight: "200px",
-    "& > div": {
-      position: "unset !important"
-    }
-  },
-  image: {
-    objectFit: "contain",
-    width: "100% !important",
-    // @ts-expect-error: position
-    position: "relative !important",
-    height: "unset !important"
+  media: {
+    height: 0,
+    paddingTop: "56.25%" // 16:9
   },
   content: {
     "&.MuiCardContent-root:last-child": {
@@ -59,10 +57,7 @@ export default function PresetCard({ preset }: { preset: Preset }): JSX.Element 
           }
           title={i18next.t(preset.title)}
         />
-
-        <div className={classes.imageContainer}>
-          <Image src="/assets/images/virus.jpg" layout="fill" className={classes.image} />
-        </div>
+        <CardMedia className={classes.media} image="/assets/images/virus.jpg" title={i18next.t(preset.title)} />
         <CardContent className={classes.content}>
           <div>
             <Typography variant="body2" component="p">
