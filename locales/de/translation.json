@@ -35,13 +35,13 @@
               "title": "Corona",
               "cases": {
                 "0": {
-                  "title": "asymptomatisch"
+                  "title": "Asymptomatisch"
                 },
                 "1": {
-                  "title": "milder Verlauf"
+                  "title": "Milder Verlauf"
                 },
                 "2": {
-                  "title": "schwerer Verlauf"
+                  "title": "Schwerer Verlauf"
                 },
                 "3": {
                   "title": "Tod"
@@ -60,13 +60,13 @@
               "title": "Corona",
               "cases": {
                 "0": {
-                  "title": "asymptomatisch"
+                  "title": "Asymptomatisch"
                 },
                 "1": {
-                  "title": "milder Verlauf"
+                  "title": "Milder Verlauf"
                 },
                 "2": {
-                  "title": "schwerer Verlauf"
+                  "title": "Schwerer Verlauf"
                 },
                 "3": {
                   "title": "Tod"

@@ -32,7 +32,6 @@ const CustomSlider = withStyles({
 
 const GROW_LEVEL = 100;
 const MULTIPLIER = 0.05;
-const THRESHOLD = 0.3;
 
 const GrowingSlider: React.FC<Props> = ({ value, onChange }) => {
   const prevValue = usePrevious(value);
@@ -46,13 +45,13 @@ const GrowingSlider: React.FC<Props> = ({ value, onChange }) => {
   const handleChange = (value: number | number[]): void => {
     if (typeof value === "number") {
       setLocalValue(value);
-      if (value <= (minMax.min < 0 ? minMax.min + -THRESHOLD * minMax.min : minMax.min + THRESHOLD * minMax.min)) {
+      if (value <= (minMax.min < 0 ? minMax.min : minMax.min)) {
         setMinMax({
           max: minMax.max < 0 ? minMax.max + -MULTIPLIER * GROW_LEVEL : minMax.max - MULTIPLIER * GROW_LEVEL,
           min: minMax.min - MULTIPLIER * GROW_LEVEL
         });
       }
-      if (value >= (minMax.max > 0 ? minMax.max + -THRESHOLD * minMax.max : minMax.max + THRESHOLD * minMax.max)) {
+      if (value >= (minMax.max > 0 ? minMax.max : minMax.max)) {
         setMinMax({
           max: minMax.max + MULTIPLIER * GROW_LEVEL,
           min: minMax.min + MULTIPLIER * GROW_LEVEL
