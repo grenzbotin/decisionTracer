@@ -40,11 +40,11 @@ export default function CalculatorWrapper(): JSX.Element {
     <Grid container spacing={2}>
       <Grid container item xs={12} style={{ display: "flex", justifyContent: "flex-end" }}>
         <ButtonGroup color="primary" style={{ marginRight: ".5rem" }}>
-          <Button variant={treeFlow ? "contained" : "outlined"} onClick={() => setTreeFlow(true)}>
-            <AccountTreeIcon />
-          </Button>
           <Button variant={!treeFlow ? "contained" : "outlined"} onClick={() => setTreeFlow(false)}>
             <ViewAgendaIcon />
+          </Button>
+          <Button variant={treeFlow ? "contained" : "outlined"} onClick={() => setTreeFlow(true)}>
+            <AccountTreeIcon />
           </Button>
         </ButtonGroup>
         <Button variant="contained" color="primary" onClick={handleClickAddItem} startIcon={<AddCircleIcon />}>
