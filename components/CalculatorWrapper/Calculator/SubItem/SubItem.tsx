@@ -1,4 +1,4 @@
-import { Card, Grid, CardContent, Typography, IconButton, useMediaQuery, useTheme } from "@material-ui/core";
+import { Card, Grid, CardContent, Typography, IconButton } from "@material-ui/core";
 import MuiCardHeader from "@material-ui/core/CardHeader";
 import { withStyles } from "@material-ui/core/styles";
 import i18next from "i18next";
@@ -42,8 +42,6 @@ export default function SubItem({
   const { setTitle, setProbability, setValue, removeItem, addItem, toggleIndependent, toggleClose } = useContext(
     GlobalDecisionContext
   );
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleProbabilityChange = (value: number): void => {
     setProbability(value, decisionKey, item.key);
@@ -88,9 +86,7 @@ export default function SubItem({
         />
         <CardContent>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <Typography variant="caption">
-              {i18next.t(isMobile ? "calculator.probability_short" : "calculator.probability")}
-            </Typography>
+            <Typography variant="caption">{i18next.t("calculator.probability_short")}</Typography>
             <div style={{ display: "flex" }}>
               <IconButton
                 onClick={() => toggleIndependent(decisionKey, item.key)}

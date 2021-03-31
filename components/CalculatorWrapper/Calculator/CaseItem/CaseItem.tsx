@@ -1,4 +1,4 @@
-import { Typography, AccordionDetails, IconButton, useTheme, useMediaQuery } from "@material-ui/core";
+import { Typography, AccordionDetails, IconButton } from "@material-ui/core";
 import MuiAccordion from "@material-ui/core/Accordion";
 import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
 import i18next from "i18next";
@@ -71,9 +71,6 @@ export default function CaseItem({
     GlobalDecisionContext
   );
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
-
   const handleProbabilityChange = (value: number): void => {
     setProbability(value, decisionKey, itemKey, caseItem.key);
   };
@@ -120,9 +117,7 @@ export default function CaseItem({
       </AccordionSummary>
       <AccordionDetails style={{ flexDirection: "column", padding: "1rem" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <Typography variant="caption">
-            {i18next.t(isMobile ? "calculator.probability_short" : "calculator.probability")}
-          </Typography>
+          <Typography variant="caption">{i18next.t("calculator.probability_short")}</Typography>
           <div>
             <IconButton
               onClick={() => toggleIndependent(decisionKey, itemKey, caseItem.key)}
