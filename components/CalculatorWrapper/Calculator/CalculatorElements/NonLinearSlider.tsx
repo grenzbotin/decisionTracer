@@ -67,7 +67,8 @@ const NonLinearSlider: React.FC<Props> = ({
   numFormatter,
   style
 }) => {
-  const handleChange = (_event: React.ChangeEvent<Record<string, unknown>>, newValue: number | number[]): void => {
+  const handleChange = (event: React.ChangeEvent<Record<string, unknown>>, newValue: number | number[]): void => {
+    event.stopPropagation();
     if (typeof newValue === "number") {
       onChange(scale(newValue));
     }

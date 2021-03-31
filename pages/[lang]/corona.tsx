@@ -9,7 +9,7 @@ import { getAllLanguageSlugs, getLanguage } from "../../lib/lang";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 
 const HtmlHeader = dynamic(() => import("../../components/HtmlHeader"));
-const Calculator = dynamic(() => import("../../components/Calculator"));
+const CalculatorWrapper = dynamic(() => import("../../components/CalculatorWrapper"));
 const Result = dynamic(() => import("../../components/Result"));
 const FooterResult = dynamic(() => import("../../components/Result/FooterResult"));
 
@@ -35,7 +35,7 @@ export default function LangIndex(): JSX.Element {
         />
         <Grid container spacing={2}>
           <Grid item xs={12} md={8} style={{ marginBottom: mobileFooter && isMobile ? "220px" : "50px" }}>
-            <Calculator />
+            <CalculatorWrapper />
           </Grid>
           <Hidden smDown>
             <Grid item xs={12} md={4} style={{ position: "relative" }}>

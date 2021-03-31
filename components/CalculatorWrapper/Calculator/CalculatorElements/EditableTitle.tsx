@@ -9,25 +9,23 @@ function EditableTitle({
   onChange,
   variant,
   component,
-  alignItems = "baseline"
+  alignItems = "baseline",
+  anchorEl,
+  setAnchorEl
 }: {
   title: string;
   onChange: (_title: string) => void;
   variant: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "subtitle1" | "subtitle2" | "body2" | "caption";
   component: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   alignItems?: "baseline" | "center";
+  anchorEl: HTMLButtonElement | null;
+  setAnchorEl: (_e: React.MouseEvent<HTMLButtonElement>) => void;
 }): JSX.Element {
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [localTitle, setLocalTitle] = useState<string>("");
 
   useEffect(() => {
     setLocalTitle(title);
   }, [title]);
-
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
-    e.stopPropagation();
-    setAnchorEl(e.currentTarget);
-  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     setLocalTitle(e.currentTarget.value);
@@ -55,18 +53,9 @@ function EditableTitle({
 
   return (
     <div style={{ display: "flex", alignItems: alignItems, overflow: "hidden" }}>
-      <Typography variant={variant} component={component} style={{ wordBreak: "break-all" }}>
+      <Typography variant={variant} component={component} style={{ wordBreak: "break-word" }}>
         {title}
       </Typography>
-      <IconButton
-        color="default"
-        size="small"
-        aria-label="edit name"
-        onClick={handleClick}
-        style={{ marginLeft: ".5rem" }}
-      >
-        <EditIcon fontSize="small" />
-      </IconButton>
       <Popover
         id={popoverId}
         open={open}

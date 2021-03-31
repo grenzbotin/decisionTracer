@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import SentimentDissatisfiedOutlinedIcon from "@material-ui/icons/SentimentDissatisfiedOutlined";
 import SentimentSatisfiedOutlinedIcon from "@material-ui/icons/SentimentSatisfiedOutlined";
 
-import { SECONDARY, PRIMARY } from "../../theme";
+import { SECONDARY, PRIMARY } from "../../../theme";
 
 function usePrevious(value: number): number {
   const ref = useRef<number>();
@@ -42,7 +42,8 @@ const GrowingSlider: React.FC<Props> = ({ value, onChange }) => {
   const [localValue, setLocalValue] = useState(value);
 
   // Local handling of max/min
-  const handleChange = (value: number | number[]): void => {
+  const handleChange = (event: React.ChangeEvent<Record<string, unknown>>, value: number | number[]): void => {
+    event.stopPropagation();
     if (typeof value === "number") {
       setLocalValue(value);
       if (value <= (minMax.min < 0 ? minMax.min : minMax.min)) {
@@ -92,7 +93,7 @@ const GrowingSlider: React.FC<Props> = ({ value, onChange }) => {
         step={10}
         style={{ color: "rgb(94, 94, 94)" }}
         valueLabelDisplay="auto"
-        onChange={(_e, value) => handleChange(value)}
+        onChange={(e, value) => handleChange(e, value)}
         onChangeCommitted={(_e, value) => handleChangeCommit(value)}
       />
       <SentimentSatisfiedOutlinedIcon style={{ color: PRIMARY, marginLeft: ".2rem" }} />

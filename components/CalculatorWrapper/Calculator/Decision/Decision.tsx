@@ -31,7 +31,7 @@ function getResult(decision: DecisionType): number | string {
 }
 
 export default function Decision({ decision, color }: { decision: DecisionType; color: string }): JSX.Element {
-  const { setTitle, removeItem, addItem } = useContext(GlobalDecisionContext);
+  const { active, setTitle, removeItem, addItem } = useContext(GlobalDecisionContext);
   const [lastAddedSub, setLastAddedSub] = useState(null);
 
   const handleClickAddItem = (): void => {
@@ -49,7 +49,15 @@ export default function Decision({ decision, color }: { decision: DecisionType; 
   }, [decision, lastAddedSub]);
 
   return (
-    <Grid id={decision.key} item xs={12} sm={12} md={6} style={{ position: "relative" }}>
+    <Grid
+      id={decision.key}
+      item
+      xs={12}
+      sm={12}
+      md={12}
+      lg={active.decisions.length > 1 ? 6 : 12}
+      style={{ position: "relative" }}
+    >
       <div
         style={{
           position: "absolute",

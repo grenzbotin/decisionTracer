@@ -5,7 +5,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 interface ListContent {
   icon?: JSX.Element;
   text: string;
-  onClick: () => void;
+  onClick: (_e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 function CardMenu({
@@ -31,7 +31,7 @@ function CardMenu({
 
   const handleAction = (event: React.MouseEvent<HTMLLIElement>, action: () => void): void => {
     event.stopPropagation();
-    action();
+    action(event);
     handleClose();
   };
 
