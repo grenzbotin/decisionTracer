@@ -71,7 +71,7 @@ export default function SubCaseItem({
   );
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
 
   const handleProbabilityChange = (value: number): void => {
     setProbability(value, decisionKey, itemKey, caseKey, subCaseItem.key);

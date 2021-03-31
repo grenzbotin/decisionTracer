@@ -72,7 +72,7 @@ export default function CaseItem({
   );
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
 
   const handleProbabilityChange = (value: number): void => {
     setProbability(value, decisionKey, itemKey, caseItem.key);
@@ -84,7 +84,12 @@ export default function CaseItem({
 
   return (
     <Accordion style={{ borderLeft: `2px solid ${color}` }}>
-      <AccordionSummary expandIcon={<ExpandMoreIcon fontSize="small" />}>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon fontSize="small" />}
+        IconButtonProps={{
+          size: "small"
+        }}
+      >
         <EditableTitle
           alignItems="center"
           title={caseItem.title}

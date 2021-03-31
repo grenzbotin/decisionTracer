@@ -2,7 +2,7 @@ import { Card, Grid, CardContent, Typography, IconButton, useMediaQuery, useThem
 import MuiCardHeader from "@material-ui/core/CardHeader";
 import { withStyles } from "@material-ui/core/styles";
 import i18next from "i18next";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
@@ -23,7 +23,7 @@ const CardHeader = withStyles({
   root: {
     backgroundColor: "rgba(0, 0, 0, .03)",
     borderBottom: "1px solid rgba(0, 0, 0, .125)",
-    padding: "0rem 1rem"
+    padding: "0rem .5rem"
   },
   action: {
     marginTop: 0
@@ -45,18 +45,12 @@ export default function SubItem({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const [titleAnchorEl, setTitleAnchorEl] = useState<HTMLButtonElement | null>(null);
-
   const handleProbabilityChange = (value: number): void => {
     setProbability(value, decisionKey, item.key);
   };
 
   const handleValueChange = (value: number): void => {
     setValue(value, decisionKey, item.key);
-  };
-
-  const handleTitleEdit = (e: React.MouseEvent<HTMLButtonElement>): void => {
-    setTitleAnchorEl(e.currentTarget);
   };
 
   return (
@@ -70,17 +64,11 @@ export default function SubItem({
               onChange={(title: string) => setTitle(title, decisionKey, item.key)}
               variant="body2"
               component="h3"
-              anchorEl={titleAnchorEl}
-              setAnchorEl={setTitleAnchorEl}
             />
           }
           action={
             <CardMenu
               listContent={[
-                {
-                  text: i18next.t("calculator.change_name"),
-                  onClick: (e) => handleTitleEdit(e)
-                },
                 {
                   text: i18next.t("calculator.add_case"),
                   icon: <AddCircleIcon fontSize="small" />,

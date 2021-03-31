@@ -1,31 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { Box, IconButton, Popover, TextField, Typography } from "@material-ui/core";
-import EditIcon from "@material-ui/icons/Edit";
+import { Box, Button, IconButton, Popover, TextField, Typography, withStyles } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import CancelIcon from "@material-ui/icons/Cancel";
+
+const CustomTextButton = withStyles({
+  root: {
+    textTransform: "none",
+    textAlign: "left",
+    minWidth: "20px"
+  }
+})(Button);
 
 function EditableTitle({
   title,
   onChange,
   variant,
   component,
-  alignItems = "baseline",
-  anchorEl,
-  setAnchorEl
+  alignItems = "baseline"
 }: {
   title: string;
   onChange: (_title: string) => void;
   variant: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "subtitle1" | "subtitle2" | "body2" | "caption";
   component: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   alignItems?: "baseline" | "center";
-  anchorEl: HTMLButtonElement | null;
-  setAnchorEl: (_e: React.MouseEvent<HTMLButtonElement>) => void;
 }): JSX.Element {
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [localTitle, setLocalTitle] = useState<string>("");
 
   useEffect(() => {
     setLocalTitle(title);
   }, [title]);
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    e.stopPropagation();
+    setAnchorEl(e.currentTarget);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     setLocalTitle(e.currentTarget.value);
@@ -53,9 +62,11 @@ function EditableTitle({
 
   return (
     <div style={{ display: "flex", alignItems: alignItems, overflow: "hidden" }}>
-      <Typography variant={variant} component={component} style={{ wordBreak: "break-word" }}>
-        {title}
-      </Typography>
+      <CustomTextButton onClick={handleClick}>
+        <Typography variant={variant} component={component} style={{ wordBreak: "break-word" }}>
+          {title}
+        </Typography>
+      </CustomTextButton>
       <Popover
         id={popoverId}
         open={open}
