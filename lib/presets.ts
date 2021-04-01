@@ -118,7 +118,7 @@ const CORONA_PRESET = {
           key: "main-1-sub-0",
           title: "presets.corona.decisions.1.sub.0.title",
           probability: 0,
-          value: 1000,
+          value: 0,
           cases: [] as CaseItem[]
         },
         {

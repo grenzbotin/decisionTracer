@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import T from "prop-types";
-import { Decision, PRESETS, Preset, Resource } from "../lib/presets";
+import { Decision, PRESETS, Preset, Resource, SubItem, SubCaseItem } from "../lib/presets";
 import i18next from "i18next";
 
 const getNewProbabilty = (
@@ -20,6 +20,15 @@ const getNewProbabilty = (
     return itemProbabilty - (itemProbabilty / probabiltySum) * targetChange;
   }
   return 0;
+};
+
+const getValueFromChilds = (node: SubItem | SubCaseItem, child: string): number => {
+  let value = 0;
+  node[child].forEach((item: SubItem | SubCaseItem) => {
+    value += (item.value * item.probability) / 100;
+  });
+
+  return value;
 };
 
 // Context for defining the global scope: UI Settings
@@ -60,7 +69,6 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
     let translatedPreset = null;
     const preset = key ? PRESETS.find((item) => item.key === key) : null;
 
-    // need to translate all preset titles
     if (preset) {
       translatedPreset = {
         ...preset,
@@ -201,7 +209,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
         isClosed = item.isClosed;
       }
 
-      setState({
+      const newState = {
         ...state,
         active: {
           ...state.active,
@@ -232,6 +240,28 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
             }))
           }))
         }
+      };
+
+      const updatedState = {
+        ...newState,
+        active: {
+          ...newState.active,
+          decisions: newState.active.decisions.map((decision: Decision) => ({
+            ...decision,
+            sub: decision.sub.map((sub) => ({
+              ...sub,
+              value: sub.cases.length > 0 ? getValueFromChilds(sub, "cases") : sub.value,
+              cases: sub.cases.map((c) => ({
+                ...c,
+                value: c.subCases.length > 0 ? getValueFromChilds(sub, "subCases") : c.value
+              }))
+            }))
+          }))
+        }
+      };
+
+      setState({
+        ...updatedState
       });
     }
   };
@@ -245,6 +275,8 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
     subCaseKey?: string
   ): void => {
     if (instanceOfPreset(root)) {
+      let newState = {} as { active: Preset };
+
       if (subCaseKey) {
         // Get information about changed subcase
         const targetSubCases = root.decisions
@@ -267,7 +299,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
           : 0;
         const equal = !isIndependent ? rest / nonTargets.length : 0;
 
-        setState({
+        newState = {
           ...state,
           active: {
             ...state.active,
@@ -314,7 +346,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                 : decision
             )
           }
-        });
+        };
       } else if (caseKey) {
         // Get information about changed case
         const targetCases = root.decisions.find((item) => item.key === decKey).sub.find((sub) => sub.key === subKey)
@@ -335,7 +367,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
           : 0;
         const equal = !isIndependent ? rest / nonTargets.length : 0;
 
-        setState({
+        newState = {
           ...state,
           active: {
             ...state.active,
@@ -369,7 +401,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                 : decision
             )
           }
-        });
+        };
       } else if (subKey) {
         // Get information about changed case
         const targetSubs = root.decisions.find((item) => item.key === decKey).sub;
@@ -389,7 +421,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
           : 0;
         const equal = !isIndependent ? rest / nonTargets.length : 0;
 
-        setState({
+        newState = {
           ...state,
           active: {
             ...state.active,
@@ -414,8 +446,28 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                 : decision
             )
           }
-        });
+        };
       }
+
+      const updatedState = {
+        ...newState,
+        active: {
+          ...newState.active,
+          decisions: newState.active.decisions.map((decision: Decision) => ({
+            ...decision,
+            sub: decision.sub.map((sub) => ({
+              ...sub,
+              value: sub.cases.length > 0 ? getValueFromChilds(sub, "cases") : sub.value,
+              cases: sub.cases.map((c) => ({
+                ...c,
+                value: c.subCases.length > 0 ? getValueFromChilds(sub, "subCases") : c.value
+              }))
+            }))
+          }))
+        }
+      };
+
+      setState({ ...updatedState });
     }
   };
 

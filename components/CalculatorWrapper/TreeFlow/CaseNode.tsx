@@ -44,7 +44,7 @@ const CaseNode = memo(({ data, targetPosition = Position.Top, sourcePosition = P
         }}
       >
         <Typography noWrap variant="caption">
-          {data.value}
+          {data.value.toFixed(3)}
         </Typography>
       </div>
       <Handle type="source" position={sourcePosition} />

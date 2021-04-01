@@ -21,7 +21,7 @@ export function scrollToTargetOffset(id: string): void {
 const position = { x: 0, y: 0 };
 const lineProps = {
   edgeType: "smoothstep",
-  labelStyle: { fontWeight: 700, fontSize: 10, fill: '#fff' },
+  labelStyle: { fontWeight: 700, fontSize: 12, fill: '#fff' },
   labelBgStyle: { color: '#fff', fillOpacity: 0.8 },
 };
 

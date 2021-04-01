@@ -45,7 +45,7 @@ const SubCaseEndNode = memo(({ data, targetPosition = Position.Top }: NodeProps)
         }}
       >
         <Typography noWrap variant="caption">
-          {data.value}
+          {data.value.toFixed(3)}
         </Typography>
       </div>
     </Paper>
