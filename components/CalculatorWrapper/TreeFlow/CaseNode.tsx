@@ -8,7 +8,7 @@ const CaseNode = memo(({ data, targetPosition = Position.Top, sourcePosition = P
     <Paper
       style={{
         borderTop: `2px solid ${data.color}`,
-        width: "120px",
+        width: "140px",
         height: "60px",
         display: "flex",
         alignItems: "center",

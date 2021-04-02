@@ -6,7 +6,7 @@ import CaseNode from "./CaseNode";
 import DecisionNode from "./DecisionNode";
 import SubCaseEndNode from "./SubCaseEndNode";
 
-const nodeWidth = 120;
+const nodeWidth = 140;
 const nodeHeight = 60;
 
 export const nodeTypes = {

@@ -1,5 +1,5 @@
 import { generateColors } from "../components/theme";
-import { Decision, SubCaseItem, SubItem } from "./presets";
+import { CaseItem, Decision, SubCaseItem, SubItem } from "./presets";
 import { Elements } from "react-flow-renderer";
 
 export function getUniqueNumber(): string {
@@ -11,9 +11,9 @@ export function getRoundedValue(value: number, digits: number): string {
   return value.toFixed(digits);
 }
 
-export function getValueFromChilds(node: SubItem | SubCaseItem, child: string): number {
+export function getValueFromChilds(node: SubItem | SubCaseItem | Decision, child: string): number {
   let value = 0;
-  node[child].forEach((item: SubItem | SubCaseItem) => {
+  node[child].forEach((item: SubItem | SubCaseItem | CaseItem) => {
     value += item.value * (item.probability / 100);
   });
 
@@ -45,9 +45,11 @@ export function createTreeDataFromPreset(decisions: Array<Decision>): Elements<a
   decisions.forEach((decision, key) => {
     elements.push({
       id: decision.key,
-      data: { title: decision.title,
+      data: {
+        title: decision.title,
         icon: decision.icon,
         color: colors[key],
+        value: getValueFromChilds(decision, "sub")
       },
         position,
         type: 'decisionNode',
