@@ -5,9 +5,9 @@ import T from "prop-types";
 // Context for defining the global scope: UI Settings
 export const GlobalUiContext = React.createContext({
   mobileFooter: true,
-  treeFlow: true,
+  visualMode: "card",
   toggleMobileFooter: () => undefined,
-  setTreeFlow: (_bool: boolean) => undefined
+  setVisualMode: (_mode: string) => undefined
 });
 
 interface T {
@@ -15,12 +15,12 @@ interface T {
 }
 
 export const GlobalUiContextProvider: React.FC<T> = ({ children }) => {
-  const [state, setState] = useState({ mobileFooter: true, treeFlow: false });
+  const [state, setState] = useState({ mobileFooter: true, visualMode: "card" });
 
-  const setTreeFlow = (bool: boolean): void => {
+  const setVisualMode = (mode: string): void => {
     setState({
       ...state,
-      treeFlow: bool
+      visualMode: mode
     });
   };
 
@@ -36,7 +36,7 @@ export const GlobalUiContextProvider: React.FC<T> = ({ children }) => {
       value={{
         ...state,
         toggleMobileFooter,
-        setTreeFlow
+        setVisualMode
       }}
     >
       {state && children}

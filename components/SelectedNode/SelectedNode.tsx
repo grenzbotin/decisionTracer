@@ -8,11 +8,17 @@ import { getNodeForm } from "./helpers";
 
 function SelectedNode(): JSX.Element {
   const { active, selectedNode } = useContext(GlobalDecisionContext);
-  const { treeFlow } = useContext(GlobalUiContext);
+  const { visualMode } = useContext(GlobalUiContext);
   const decisions = active.decisions as DecisionType[];
   const selectedForm = getNodeForm(selectedNode, decisions);
 
-  return treeFlow && selectedForm ? <Card style={{ marginTop: "1rem", padding: "1rem" }}>{selectedForm}</Card> : <></>;
+  const isTreeMode = visualMode === "tree";
+
+  return isTreeMode && selectedForm ? (
+    <Card style={{ marginTop: "1rem", padding: "1rem" }}>{selectedForm}</Card>
+  ) : (
+    <></>
+  );
 }
 
 export default SelectedNode;

@@ -16,7 +16,7 @@ const SelectedNode = dynamic(() => import("../../components/SelectedNode"));
 const MobileSelectedNode = dynamic(() => import("../../components/SelectedNode/MobileSelectedNode"));
 
 export default function LangIndex(): JSX.Element {
-  const { mobileFooter } = useContext(GlobalUiContext);
+  const { mobileFooter, setVisualMode } = useContext(GlobalUiContext);
   const { active, setActiveFromPreset } = useContext(GlobalDecisionContext);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -24,8 +24,9 @@ export default function LangIndex(): JSX.Element {
   useEffect(() => {
     if (!active || active.key !== "corona-2") {
       setActiveFromPreset("corona-2");
+      setVisualMode("tree");
     }
-  }, [active, setActiveFromPreset]);
+  }, [active, setActiveFromPreset, setVisualMode]);
 
   return (
     active && (

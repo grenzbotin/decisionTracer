@@ -8,11 +8,12 @@ import { getNodeForm } from "./helpers";
 
 function MobileSelectedNode(): JSX.Element {
   const { active, selectedNode, setSelectedNode } = useContext(GlobalDecisionContext);
-  const { treeFlow } = useContext(GlobalUiContext);
+  const { visualMode } = useContext(GlobalUiContext);
   const decisions = active.decisions as DecisionType[];
   const selectedForm = getNodeForm(selectedNode, decisions);
 
-  const open = treeFlow && selectedForm !== null;
+  const isTreeMode = visualMode === "tree";
+  const open = isTreeMode && selectedForm !== null;
 
   return (
     <Dialog fullWidth onClose={() => setSelectedNode(null)} open={open}>

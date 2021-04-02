@@ -24,10 +24,11 @@ Make your decisions based on rational thoughts
 - [x] Tree view (selectable)
 - [x] Tree view (adding, deleting, modifying data)
 - [x] Create own decision tree
-- [] Questionnaire for corona simple preset
-- [] Tooltips
-- [] Help page
-- [] Save changes via local storage
+- [-] Input on enter (mobile)
+- [-] Questionnaire for corona simple preset
+- [-] Tooltips
+- [-] Help page
+- [-] Save changes via local storage
 
 ### Icons
 
