@@ -13,6 +13,7 @@ const CalculatorWrapper = dynamic(() => import("../../components/CalculatorWrapp
 const Result = dynamic(() => import("../../components/Result"));
 const FooterResult = dynamic(() => import("../../components/Result/FooterResult"));
 const SelectedNode = dynamic(() => import("../../components/SelectedNode"));
+const MobileSelectedNode = dynamic(() => import("../../components/SelectedNode/MobileSelectedNode"));
 
 export default function LangIndex(): JSX.Element {
   const { mobileFooter } = useContext(GlobalUiContext);
@@ -48,6 +49,7 @@ export default function LangIndex(): JSX.Element {
           </Hidden>
           <Hidden smUp>
             <FooterResult />
+            <MobileSelectedNode />
           </Hidden>
         </Grid>
       </>

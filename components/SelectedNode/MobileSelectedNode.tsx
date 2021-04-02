@@ -1,18 +1,24 @@
 import React, { useContext } from "react";
 import { GlobalDecisionContext } from "../../hooks/GlobalDecisionsContextProvider";
-import { Card } from "@material-ui/core";
+import { Dialog } from "@material-ui/core";
 
 import { Decision as DecisionType } from "@/../lib/presets";
 import { GlobalUiContext } from "@/../hooks/GlobalUiContextProvider";
 import { getNodeForm } from "./helpers";
 
-function SelectedNode(): JSX.Element {
-  const { active, selectedNode } = useContext(GlobalDecisionContext);
+function MobileSelectedNode(): JSX.Element {
+  const { active, selectedNode, setSelectedNode } = useContext(GlobalDecisionContext);
   const { treeFlow } = useContext(GlobalUiContext);
   const decisions = active.decisions as DecisionType[];
   const selectedForm = getNodeForm(selectedNode, decisions);
 
-  return treeFlow && selectedForm ? <Card style={{ marginTop: "1rem", padding: "1rem" }}>{selectedForm}</Card> : <></>;
+  const open = treeFlow && selectedForm !== null;
+
+  return (
+    <Dialog fullWidth onClose={() => setSelectedNode(null)} open={open}>
+      {selectedForm}
+    </Dialog>
+  );
 }
 
-export default SelectedNode;
+export default MobileSelectedNode;
