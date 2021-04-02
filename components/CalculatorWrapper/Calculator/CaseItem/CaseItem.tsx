@@ -60,12 +60,14 @@ export default function CaseItem({
   itemKey,
   decisionKey,
   caseItem,
-  color
+  color,
+  open = false
 }: {
   itemKey: string;
   caseItem: CaseItemType;
   decisionKey: string;
   color: string;
+  open?: boolean;
 }): JSX.Element {
   const { setTitle, setProbability, setValue, removeItem, toggleIndependent, toggleClose, addItem } = useContext(
     GlobalDecisionContext
@@ -80,7 +82,7 @@ export default function CaseItem({
   };
 
   return (
-    <Accordion style={{ borderLeft: `2px solid ${color}` }}>
+    <Accordion defaultExpanded={open} style={{ borderLeft: `2px solid ${color}` }}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon fontSize="small" />}
         IconButtonProps={{

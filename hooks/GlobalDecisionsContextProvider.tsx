@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import T from "prop-types";
 import { Decision, PRESETS, Preset, Resource, SubItem, SubCaseItem } from "../lib/presets";
+import { Node } from "react-flow-renderer";
 import i18next from "i18next";
 import { getValueFromChilds } from "../lib/helpers";
 
@@ -41,7 +42,9 @@ export const GlobalDecisionContext = React.createContext({
   toggleIndependent: (_decKey: string, _subKey?: string, _caseKey?: string, _subCaseKey?: string) => undefined,
   toggleClose: (_decKey: string, _subKey?: string, _caseKey?: string, _subCaseKey?: string) => undefined,
   createNewPreset: (_title: string, _icon?: string, _resources?: Resource[], _decisions?: Decision[]) => undefined,
-  setActiveFromPreset: (_key?: string) => undefined
+  setActiveFromPreset: (_key?: string) => undefined,
+  selectedNode: null,
+  setSelectedNode: (_element: Node) => undefined
 });
 
 interface T {
@@ -54,7 +57,7 @@ function instanceOfPreset(object: any): object is Preset {
 }
 
 export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
-  const [state, setState] = useState({ active: null });
+  const [state, setState] = useState({ active: null, selectedNode: null });
   const root = state.active;
 
   const setActiveFromPreset = (key: string): void => {
@@ -83,7 +86,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
       };
     }
 
-    setState({ active: translatedPreset });
+    setState({ active: translatedPreset, selectedNode: null });
   };
 
   // Name changes
@@ -267,7 +270,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
     subCaseKey?: string
   ): void => {
     if (instanceOfPreset(root)) {
-      let newState = {} as { active: Preset };
+      let newState = {} as { active: Preset; selectedNode: Node | null };
 
       if (subCaseKey) {
         // Get information about changed subcase
@@ -644,7 +647,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
   // Remove
   const removeItem = (decKey: string, subKey?: string, caseKey?: string, subCaseKey?: string): void => {
     if (instanceOfPreset(root)) {
-      let newState = {} as { active: Preset };
+      let newState = {} as { active: Preset; selectedNode: Node | null };
 
       if (subCaseKey) {
         newState = {
@@ -822,6 +825,10 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
     }
   };
 
+  const setSelectedNode = (node: Node | null): void => {
+    setState({ ...state, selectedNode: node });
+  };
+
   const createNewPreset = (
     title: string,
     icon: string = null,
@@ -852,7 +859,8 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
         toggleIndependent,
         createNewPreset,
         setActiveFromPreset,
-        toggleClose
+        toggleClose,
+        setSelectedNode
       }}
     >
       {state && children}

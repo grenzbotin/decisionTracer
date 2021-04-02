@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import dynamic from "next/dynamic";
 import i18next from "i18next";
 import { GlobalDecisionContext } from "../../hooks/GlobalDecisionsContextProvider";
-import { Card, makeStyles, Typography } from "@material-ui/core";
+import { Card, Typography } from "@material-ui/core";
 import SentimentDissatisfiedOutlinedIcon from "@material-ui/icons/SentimentDissatisfiedOutlined";
 import SentimentSatisfiedOutlinedIcon from "@material-ui/icons/SentimentSatisfiedOutlined";
 
@@ -64,23 +64,15 @@ function getResults(decisions: Array<DecisionType>): Array<number | boolean> {
   return results;
 }
 
-const useStyles = makeStyles({
-  root: {
-    position: "sticky",
-    top: "calc(1rem + 60px)"
-  }
-});
-
 function Result({ height = 300, mobile = false }: { height?: number; mobile?: boolean }): JSX.Element {
   const { active } = useContext(GlobalDecisionContext);
-  const classes = useStyles();
   const decisions = active.decisions as DecisionType[];
   const categories = decisions.map((decision) => decision.title);
   const results = getResults(decisions);
   const colors = generateColors(decisions.length);
 
   return (
-    <Card className={classes.root} style={{ padding: mobile ? ".5rem .5rem 0 .2rem" : "1rem" }}>
+    <Card style={{ padding: mobile ? ".5rem .5rem 0 .2rem" : "1rem" }}>
       {!mobile && (
         <Typography variant="h5" component="h3" gutterBottom>
           {i18next.t("calculator.result")}

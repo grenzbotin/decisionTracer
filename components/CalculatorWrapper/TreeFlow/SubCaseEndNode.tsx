@@ -4,7 +4,7 @@ import { Paper, Typography } from "@material-ui/core";
 import { Handle, NodeProps, Position } from "react-flow-renderer";
 import { getRoundedValue } from "@/../lib/helpers";
 
-const SubCaseEndNode = memo(({ data, targetPosition = Position.Top }: NodeProps) => {
+const SubCaseEndNode = memo(({ data, selected, targetPosition = Position.Top }: NodeProps) => {
   return (
     <Paper
       style={{
@@ -13,7 +13,9 @@ const SubCaseEndNode = memo(({ data, targetPosition = Position.Top }: NodeProps)
         height: "60px",
         display: "flex",
         alignItems: "center",
-        flexDirection: "column"
+        flexDirection: "column",
+        background: selected && data.color,
+        color: selected && "#fff"
       }}
     >
       <Handle type="target" position={targetPosition} />
@@ -39,7 +41,7 @@ const SubCaseEndNode = memo(({ data, targetPosition = Position.Top }: NodeProps)
         style={{
           display: "flex",
           alignItems: "center",
-          borderTop: "1px solid rgba(0,0,0,0.40)",
+          borderTop: selected ? "1px solid #fff" : "1px solid rgba(0,0,0,0.40)",
           width: "100%",
           height: "20px",
           justifyContent: "center"

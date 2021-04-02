@@ -12,6 +12,7 @@ const HtmlHeader = dynamic(() => import("../../components/HtmlHeader"));
 const CalculatorWrapper = dynamic(() => import("../../components/CalculatorWrapper"));
 const Result = dynamic(() => import("../../components/Result"));
 const FooterResult = dynamic(() => import("../../components/Result/FooterResult"));
+const SelectedNode = dynamic(() => import("../../components/SelectedNode"));
 
 export default function LangIndex(): JSX.Element {
   const { mobileFooter } = useContext(GlobalUiContext);
@@ -39,7 +40,10 @@ export default function LangIndex(): JSX.Element {
           </Grid>
           <Hidden mdDown>
             <Grid item xs={12} md={12} lg={3} style={{ position: "relative" }}>
-              <Result />
+              <div style={{ position: "sticky", top: "calc(1rem + 60px)" }}>
+                <Result />
+                <SelectedNode />
+              </div>
             </Grid>
           </Hidden>
           <Hidden smUp>

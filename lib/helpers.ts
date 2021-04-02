@@ -46,10 +46,10 @@ export function createTreeDataFromPreset(decisions: Array<Decision>): Elements<a
     elements.push({
       id: decision.key,
       data: {
-        title: decision.title,
-        icon: decision.icon,
         color: colors[key],
-        value: getValueFromChilds(decision, "sub")
+        value: getValueFromChilds(decision, "sub"),
+        decKey: decision.key,
+        ...decision,
       },
         position,
         type: 'decisionNode',
@@ -59,10 +59,10 @@ export function createTreeDataFromPreset(decisions: Array<Decision>): Elements<a
       elements.push({
         id: scenario.key,
         data: {
-          title: scenario.title,
+          ...scenario,
+          decKey: decision.key,
+          subKey: scenario.key,
           color: colors[key],
-          probability: scenario.probability,
-          value: scenario.value
         },
         position,
         type: nodeType,
@@ -81,10 +81,11 @@ export function createTreeDataFromPreset(decisions: Array<Decision>): Elements<a
         elements.push({
           id: c.key,
           data: {
-            title: c.title,
+            decKey: decision.key,
+            subKey: scenario.key,
+            caseKey: c.key,
             color: colors[key],
-            probability: c.probability,
-            value: c.value,
+            ...c,
           },
           position,
           type: nodeType,
@@ -102,10 +103,12 @@ export function createTreeDataFromPreset(decisions: Array<Decision>): Elements<a
           elements.push({
             id: sc.key,
             data: {
-              title: sc.title,
               color: colors[key],
-              probability: sc.probability,
-              value: sc.value,
+              decKey: decision.key,
+              subKey: scenario.key,
+              caseKey: c.key,
+              subCaseKey: sc.key,
+              ...sc
             },
             position,
             type: 'subCaseEndNode',

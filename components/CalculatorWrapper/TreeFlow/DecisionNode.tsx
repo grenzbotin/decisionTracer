@@ -5,7 +5,7 @@ import React, { memo } from "react";
 
 import { Handle, NodeProps, Position } from "react-flow-renderer";
 
-const DecisionNode = memo(({ data, sourcePosition = Position.Bottom }: NodeProps) => {
+const DecisionNode = memo(({ data, selected, sourcePosition = Position.Bottom }: NodeProps) => {
   return (
     <Paper
       style={{
@@ -14,7 +14,9 @@ const DecisionNode = memo(({ data, sourcePosition = Position.Bottom }: NodeProps
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
-        width: "140px"
+        width: "140px",
+        background: selected && data.color,
+        color: selected && "#fff"
       }}
     >
       <div style={{ display: "flex", alignItems: "center", flex: 1, padding: ".5rem", lineHeight: 1.15 }}>
@@ -25,7 +27,7 @@ const DecisionNode = memo(({ data, sourcePosition = Position.Bottom }: NodeProps
         style={{
           display: "flex",
           alignItems: "center",
-          borderTop: "1px solid rgba(0,0,0,0.40)",
+          borderTop: selected ? "1px solid #fff" : "1px solid rgba(0,0,0,0.40)",
           width: "100%",
           height: "20px",
           justifyContent: "center"
