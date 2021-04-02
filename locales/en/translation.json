@@ -220,6 +220,8 @@
   },
   "calculator": {
     "new_decision": "Decision",
+    "no_decisions_created": "No decisions created",
+    "add_item_title": "New",
     "probability": "Occurence probability",
     "probability_short": "Prob. (𝑝)",
     "value": "Utility",

@@ -97,7 +97,7 @@ function Result({ height = 300, mobile = false }: { height?: number; mobile?: bo
           />
         </div>
       ) : (
-        "Keine Entscheidungen angegeben"
+        i18next.t("calculator.no_decisions_created")
       )}
     </Card>
   );

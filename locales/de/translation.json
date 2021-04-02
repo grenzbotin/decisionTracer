@@ -220,6 +220,8 @@
   },
   "calculator": {
     "new_decision": "Entscheidung",
+    "no_decisions_created": "Keine Entscheidungen erstellt",
+    "add_item_title": "Neu",
     "probability": "Wahrscheinlichkeit",
     "probability_short": "Ws (𝑝)",
     "value": "Nutzwert",

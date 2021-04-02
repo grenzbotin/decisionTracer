@@ -754,7 +754,15 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                               c.key === caseKey
                                 ? {
                                     ...c,
-                                    subCases: [...c.subCases, { key: newKey, title: "new", probability: 0, value: 0 }]
+                                    subCases: [
+                                      ...c.subCases,
+                                      {
+                                        key: newKey,
+                                        title: i18next.t("calculator.add_item_title"),
+                                        probability: 0,
+                                        value: 0
+                                      }
+                                    ]
                                   }
                                 : c
                             )
@@ -779,7 +787,16 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                       sub.key === subKey
                         ? {
                             ...sub,
-                            cases: [...sub.cases, { key: newKey, title: "new", probability: 0, value: 0, subCases: [] }]
+                            cases: [
+                              ...sub.cases,
+                              {
+                                key: newKey,
+                                title: i18next.t("calculator.add_item_title"),
+                                probability: 0,
+                                value: 0,
+                                subCases: []
+                              }
+                            ]
                           }
                         : sub
                     )
@@ -801,7 +818,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                       ...decision.sub,
                       {
                         key: newKey,
-                        title: "new",
+                        title: i18next.t("calculator.add_item_title"),
                         probability: 0,
                         value: 0,
                         cases: []
@@ -817,7 +834,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
           ...state,
           active: {
             ...state.active,
-            decisions: [...root.decisions, { key: newKey, title: "new", sub: [] }]
+            decisions: [...root.decisions, { key: newKey, title: i18next.t("calculator.add_item_title"), sub: [] }]
           }
         });
       }
