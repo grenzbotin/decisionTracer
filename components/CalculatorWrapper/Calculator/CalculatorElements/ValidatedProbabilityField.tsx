@@ -41,7 +41,7 @@ const ValidatedProbabilityField: React.FC<Props> = ({ onChange, value }) => {
       setError(true);
     } else {
       setError(false);
-      onChange(parseFloat(probability));
+      onChange(parseFloat(probability.replace(",", ".")));
     }
   };
 

@@ -17,6 +17,7 @@ import NonLinearSlider from "../CalculatorElements/NonLinearSlider";
 import GrowingSlider from "../CalculatorElements/GrowingSlider";
 import CardMenu from "../CalculatorElements/CardMenu";
 import ValidatedValueField from "../CalculatorElements/ValidatedValueField";
+import { getRoundedValue } from "@/../lib/helpers";
 
 const Accordion = withStyles({
   root: {
@@ -96,7 +97,7 @@ export default function SubCaseItem({
         />
         <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", flex: 1 }}>
           <Typography variant="caption" display="block">
-            {((subCaseItem.value * subCaseItem.probability) / 100).toFixed(1)}
+            {getRoundedValue((subCaseItem.value * subCaseItem.probability) / 100, 2)}
           </Typography>
           <CardMenu
             size="small"

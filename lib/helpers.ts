@@ -1,11 +1,24 @@
 import { generateColors } from "../components/theme";
-import { Decision } from "./presets";
+import { Decision, SubCaseItem, SubItem } from "./presets";
 import { Elements } from "react-flow-renderer";
 
 export function getUniqueNumber(): string {
     const date = new Date();
     return date.valueOf().toString();
   }
+
+export function getRoundedValue(value: number, digits: number): string {
+  return value.toFixed(digits);
+}
+
+export function getValueFromChilds(node: SubItem | SubCaseItem, child: string): number {
+  let value = 0;
+  node[child].forEach((item: SubItem | SubCaseItem) => {
+    value += item.value * (item.probability / 100);
+  });
+
+  return value;
+}
 
 export function scrollToTargetOffset(id: string): void {
     const element = document.getElementById(id);
@@ -56,7 +69,7 @@ export function createTreeDataFromPreset(decisions: Array<Decision>): Elements<a
         id: `${decision.key}-${scenario.key}-link`,
         source: decision.key,
         target: scenario.key,
-        label: `${scenario.probability} %`,
+        label: `${getRoundedValue(scenario.probability, 3)} %`,
         ...lineProps,
         labelBgStyle: { fill: colors[key] },
       });
@@ -78,7 +91,7 @@ export function createTreeDataFromPreset(decisions: Array<Decision>): Elements<a
           id: `${scenario.key}-${c.key}-link`, 
           source: scenario.key,
           target: c.key,
-          label: `${c.probability} %`,
+          label: `${getRoundedValue(c.probability, 3)} %`,
           ...lineProps,
           labelBgStyle: { fill: colors[key] },
         });
@@ -99,7 +112,7 @@ export function createTreeDataFromPreset(decisions: Array<Decision>): Elements<a
             id: `${c.key}-${sc.key}-link`,
             source: c.key,
             target: sc.key,
-            label: `${sc.probability} %`,
+            label: `${getRoundedValue(sc.probability, 3)} %`,
             ...lineProps,
             labelBgStyle: { fill: colors[key] },
           });

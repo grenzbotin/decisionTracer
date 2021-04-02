@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import { Paper, Typography } from "@material-ui/core";
 import { Handle, NodeProps, Position } from "react-flow-renderer";
+import { getRoundedValue } from "@/../lib/helpers";
 
 const CaseNode = memo(({ data, targetPosition = Position.Top, sourcePosition = Position.Bottom }: NodeProps) => {
   return (
@@ -44,7 +45,7 @@ const CaseNode = memo(({ data, targetPosition = Position.Top, sourcePosition = P
         }}
       >
         <Typography noWrap variant="caption">
-          {data.value.toFixed(3)}
+          {getRoundedValue(data.value, 3)}
         </Typography>
       </div>
       <Handle type="source" position={sourcePosition} />

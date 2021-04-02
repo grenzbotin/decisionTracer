@@ -11,23 +11,15 @@ import EditableTitle from "../CalculatorElements/EditableTitle";
 import SubItem from "../SubItem";
 import CustomIcon from "@/../assets/CustomIcon";
 import CardMenu from "../CalculatorElements/CardMenu";
-import { getUniqueNumber, scrollToTargetOffset } from "@/../lib/helpers";
+import { getRoundedValue, getUniqueNumber, scrollToTargetOffset } from "@/../lib/helpers";
 
 function getResult(decision: DecisionType): number | string {
   let total = 0;
   decision.sub.forEach((item) => {
-    if (item.cases.length !== 0) {
-      let subs = 0;
-      item.cases.map((c) => {
-        subs += c.value * (c.probability / 100);
-      });
-      total += subs * (item.probability / 100);
-    } else {
-      total += item.value * (item.probability / 100);
-    }
+    total += item.value * (item.probability / 100);
   });
 
-  return Math.round((total * 100) / 100);
+  return getRoundedValue(total, 3);
 }
 
 export default function Decision({ decision, color }: { decision: DecisionType; color: string }): JSX.Element {

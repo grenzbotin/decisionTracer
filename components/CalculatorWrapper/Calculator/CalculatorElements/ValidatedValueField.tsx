@@ -41,7 +41,7 @@ const ValidatedValueField: React.FC<Props> = ({ onChange, value }) => {
       setError(true);
     } else {
       setError(false);
-      onChange(parseFloat(newValue));
+      onChange(parseFloat(newValue.replace(",", ".")));
     }
   };
 

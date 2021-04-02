@@ -55,18 +55,10 @@ function getResults(decisions: Array<DecisionType>): Array<number | boolean> {
   const results = decisions.map((decision) => {
     let total = 0;
     decision.sub.forEach((item) => {
-      if (item.cases.length !== 0) {
-        let subs = 0;
-        item.cases.map((c) => {
-          subs += c.value * (c.probability / 100);
-        });
-        total += subs * (item.probability / 100);
-      } else {
-        total += item.value * (item.probability / 100);
-      }
+      total += item.value * (item.probability / 100);
     });
 
-    return Math.round((total * 100) / 100);
+    return Math.round(total * 100) / 100;
   });
 
   return results;

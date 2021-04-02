@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import T from "prop-types";
 import { Decision, PRESETS, Preset, Resource, SubItem, SubCaseItem } from "../lib/presets";
 import i18next from "i18next";
+import { getValueFromChilds } from "../lib/helpers";
 
 const getNewProbabilty = (
   itemProbabilty: number,
@@ -20,15 +21,6 @@ const getNewProbabilty = (
     return itemProbabilty - (itemProbabilty / probabiltySum) * targetChange;
   }
   return 0;
-};
-
-const getValueFromChilds = (node: SubItem | SubCaseItem, child: string): number => {
-  let value = 0;
-  node[child].forEach((item: SubItem | SubCaseItem) => {
-    value += (item.value * item.probability) / 100;
-  });
-
-  return value;
 };
 
 // Context for defining the global scope: UI Settings
@@ -253,7 +245,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
               value: sub.cases.length > 0 ? getValueFromChilds(sub, "cases") : sub.value,
               cases: sub.cases.map((c) => ({
                 ...c,
-                value: c.subCases.length > 0 ? getValueFromChilds(sub, "subCases") : c.value
+                value: c.subCases.length > 0 ? getValueFromChilds(c, "subCases") : c.value
               }))
             }))
           }))
@@ -319,20 +311,13 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                                       sc.key === subCaseKey
                                         ? {
                                             ...sc,
-                                            probability: typeof value === "number" && parseFloat(value.toFixed(3))
+                                            probability: typeof value === "number" && value
                                           }
                                         : {
                                             ...sc,
                                             probability:
                                               !isIndependent && !sc.isIndependent
-                                                ? parseFloat(
-                                                    getNewProbabilty(
-                                                      sc.probability,
-                                                      equal,
-                                                      probabiltySum,
-                                                      targetChange
-                                                    ).toFixed(3)
-                                                  )
+                                                ? getNewProbabilty(sc.probability, equal, probabiltySum, targetChange)
                                                 : sc.probability
                                           }
                                     )
@@ -381,16 +366,12 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                             ...sub,
                             cases: sub.cases.map((c) =>
                               c.key === caseKey
-                                ? { ...c, probability: typeof value === "number" && parseFloat(value.toFixed(3)) }
+                                ? { ...c, probability: typeof value === "number" && value }
                                 : {
                                     ...c,
                                     probability:
                                       !isIndependent && !c.isIndependent
-                                        ? parseFloat(
-                                            getNewProbabilty(c.probability, equal, probabiltySum, targetChange).toFixed(
-                                              3
-                                            )
-                                          )
+                                        ? getNewProbabilty(c.probability, equal, probabiltySum, targetChange)
                                         : c.probability
                                   }
                             )
@@ -431,14 +412,12 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                     ...decision,
                     sub: decision.sub.map((sub) =>
                       sub.key === subKey
-                        ? { ...sub, probability: typeof value === "number" && parseFloat(value.toFixed(3)) }
+                        ? { ...sub, probability: typeof value === "number" && value }
                         : {
                             ...sub,
                             probability:
                               !isIndependent && !sub.isIndependent
-                                ? parseFloat(
-                                    getNewProbabilty(sub.probability, equal, probabiltySum, targetChange).toFixed(3)
-                                  )
+                                ? getNewProbabilty(sub.probability, equal, probabiltySum, targetChange)
                                 : sub.probability
                           }
                     )
@@ -460,7 +439,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
               value: sub.cases.length > 0 ? getValueFromChilds(sub, "cases") : sub.value,
               cases: sub.cases.map((c) => ({
                 ...c,
-                value: c.subCases.length > 0 ? getValueFromChilds(sub, "subCases") : c.value
+                value: c.subCases.length > 0 ? getValueFromChilds(c, "subCases") : c.value
               }))
             }))
           }))
@@ -665,8 +644,10 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
   // Remove
   const removeItem = (decKey: string, subKey?: string, caseKey?: string, subCaseKey?: string): void => {
     if (instanceOfPreset(root)) {
+      let newState = {} as { active: Preset };
+
       if (subCaseKey) {
-        setState({
+        newState = {
           ...state,
           active: {
             ...state.active,
@@ -690,9 +671,9 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                 : decision
             )
           }
-        });
+        };
       } else if (caseKey) {
-        setState({
+        newState = {
           ...state,
           active: {
             ...state.active,
@@ -707,9 +688,9 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                 : decision
             )
           }
-        });
+        };
       } else if (subKey) {
-        setState({
+        newState = {
           ...state,
           active: {
             ...state.active,
@@ -719,16 +700,36 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                 : decision
             )
           }
-        });
+        };
       } else {
-        setState({
+        newState = {
           ...state,
           active: {
             ...state.active,
             decisions: root.decisions.filter((dec) => dec.key !== decKey)
           }
-        });
+        };
       }
+
+      const updatedState = {
+        ...newState,
+        active: {
+          ...newState.active,
+          decisions: newState.active.decisions.map((decision: Decision) => ({
+            ...decision,
+            sub: decision.sub.map((sub) => ({
+              ...sub,
+              value: sub.cases.length > 0 ? getValueFromChilds(sub, "cases") : sub.value,
+              cases: sub.cases.map((c) => ({
+                ...c,
+                value: c.subCases.length > 0 ? getValueFromChilds(c, "subCases") : c.value
+              }))
+            }))
+          }))
+        }
+      };
+
+      setState({ ...updatedState });
     }
   };
 
