@@ -7,6 +7,7 @@ import NoVaccination from "./svg/noVaccination.svg";
 import Question from "./svg/question.svg";
 import DeFlag from "./svg/de.svg";
 import EnFlag from "./svg/en.svg";
+import Custom from "./svg/custom.svg";
 
 const ICONS = {
   virus: {
@@ -32,6 +33,10 @@ const ICONS = {
   de: {
     path: DeFlag,
     viewbox: "0 0 5 3"
+  },
+  custom: {
+    path: Custom,
+    viewbox: "0 0 512 512"
   }
 };
 

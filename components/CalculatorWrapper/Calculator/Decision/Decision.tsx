@@ -61,7 +61,8 @@ export default function Decision({ decision, color }: { decision: DecisionType; 
       <Paper
         style={{
           padding: "0.5rem 1rem",
-          borderTop: `5px solid ${color}`
+          borderTop: `5px solid ${color}`,
+          minWidth: "312px"
         }}
       >
         <div

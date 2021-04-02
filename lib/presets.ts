@@ -43,6 +43,7 @@ export interface Preset {
   key: string;
   title: string;
   description: string;
+  image?: string;
   icon?: string;
   url?: string;
   question?: string;
@@ -55,6 +56,7 @@ const CORONA_PRESET = {
   title: "presets.corona.title",
   url: 'corona',
   icon:'virus',
+  image: 'virus',
   question: "presets.corona.question",
   description: "presets.corona.description",
   resources: [{ title: "title", link: "link" }],
@@ -175,6 +177,7 @@ const CORONA_PRESET_2 = {
   title: "presets.corona-2.title",
   url: 'corona-2',
   icon:'virus',
+  image: 'virus',
   question: "presets.corona-2.question",
   description: "presets.corona-2.description",
   resources: [{ title: "title", link: "link" }],
@@ -412,9 +415,21 @@ const CORONA_PRESET_2 = {
   ]
 };
 
+const CUSTOM_PRESET = {
+  key: 'custom',
+  title: "presets.custom.title",
+  url: 'custom',
+  icon:'custom',
+  image: 'custom',
+  question: "presets.custom.question",
+  description: "presets.custom.description",
+  decisions: [] as Decision[],
+};
+
 const PRESETS = <Preset[]> [
   CORONA_PRESET,
-  CORONA_PRESET_2
+  CORONA_PRESET_2,
+  CUSTOM_PRESET,
 ];
 
 export {

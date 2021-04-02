@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import T from "prop-types";
-import { Decision, PRESETS, Preset, Resource, SubItem, SubCaseItem } from "../lib/presets";
+import { Decision, PRESETS, Preset, Resource } from "../lib/presets";
 import { Node } from "react-flow-renderer";
 import i18next from "i18next";
 import { getValueFromChilds } from "../lib/helpers";
@@ -41,7 +41,6 @@ export const GlobalDecisionContext = React.createContext({
   addItem: (_newKey: string, _decKey?: string, _subKey?: string, _caseKey?: string) => undefined,
   toggleIndependent: (_decKey: string, _subKey?: string, _caseKey?: string, _subCaseKey?: string) => undefined,
   toggleClose: (_decKey: string, _subKey?: string, _caseKey?: string, _subCaseKey?: string) => undefined,
-  createNewPreset: (_title: string, _icon?: string, _resources?: Resource[], _decisions?: Decision[]) => undefined,
   setActiveFromPreset: (_key?: string) => undefined,
   selectedNode: null,
   setSelectedNode: (_element: Node) => undefined
@@ -829,24 +828,6 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
     setState({ ...state, selectedNode: node });
   };
 
-  const createNewPreset = (
-    title: string,
-    icon: string = null,
-    resources: Resource[] = [],
-    decisions: Decision[] = []
-  ): void => {
-    setState({
-      ...state,
-      active: {
-        ...state.active,
-        title,
-        icon,
-        resources,
-        decisions
-      }
-    });
-  };
-
   return (
     <GlobalDecisionContext.Provider
       value={{
@@ -857,7 +838,6 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
         removeItem,
         addItem,
         toggleIndependent,
-        createNewPreset,
         setActiveFromPreset,
         toggleClose,
         setSelectedNode

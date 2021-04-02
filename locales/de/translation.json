@@ -15,6 +15,16 @@
     }
   },
   "presets": {
+    "custom": {
+      "meta": {
+        "title": "Eigener Entscheidungsbaum | Decision Tracer",
+        "description": "Eigener Entscheidungsbaum ohne Voreinstellungen",
+        "keywords": "Entscheidungsbaum, individuell, erstellen, Entscheidungshilfe, Rechner"
+      },
+      "title": "Eigener Entscheidungsbaum",
+      "question": "Was sollte ich tun?",
+      "description": "Erstelle einen eigenen Entscheidungsbaum ohne Voreinstellungen"
+    },
     "corona": {
       "meta": {
         "title": "Soll ich mich impfen lassen? | Decision Tracer",

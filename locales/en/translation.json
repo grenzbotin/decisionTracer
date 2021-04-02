@@ -15,6 +15,16 @@
     }
   },
   "presets": {
+    "custom": {
+      "meta": {
+        "title": "Own decision tree | Decision Tracer",
+        "description": "Own decision tree without presettings",
+        "keywords": "Decision tree, individual, create, decision helper, calculator"
+      },
+      "title": "Own decision tree",
+      "question": "What should I do?",
+      "description": "Create an own decision tree without presettings."
+    },
     "corona": {
       "meta": {
         "title": "Should I get vaccinated? | Decision Tracer",
