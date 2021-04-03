@@ -15,7 +15,7 @@ import {
   Typography
 } from "@material-ui/core";
 import CustomIcon from "@/../assets/CustomIcon";
-import { PRIMARY } from "../theme";
+import { PRIMARY } from "../../theme";
 
 const useStyles = makeStyles({
   root: {

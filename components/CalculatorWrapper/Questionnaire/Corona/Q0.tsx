@@ -1,7 +1,7 @@
 import React from "react";
 import { Divider, Typography } from "@material-ui/core";
 import i18next from "i18next";
-import CustomTooltip from "@/../components/CustomTooltip";
+import CustomTooltip from "@/../components/elements/CustomTooltip";
 
 export default function Q0(): JSX.Element {
   const i18nPrefix = "presets.corona.questionnaire.0";

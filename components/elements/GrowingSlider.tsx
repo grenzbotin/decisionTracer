@@ -3,8 +3,7 @@ import { Box, Slider } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import SentimentDissatisfiedOutlinedIcon from "@material-ui/icons/SentimentDissatisfiedOutlined";
 import SentimentSatisfiedOutlinedIcon from "@material-ui/icons/SentimentSatisfiedOutlined";
-
-import { SECONDARY, PRIMARY } from "../../../theme";
+import { PRIMARY, SECONDARY } from "../theme";
 
 function usePrevious(value: number): number {
   const ref = useRef<number>();

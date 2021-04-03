@@ -11,12 +11,12 @@ import LockIcon from "@material-ui/icons/Lock";
 
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { SubCaseItem as SubCaseItemType } from "@/../lib/presets";
-import EditableTitle from "../CalculatorElements/EditableTitle";
-import ValidatedProbabilityField from "../CalculatorElements/ValidatedProbabilityField";
-import NonLinearSlider from "../CalculatorElements/NonLinearSlider";
-import GrowingSlider from "../CalculatorElements/GrowingSlider";
-import CardMenu from "../CalculatorElements/CardMenu";
-import ValidatedValueField from "../CalculatorElements/ValidatedValueField";
+import EditableTitle from "@/../components/elements/EditableTitle";
+import CardMenu from "@/../components/elements/CardMenu";
+import ValidatedProbabilityField from "@/../components/elements/ValidatedProbabilityField";
+import NonLinearSlider from "@/../components/elements/NonLinearSlider";
+import ValidatedValueField from "@/../components/elements/ValidatedValueField";
+import GrowingSlider from "@/../components/elements/GrowingSlider";
 import { getRoundedValue } from "@/../lib/helpers";
 
 const Accordion = withStyles({

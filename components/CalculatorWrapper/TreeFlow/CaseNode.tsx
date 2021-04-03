@@ -48,7 +48,7 @@ const CaseNode = memo(
           }}
         >
           <Typography noWrap variant="caption">
-            {getRoundedValue(data.value, 3)}
+            {getRoundedValue(data.value, 2)}
           </Typography>
         </div>
         <Handle type="source" position={sourcePosition} />

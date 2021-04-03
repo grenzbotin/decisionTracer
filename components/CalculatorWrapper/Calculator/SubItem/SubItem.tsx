@@ -10,14 +10,14 @@ import LockIcon from "@material-ui/icons/Lock";
 
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { SubItem as SubItemType } from "@/../lib/presets";
-import EditableTitle from "../CalculatorElements/EditableTitle";
-import ValidatedProbabilityField from "../CalculatorElements/ValidatedProbabilityField";
-import NonLinearSlider from "../CalculatorElements/NonLinearSlider";
-import GrowingSlider from "../CalculatorElements/GrowingSlider";
 import CaseItem from "../CaseItem";
-import CardMenu from "../CalculatorElements/CardMenu";
-import ValidatedValueField from "../CalculatorElements/ValidatedValueField";
+import CardMenu from "../../../elements/CardMenu";
 import { getUniqueNumber } from "@/../lib/helpers";
+import EditableTitle from "@/../components/elements/EditableTitle";
+import ValidatedProbabilityField from "@/../components/elements/ValidatedProbabilityField";
+import NonLinearSlider from "@/../components/elements/NonLinearSlider";
+import ValidatedValueField from "@/../components/elements/ValidatedValueField";
+import GrowingSlider from "@/../components/elements/GrowingSlider";
 
 const CardHeader = withStyles({
   root: {

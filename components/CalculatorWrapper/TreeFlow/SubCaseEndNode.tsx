@@ -48,7 +48,7 @@ const SubCaseEndNode = memo(({ data, selected, targetPosition = Position.Top }: 
         }}
       >
         <Typography noWrap variant="caption">
-          {getRoundedValue(data.value, 3)}
+          {getRoundedValue(data.value, 2)}
         </Typography>
       </div>
     </Paper>

@@ -1,14 +1,19 @@
 import { generateColors } from "../components/theme";
 import { CaseItem, Decision, SubCaseItem, SubItem } from "./presets";
 import { Elements } from "react-flow-renderer";
+import i18next from "i18next";
 
 export function getUniqueNumber(): string {
     const date = new Date();
     return date.valueOf().toString();
   }
 
+function toLocale(value: string): string {
+  return parseFloat(value).toLocaleString(i18next.language);
+}
+
 export function getRoundedValue(value: number, digits: number): string {
-  return value.toFixed(digits);
+  return toLocale(value.toFixed(digits));
 }
 
 export function getValueFromChilds(node: SubItem | SubCaseItem | Decision, child: string): number {

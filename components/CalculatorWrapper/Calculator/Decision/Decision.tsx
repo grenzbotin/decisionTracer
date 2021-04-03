@@ -7,10 +7,10 @@ import TurnedInNotIcon from "@material-ui/icons/TurnedInNot";
 
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { Decision as DecisionType } from "@/../lib/presets";
-import EditableTitle from "../CalculatorElements/EditableTitle";
+import EditableTitle from "@/../components/elements/EditableTitle";
 import SubItem from "../SubItem";
 import CustomIcon from "@/../assets/CustomIcon";
-import CardMenu from "../CalculatorElements/CardMenu";
+import CardMenu from "../../../elements/CardMenu";
 import { getRoundedValue, getUniqueNumber, scrollToTargetOffset } from "@/../lib/helpers";
 
 function getResult(decision: DecisionType): number | string {
@@ -19,7 +19,7 @@ function getResult(decision: DecisionType): number | string {
     total += item.value * (item.probability / 100);
   });
 
-  return getRoundedValue(total, 3);
+  return getRoundedValue(total, 2);
 }
 
 export default function Decision({ decision, color }: { decision: DecisionType; color: string }): JSX.Element {
