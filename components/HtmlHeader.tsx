@@ -31,7 +31,7 @@ const HtmlHeader: React.FC<Props> = ({ title, description, keywords }) => {
       <meta
         name="viewport"
         // eslint-disable-next-line max-len
-        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5,shrink-to-fit=no"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,shrink-to-fit=no"
       />
       <meta name="application-name" content="Decision Tracer" />
       <meta name="msapplication-tooltip" content="Decision Tracer" />

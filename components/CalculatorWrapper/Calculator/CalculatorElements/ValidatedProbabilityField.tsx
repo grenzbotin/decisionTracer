@@ -57,7 +57,6 @@ const ValidatedProbabilityField: React.FC<Props> = ({ onChange, value }) => {
       <Input
         ref={ref}
         error={error}
-        inputMode="numeric"
         value={localValue}
         onChange={handleProbabiltyChange}
         onKeyPress={handleKeyPress}
@@ -67,6 +66,7 @@ const ValidatedProbabilityField: React.FC<Props> = ({ onChange, value }) => {
           </InputAdornment>
         }
         inputProps={{
+          inputMode: "numeric",
           style: {
             fontSize: ".8rem"
           }

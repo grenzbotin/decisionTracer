@@ -57,11 +57,11 @@ const ValidatedValueField: React.FC<Props> = ({ onChange, value }) => {
       <Input
         ref={ref}
         error={error}
-        inputMode="numeric"
         value={localValue}
         onChange={handleValueChange}
         onKeyPress={handleKeyPress}
         inputProps={{
+          inputMode: "numeric",
           style: {
             fontSize: ".8rem"
           }
