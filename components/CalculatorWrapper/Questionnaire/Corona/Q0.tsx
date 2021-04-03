@@ -21,12 +21,9 @@ export default function Q0(): JSX.Element {
                 .t(`${i18nPrefix}.tooltip`)
                 .split("\n")
                 .map((c) => (
-                  <div key={c}>
-                    <Typography variant="caption" component="p" key={c}>
-                      {c}
-                    </Typography>
-                    <br />
-                  </div>
+                  <Typography key={c} variant="caption" component="p" style={{ marginBottom: ".4rem" }}>
+                    {c}
+                  </Typography>
                 ))}
             </>
           }

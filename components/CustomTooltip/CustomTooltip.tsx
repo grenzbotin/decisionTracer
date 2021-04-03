@@ -1,5 +1,6 @@
 import React from "react";
 import { withStyles, Theme } from "@material-ui/core/styles";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Tooltip from "@material-ui/core/Tooltip";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import HelpIcon from "@material-ui/icons/Help";
@@ -27,10 +28,19 @@ export default function CustomTooltip({ content }: { content: JSX.Element | stri
   };
 
   return (
-    <TooltipWrapper open={open} onClose={handleClose} onOpen={handleOpen} title={content}>
-      <IconButton size="small" color="primary" aria-label="meeting a person?" component="span">
-        {open ? <HelpIcon fontSize="inherit" /> : <HelpOutlineIcon fontSize="inherit" />}
-      </IconButton>
-    </TooltipWrapper>
+    <ClickAwayListener onClickAway={handleClose}>
+      <TooltipWrapper
+        open={open}
+        onClose={handleClose}
+        title={content}
+        disableFocusListener
+        disableHoverListener
+        disableTouchListener
+      >
+        <IconButton size="small" color="primary" aria-label="meeting a person?" component="span" onClick={handleOpen}>
+          {open ? <HelpIcon fontSize="inherit" /> : <HelpOutlineIcon fontSize="inherit" />}
+        </IconButton>
+      </TooltipWrapper>
+    </ClickAwayListener>
   );
 }

@@ -4,7 +4,7 @@ import T from "prop-types";
 
 // Context for defining the global scope: UI Settings
 export const GlobalUiContext = React.createContext({
-  mobileFooter: true,
+  mobileFooter: false,
   visualMode: "card",
   toggleMobileFooter: () => undefined,
   setVisualMode: (_mode: string) => undefined
@@ -15,7 +15,7 @@ interface T {
 }
 
 export const GlobalUiContextProvider: React.FC<T> = ({ children }) => {
-  const [state, setState] = useState({ mobileFooter: true, visualMode: "card" });
+  const [state, setState] = useState({ mobileFooter: false, visualMode: "card" });
 
   const setVisualMode = (mode: string): void => {
     setState({

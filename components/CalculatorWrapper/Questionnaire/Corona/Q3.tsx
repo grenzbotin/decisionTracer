@@ -14,12 +14,9 @@ export default function Q3(): JSX.Element {
         .t(`${i18nPrefix}.subtitle`)
         .split("\n")
         .map((c) => (
-          <div key={c}>
-            <Typography variant="caption" component="p" key={c}>
-              {c}
-            </Typography>
-            <br />
-          </div>
+          <Typography key={c} variant="caption" component="p" style={{ marginBottom: ".4rem" }}>
+            {c}
+          </Typography>
         ))}
       <Typography variant="caption">
         {i18next.t(`${i18nPrefix}.tooltipText`)}{" "}
@@ -30,12 +27,9 @@ export default function Q3(): JSX.Element {
                 .t(`${i18nPrefix}.tooltip`)
                 .split("\n")
                 .map((c) => (
-                  <div key={c}>
-                    <Typography variant="caption" component="p" key={c}>
-                      {c}
-                    </Typography>
-                    <br />
-                  </div>
+                  <Typography key={c} variant="caption" component="p" style={{ marginBottom: ".4rem" }}>
+                    {c}
+                  </Typography>
                 ))}
             </>
           }
