@@ -66,7 +66,7 @@ const ValidatedProbabilityField: React.FC<Props> = ({ onChange, value }) => {
           </InputAdornment>
         }
         inputProps={{
-          inputMode: "numeric",
+          inputMode: "decimal",
           style: {
             fontSize: ".8rem"
           }
