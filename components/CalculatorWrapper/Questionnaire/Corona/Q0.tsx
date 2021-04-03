@@ -64,11 +64,14 @@ export default function Q0(): JSX.Element {
     // only if context probability is still existent
     const contextNonVacProbability = getProbabilityNonVac(active.decisions);
     const contextVacProbability = getProbabilityVac(active.decisions);
-    if (contextNonVacProbability !== null && calc.ownRisk !== contextNonVacProbability) {
-      setProbability(calc.ownRisk, "main-0", "main-0-sub-1");
+
+    const compareValue = calc.ownRisk > 100 ? 100 : calc.ownRisk;
+
+    if (contextNonVacProbability !== null && compareValue !== contextNonVacProbability) {
+      setProbability(compareValue, "main-0", "main-0-sub-1");
     }
-    if (contextVacProbability !== null && calc.ownRisk !== contextVacProbability) {
-      setProbability(calc.ownRisk, "main-1", "main-1-sub-1");
+    if (contextVacProbability !== null && compareValue !== contextVacProbability) {
+      setProbability(compareValue, "main-1", "main-1-sub-1");
     }
   }, [calc.ownRisk, setProbability, active.decisions]);
 
