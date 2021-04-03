@@ -213,7 +213,7 @@ export default function Q0(): JSX.Element {
             {i18next.t(`${i18nPrefix}.calc.infection_risk`)}
           </Grid>
           <Grid item xs={4}>
-            <b>{getRoundedValue(calc.ownRisk, 2)}%</b>
+            <b>{getRoundedValue(calc.ownRisk, 2)}%</b> {calc.ownRisk > 100 && `(100%)`}
           </Grid>
         </Grid>
       </Container>
