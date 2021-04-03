@@ -4,9 +4,13 @@ import { makeStyles, Theme, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { Grid } from "@material-ui/core";
+import Q0 from "./Corona/Q0";
+import Q1 from "./Corona/Q1";
+import Q2 from "./Corona/Q2";
+import Q3 from "./Corona/Q3";
+import Q4 from "./Corona/Q4";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -26,11 +30,7 @@ function TabPanel(props: TabPanelProps): JSX.Element {
       aria-labelledby={`full-width-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box p={3}>{children}</Box>}
     </div>
   );
 }
@@ -60,6 +60,34 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
+const TABS = [
+  {
+    id: 0,
+    label: 1,
+    content: <Q0 />
+  },
+  {
+    id: 1,
+    label: 2,
+    content: <Q1 />
+  },
+  {
+    id: 2,
+    label: 3,
+    content: <Q2 />
+  },
+  {
+    id: 3,
+    label: 4,
+    content: <Q3 />
+  },
+  {
+    id: 4,
+    label: 5,
+    content: <Q4 />
+  }
+];
+
 export default function FullWidthTabs(): JSX.Element {
   const classes = useStyles();
   const theme = useTheme();
@@ -85,42 +113,18 @@ export default function FullWidthTabs(): JSX.Element {
             variant="fullWidth"
             aria-label="full width tabs example"
           >
-            <Tab
-              className={classes.tab}
-              label={
-                <>
-                  <div className={classes.shape}>1</div>
-                </>
-              }
-              {...a11yProps(0)}
-            />
-            <Tab
-              className={classes.tab}
-              label={
-                <>
-                  <div className={classes.shape}>2</div>
-                </>
-              }
-              {...a11yProps(1)}
-            />
-            <Tab
-              className={classes.tab}
-              label={
-                <>
-                  <div className={classes.shape}>3</div>
-                </>
-              }
-              {...a11yProps(2)}
-            />
-            <Tab
-              className={classes.tab}
-              label={
-                <>
-                  <div className={classes.shape}>4</div>
-                </>
-              }
-              {...a11yProps(3)}
-            />
+            {TABS.map((t) => (
+              <Tab
+                key={t.id}
+                className={classes.tab}
+                label={
+                  <>
+                    <div className={classes.shape}>{t.label}</div>
+                  </>
+                }
+                {...a11yProps(t.id)}
+              />
+            ))}
           </Tabs>
         </AppBar>
         <SwipeableViews
@@ -128,18 +132,11 @@ export default function FullWidthTabs(): JSX.Element {
           index={value}
           onChangeIndex={handleChangeIndex}
         >
-          <TabPanel value={value} index={0} dir={theme.direction}>
-            tbd 1
-          </TabPanel>
-          <TabPanel value={value} index={1} dir={theme.direction}>
-            tbd 2
-          </TabPanel>
-          <TabPanel value={value} index={2} dir={theme.direction}>
-            tbd 3
-          </TabPanel>
-          <TabPanel value={value} index={3} dir={theme.direction}>
-            tbd 4
-          </TabPanel>
+          {TABS.map((t) => (
+            <TabPanel key={t.id} value={value} index={t.id} dir={theme.direction}>
+              {t.content}
+            </TabPanel>
+          ))}
         </SwipeableViews>
       </div>
     </Grid>
