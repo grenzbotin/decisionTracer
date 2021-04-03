@@ -5,8 +5,8 @@ import dynamic from "next/dynamic";
 
 import { getAllLanguageSlugs, getLanguage } from "../../lib/lang";
 import { PRESETS } from "@/../lib/presets";
-import PresetCard from "@/../components/elements/PresetCard";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
+import PresetCard from "@/../components/elements/PresetCard";
 
 const HtmlHeader = dynamic(() => import("../../components/HtmlHeader"));
 

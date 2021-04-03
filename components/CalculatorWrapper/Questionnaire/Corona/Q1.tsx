@@ -20,7 +20,7 @@ export default function Q1(): JSX.Element {
               <img
                 src="/decisionTracer/images/studies_corona_mortality.jpg"
                 alt="Absolute 28-day mortality risk associated with B.1.1.7"
-                width="340px"
+                width="320px"
               />
             </>
           }

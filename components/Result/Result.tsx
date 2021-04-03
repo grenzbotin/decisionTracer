@@ -30,7 +30,10 @@ const defaultOptions = {
   },
   yaxis: {
     title: {
-      text: i18next.t("calculator.expected_utility")
+      text: i18next.t("calculator.expected_utility"),
+      style: {
+        fontWeight: 500
+      }
     }
   },
   dataLabels: {

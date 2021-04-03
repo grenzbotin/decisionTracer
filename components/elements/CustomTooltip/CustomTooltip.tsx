@@ -12,7 +12,7 @@ const TooltipWrapper = withStyles((theme: Theme) => ({
     color: "rgba(0, 0, 0, 0.87)",
     fontSize: theme.typography.pxToRem(12),
     border: "1px solid #dadde9",
-    maxWidth: "360px"
+    maxWidth: "340px"
   }
 }))(Tooltip);
 

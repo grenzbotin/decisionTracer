@@ -1,5 +1,5 @@
 import { Grid, Button, ButtonGroup } from "@material-ui/core";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import i18next from "i18next";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import AccountTreeIcon from "@material-ui/icons/AccountTree";
@@ -7,23 +7,26 @@ import ViewAgendaIcon from "@material-ui/icons/ViewAgenda";
 import LiveHelpIcon from "@material-ui/icons/LiveHelp";
 
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
-import { getUniqueNumber, scrollToTargetOffset } from "@/../lib/helpers";
-import { Decision as DecisionType } from "@/../lib/presets";
+import { getUniqueNumber } from "@/../lib/helpers";
 import { GlobalUiContext } from "@/../hooks/GlobalUiContextProvider";
 import TreeFlow from "./TreeFlow";
 import Calculator from "./Calculator";
 import Questionnaire from "./Questionnaire";
 
-const getComponentFromMode = (mode: string): JSX.Element => {
+const getComponentFromMode = (
+  mode: string,
+  lastAddedDecision: string,
+  setLastAddedDecision: (_value: number | null) => void
+): JSX.Element => {
   switch (mode) {
     case "tree":
       return <TreeFlow />;
     case "card":
-      return <Calculator />;
+      return <Calculator lastAdded={lastAddedDecision} setLastAdded={setLastAddedDecision} />;
     case "questionnaire":
       return <Questionnaire />;
     default:
-      return <Calculator />;
+      return <Calculator lastAdded={lastAddedDecision} setLastAdded={setLastAddedDecision} />;
   }
 };
 
@@ -32,25 +35,11 @@ export default function CalculatorWrapper(): JSX.Element {
   const { visualMode, setVisualMode } = useContext(GlobalUiContext);
   const [lastAddedDecision, setLastAddedDecision] = useState(null);
 
-  const decisions = active.decisions as DecisionType[];
-
   const handleClickAddItem = (): void => {
     const uniqueNumber = getUniqueNumber();
     setLastAddedDecision(uniqueNumber);
     addItem(uniqueNumber);
   };
-
-  // Scroll to last added decision if on card view
-  useEffect(() => {
-    const isCardMode = visualMode === "card";
-    if (isCardMode && decisions.find((item) => item.key === lastAddedDecision)) {
-      scrollToTargetOffset(lastAddedDecision);
-      setLastAddedDecision(null);
-    }
-    if (!isCardMode) {
-      setLastAddedDecision(null);
-    }
-  }, [visualMode, decisions, lastAddedDecision]);
 
   return (
     <Grid container spacing={2}>
@@ -76,7 +65,7 @@ export default function CalculatorWrapper(): JSX.Element {
           {i18next.t("calculator.new_decision")}
         </Button>
       </Grid>
-      {getComponentFromMode(visualMode)}
+      {getComponentFromMode(visualMode, lastAddedDecision, setLastAddedDecision)}
     </Grid>
   );
 }

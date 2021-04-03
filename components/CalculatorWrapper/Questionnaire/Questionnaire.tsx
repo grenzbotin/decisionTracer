@@ -5,7 +5,10 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
-import { Grid } from "@material-ui/core";
+import { Grid, IconButton } from "@material-ui/core";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+
 import Q0 from "./Corona/Q0";
 import Q1 from "./Corona/Q1";
 import Q2 from "./Corona/Q2";
@@ -135,6 +138,19 @@ export default function FullWidthTabs(): JSX.Element {
           {TABS.map((t) => (
             <TabPanel key={t.id} value={value} index={t.id} dir={theme.direction}>
               {t.content}
+
+              <div style={{ display: "flex", justifyContent: "space-between", marginTop: "2rem" }}>
+                <IconButton color="primary" disabled={t.id === 0} onClick={() => handleChangeIndex(t.id - 1)}>
+                  <ArrowBackIosIcon fontSize="small" />
+                </IconButton>
+                <IconButton
+                  color="primary"
+                  disabled={t.id === TABS.length - 1}
+                  onClick={() => handleChangeIndex(t.id + 1)}
+                >
+                  <ArrowForwardIosIcon fontSize="small" />
+                </IconButton>
+              </div>
             </TabPanel>
           ))}
         </SwipeableViews>
