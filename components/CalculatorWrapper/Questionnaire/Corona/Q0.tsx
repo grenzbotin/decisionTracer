@@ -9,15 +9,25 @@ import { Decision } from "@/../lib/presets";
 import { useFirstRender } from "@/../hooks/helpers";
 
 const getProbabilityNonVac = (decisions: Decision[]): number => {
-  const item =
-    (decisions.find((item) => item.key === "main-0") || null).sub.find((i) => i.key === "main-0-sub-1") || null;
-  return item ? item.probability : null;
+  const decision = decisions.find((item) => item.key === "main-0") || null;
+  if (decision) {
+    const decisionSub = decision.sub.find((i) => i.key === "main-0-sub-1") || null;
+    if (decisionSub) {
+      return decisionSub.probability;
+    }
+  }
+  return null;
 };
 
 const getProbabilityVac = (decisions: Decision[]): number => {
-  const item =
-    (decisions.find((item) => item.key === "main-1") || null).sub.find((i) => i.key === "main-1-sub-1") || null;
-  return item ? item.probability : null;
+  const decision = decisions.find((item) => item.key === "main-1") || null;
+  if (decision) {
+    const decisionSub = decision.sub.find((i) => i.key === "main-1-sub-1") || null;
+    if (decisionSub) {
+      return decisionSub.probability;
+    }
+  }
+  return null;
 };
 
 export default function Q0(): JSX.Element {
@@ -35,7 +45,7 @@ export default function Q0(): JSX.Element {
     probabilityInfection: 0.0024,
     peopleToMeet: 15,
     injectionDuration: 12,
-    ownRisk: getProbabilityNonVac(active.decisions)
+    ownRisk: getProbabilityNonVac(active.decisions) || 0
   });
 
   useEffect(() => {
