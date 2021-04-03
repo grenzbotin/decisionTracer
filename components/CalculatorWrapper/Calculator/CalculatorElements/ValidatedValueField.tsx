@@ -20,6 +20,7 @@ interface Props {
 
 const ValidatedValueField: React.FC<Props> = ({ onChange, value }) => {
   const prevValue = usePrevious(value);
+  const ref = useRef(null);
   const [localValue, setLocalValue] = useState<number | string>(value);
   const [error, setError] = useState(false);
 
@@ -45,12 +46,21 @@ const ValidatedValueField: React.FC<Props> = ({ onChange, value }) => {
     }
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>): void => {
+    if (e.key === "Enter" && ((ref || {}).current || {}).firstChild) {
+      ref.current.firstChild.blur();
+    }
+  };
+
   return (
     <FormControl size="small" style={{ maxWidth: "75px" }}>
       <Input
+        ref={ref}
         error={error}
+        inputMode="numeric"
         value={localValue}
         onChange={handleValueChange}
+        onKeyPress={handleKeyPress}
         inputProps={{
           style: {
             fontSize: ".8rem"
