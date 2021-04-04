@@ -61,7 +61,7 @@ export default function Q2(): JSX.Element {
         3. {i18next.t(`${i18nPrefix}.title`)}
       </Typography>
       <Typography variant="caption">{i18next.t(`${i18nPrefix}.subtitle`)}</Typography>
-      <Container maxWidth="sm" style={{ margin: "2rem 0", fontSize: ".8rem", padding: 0 }}>
+      <Container maxWidth="sm" style={{ marginTop: "2rem", fontSize: "0.875rem", padding: 0 }}>
         <Grid container spacing={2}>
           <Grid item xs={5}>
             {i18next.t(`${i18nPrefix}.calc.death_title`)}
@@ -140,11 +140,9 @@ export default function Q2(): JSX.Element {
             })}
           </Grid>
         </Grid>
-      </Container>
-      <Typography variant="subtitle2" gutterBottom style={{ marginTop: "1rem" }}>
-        {i18next.t(`${i18nPrefix}.0`)}
-      </Typography>
-      <Container maxWidth="sm" style={{ margin: "1rem 0", fontSize: ".8rem", padding: 0 }}>
+        <Typography variant="subtitle2" gutterBottom style={{ marginTop: "2rem" }}>
+          {i18next.t(`${i18nPrefix}.0`)}
+        </Typography>
         <Grid container spacing={2}>
           <Grid item xs={5}>
             {i18next.t(`${i18nPrefix}.damage_probability`)}

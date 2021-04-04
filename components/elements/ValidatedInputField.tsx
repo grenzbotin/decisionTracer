@@ -5,6 +5,10 @@ function regex(value: string): boolean {
   return /^[+]?\d+(\d+)?$/.test(value);
 }
 
+function regexNegative(value: string): boolean {
+  return /^[-]\d+(\d+)?$/.test(value);
+}
+
 function usePrevious(value: number): number {
   const ref = useRef<number>();
   useEffect(() => {
@@ -17,9 +21,11 @@ interface Props {
   onChange: (_value: number) => void;
   value: number;
   label?: string;
+  onlyNegative?: boolean;
+  disabled?: boolean;
 }
 
-const ValidatedInputField: React.FC<Props> = ({ onChange, value, label }) => {
+const ValidatedInputField: React.FC<Props> = ({ onChange, value, label, disabled = false, onlyNegative = false }) => {
   const prevValue = usePrevious(value);
   const ref = useRef(null);
   const [localValue, setLocalValue] = useState<number | string>(value);
@@ -37,9 +43,11 @@ const ValidatedInputField: React.FC<Props> = ({ onChange, value, label }) => {
     const newValue = e.target.value;
     setLocalValue(newValue);
 
+    const validate = onlyNegative ? regexNegative : regex;
+
     // set error if value is empty, float number regex not matching
     // if valid, set probability in global state
-    if (newValue === "" || !regex(newValue)) {
+    if (newValue === "" || !validate(newValue)) {
       setError(true);
     } else {
       setError(false);
@@ -54,7 +62,7 @@ const ValidatedInputField: React.FC<Props> = ({ onChange, value, label }) => {
   };
 
   return (
-    <FormControl size="small" style={{ maxWidth: "75px" }}>
+    <FormControl disabled={disabled} size="small" style={{ maxWidth: "75px" }}>
       {label && <InputLabel htmlFor="label">{label}</InputLabel>}
       <Input
         ref={ref}

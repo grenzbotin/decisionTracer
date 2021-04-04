@@ -1,113 +1,48 @@
 {
-  "home": {
-    "meta": {
-      "title": "Decision Tracer | Home",
-      "description": "Make the right choice with ease",
-      "keywords": "Calculator, Decision helper, Corona"
-    }
+  "calculator": {
+    "add_case": "Add case",
+    "add_item_title": "New",
+    "add_scenario": "Add scenario",
+    "add_sub_case": "Add sub case",
+    "expected_utility": "Expected utility",
+    "independent": "independent",
+    "new_decision": "Decision",
+    "no_decisions_created": "No decisions created",
+    "probability": "Occurence probability",
+    "probability_short": "Prob. (𝑝)",
+    "remove_case": "Delete case",
+    "remove_decision": "Delete decision",
+    "remove_scenario": "Delete scenario",
+    "remove_sub_case": "Delete sub case",
+    "result": "Result",
+    "subCasesItems": "Sub cases",
+    "subcases": "Cases",
+    "value": "Utility"
   },
   "common": {
-    "navbar": {
-      "home": "Overview"
-    },
     "heading": {
       "logo": "Welcome to Decision Tracer"
+    },
+    "navbar": {
+      "home": "Overview"
+    }
+  },
+  "home": {
+    "meta": {
+      "description": "Make the right choice with ease",
+      "keywords": "Calculator, Decision helper, Corona",
+      "title": "Decision Tracer | Home"
     }
   },
   "presets": {
-    "custom": {
-      "meta": {
-        "title": "Own decision tree | Decision Tracer",
-        "description": "Own decision tree without presettings",
-        "keywords": "Decision tree, individual, create, decision helper, calculator"
-      },
-      "title": "Own decision tree",
-      "question": "What should I do?",
-      "description": "Create an own decision tree without presettings."
-    },
     "corona": {
-      "meta": {
-        "title": "Should I get vaccinated? | Decision Tracer",
-        "description": "Vaccination: Yes or no? Are disadvantages of a vaccination higher than the benefits?",
-        "keywords": "Corona, vaccination, decision, help, calculator"
-      },
-      "title": "Corona",
-      "question": "Should I get vaccinated?",
-      "description": "Simple decision guidance",
-      "questionnaire": {
-        "0": {
-          "intro": "Mit unserem kleinen Tool wollen wir so rational wie möglich an die Impfentscheidung herangehen. Alle für Dich relevanten Aspekte sollen berücksichtigt und bewertet werden. Um den Einstieg zu erleichtern haben wir eine Basis-Konfiguration erstellt, die Du nach Belieben anpassen und erweitern kannst. Alle Werte, die Du eingibst oder übernimmst, kannst Du später verändern und schauen, ob dadurch die Entscheidung kippt.",
-          "title": "Wie wahrscheinlich ist es, dass man sich mit Corona infiziert?",
-          "subtitle": "In einem ersten Schritt wollen wir die Wahrscheinlichkeit berechnen, einer infizierten Person zu begegnen:",
-          "tooltip": "Personen treffen bedeutet in diesem Zusammenhang mit Anderen so Kontakt zu haben, dass ich mich bei ihnen anstecken könnte, wenn sie infektiös sind.\n Nach einer Impfung würden wir uns bald wieder normal verhalten und andere Menschen treffen. Lässt man sich nicht impfen, so wird man sich auf absehbare Zeit trotzdem normal verhalten (oder auf Dauer von der Gesellschaft isolieren).\nDa wir „Impfen“ mit „Nicht Impfen“ vergleichen wollen, müssen wir das für den gleichen Zeitraum tun. Wenn wir glauben, dass die Impfung einmal pro Jahr aufgefrischt werden muss, dann sollten wir uns überlegen, wie viele Menschen wir in einem Jahr treffen.\nDie Impfung senkt die Infektionswahrscheinlichkeit möglicherweise über viele Jahre. Verändert sich das Virus, kann auch eine jährliche Impfung notwendig werden, das wissen wir jetzt noch nicht. Wenn wir nicht Äpfel mit Birnen vergleichen wollen, müssen wir den gleichen Zeitraum für die beiden Möglichkeiten betrachten. Wir müssen uns also fragen, wie viele Menschen wir treffen, bevor wir uns erneut impfen lassen.\nSo kann die rechnerische (!) Wahrscheinlichkeit einer Infektion leicht 100% überschreiten. Das ist nicht falsch. Wenn das Virus weiterhin in der Welt kursiert und wir uns verhalten wie vor der Pandemie, werden wir uns früher oder später anstecken. In diesem Fall nehmen wir als Voreinstellung eine Wahrscheinlichkeit von 90% an, Du kannst das gern ändern.",
-          "calc": {
-            "infected_known": "Known Corona-infected persons",
-            "dark_figure": "Dark figure (x times as many infected as known)",
-            "infected_actual": "Actually infected persons",
-            "infected_unknown": "Persons that do not know of their infection",
-            "inhabitants": "Inhabitants",
-            "potential_infected": "Probability a person is infected",
-            "people_meet": "Amount of people I meet in a month",
-            "injection_duration": "How many months does the injection last?",
-            "infection_risk": "Risk getting infected if I meet one person"
-          }
-        },
-        "1": {
-          "title": "Wie hoch ist die Wahrscheinlichkeit der möglichen Krankheitsverläufe, wenn man sich infiziert hat?",
-          "subtitle": "Wenn Du auf den Info-Button klickst, geben wir Dir einen kurzen Überblick über die aktuelle Studienlage.",
-          "tooltip": "Studien",
-          "calc": {
-            "unvaccinated": "Unvaccinated",
-            "vaccinated": "Vaccinated",
-            "probability_asymptomatic": "Probability for asymptomatic disease",
-            "probability_mild": "Probability of mild progression",
-            "probability_difficult": "Probability of difficult progression",
-            "probability_death": "Probability to die of covid",
-            "tooltip_disabled": "Deactivated fields appear because the related case got deleted in the calculator. To fix the problem, you need to restart the calculation with reloading the page."
-          }
-        },
-        "2": {
-          "title": "Wie hoch ist das Risiko, einen schweren Impfschaden zu erleiden?",
-          "subtitle": "Im Rahmen der Impfung mit dem AstraZeneca-Impfstoff kam es in Deutschland in 31 Fällen zu Hirnvenenthrombosen, die vermutlich in Zusammenhang mit der Impfung stehen. Mit dem Wirkstoff wurden rund 2,85 Millionen Deutsche geimpft.",
-          "calc": {
-            "death_title": "Deaths of covid",
-            "damage_title": "Cerebral venous thrombosis (CVT)",
-            "dead": "Deaths",
-            "infected": "Infected",
-            "cvt": "Cases",
-            "vaccinated": "Vaccinated",
-            "in": "in"
-          },
-          "0": "Mit welchem Wert möchtest Du rechnen?",
-          "damage_probability": "Probability of getting difficult vaccination damage",
-          "interpretation": "Interpretation",
-          "interpretation_text": "The chance to die of covid is {{value}} higher than the chance to get a difficult vaccination damage after becoming vaccinated.",
-          "tooltip_disabled": "The field for taking the vaccination damage into consideration got deleted in the calculator. To fix the problem, you need to restart the calculation with reloading the page."
-        },
-        "3": {
-          "title": "Wie schlimm sind für Dich die möglichen Verläufe?",
-          "subtitle": "Um die möglichen Verläufe miteinander vergleichen zu können, benötigen wir neben der Eintrittswahrscheinlichkeit einen Wert, der beispielsweise aufzeigt, dass der Tod schlimmer als ein milder Verlauf ist.",
-          "tooltipText": "Eine mögliche Herangehensweise siehst Du mit Klick auf den Info-Button.",
-          "tooltip": "Wie finde ich die richtige Punktebewertung? Hier ein Vorschlag:\nSagen wir, ein Tag mit Erkältungssymptomen bekommt einen Minuspunkt. Nehmen wir an, ein milder Covid-Verlauf dauert 14 Tage, dann sollte das Szenario 14 Minuspunkte bekommen.\nEinen Tag im Krankenhaus zu liegen, eventuell beatmet zu werden, ist schlimmer, als mit Erkältungssymptomen daheim zu liegen. Daher bekommt ein Tag mit schwerem Verlauf 5 Minuspunkte. Schwere Verläufe bei Covid dauern im Durchschnitt XXX Tage, das Szenario bekommt also YYY Punkte.\nDer Tod ist sehr schwer zu bewerten. Als kleine Hilfestellung überlegen wir uns, wie viele Tage mit mildem bzw. schwerem Verlauf gleich schlimm sind wie der Tod. Hat ein Tag mit Erkältungssymptomen einen Minuspunkt, dann hat ein Jahr mit Erkältungssymptomen 365 Minuspunkte, 10 Jahre haben 3650 Minuspunkte. Ist der Tod für Dich gleich schlimm wie 10 Jahre Erkältungssymptome zu haben, dann bekommt er auch 3650 Minuspunkte."
-        },
-        "4": {
-          "title": "Wie beurteilst Du Long Covid?",
-          "subtitle": "In der medialen Diskussion dreht sich viel um Inzidenz, R-Wert und Todesfälle. Dabei wird manchmal übersehen, dass eine Corona-Infektion langfristige Gesundheitsschäden nach sich ziehen kann. Diese Krankheit wird Long Covid genannt.\nNach aktueller Studienlage bekommen etwa … Menschen Long Covid:"
-        },
-        "5": {
-          "title": "Unabsehbare Spätfolgen",
-          "subtitle": "Häufig ist zu hören, dass derzeit überhaupt noch nicht klar ist, ob sich irgendwann in der Zukunft Schäden …"
-        }
-      },
       "decisions": {
         "0": {
-          "title": "No vaccination",
           "sub": {
             "0": {
               "title": "No infection"
             },
             "1": {
-              "title": "Corona",
               "cases": {
                 "0": {
                   "title": "Asymptomatic"
@@ -121,18 +56,18 @@
                 "3": {
                   "title": "Death"
                 }
-              }
+              },
+              "title": "Corona"
             }
-          }
+          },
+          "title": "No vaccination"
         },
         "1": {
-          "title": "Vaccination",
           "sub": {
             "0": {
               "title": "No infection"
             },
             "1": {
-              "title": "Corona",
               "cases": {
                 "0": {
                   "title": "Asymptomatic"
@@ -146,39 +81,117 @@
                 "3": {
                   "title": "Death"
                 }
-              }
+              },
+              "title": "Corona"
             },
             "2": {
               "title": "Vaccination damage"
             }
-          }
+          },
+          "title": "Vaccination"
         }
-      }
+      },
+      "description": "Simple decision guidance",
+      "meta": {
+        "description": "Vaccination: Yes or no? Are disadvantages of a vaccination higher than the benefits?",
+        "keywords": "Corona, vaccination, decision, help, calculator",
+        "title": "Should I get vaccinated? | Decision Tracer"
+      },
+      "question": "Should I get vaccinated?",
+      "questionnaire": {
+        "0": {
+          "calc": {
+            "dark_figure": "Dark figure (x times as many infected as known)",
+            "infected_actual": "Actually infected persons",
+            "infected_known": "Known Corona-infected persons",
+            "infected_unknown": "Persons that do not know of their infection",
+            "infection_risk": "Risk getting infected if I meet one person",
+            "inhabitants": "Inhabitants",
+            "injection_duration": "How many months does the injection last?",
+            "people_meet": "Amount of people I meet in a month",
+            "potential_infected": "Probability a person is infected"
+          },
+          "intro": "Mit unserem kleinen Tool wollen wir so rational wie möglich an die Impfentscheidung herangehen. Alle für Dich relevanten Aspekte sollen berücksichtigt und bewertet werden. Um den Einstieg zu erleichtern haben wir eine Basis-Konfiguration erstellt, die Du nach Belieben anpassen und erweitern kannst. Alle Werte, die Du eingibst oder übernimmst, kannst Du später verändern und schauen, ob dadurch die Entscheidung kippt.",
+          "subtitle": "In einem ersten Schritt wollen wir die Wahrscheinlichkeit berechnen, einer infizierten Person zu begegnen:",
+          "title": "Wie wahrscheinlich ist es, dass man sich mit Corona infiziert?",
+          "tooltip": "Personen treffen bedeutet in diesem Zusammenhang mit Anderen so Kontakt zu haben, dass ich mich bei ihnen anstecken könnte, wenn sie infektiös sind.\n Nach einer Impfung würden wir uns bald wieder normal verhalten und andere Menschen treffen. Lässt man sich nicht impfen, so wird man sich auf absehbare Zeit trotzdem normal verhalten (oder auf Dauer von der Gesellschaft isolieren).\nDa wir „Impfen“ mit „Nicht Impfen“ vergleichen wollen, müssen wir das für den gleichen Zeitraum tun. Wenn wir glauben, dass die Impfung einmal pro Jahr aufgefrischt werden muss, dann sollten wir uns überlegen, wie viele Menschen wir in einem Jahr treffen.\nDie Impfung senkt die Infektionswahrscheinlichkeit möglicherweise über viele Jahre. Verändert sich das Virus, kann auch eine jährliche Impfung notwendig werden, das wissen wir jetzt noch nicht. Wenn wir nicht Äpfel mit Birnen vergleichen wollen, müssen wir den gleichen Zeitraum für die beiden Möglichkeiten betrachten. Wir müssen uns also fragen, wie viele Menschen wir treffen, bevor wir uns erneut impfen lassen.\nSo kann die rechnerische (!) Wahrscheinlichkeit einer Infektion leicht 100% überschreiten. Das ist nicht falsch. Wenn das Virus weiterhin in der Welt kursiert und wir uns verhalten wie vor der Pandemie, werden wir uns früher oder später anstecken. In diesem Fall nehmen wir als Voreinstellung eine Wahrscheinlichkeit von 90% an, Du kannst das gern ändern."
+        },
+        "1": {
+          "calc": {
+            "probability_asymptomatic": "Probability for asymptomatic disease",
+            "probability_death": "Probability to die of covid",
+            "probability_difficult": "Probability of difficult progression",
+            "probability_mild": "Probability of mild progression",
+            "tooltip_disabled": "Deactivated fields appear because the related case got deleted in the calculator. To fix the problem, you need to restart the calculation with reloading the page.",
+            "unvaccinated": "Unvaccinated",
+            "vaccinated": "Vaccinated"
+          },
+          "subtitle": "Wenn Du auf den Info-Button klickst, geben wir Dir einen kurzen Überblick über die aktuelle Studienlage.",
+          "title": "Wie hoch ist die Wahrscheinlichkeit der möglichen Krankheitsverläufe, wenn man sich infiziert hat?",
+          "tooltip": "Studien"
+        },
+        "2": {
+          "0": "Mit welchem Wert möchtest Du rechnen?",
+          "calc": {
+            "cvt": "Cases",
+            "damage_title": "Cerebral venous thrombosis (CVT)",
+            "dead": "Deaths",
+            "death_title": "Deaths of covid",
+            "in": "in",
+            "infected": "Infected",
+            "vaccinated": "Vaccinated"
+          },
+          "damage_probability": "Probability of getting difficult vaccination damage",
+          "interpretation": "Interpretation",
+          "interpretation_text": "The chance to die of covid is {{value}} higher than the chance to get a difficult vaccination damage after becoming vaccinated.",
+          "subtitle": "Im Rahmen der Impfung mit dem AstraZeneca-Impfstoff kam es in Deutschland in 31 Fällen zu Hirnvenenthrombosen, die vermutlich in Zusammenhang mit der Impfung stehen. Mit dem Wirkstoff wurden rund 2,85 Millionen Deutsche geimpft.",
+          "title": "Wie hoch ist das Risiko, einen schweren Impfschaden zu erleiden?",
+          "tooltip_disabled": "The field for taking the vaccination damage into consideration got deleted in the calculator. To fix the problem, you need to restart the calculation with reloading the page."
+        },
+        "3": {
+          "calc": {
+            "current_value_difficult": "Current value",
+            "current_value_mild": "Current value",
+            "day_difficult_value": "Points per day with difficult progression",
+            "day_mild_value": "Points per day with mild progression",
+            "days_duration_difficult": "Duration of difficult progression (days)",
+            "days_duration_mild": "Duration of mild progression (days)",
+            "death_value": "Points for death",
+            "interpretation": "Interpretation",
+            "interpretation_difficult": "Der Tod ist für Dich in etwa gleich schlimm wie {{years}} Jahr(e) und {{days}} Tag(e) lang mit schweren Symptomen im Krankenhaus zu liegen. Bevor Du einen Tag länger im Krankenhaus liegen würdest, wärst Du lieber tot.",
+            "interpretation_mild": "Der Tod ist für Dich in etwa gleich schlimm wie {{years}} Jahr(e) und {{days}} Tag(e) milde Erkältungssymptome. Bevor Du einen Tag länger milde Erkältungssymptome hättest, wärst Du lieber tot.",
+            "no_value": "Not applicable",
+            "tooltip_no_value": "The field for taking the value into consideration got deleted in the calculator. To fix the problem, you need to restart the calculation with reloading the page."
+          },
+          "subtitle": "Um die möglichen Verläufe miteinander vergleichen zu können, benötigen wir neben der Eintrittswahrscheinlichkeit einen Wert, der beispielsweise aufzeigt, dass der Tod schlimmer als ein milder Verlauf ist.",
+          "title": "Wie schlimm sind für Dich die möglichen Verläufe?",
+          "tooltip": "Wie finde ich die richtige Punktebewertung? Hier ein Vorschlag:\nSagen wir, ein Tag mit Erkältungssymptomen bekommt einen Minuspunkt. Nehmen wir an, ein milder Covid-Verlauf dauert 14 Tage, dann sollte das Szenario 14 Minuspunkte bekommen.\nEinen Tag im Krankenhaus zu liegen, eventuell beatmet zu werden, ist schlimmer, als mit Erkältungssymptomen daheim zu liegen. Daher bekommt ein Tag mit schwerem Verlauf 5 Minuspunkte. Schwere Verläufe bei Covid dauern im Durchschnitt XXX Tage, das Szenario bekommt also YYY Punkte.\nDer Tod ist sehr schwer zu bewerten. Als kleine Hilfestellung überlegen wir uns, wie viele Tage mit mildem bzw. schwerem Verlauf gleich schlimm sind wie der Tod. Hat ein Tag mit Erkältungssymptomen einen Minuspunkt, dann hat ein Jahr mit Erkältungssymptomen 365 Minuspunkte, 10 Jahre haben 3650 Minuspunkte. Ist der Tod für Dich gleich schlimm wie 10 Jahre Erkältungssymptome zu haben, dann bekommt er auch 3650 Minuspunkte.",
+          "tooltipText": "Eine mögliche Herangehensweise siehst Du mit Klick auf den Info-Button."
+        },
+        "4": {
+          "subtitle": "In der medialen Diskussion dreht sich viel um Inzidenz, R-Wert und Todesfälle. Dabei wird manchmal übersehen, dass eine Corona-Infektion langfristige Gesundheitsschäden nach sich ziehen kann. Diese Krankheit wird Long Covid genannt.\nNach aktueller Studienlage bekommen etwa … Menschen Long Covid:",
+          "title": "Wie beurteilst Du Long Covid?"
+        },
+        "5": {
+          "subtitle": "Häufig ist zu hören, dass derzeit überhaupt noch nicht klar ist, ob sich irgendwann in der Zukunft Schäden …",
+          "title": "Unabsehbare Spätfolgen"
+        }
+      },
+      "title": "Corona"
     },
     "corona-2": {
-      "meta": {
-        "title": "Should I get vaccinated? | Decision Tracer",
-        "description": "Vaccination: Yes or no? Are disadvantages of a vaccination higher than the benefits?",
-        "keywords": "Corona, vaccination, decision, help, calculator, complex"
-      },
-      "title": "Corona (complex)",
-      "question": "Should I get vaccinated?",
-      "description": "Decision guidance with complex decision tree",
       "decisions": {
         "0": {
-          "title": "No vaccination",
           "sub": {
             "0": {
               "title": "No infection"
             },
             "1": {
-              "title": "Corona",
               "cases": {
                 "0": {
                   "title": "Asymptomatic"
                 },
                 "1": {
-                  "title": "Mild progression",
                   "subcases": {
                     "0": {
                       "title": "Long Covid"
@@ -189,10 +202,10 @@
                     "2": {
                       "title": "Complete Healing"
                     }
-                  }
+                  },
+                  "title": "Mild progression"
                 },
                 "2": {
-                  "title": "Difficult progression",
                   "subcases": {
                     "0": {
                       "title": "Long Covid"
@@ -203,12 +216,14 @@
                     "2": {
                       "title": "Complete healing"
                     }
-                  }
+                  },
+                  "title": "Difficult progression"
                 },
                 "3": {
                   "title": "Death"
                 }
-              }
+              },
+              "title": "Corona"
             },
             "2": {
               "title": "Infect other people"
@@ -216,22 +231,20 @@
             "3": {
               "title": "Positive or negative gut feeling"
             }
-          }
+          },
+          "title": "No vaccination"
         },
         "1": {
-          "title": "Vaccination",
           "sub": {
             "0": {
               "title": "No infection"
             },
             "1": {
-              "title": "Corona",
               "cases": {
                 "0": {
                   "title": "Asymptomatic"
                 },
                 "1": {
-                  "title": "Mild progression",
                   "subcases": {
                     "0": {
                       "title": "Long Covid"
@@ -242,10 +255,10 @@
                     "2": {
                       "title": "Complete Healing"
                     }
-                  }
+                  },
+                  "title": "Mild progression"
                 },
                 "2": {
-                  "title": "schwerer Verlauf",
                   "subcases": {
                     "0": {
                       "title": "Long Covid"
@@ -256,12 +269,14 @@
                     "2": {
                       "title": "Complete Healing"
                     }
-                  }
+                  },
+                  "title": "schwerer Verlauf"
                 },
                 "3": {
                   "title": "Death"
                 }
-              }
+              },
+              "title": "Corona"
             },
             "2": {
               "title": "Infect other people"
@@ -278,29 +293,28 @@
             "6": {
               "title": "Unforeseeable consequences"
             }
-          }
+          },
+          "title": "Vaccination"
         }
-      }
+      },
+      "description": "Decision guidance with complex decision tree",
+      "meta": {
+        "description": "Vaccination: Yes or no? Are disadvantages of a vaccination higher than the benefits?",
+        "keywords": "Corona, vaccination, decision, help, calculator, complex",
+        "title": "Should I get vaccinated? | Decision Tracer"
+      },
+      "question": "Should I get vaccinated?",
+      "title": "Corona (complex)"
+    },
+    "custom": {
+      "description": "Create an own decision tree without presettings.",
+      "meta": {
+        "description": "Own decision tree without presettings",
+        "keywords": "Decision tree, individual, create, decision helper, calculator",
+        "title": "Own decision tree | Decision Tracer"
+      },
+      "question": "What should I do?",
+      "title": "Own decision tree"
     }
-  },
-  "calculator": {
-    "new_decision": "Decision",
-    "no_decisions_created": "No decisions created",
-    "add_item_title": "New",
-    "probability": "Occurence probability",
-    "probability_short": "Prob. (𝑝)",
-    "value": "Utility",
-    "expected_utility": "Expected utility",
-    "subcases": "Cases",
-    "subCasesItems": "Sub cases",
-    "add_scenario": "Add scenario",
-    "add_case": "Add case",
-    "add_sub_case": "Add sub case",
-    "remove_scenario": "Delete scenario",
-    "remove_sub_case": "Delete sub case",
-    "remove_case": "Delete case",
-    "remove_decision": "Delete decision",
-    "independent": "independent",
-    "result": "Result"
   }
 }
