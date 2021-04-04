@@ -16,9 +16,10 @@ function usePrevious(value: number): number {
 interface Props {
   onChange: (_value: number) => void;
   value: number;
+  disabled?: boolean;
 }
 
-const ValidatedProbabilityField: React.FC<Props> = ({ onChange, value }) => {
+const ValidatedProbabilityField: React.FC<Props> = ({ onChange, value, disabled = false }) => {
   const prevValue = usePrevious(value);
   const ref = useRef(null);
   const [localValue, setLocalValue] = useState<number | string>(value);
@@ -53,7 +54,7 @@ const ValidatedProbabilityField: React.FC<Props> = ({ onChange, value }) => {
   };
 
   return (
-    <FormControl size="small" style={{ maxWidth: "75px" }}>
+    <FormControl disabled={disabled} size="small" style={{ maxWidth: "75px" }}>
       <Input
         ref={ref}
         error={error}

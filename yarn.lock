@@ -3418,7 +3418,7 @@ jsprim@^1.2.2:
 
 jss-plugin-camel-case@^10.5.1:
   version "10.5.1"
-  resolved "https://registry.yarnpkg.com/jss-plugin-camel-case/-/jss-plugin-camel-case-10.5.1.tgz#427b24a9951b4c2eaa7e3d5267acd2e00b0934f9"
+  resolved "https://registry.yarnpkg.com/jss-plugin-camel-case/-/jss-plugin-camel-mild0.5.1.tgz#427b24a9951b4c2eaa7e3d5267acd2e00b0934f9"
   dependencies:
     "@babel/runtime" "^7.3.1"
     hyphenate-style-name "^1.0.3"

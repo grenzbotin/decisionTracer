@@ -62,49 +62,53 @@ const CORONA_PRESET = {
   resources: [{ title: "title", link: "link" }],
   decisions: [
     {
-      key: "main-0",
+      key: "unvaccinated",
       title: "presets.corona.decisions.0.title",
       icon: 'noVaccination',
       sub: [
         {
-          key: "main-0-sub-0",
+          key: "unvaccinated-noInfection",
           title: "presets.corona.decisions.0.sub.0.title",
           probability: 0,
           value: 0,
           cases: [] as CaseItem[]
         },
         {
-          key: "main-0-sub-1",
+          key: "unvaccinated-infection",
           title: "presets.corona.decisions.0.sub.1.title",
           probability: 0,
           value: 0,
           cases: [
             {
-              key: "main-0-sub-1-case-0",
+              key: "unvaccinated-infection-asymptomatic",
               title: "presets.corona.decisions.0.sub.1.cases.0.title",
-              probability: 0,
+              probability: 50,
               value: 0,
+              isIndependent: true,
               subCases: [] as SubCaseItem[],
             },
             {
-              key: "main-0-sub-1-case-1",
+              key: "unvaccinated-infection-mild",
               title: "presets.corona.decisions.0.sub.1.cases.1.title",
-              probability: 0,
+              probability: 35,
               value: 0,
+              isIndependent: true,
               subCases: [] as SubCaseItem[],
             },
             {
-              key: "main-0-sub-1-case-2",
+              key: "unvaccinated-infection-difficult",
               title: "presets.corona.decisions.0.sub.1.cases.2.title",
-              probability: 0,
+              probability: 14.99,
               value: 0,
+              isIndependent: true,
               subCases: [] as SubCaseItem[],
             },
             {
-              key: "main-0-sub-1-case-3",
+              key: "unvaccinated-infection-death",
               title: "presets.corona.decisions.0.sub.1.cases.3.title",
-              probability: 0,
+              probability: 0.01,
               value: 0,
+              isIndependent: true,
               subCases: [] as SubCaseItem[],
             }
           ]
@@ -112,55 +116,59 @@ const CORONA_PRESET = {
       ]
     },
     {
-      key: "main-1",
+      key: "vaccinated",
       title: "presets.corona.decisions.1.title",
       icon: 'vaccination',
       sub: [
         {
-          key: "main-1-sub-0",
+          key: "vaccinated-noInfection",
           title: "presets.corona.decisions.1.sub.0.title",
           probability: 0,
           value: 0,
           cases: [] as CaseItem[]
         },
         {
-          key: "main-1-sub-1",
+          key: "vaccinated-infection",
           title: "presets.corona.decisions.1.sub.1.title",
           probability: 0,
           value: 0,
           cases: [
             {
-              key: "main-1-sub-1-case-0",
+              key: "vaccinated-infection-asymptomatic",
               title: "presets.corona.decisions.0.sub.1.cases.0.title",
-              probability: 0,
+              probability: 80,
               value: 0,
+              isIndependent: true,
               subCases: [] as SubCaseItem[],
             },
             {
-              key: "main-1-sub-1-case-1",
+              key: "vaccinated-infection-mild",
               title: "presets.corona.decisions.0.sub.1.cases.1.title",
-              probability: 0,
+              probability: 20,
               value: 0,
+              isIndependent: true,
               subCases: [] as SubCaseItem[],
             },
             {
-              key: "main-1-sub-1-case-2",
+              key: "vaccinated-infection-difficult",
               title: "presets.corona.decisions.0.sub.1.cases.2.title",
-              probability: 0,
+              probability: 0.00009,
               value: 0,
+              isIndependent: true,
               subCases: [] as SubCaseItem[],
             },
             {
-              key: "main-1-sub-1-case-3",
+              key: "vaccinated-infection-death",
               title: "presets.corona.decisions.0.sub.1.cases.3.title",
-              probability: 0,
+              probability: 0.00001,
               value: 0,
+              isIndependent: true,
               subCases: [] as SubCaseItem[],
             }
           ]
         },
         {
-          key: "main-1-sub-2",
+          key: "vaccinated-sub-2",
           title: "presets.corona.decisions.1.sub.2.title",
           probability: 0,
           value: 0,
@@ -183,50 +191,50 @@ const CORONA_PRESET_2 = {
   resources: [{ title: "title", link: "link" }],
   decisions: [
     {
-      key: "decision-0",
+      key: "unvaccinated",
       title: "presets.corona-2.decisions.0.title",
       icon: 'noVaccination',
       sub: [
         {
-          key: "decision-0-sub-0",
+          key: "unvaccinated-noInfection",
           title: "presets.corona-2.decisions.0.sub.0.title",
           probability: 0,
           value: 0,
           cases: [] as CaseItem[]
         },
         {
-          key: "decision-0-sub-1",
+          key: "unvaccinated-infection",
           title: "presets.corona-2.decisions.0.sub.1.title",
           probability: 0,
           value: 0,
           cases: [
             {
-              key: "decision-0-sub-1-case-0",
+              key: "unvaccinated-infection-asymptomatic",
               title: "presets.corona-2.decisions.0.sub.1.cases.0.title",
               probability: 0,
               value: 0,
               subCases: [] as SubCaseItem[],
             },
             {
-              key: "decision-0-sub-1-case-1",
+              key: "unvaccinated-infection-mild",
               title: "presets.corona-2.decisions.0.sub.1.cases.1.title",
               probability: 0,
               value: 0,
               subCases: [
                 {
-                  key: "decision-0-sub-1-case-1-subcase-0",
+                  key: "unvaccinated-infection-mild-subcase-0",
                   title: "presets.corona-2.decisions.0.sub.1.cases.1.subcases.0.title",
                   probability: 0,
                   value: 0,
                 },
                 {
-                  key: "decision-0-sub-1-case-1-subcase-1",
+                  key: "unvaccinated-infection-mild-subcase-1",
                   title: "presets.corona-2.decisions.0.sub.1.cases.1.subcases.1.title",
                   probability: 0,
                   value: 0,
                 },
                 {
-                  key: "decision-0-sub-1-case-1-subcase-2",
+                  key: "unvaccinated-infection-mild-subcase-2",
                   title: "presets.corona-2.decisions.0.sub.1.cases.1.subcases.2.title",
                   probability: 0,
                   value: 0,
@@ -234,25 +242,25 @@ const CORONA_PRESET_2 = {
               ],
             },
             {
-              key: "decision-0-sub-1-case-2",
+              key: "unvaccinated-infection-difficult",
               title: "presets.corona-2.decisions.0.sub.1.cases.2.title",
               probability: 0,
               value: 0,
               subCases: [
                 {
-                  key: "decision-0-sub-1-case-2-subcase-0",
+                  key: "unvaccinated-infection-difficult-subcase-0",
                   title: "presets.corona-2.decisions.0.sub.1.cases.2.subcases.0.title",
                   probability: 0,
                   value: 0,
                 },
                 {
-                  key: "decision-0-sub-1-case-2-subcase-1",
+                  key: "unvaccinated-infection-difficult-subcase-1",
                   title: "presets.corona-2.decisions.0.sub.1.cases.2.subcases.1.title",
                   probability: 0,
                   value: 0,
                 },
                 {
-                  key: "decision-0-sub-1-case-2-subcase-2",
+                  key: "unvaccinated-infection-difficult-subcase-2",
                   title: "presets.corona-2.decisions.0.sub.1.cases.2.subcases.2.title",
                   probability: 0,
                   value: 0,
@@ -260,7 +268,7 @@ const CORONA_PRESET_2 = {
               ],
             },
             {
-              key: "decision-0-sub-1-case-3",
+              key: "unvaccinated-infection-death",
               title: "presets.corona-2.decisions.0.sub.1.cases.3.title",
               probability: 0,
               value: 0,
@@ -269,7 +277,7 @@ const CORONA_PRESET_2 = {
           ]
         },
         {
-          key: "decision-0-sub-2",
+          key: "unvaccinated-sub-2",
           title: "presets.corona-2.decisions.0.sub.2.title",
           probability: 0,
           value: 0,
@@ -277,7 +285,7 @@ const CORONA_PRESET_2 = {
           cases: [] as CaseItem[]
         },
         {
-          key: "decision-0-sub-3",
+          key: "unvaccinated-sub-3",
           title: "presets.corona-2.decisions.0.sub.3.title",
           probability: 0,
           value: 0,
@@ -287,50 +295,50 @@ const CORONA_PRESET_2 = {
       ]
     },
     {
-      key: "decision-1",
+      key: "vaccinated",
       title: "presets.corona-2.decisions.1.title",
       icon: 'vaccination',
       sub: [
         {
-          key: "decision-1-sub-0",
+          key: "vaccinated-noInfection",
           title: "presets.corona-2.decisions.1.sub.0.title",
           probability: 0,
           value: 0,
           cases: [] as CaseItem[]
         },
         {
-          key: "decision-1-sub-1",
+          key: "vaccinated-infection",
           title: "presets.corona-2.decisions.1.sub.1.title",
           probability: 0,
           value: 0,
           cases: [
             {
-              key: "decision-1-sub-1-case-0",
+              key: "vaccinated-infection-asymptomatic",
               title: "presets.corona-2.decisions.1.sub.1.cases.0.title",
               probability: 0,
               value: 0,
               subCases: [] as SubCaseItem[],
             },
             {
-              key: "decision-1-sub-1-case-1",
+              key: "vaccinated-infection-mild",
               title: "presets.corona-2.decisions.1.sub.1.cases.1.title",
               probability: 0,
               value: 0,
               subCases: [
                 {
-                  key: "decision-1-sub-1-case-1-subcase-0",
+                  key: "vaccinated-infection-mild-subcase-0",
                   title: "presets.corona-2.decisions.1.sub.1.cases.1.subcases.0.title",
                   probability: 0,
                   value: 0,
                 },
                 {
-                  key: "decision-1-sub-1-case-1-subcase-1",
+                  key: "vaccinated-infection-mild-subcase-1",
                   title: "presets.corona-2.decisions.1.sub.1.cases.1.subcases.1.title",
                   probability: 0,
                   value: 0,
                 },
                 {
-                  key: "decision-1-sub-1-case-1-subcase-2",
+                  key: "vaccinated-infection-mild-subcase-2",
                   title: "presets.corona-2.decisions.1.sub.1.cases.1.subcases.2.title",
                   probability: 0,
                   value: 0,
@@ -338,25 +346,25 @@ const CORONA_PRESET_2 = {
               ],
             },
             {
-              key: "decision-1-sub-1-case-2",
+              key: "vaccinated-infection-difficult",
               title: "presets.corona-2.decisions.1.sub.1.cases.2.title",
               probability: 0,
               value: 0,
               subCases: [
                 {
-                  key: "decision-1-sub-1-case-2-subcase-0",
+                  key: "vaccinated-infection-difficult-subcase-0",
                   title: "presets.corona-2.decisions.1.sub.1.cases.2.subcases.0.title",
                   probability: 0,
                   value: 0,
                 },
                 {
-                  key: "decision-1-sub-1-case-2-subcase-1",
+                  key: "vaccinated-infection-difficult-subcase-1",
                   title: "presets.corona-2.decisions.1.sub.1.cases.2.subcases.1.title",
                   probability: 0,
                   value: 0,
                 },
                 {
-                  key: "decision-1-sub-1-case-2-subcase-2",
+                  key: "vaccinated-infection-difficult-subcase-2",
                   title: "presets.corona-2.decisions.1.sub.1.cases.2.subcases.2.title",
                   probability: 0,
                   value: 0,
@@ -364,7 +372,7 @@ const CORONA_PRESET_2 = {
               ],
             },
             {
-              key: "decision-1-sub-1-case-3",
+              key: "vaccinated-infection-death",
               title: "presets.corona-2.decisions.1.sub.1.cases.3.title",
               probability: 0,
               value: 0,
@@ -373,14 +381,14 @@ const CORONA_PRESET_2 = {
           ]
         },
         {
-          key: "decision-1-sub-2",
+          key: "vaccinated-sub-2",
           title: "presets.corona-2.decisions.1.sub.2.title",
           probability: 0,
           value: 0,
           cases: [] as CaseItem[]
         },
         {
-          key: "decision-1-sub-3",
+          key: "vaccinated-sub-3",
           title: "presets.corona-2.decisions.1.sub.3.title",
           probability: 0,
           value: 0,
@@ -388,7 +396,7 @@ const CORONA_PRESET_2 = {
           cases: [] as CaseItem[]
         },
         {
-          key: "decision-1-sub-4",
+          key: "vaccinated-sub-4",
           title: "presets.corona-2.decisions.1.sub.4.title",
           probability: 0,
           value: 0,
@@ -396,7 +404,7 @@ const CORONA_PRESET_2 = {
           cases: [] as CaseItem[]
         },
         {
-          key: "decision-1-sub-5",
+          key: "vaccinated-sub-5",
           title: "presets.corona-2.decisions.1.sub.5.title",
           probability: 0,
           value: 0,
@@ -404,7 +412,7 @@ const CORONA_PRESET_2 = {
           cases: [] as CaseItem[]
         },
         {
-          key: "decision-1-sub-6",
+          key: "vaccinated-sub-6",
           title: "presets.corona-2.decisions.1.sub.6.title",
           probability: 0,
           value: 0,

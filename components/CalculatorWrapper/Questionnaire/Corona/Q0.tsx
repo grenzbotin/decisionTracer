@@ -3,32 +3,9 @@ import { Divider, Grid, Typography, Container } from "@material-ui/core";
 import i18next from "i18next";
 import CustomTooltip from "@/../components/elements/CustomTooltip";
 import ValidatedInputField from "@/../components/elements/ValidatedInputField";
-import { getRoundedValue } from "@/../lib/helpers";
+import { getPresetValueByField, getRoundedValue } from "@/../lib/helpers";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
-import { Decision } from "@/../lib/presets";
 import { useFirstRender } from "@/../hooks/helpers";
-
-const getProbabilityNonVac = (decisions: Decision[]): number => {
-  const decision = decisions.find((item) => item.key === "main-0") || null;
-  if (decision) {
-    const decisionSub = decision.sub.find((i) => i.key === "main-0-sub-1") || null;
-    if (decisionSub) {
-      return decisionSub.probability;
-    }
-  }
-  return null;
-};
-
-const getProbabilityVac = (decisions: Decision[]): number => {
-  const decision = decisions.find((item) => item.key === "main-1") || null;
-  if (decision) {
-    const decisionSub = decision.sub.find((i) => i.key === "main-1-sub-1") || null;
-    if (decisionSub) {
-      return decisionSub.probability;
-    }
-  }
-  return null;
-};
 
 export default function Q0(): JSX.Element {
   const i18nPrefix = "presets.corona.questionnaire.0";
@@ -45,7 +22,7 @@ export default function Q0(): JSX.Element {
     probabilityInfection: 0.0024,
     peopleToMeet: 15,
     injectionDuration: 12,
-    ownRisk: getProbabilityNonVac(active.decisions) || 0
+    ownRisk: getPresetValueByField(active.decisions, "probability", "unvaccinated", "unvaccinated-infection") || 0
   });
 
   useEffect(() => {
@@ -62,16 +39,26 @@ export default function Q0(): JSX.Element {
 
   useEffect(() => {
     // only if context probability is still existent
-    const contextNonVacProbability = getProbabilityNonVac(active.decisions);
-    const contextVacProbability = getProbabilityVac(active.decisions);
+    const contextNonVacProbability = getPresetValueByField(
+      active.decisions,
+      "probability",
+      "unvaccinated",
+      "unvaccinated-infection"
+    );
+    const contextVacProbability = getPresetValueByField(
+      active.decisions,
+      "probability",
+      "vaccinated",
+      "vaccinated-infection"
+    );
 
     const compareValue = calc.ownRisk > 100 ? 100 : calc.ownRisk;
 
     if (contextNonVacProbability !== null && compareValue !== contextNonVacProbability) {
-      setProbability(compareValue, "main-0", "main-0-sub-1");
+      setProbability(compareValue, "unvaccinated", "unvaccinated-infection");
     }
     if (contextVacProbability !== null && compareValue !== contextVacProbability) {
-      setProbability(compareValue, "main-1", "main-1-sub-1");
+      setProbability(compareValue, "vaccinated", "vaccinated-infection");
     }
   }, [calc.ownRisk, setProbability, active.decisions]);
 

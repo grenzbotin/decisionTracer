@@ -3,6 +3,29 @@ import { CaseItem, Decision, SubCaseItem, SubItem } from "./presets";
 import { Elements } from "react-flow-renderer";
 import i18next from "i18next";
 
+export function getPresetValueByField(
+  decisions: Decision[],
+  type: 'probability' | 'value',
+  decKey: string,
+  subKey: string,
+  subItemKey?: string,
+): number | null {
+  const decision = decisions.find((item) => item.key === decKey) || null;
+  if (decision) {
+    const decisionSub = decision.sub.find((i) => i.key === subKey) || null;
+    if (decisionSub && subItemKey) {
+      const subItem = decisionSub.cases.find((c) => c.key === subItemKey || null);
+      if (subItem) {
+        return subItem[type];
+      }
+      return null;
+    } else if (decisionSub) {
+      return decisionSub[type];
+    }
+  }
+  return null;
+}
+
 export function getUniqueNumber(): string {
     const date = new Date();
     return date.valueOf().toString();

@@ -55,7 +55,16 @@
         "1": {
           "title": "Wie hoch ist die Wahrscheinlichkeit der möglichen Krankheitsverläufe, wenn man sich infiziert hat?",
           "subtitle": "Wenn Du auf den Info-Button klickst, geben wir Dir einen kurzen Überblick über die aktuelle Studienlage.",
-          "tooltip": "Studien"
+          "tooltip": "Studien",
+          "calc": {
+            "unvaccinated": "Unvaccinated",
+            "vaccinated": "Vaccinated",
+            "probability_asymptomatic": "Probability for asymptomatic disease",
+            "probability_mild": "Probability of mild progression",
+            "probability_difficult": "Probability of difficult progression",
+            "probability_death": "Probability to die of covid",
+            "tooltip_disabled": "Deactivated fields appear because the related case got deleted in the calculator. To fix the problem, you need to restart the calculation with reloading the page."
+          }
         },
         "2": {
           "title": "Wie hoch ist das Risiko, einen schweren Impfschaden zu erleiden?",
