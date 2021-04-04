@@ -69,7 +69,20 @@
         "2": {
           "title": "Wie hoch ist das Risiko, einen schweren Impfschaden zu erleiden?",
           "subtitle": "Im Rahmen der Impfung mit dem AstraZeneca-Impfstoff kam es in Deutschland in 31 Fällen zu Hirnvenenthrombosen, die vermutlich in Zusammenhang mit der Impfung stehen. Mit dem Wirkstoff wurden rund 2,85 Millionen Deutsche geimpft.",
-          "0": "Mit welchem Wert möchtest Du rechnen?"
+          "calc": {
+            "death_title": "Deaths of covid",
+            "damage_title": "Cerebral venous thrombosis (CVT)",
+            "dead": "Deaths",
+            "infected": "Infected",
+            "cvt": "Cases",
+            "vaccinated": "Vaccinated",
+            "in": "in"
+          },
+          "0": "Mit welchem Wert möchtest Du rechnen?",
+          "damage_probability": "Probability of getting difficult vaccination damage",
+          "interpretation": "Interpretation",
+          "interpretation_text": "The chance to die of covid is {{value}} higher than the chance to get a difficult vaccination damage after becoming vaccinated.",
+          "tooltip_disabled": "The field for taking the vaccination damage into consideration got deleted in the calculator. To fix the problem, you need to restart the calculation with reloading the page."
         },
         "3": {
           "title": "Wie schlimm sind für Dich die möglichen Verläufe?",

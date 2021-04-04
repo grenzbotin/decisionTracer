@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FormControl, Input } from "@material-ui/core";
+import { FormControl, Input, InputLabel } from "@material-ui/core";
 
 function regex(value: string): boolean {
   return /^[+]?\d+(\d+)?$/.test(value);
@@ -16,9 +16,10 @@ function usePrevious(value: number): number {
 interface Props {
   onChange: (_value: number) => void;
   value: number;
+  label?: string;
 }
 
-const ValidatedInputField: React.FC<Props> = ({ onChange, value }) => {
+const ValidatedInputField: React.FC<Props> = ({ onChange, value, label }) => {
   const prevValue = usePrevious(value);
   const ref = useRef(null);
   const [localValue, setLocalValue] = useState<number | string>(value);
@@ -54,6 +55,7 @@ const ValidatedInputField: React.FC<Props> = ({ onChange, value }) => {
 
   return (
     <FormControl size="small" style={{ maxWidth: "75px" }}>
+      {label && <InputLabel htmlFor="label">{label}</InputLabel>}
       <Input
         ref={ref}
         error={error}

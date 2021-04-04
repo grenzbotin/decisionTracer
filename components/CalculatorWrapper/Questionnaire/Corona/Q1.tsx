@@ -7,6 +7,9 @@ import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider
 import ValidatedProbabilityField from "@/../components/elements/ValidatedProbabilityField";
 import { getPresetValueByField } from "@/../lib/helpers";
 
+const DISEASES = ["asymptomatic", "mild", "difficult", "death"];
+const LEVEL = ["unvaccinated", "vaccinated"];
+
 export default function Q1(): JSX.Element {
   const i18nPrefix = "presets.corona.questionnaire.1";
   const { active, setProbability } = useContext(GlobalDecisionContext);
@@ -98,9 +101,6 @@ export default function Q1(): JSX.Element {
     }
   };
 
-  const DISEASES = ["asymptomatic", "mild", "difficult", "death"];
-  const LEVEL = ["unvaccinated", "vaccinated"];
-
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -122,7 +122,7 @@ export default function Q1(): JSX.Element {
           }
         />
       </Typography>
-      <Container maxWidth="sm" style={{ marginTop: "2rem", fontSize: ".8rem" }}>
+      <Container maxWidth="sm" style={{ marginTop: "2rem", fontSize: ".8rem", padding: 0 }}>
         <Grid container spacing={2}>
           <Grid item xs={6}></Grid>
           <Grid item xs={3}>

@@ -168,7 +168,7 @@ const CORONA_PRESET = {
           ]
         },
         {
-          key: "vaccinated-sub-2",
+          key: "vaccinated-vaccination_damage",
           title: "presets.corona.decisions.1.sub.2.title",
           probability: 0,
           value: 0,
@@ -381,7 +381,7 @@ const CORONA_PRESET_2 = {
           ]
         },
         {
-          key: "vaccinated-sub-2",
+          key: "vaccinated-vaccination_damage",
           title: "presets.corona-2.decisions.1.sub.2.title",
           probability: 0,
           value: 0,

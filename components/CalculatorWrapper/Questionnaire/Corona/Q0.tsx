@@ -146,7 +146,7 @@ export default function Q0(): JSX.Element {
           }
         />
       </Typography>
-      <Container maxWidth="sm" style={{ marginTop: "2rem", fontSize: ".8rem" }}>
+      <Container maxWidth="sm" style={{ marginTop: "2rem", fontSize: ".8rem", padding: 0 }}>
         <Grid container spacing={2}>
           <Grid item xs={8} style={{ textAlign: "right" }}>
             {i18next.t(`${i18nPrefix}.calc.infected_known`)}
