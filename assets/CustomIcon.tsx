@@ -28,7 +28,7 @@ const ICONS = {
   },
   en: {
     path: EnFlag,
-    viewbox: "0 0 60 30"
+    viewbox: "0 0 1000 500"
   },
   de: {
     path: DeFlag,

@@ -8,6 +8,7 @@ import { getPresetValueByField, getRoundedValue } from "@/../lib/helpers";
 import ValidatedInputField from "@/../components/elements/ValidatedInputField";
 import ValidatedProbabilityField from "@/../components/elements/ValidatedProbabilityField";
 import CustomTooltip from "@/../components/elements/CustomTooltip";
+import CoronaCases from "./CoronaCases";
 
 export default function Q2(): JSX.Element {
   const i18nPrefix = "presets.corona.questionnaire.2";
@@ -55,6 +56,28 @@ export default function Q2(): JSX.Element {
     }
   };
 
+  const handleGetCoronaData = ({
+    cases,
+    deaths,
+    astraZenecaVacc
+  }: {
+    cases: number;
+    deaths: number;
+    astraZenecaVacc: number;
+  }): void => {
+    setCalc({
+      ...calc,
+      deaths: {
+        amount: deaths,
+        infected: cases
+      },
+      damage: {
+        ...calc.damage,
+        vaccinated: astraZenecaVacc
+      }
+    });
+  };
+
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -63,6 +86,9 @@ export default function Q2(): JSX.Element {
       <Typography variant="caption">{i18next.t(`${i18nPrefix}.subtitle`)}</Typography>
       <Container maxWidth="sm" style={{ marginTop: "2rem", fontSize: "0.875rem", padding: 0 }}>
         <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <CoronaCases onGetTotalNumbers={handleGetCoronaData} />
+          </Grid>
           <Grid item xs={5}>
             {i18next.t(`${i18nPrefix}.calc.death_title`)}
           </Grid>
@@ -78,11 +104,15 @@ export default function Q2(): JSX.Element {
             />
           </Grid>
           <Grid item xs={2}></Grid>
-          <Grid item xs={5}>
+          <Grid item xs={5} style={{ display: "flex", alignItems: "center" }}>
             <ValidatedInputField
               label={i18next.t(`${i18nPrefix}.calc.cvt`)}
               value={calc.damage.amount}
               onChange={(value) => handleChange(value, "damage", "amount")}
+            />
+            <CustomTooltip
+              alert
+              content={<Typography variant="caption">{i18next.t(`${i18nPrefix}.calc.tooltip_cvt_cases`)}</Typography>}
             />
           </Grid>
           <Grid item xs={5}>

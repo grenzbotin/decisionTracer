@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { withStyles, Theme } from "@material-ui/core/styles";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Tooltip from "@material-ui/core/Tooltip";
+import ErrorIcon from "@material-ui/icons/Error";
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import HelpIcon from "@material-ui/icons/Help";
 import { IconButton } from "@material-ui/core";
@@ -16,8 +18,14 @@ const TooltipWrapper = withStyles((theme: Theme) => ({
   }
 }))(Tooltip);
 
-export default function CustomTooltip({ content }: { content: JSX.Element | string }): JSX.Element {
-  const [open, setOpen] = React.useState(false);
+export default function CustomTooltip({
+  content,
+  alert = false
+}: {
+  content: JSX.Element | string;
+  alert?: boolean;
+}): JSX.Element {
+  const [open, setOpen] = useState(false);
 
   const handleClose = (): void => {
     setOpen(false);
@@ -25,6 +33,20 @@ export default function CustomTooltip({ content }: { content: JSX.Element | stri
 
   const handleOpen = (): void => {
     setOpen(true);
+  };
+
+  const getCustomTooltipIcon = (): JSX.Element => {
+    if (alert) {
+      if (open) {
+        return <ErrorIcon fontSize="inherit" />;
+      }
+      return <ErrorOutlineIcon fontSize="inherit" />;
+    } else {
+      if (open) {
+        return <HelpIcon fontSize="inherit" />;
+      }
+      return <HelpOutlineIcon fontSize="inherit" />;
+    }
   };
 
   return (
@@ -38,7 +60,7 @@ export default function CustomTooltip({ content }: { content: JSX.Element | stri
         disableTouchListener
       >
         <IconButton size="small" color="primary" aria-label="meeting a person?" component="span" onClick={handleOpen}>
-          {open ? <HelpIcon fontSize="inherit" /> : <HelpOutlineIcon fontSize="inherit" />}
+          {getCustomTooltipIcon()}
         </IconButton>
       </TooltipWrapper>
     </ClickAwayListener>

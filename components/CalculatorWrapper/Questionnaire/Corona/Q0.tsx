@@ -6,6 +6,7 @@ import ValidatedInputField from "@/../components/elements/ValidatedInputField";
 import { getPresetValueByField, getRoundedValue } from "@/../lib/helpers";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { useFirstRender } from "@/../hooks/helpers";
+import CoronaCases from "./CoronaCases";
 
 export default function Q0(): JSX.Element {
   const i18nPrefix = "presets.corona.questionnaire.0";
@@ -148,55 +149,58 @@ export default function Q0(): JSX.Element {
       </Typography>
       <Container maxWidth="sm" style={{ marginTop: "2rem", fontSize: "0.875rem", padding: 0 }}>
         <Grid container spacing={2}>
-          <Grid item xs={8} style={{ textAlign: "right" }}>
+          <Grid item xs={12}>
+            <CoronaCases onGetInfected={handleChangeKnownInfected} />
+          </Grid>
+          <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.infected_known`)}
           </Grid>
           <Grid item xs={4}>
             <ValidatedInputField value={calc.knownInfected} onChange={handleChangeKnownInfected} />
           </Grid>
-          <Grid item xs={8} style={{ textAlign: "right" }}>
+          <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.dark_figure`)}
           </Grid>
           <Grid item xs={4}>
             <ValidatedInputField value={calc.darkFigure} onChange={handleChangeDarkFigure} />
           </Grid>
-          <Grid item xs={8} style={{ textAlign: "right" }}>
+          <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.infected_actual`)}
           </Grid>
           <Grid item xs={4}>
             {calc.actualInfected}
           </Grid>
-          <Grid item xs={8} style={{ textAlign: "right" }}>
+          <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.infected_unknown`)}
           </Grid>
           <Grid item xs={4}>
             {calc.unknownInfected}
           </Grid>
-          <Grid item xs={8} style={{ textAlign: "right" }}>
+          <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.inhabitants`)}
           </Grid>
           <Grid item xs={4}>
             <ValidatedInputField value={calc.inhabitants} onChange={handleChangeInhabitants} />
           </Grid>
-          <Grid item xs={8} style={{ textAlign: "right" }}>
+          <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.potential_infected`)}
           </Grid>
           <Grid item xs={4}>
             {getRoundedValue(calc.probabilityInfection * 100, 2)}%
           </Grid>
-          <Grid item xs={8} style={{ textAlign: "right" }}>
+          <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.people_meet`)}
           </Grid>
           <Grid item xs={4}>
             <ValidatedInputField value={calc.peopleToMeet} onChange={handleChangePeopleToMeet} />
           </Grid>
-          <Grid item xs={8} style={{ textAlign: "right" }}>
+          <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.injection_duration`)}
           </Grid>
           <Grid item xs={4}>
             <ValidatedInputField value={calc.injectionDuration} onChange={handleChangeInjectionDuration} />
           </Grid>
-          <Grid item xs={8} style={{ textAlign: "right" }}>
+          <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.infection_risk`)}
           </Grid>
           <Grid item xs={4}>

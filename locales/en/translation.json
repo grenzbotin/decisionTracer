@@ -36,6 +36,9 @@
   },
   "presets": {
     "corona": {
+      "data_loaded": "Updated",
+      "get_data_for": "Load data for",
+      "get_data_tooltip": "Clicking this button will get you data about the current corona situation in Germany (Robert Koch-Institut).\n Data provided by Marlon Lueckert (https://github.com/marlon360/rki-covid-api).",
       "decisions": {
         "0": {
           "sub": {
@@ -134,7 +137,8 @@
           "0": "Mit welchem Wert möchtest Du rechnen?",
           "calc": {
             "cvt": "Cases",
-            "damage_title": "Cerebral venous thrombosis (CVT)",
+            "tooltip_cvt_cases": "Please note! We try to keep this value as updated as possible, but we do not have any technical and official source to pull the data automatically. Please adapt this value manually.",
+            "damage_title": "Cerebral venous thrombosis (CVT) (Astra-Zeneca)",
             "dead": "Deaths",
             "death_title": "Deaths of covid",
             "in": "in",

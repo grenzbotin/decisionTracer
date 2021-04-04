@@ -36,6 +36,9 @@
   },
   "presets": {
     "corona": {
+      "data_loaded": "Aktualisiert",
+      "get_data_for": "Lade Daten für",
+      "get_data_tooltip": "Mit Klick auf diesen Button lädst Du die aktuellen Corona-Daten in Deutschland vom Robert Koch-Institut (RKI).\n Die Daten wurden bereitgestellt durch Marlon Lueckert (https://github.com/marlon360/rki-covid-api).",
       "decisions": {
         "0": {
           "sub": {
@@ -134,7 +137,8 @@
           "0": "Mit welchem Wert möchtest Du rechnen?",
           "calc": {
             "cvt": "Fälle",
-            "damage_title": "Hirnvenen-Thrombosen bei Geimpften",
+            "tooltip_cvt_cases": "Bitte beachten! Wir versuchen diese Angabe möglichst aktuell zu halten, haben jedoch keinen Zugriff auf aktuelle Daten via offizielle Quellen. Bitte im Zweifel eigenständig angeben.",
+            "damage_title": "Hirnvenen-Thrombosen bei Geimpften (Astra-Zeneca)",
             "dead": "Tote",
             "death_title": "Tote bei Corona-Infizierten",
             "in": "bei",
