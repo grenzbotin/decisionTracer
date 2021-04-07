@@ -125,15 +125,14 @@ export default function Q1(): JSX.Element {
       <Container maxWidth="sm" style={{ marginTop: "2rem", fontSize: "0.8rem", padding: 0 }}>
         <Grid container spacing={2}>
           <Grid item xs={6}></Grid>
-          <Grid item xs={3}>
-            {i18next.t(`${i18nPrefix}.calc.unvaccinated`)}
-          </Grid>
-          <Grid item xs={3}>
-            {i18next.t(`${i18nPrefix}.calc.vaccinated`)}
-          </Grid>
+          {LEVEL.map((d) => (
+            <Grid key={d} item xs={3}>
+              {i18next.t(`${i18nPrefix}.calc.${d}`)}
+            </Grid>
+          ))}
           {DISEASES.map((d) => (
             <Fragment key={d}>
-              <Grid item xs={6} style={{ textAlign: "right" }}>
+              <Grid item xs={6}>
                 {i18next.t(`${i18nPrefix}.calc.probability_${d}`)}
               </Grid>
               {LEVEL.map((l) => (
@@ -154,6 +153,24 @@ export default function Q1(): JSX.Element {
               ))}
             </Fragment>
           ))}
+          <Grid item xs={6}>
+            <b>Gesamt</b>
+          </Grid>
+          {LEVEL.map((l) => {
+            let total = 0;
+            DISEASES.forEach((d) => (total += calc[l][d]));
+            return (
+              <Grid key={l} item xs={3}>
+                <b>{total}%</b>{" "}
+                {total !== 100 && (
+                  <CustomTooltip
+                    alert
+                    content={<Typography variant="caption">{i18next.t(`${i18nPrefix}.calc.not_100`)}</Typography>}
+                  />
+                )}
+              </Grid>
+            );
+          })}
         </Grid>
       </Container>
     </>

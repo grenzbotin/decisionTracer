@@ -130,7 +130,8 @@
             "probability_mild": "Probability of mild progression",
             "tooltip_disabled": "Deactivated fields appear because the related case got deleted in the calculator. To fix the problem, you need to restart the calculation with reloading the page.",
             "unvaccinated": "Unvaccinated",
-            "vaccinated": "Vaccinated"
+            "vaccinated": "Vaccinated",
+            "not_100": "The total probability value should sum up to 100% for a meaningful calculation."
           },
           "subtitle": "Wenn Du auf den Info-Button klickst, geben wir Dir einen kurzen Überblick über die aktuelle Studienlage.",
           "title": "Wie hoch ist die Wahrscheinlichkeit der möglichen Krankheitsverläufe, wenn man sich infiziert hat?",

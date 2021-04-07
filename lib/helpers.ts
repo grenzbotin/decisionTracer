@@ -32,9 +32,13 @@ export function getUniqueNumber(): string {
 }
 
 export function toLocale(value: string | number): string {
-  const valueToConvert = typeof value === "string" ? parseFloat(value) : value;
+  if (typeof value === "string" || typeof value === "number") {
+    const valueToConvert = typeof value === "string" && value !== "" ? parseFloat(value) : value;
 
-  return valueToConvert.toLocaleString(i18next.language, { maximumFractionDigits: 5 });
+    return valueToConvert.toLocaleString(i18next.language, { maximumFractionDigits: 5 });
+  }
+
+  return "";
 }
 
 export function getRoundedValue(value: number, digits: number): string {
