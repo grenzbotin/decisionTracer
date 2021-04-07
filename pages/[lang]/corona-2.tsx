@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 
 import { getAllLanguageSlugs, getLanguage } from "../../lib/lang";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
+import { useRouteLeavingCheck } from "@/../hooks/helpers";
 
 const HtmlHeader = dynamic(() => import("../../components/HtmlHeader"));
 const CalculatorWrapper = dynamic(() => import("../../components/CalculatorWrapper"));
@@ -20,6 +21,7 @@ export default function LangIndex(): JSX.Element {
   const { active, setActiveFromPreset } = useContext(GlobalDecisionContext);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  useRouteLeavingCheck(i18next.t("common.route_leaving_confirm"));
 
   useEffect(() => {
     if (!active || active.key !== "corona-2") {

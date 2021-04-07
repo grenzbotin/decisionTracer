@@ -25,17 +25,20 @@ Make your decisions based on rational thoughts
 - [x] Tree view (adding, deleting, modifying data)
 - [x] Create own decision tree
 - [x] Input on enter, show numeric/decimal keyboard (mobile)
-- [] Questionnaire for corona simple preset
-- [] Implement RKI numbers
-- [] Tooltips
-- [] Help page
+- [x] Questionnaire for corona simple preset
+- [x] Implement RKI numbers
+- [x] Tooltips
+- [x] Simple confirmation on route leaving from calculator page
+- [x] Tutorial preset
+- [] Tutorial Questionnaire
 - [] Save changes via local storage
 
 ### Icons
 
 <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-
+<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 ### Photos
 
-- Corona virus 1 Photo by CDC on Unsplash
-- Custom icon Photo by Markus Spiske on Unsplash
+- Custom icon Photo by Markus Spiske (https://unsplash.com/@markusspiske) on Unsplash
+- Virus: Photo by <a href="https://unsplash.com/@cdc">CDC</a> on <a href="https://unsplash.com/s/photos/virus">Unsplash</a>
+- Coin: Photo by <a href="https://unsplash.com/@neural_notworks">Shaojie</a> on <a href="https://unsplash.com/s/photos/coin">Unsplash</a>

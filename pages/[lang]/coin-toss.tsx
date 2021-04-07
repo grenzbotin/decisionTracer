@@ -24,9 +24,9 @@ export default function LangIndex(): JSX.Element {
   useRouteLeavingCheck(i18next.t("common.route_leaving_confirm"));
 
   useEffect(() => {
-    if (!active || active.key !== "corona") {
-      setActiveFromPreset("corona");
-      setVisualMode("questionnaire");
+    if (!active || active.key !== "coin-toss") {
+      setActiveFromPreset("coin-toss");
+      setVisualMode("tree");
     }
   }, [active, setActiveFromPreset, setVisualMode]);
 
@@ -34,23 +34,23 @@ export default function LangIndex(): JSX.Element {
     active && (
       <>
         <HtmlHeader
-          title={i18next.t("presets.corona.meta.title")}
-          description={i18next.t("presets.corona.meta.description")}
-          keywords={i18next.t("presetss.corona.meta.keywords")}
+          title={i18next.t("presets.coin-toss.meta.title")}
+          description={i18next.t("presets.coin-toss.meta.description")}
+          keywords={i18next.t("presetss.coin-toss.meta.keywords")}
         />
         <Grid container spacing={2}>
-          <Grid item xs={12} md={8} style={{ marginBottom: mobileFooter && isMobile ? "220px" : "50px" }}>
+          <Grid item xs={12} md={12} lg={9} style={{ marginBottom: mobileFooter && isMobile ? "220px" : "50px" }}>
             <CalculatorWrapper />
           </Grid>
-          <Hidden smDown>
-            <Grid item xs={12} md={4} style={{ position: "relative" }}>
+          <Hidden mdDown>
+            <Grid item xs={12} md={12} lg={3} style={{ position: "relative" }}>
               <div style={{ position: "sticky", top: "calc(1rem + 60px)" }}>
                 <Result />
                 <SelectedNode />
               </div>
             </Grid>
           </Hidden>
-          <Hidden mdUp>
+          <Hidden smUp>
             <FooterResult />
             <MobileSelectedNode />
           </Hidden>

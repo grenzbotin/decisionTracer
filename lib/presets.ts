@@ -180,6 +180,71 @@ const CORONA_PRESET = {
   ]
 };
 
+const COIN_TOSS = {
+  key: "coin-toss",
+  title: "presets.coin-toss.title",
+  url: "coin-toss",
+  icon: "coin",
+  image: "coin",
+  question: "presets.coin-toss.question",
+  description: "presets.coin-toss.description",
+  decisions: [
+    {
+      key: "game-1",
+      title: "presets.coin-toss.decisions.0.title",
+      sub: [
+        {
+          key: "game-1-head",
+          title: "presets.coin-toss.decisions.0.sub.0.title",
+          probability: 50,
+          value: 10,
+          cases: [] as CaseItem[]
+        },
+        {
+          key: "game-1-tail",
+          title: "presets.coin-toss.decisions.0.sub.1.title",
+          probability: 50,
+          value: 0,
+          cases: [] as CaseItem[]
+        }
+      ]
+    },
+    {
+      key: "no-game",
+      title: "presets.coin-toss.decisions.1.title",
+      sub: [
+        {
+          key: "no-game-keep",
+          title: "presets.coin-toss.decisions.1.sub.0.title",
+          probability: 100,
+          value: 5,
+          cases: [] as CaseItem[]
+        }
+      ]
+    },
+    {
+      key: "game-2",
+      title: "presets.coin-toss.decisions.2.title",
+      sub: [
+        {
+          key: "game-2-head",
+          title: "presets.coin-toss.decisions.2.sub.0.title",
+          probability: 53,
+          value: 12,
+          cases: [] as CaseItem[]
+        },
+        {
+          key: "game-2-tail",
+          title: "presets.coin-toss.decisions.2.sub.1.title",
+          probability: 47,
+          value: -2,
+          cases: [] as CaseItem[]
+        }
+      ]
+    }
+  ]
+};
+
 const CORONA_PRESET_2 = {
   key: "corona-2",
   title: "presets.corona-2.title",
@@ -434,6 +499,6 @@ const CUSTOM_PRESET = {
   decisions: [] as Decision[]
 };
 
-const PRESETS = <Preset[]>[CORONA_PRESET, CORONA_PRESET_2, CUSTOM_PRESET];
+const PRESETS = <Preset[]>[COIN_TOSS, CORONA_PRESET, CORONA_PRESET_2, CUSTOM_PRESET];
 
 export { PRESETS };

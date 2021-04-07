@@ -8,6 +8,7 @@ import Question from "./svg/question.svg";
 import DeFlag from "./svg/de.svg";
 import EnFlag from "./svg/en.svg";
 import Custom from "./svg/custom.svg";
+import Coin from "./svg/coins.svg";
 
 const ICONS = {
   virus: {
@@ -37,6 +38,10 @@ const ICONS = {
   custom: {
     path: Custom,
     viewbox: "0 0 512 512"
+  },
+  coin: {
+    path: Coin,
+    viewbox: "0 0 60 60"
   }
 };
 
@@ -49,7 +54,7 @@ const CustomIcon = ({
   fontSize?: "small" | "inherit" | "large" | "default";
   style?: Record<string, string | number>;
 }): JSX.Element => {
-  const icon = ICONS[name] || ICONS["virus"];
+  const icon = ICONS[name] || ICONS["custom"];
   return <SvgIcon component={icon.path} fontSize={fontSize} viewBox={icon.viewbox} style={style} />;
 };
 

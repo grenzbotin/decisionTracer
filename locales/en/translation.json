@@ -28,7 +28,8 @@
     },
     "navbar": {
       "home": "Overview"
-    }
+    },
+    "route_leaving_confirm": "Are you sure that you want to leave the page? Your changes can not be saved."
   },
   "home": {
     "meta": {
@@ -38,6 +39,48 @@
     }
   },
   "presets": {
+    "coin-toss": {
+      "description": "A little tutorial for understanding the tool",
+      "question": "Tutorial",
+      "title": "Head or Tail?",
+      "meta": {
+        "description": "Head or Tail: Should I bet or not? Das Tutorial von Decision Tracer",
+        "keywords": "Head or Tail, Tutorial, Decision, Help, Calculator",
+        "title": "Head or Tail? | Decision Tracer"
+      },
+      "decisions": {
+        "0": {
+          "title": "Game 1",
+          "sub": {
+            "0": {
+              "title": "Game 1: Head"
+            },
+            "1": {
+              "title": "Game 1: Tail"
+            }
+          }
+        },
+        "1": {
+          "title": "No game",
+          "sub": {
+            "0": {
+              "title": "Saving 5,- Euro"
+            }
+          }
+        },
+        "2": {
+          "title": "Game 2",
+          "sub": {
+            "0": {
+              "title": "Game 2: Head"
+            },
+            "1": {
+              "title": "Game 2: Tail"
+            }
+          }
+        }
+      }
+    },
     "corona": {
       "data_loaded": "Updated",
       "get_data_for": "Load data for",

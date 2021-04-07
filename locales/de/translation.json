@@ -28,7 +28,8 @@
     },
     "navbar": {
       "home": "Übersicht"
-    }
+    },
+    "route_leaving_confirm": "Bist Du sicher, dass Du die Seite verlassen willst? Deine Änderungen können nicht gespeichert werden."
   },
   "home": {
     "meta": {
@@ -38,6 +39,48 @@
     }
   },
   "presets": {
+    "coin-toss": {
+      "description": "Ein kleines Tutorial zum Verstehen und Ausprobieren des Tools",
+      "question": "Tutorial",
+      "title": "Kopf oder Zahl?",
+      "meta": {
+        "description": "Kopf oder Zahl: Spielen oder nicht? Das Tutorial von Decision Tracer",
+        "keywords": "Kopf oder Zahl, Tutorial, Entscheidung, Hilfe, Rechner",
+        "title": "Kopf oder Zahl? | Decision Tracer"
+      },
+      "decisions": {
+        "0": {
+          "title": "Spiel 1",
+          "sub": {
+            "0": {
+              "title": "Spiel 1: Kopf"
+            },
+            "1": {
+              "title": "Spiel 1: Zahl"
+            }
+          }
+        },
+        "1": {
+          "title": "Nicht spielen",
+          "sub": {
+            "0": {
+              "title": "5,- Euro bleiben in unserer Tasche"
+            }
+          }
+        },
+        "2": {
+          "title": "Spiel 2",
+          "sub": {
+            "0": {
+              "title": "Spiel 2: Kopf"
+            },
+            "1": {
+              "title": "Spiel 2: Zahl"
+            }
+          }
+        }
+      }
+    },
     "corona": {
       "data_loaded": "Aktualisiert",
       "get_data_for": "Lade Daten für",
