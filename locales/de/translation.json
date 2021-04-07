@@ -15,6 +15,9 @@
     "remove_scenario": "Szenario löschen",
     "remove_sub_case": "Fall löschen",
     "result": "Ergebnis",
+    "interpretation": "Interpretation",
+    "interpretation_text": "{{ decision }} scheint für Dich die bessere Alternative zu sein.",
+    "interpretation_text_pl": "{{ decision }} scheinen für Dich die besseren Alternativen zu sein.",
     "subCasesItems": "Fälle",
     "subcases": "Sub-Szenarien",
     "value": "Nutzwert"

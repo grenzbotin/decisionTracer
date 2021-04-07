@@ -15,6 +15,9 @@
     "remove_scenario": "Delete scenario",
     "remove_sub_case": "Delete sub case",
     "result": "Result",
+    "interpretation": "Interpretation",
+    "interpretation_text": "{{ decision }} seems to be the better alternative for you.",
+    "interpretation_text_pl": "{{ decision }} seem to be the better alternatives for you.",
     "subCasesItems": "Sub cases",
     "subcases": "Cases",
     "value": "Utility"
