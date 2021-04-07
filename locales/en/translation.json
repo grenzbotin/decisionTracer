@@ -36,7 +36,8 @@
       "description": "Make the right choice with ease",
       "keywords": "Calculator, Decision helper, Corona",
       "title": "Decision Tracer | Home"
-    }
+    },
+    "intro": "Mit unserem Tool wollen wir Dich dabei unterstützen, eine rationale Entscheidung zu treffen. Du kannst Alternativen gegenüberstellen, Ihre Vor- und Nachteile bewerten und Dir ein Ergebnis berechnen lassen.\n Du kannst Dinge, die Du berücksichtigen möchtest, hinzufügen oder bestehende Elemente verändern. Alle Werte, die Du eingibst oder übernimmst, kannst Du später verändern und schauen, ob dadurch die Entscheidung kippt.\nNatürlich kann das Tool lediglich eine Hilfe sein. Wir wollen Dir helfen, Deine Entscheidung zu reflektieren. Das Ergebnis hängt von Deinen Eingaben ab. Du bist für Deine Entscheidung verantwortlich, Du musst sie treffen.\n Um das Prinzip zu verstehen, solltest Du Dir zunächst das Tutorial anschauen. (Siehe Karte: 'Kopf oder Zahl')\n Eine rationale Entscheidung bezüglich der Corona-Impfung kannst Du Dir mit Klick auf die zweite Karte herleiten. (Siehe Karte 'Corona')\n Du kannst aber auch etwas ganz Eigenes entwerfen. (Siehe Karte 'Eigener Entscheidungsbaum')\n Viel Spaß!"
   },
   "presets": {
     "coin-toss": {
@@ -140,7 +141,7 @@
           "title": "Vaccination"
         }
       },
-      "description": "Simple decision guidance",
+      "description": "Decision guidance with simple decision tree",
       "meta": {
         "description": "Vaccination: Yes or no? Are disadvantages of a vaccination higher than the benefits?",
         "keywords": "Corona, vaccination, decision, help, calculator",

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Grid } from "@material-ui/core";
+import { Card, Grid, Typography } from "@material-ui/core";
 import i18next from "i18next";
 import dynamic from "next/dynamic";
 
@@ -25,6 +25,19 @@ export default function LangIndex(): JSX.Element {
         description={i18next.t("home.meta.description")}
         keywords={i18next.t("home.meta.keywords")}
       />
+      <Card variant="outlined" style={{ margin: "1rem 0 2rem 0", padding: "1rem" }}>
+        <Typography variant="h6" gutterBottom>
+          Howdy!
+        </Typography>
+        {i18next
+          .t("home.intro")
+          .split("\n")
+          .map((c, i) => (
+            <Typography key={c} variant="body2" component="p" style={{ marginBottom: (i === 2 || i === 5) && ".6rem" }}>
+              {c}
+            </Typography>
+          ))}
+      </Card>
       <Grid container spacing={2}>
         {PRESETS.map((preset) => (
           <Grid key={preset.key} md={4} sm={6} lg={3} xs={12} item>
