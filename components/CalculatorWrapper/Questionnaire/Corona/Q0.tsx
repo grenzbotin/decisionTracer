@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Divider, Grid, Typography, Container } from "@material-ui/core";
+import { Grid, Typography, Container } from "@material-ui/core";
 import i18next from "i18next";
 import CustomTooltip from "@/../components/elements/CustomTooltip";
 import ValidatedInputField from "@/../components/elements/ValidatedInputField";
@@ -125,12 +125,10 @@ export default function Q0(): JSX.Element {
 
   return (
     <>
-      <Typography variant="body2">{i18next.t(`${i18nPrefix}.intro`)}</Typography>
-      <Divider style={{ margin: "1.5rem 0" }} />
       <Typography variant="h6" gutterBottom>
         1. {i18next.t(`${i18nPrefix}.title`)}
       </Typography>
-      <Typography variant="caption" style={{ display: "flex", alignItems: "center" }}>
+      <Typography variant="body2" style={{ display: "flex", alignItems: "center" }}>
         {i18next.t(`${i18nPrefix}.subtitle`)}
         <CustomTooltip
           content={
@@ -147,7 +145,7 @@ export default function Q0(): JSX.Element {
           }
         />
       </Typography>
-      <Container maxWidth="sm" style={{ marginTop: "2rem", fontSize: "0.875rem", padding: 0 }}>
+      <Container maxWidth="sm" style={{ marginTop: "2rem", fontSize: "0.8rem", padding: 0 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <CoronaCases onGetInfected={handleChangeKnownInfected} />

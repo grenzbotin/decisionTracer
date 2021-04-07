@@ -138,11 +138,11 @@ export default function Q3(): JSX.Element {
         .t(`${i18nPrefix}.subtitle`)
         .split("\n")
         .map((c) => (
-          <Typography key={c} variant="caption" component="p" style={{ marginBottom: ".4rem" }}>
+          <Typography key={c} variant="body2" component="p" style={{ marginBottom: ".4rem" }}>
             {c}
           </Typography>
         ))}
-      <Typography variant="caption">
+      <Typography variant="body2">
         {i18next.t(`${i18nPrefix}.tooltipText`)}{" "}
         <CustomTooltip
           content={
@@ -159,8 +159,8 @@ export default function Q3(): JSX.Element {
           }
         />
       </Typography>
-      <Container maxWidth="sm" style={{ marginTop: "2rem", fontSize: "0.875rem", padding: 0 }}>
-        <Grid container spacing={2}>
+      <Container maxWidth="sm" style={{ marginTop: "3rem", padding: 0 }}>
+        <Grid container spacing={2} style={{ fontSize: "0.8rem" }}>
           <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.day_mild_value`)}
           </Grid>
@@ -252,24 +252,22 @@ export default function Q3(): JSX.Element {
               />
             )}
           </Grid>
-          <Grid item xs={12}>
-            <Typography variant="subtitle2" gutterBottom style={{ marginTop: "3rem" }}>
-              {i18next.t(`${i18nPrefix}.interpretation`)}
-            </Typography>
-            <Typography variant="body2" component="p" gutterBottom>
-              {i18next.t(`${i18nPrefix}.interpretation_mild`, {
-                years: interpretation.mild.years,
-                days: interpretation.mild.days
-              })}
-            </Typography>
-            <Typography variant="body2" component="p">
-              {i18next.t(`${i18nPrefix}.interpretation_difficult`, {
-                years: interpretation.difficult.years,
-                days: interpretation.difficult.days
-              })}
-            </Typography>
-          </Grid>
         </Grid>
+        <Typography variant="subtitle2" gutterBottom style={{ marginTop: "3rem" }}>
+          {i18next.t(`${i18nPrefix}.interpretation`)}
+        </Typography>
+        <Typography variant="body2" component="p" gutterBottom>
+          {i18next.t(`${i18nPrefix}.interpretation_mild`, {
+            years: interpretation.mild.years,
+            days: interpretation.mild.days
+          })}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {i18next.t(`${i18nPrefix}.interpretation_difficult`, {
+            years: interpretation.difficult.years,
+            days: interpretation.difficult.days
+          })}
+        </Typography>
       </Container>
     </>
   );

@@ -83,9 +83,9 @@ export default function Q2(): JSX.Element {
       <Typography variant="h6" gutterBottom>
         3. {i18next.t(`${i18nPrefix}.title`)}
       </Typography>
-      <Typography variant="caption">{i18next.t(`${i18nPrefix}.subtitle`)}</Typography>
-      <Container maxWidth="sm" style={{ marginTop: "2rem", fontSize: "0.875rem", padding: 0 }}>
-        <Grid container spacing={2}>
+      <Typography variant="body2">{i18next.t(`${i18nPrefix}.subtitle`)}</Typography>
+      <Container maxWidth="sm" style={{ marginTop: "3rem", padding: 0 }}>
+        <Grid container spacing={2} style={{ fontSize: ".8rem" }}>
           <Grid item xs={12}>
             <CoronaCases onGetTotalNumbers={handleGetCoronaData} />
           </Grid>
@@ -158,22 +158,22 @@ export default function Q2(): JSX.Element {
               <FileCopyIcon fontSize="small" />
             </IconButton>
           </Grid>
-          <Grid item xs={12}>
-            <Typography variant="subtitle2" gutterBottom>
-              {i18next.t(`${i18nPrefix}.interpretation`)}
-            </Typography>
-            {i18next.t(`${i18nPrefix}.interpretation_text`, {
-              value: getRoundedValue(
-                calc.deaths.amount / calc.deaths.infected / (calc.damage.amount / calc.damage.vaccinated),
-                2
-              )
-            })}
-          </Grid>
         </Grid>
+        <Typography variant="subtitle2" gutterBottom style={{ marginTop: "3rem" }}>
+          {i18next.t(`${i18nPrefix}.interpretation`)}
+        </Typography>
+        <Typography variant="body2">
+          {i18next.t(`${i18nPrefix}.interpretation_text`, {
+            value: getRoundedValue(
+              calc.deaths.amount / calc.deaths.infected / (calc.damage.amount / calc.damage.vaccinated),
+              2
+            )
+          })}
+        </Typography>
         <Typography variant="subtitle2" gutterBottom style={{ marginTop: "2rem" }}>
           {i18next.t(`${i18nPrefix}.0`)}
         </Typography>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} style={{ fontSize: ".8rem" }}>
           <Grid item xs={5}>
             {i18next.t(`${i18nPrefix}.damage_probability`)}
           </Grid>
