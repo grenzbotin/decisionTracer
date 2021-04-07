@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002F[lang]","\u002F[lang]\u002Fcoin-toss","\u002F[lang]\u002Fcorona-2","\u002F[lang]\u002Fcorona","\u002F[lang]\u002Fcustom"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
