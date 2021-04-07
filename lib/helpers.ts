@@ -5,10 +5,10 @@ import i18next from "i18next";
 
 export function getPresetValueByField(
   decisions: Decision[],
-  type: 'probability' | 'value',
+  type: "probability" | "value",
   decKey: string,
   subKey: string,
-  subItemKey?: string,
+  subItemKey?: string
 ): number | null {
   const decision = decisions.find((item) => item.key === decKey) || null;
   if (decision) {
@@ -27,12 +27,14 @@ export function getPresetValueByField(
 }
 
 export function getUniqueNumber(): string {
-    const date = new Date();
-    return date.valueOf().toString();
-  }
+  const date = new Date();
+  return date.valueOf().toString();
+}
 
-function toLocale(value: string): string {
-  return parseFloat(value).toLocaleString(i18next.language);
+export function toLocale(value: string | number): string {
+  const valueToConvert = typeof value === "string" ? parseFloat(value) : value;
+
+  return valueToConvert.toLocaleString(i18next.language, { maximumFractionDigits: 5 });
 }
 
 export function getRoundedValue(value: number, digits: number): string {
@@ -49,24 +51,24 @@ export function getValueFromChilds(node: SubItem | SubCaseItem | Decision, child
 }
 
 export function scrollToTargetOffset(id: string): void {
-    const element = document.getElementById(id);
-    const elementPosition = element.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset;
+  const element = document.getElementById(id);
+  const elementPosition = element.getBoundingClientRect().top;
+  const offsetPosition = elementPosition + window.pageYOffset;
 
-    window.scrollTo({
-         top: offsetPosition,
-         behavior: "smooth"
-    });
+  window.scrollTo({
+    top: offsetPosition,
+    behavior: "smooth"
+  });
 }
 
 const position = { x: 0, y: 0 };
 const lineProps = {
   edgeType: "smoothstep",
-  labelStyle: { fontWeight: 700, fontSize: 12, fill: '#fff' },
-  labelBgStyle: { color: '#fff', fillOpacity: 0.8 },
+  labelStyle: { fontWeight: 700, fontSize: 12, fill: "#fff" },
+  labelBgStyle: { color: "#fff", fillOpacity: 0.8 }
 };
 
-export function createTreeDataFromPreset(decisions: Array<Decision>): Elements<any>{
+export function createTreeDataFromPreset(decisions: Array<Decision>): Elements<any> {
   const elements = [] as Elements<any>;
   const colors = generateColors(decisions.length);
 
@@ -77,23 +79,23 @@ export function createTreeDataFromPreset(decisions: Array<Decision>): Elements<a
         color: colors[key],
         value: getValueFromChilds(decision, "sub"),
         decKey: decision.key,
-        ...decision,
+        ...decision
       },
-        position,
-        type: 'decisionNode',
+      position,
+      type: "decisionNode"
     });
     decision.sub.forEach((scenario) => {
-      const nodeType = scenario.cases.length > 0 ? 'caseNode' : 'subCaseEndNode';
+      const nodeType = scenario.cases.length > 0 ? "caseNode" : "subCaseEndNode";
       elements.push({
         id: scenario.key,
         data: {
           ...scenario,
           decKey: decision.key,
           subKey: scenario.key,
-          color: colors[key],
+          color: colors[key]
         },
         position,
-        type: nodeType,
+        type: nodeType
       });
       elements.push({
         id: `${decision.key}-${scenario.key}-link`,
@@ -101,11 +103,11 @@ export function createTreeDataFromPreset(decisions: Array<Decision>): Elements<a
         target: scenario.key,
         label: `${getRoundedValue(scenario.probability, 3)} %`,
         ...lineProps,
-        labelBgStyle: { fill: colors[key] },
+        labelBgStyle: { fill: colors[key] }
       });
 
       scenario.cases.forEach((c) => {
-        const nodeType = c.subCases.length > 0 ? 'caseNode' : 'subCaseEndNode';
+        const nodeType = c.subCases.length > 0 ? "caseNode" : "subCaseEndNode";
         elements.push({
           id: c.key,
           data: {
@@ -113,18 +115,18 @@ export function createTreeDataFromPreset(decisions: Array<Decision>): Elements<a
             subKey: scenario.key,
             caseKey: c.key,
             color: colors[key],
-            ...c,
+            ...c
           },
           position,
-          type: nodeType,
+          type: nodeType
         });
         elements.push({
-          id: `${scenario.key}-${c.key}-link`, 
+          id: `${scenario.key}-${c.key}-link`,
           source: scenario.key,
           target: c.key,
           label: `${getRoundedValue(c.probability, 3)} %`,
           ...lineProps,
-          labelBgStyle: { fill: colors[key] },
+          labelBgStyle: { fill: colors[key] }
         });
 
         c.subCases.forEach((sc) => {
@@ -139,7 +141,7 @@ export function createTreeDataFromPreset(decisions: Array<Decision>): Elements<a
               ...sc
             },
             position,
-            type: 'subCaseEndNode',
+            type: "subCaseEndNode"
           });
           elements.push({
             id: `${c.key}-${sc.key}-link`,
@@ -147,11 +149,11 @@ export function createTreeDataFromPreset(decisions: Array<Decision>): Elements<a
             target: sc.key,
             label: `${getRoundedValue(sc.probability, 3)} %`,
             ...lineProps,
-            labelBgStyle: { fill: colors[key] },
+            labelBgStyle: { fill: colors[key] }
           });
-        })
+        });
       });
-    })
+    });
   });
 
   return elements;

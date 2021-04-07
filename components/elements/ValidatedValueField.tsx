@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FormControl, Input } from "@material-ui/core";
+import { toLocale } from "@/../lib/helpers";
 
 function regex(value: string): boolean {
-  return /^[+-]?\d+(\d+)?$/.test(value);
+  return /^[+-]?\d+([.,]\d+)?$/.test(value);
 }
 
 function usePrevious(value: number): number {
@@ -16,10 +17,12 @@ function usePrevious(value: number): number {
 interface Props {
   onChange: (_value: number) => void;
   value: number;
+  disabled?: boolean;
 }
 
-const ValidatedValueField: React.FC<Props> = ({ onChange, value }) => {
+const ValidatedValueField: React.FC<Props> = ({ onChange, value, disabled = false }) => {
   const prevValue = usePrevious(value);
+  const [isFocus, setIsFocus] = useState<boolean>(false);
   const ref = useRef(null);
   const [localValue, setLocalValue] = useState<number | string>(value);
   const [error, setError] = useState(false);
@@ -53,13 +56,15 @@ const ValidatedValueField: React.FC<Props> = ({ onChange, value }) => {
   };
 
   return (
-    <FormControl size="small" style={{ maxWidth: "75px" }}>
+    <FormControl disabled={disabled} size="small" style={{ maxWidth: "75px" }}>
       <Input
         ref={ref}
         error={error}
-        value={localValue}
+        value={isFocus ? localValue : toLocale(localValue)}
         onChange={handleValueChange}
         onKeyPress={handleKeyPress}
+        onFocus={() => setIsFocus(true)}
+        onBlur={() => setIsFocus(false)}
         inputProps={{
           inputMode: "numeric",
           style: {

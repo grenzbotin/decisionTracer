@@ -5,6 +5,7 @@ import CustomTooltip from "@/../components/elements/CustomTooltip";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import ValidatedInputField from "@/../components/elements/ValidatedInputField";
 import { getPresetValueByField, getRoundedValue } from "@/../lib/helpers";
+import ValidatedValueField from "@/../components/elements/ValidatedValueField";
 
 const getInterpretationValues = (
   calc: { mild: { day_value: number }; difficult: { day_value: number }; death: { value: number } },
@@ -164,8 +165,7 @@ export default function Q3(): JSX.Element {
             {i18next.t(`${i18nPrefix}.calc.day_mild_value`)}
           </Grid>
           <Grid item xs={4}>
-            <ValidatedInputField
-              onlyNegative
+            <ValidatedValueField
               value={calc.mild.day_value}
               onChange={(value) => handleChange(value, "mild", "day_value")}
             />
@@ -203,8 +203,7 @@ export default function Q3(): JSX.Element {
             {i18next.t(`${i18nPrefix}.calc.day_difficult_value`)}
           </Grid>
           <Grid item xs={4}>
-            <ValidatedInputField
-              onlyNegative
+            <ValidatedValueField
               value={calc.difficult.day_value}
               onChange={(value) => handleChange(value, "difficult", "day_value")}
             />
@@ -242,8 +241,7 @@ export default function Q3(): JSX.Element {
             {i18next.t(`${i18nPrefix}.calc.death_value`)}
           </Grid>
           <Grid item xs={4}>
-            <ValidatedInputField
-              onlyNegative
+            <ValidatedValueField
               disabled={calc.death.value === null}
               value={calc.death.value !== null ? calc.death.value : 0}
               onChange={(value) => handleChange(value, "death", "value")}

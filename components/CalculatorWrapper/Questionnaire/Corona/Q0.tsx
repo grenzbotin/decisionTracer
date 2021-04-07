@@ -168,13 +168,13 @@ export default function Q0(): JSX.Element {
             {i18next.t(`${i18nPrefix}.calc.infected_actual`)}
           </Grid>
           <Grid item xs={4}>
-            {calc.actualInfected}
+            {getRoundedValue(calc.actualInfected, 0)}
           </Grid>
           <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.infected_unknown`)}
           </Grid>
           <Grid item xs={4}>
-            {calc.unknownInfected}
+            {getRoundedValue(calc.unknownInfected, 0)}
           </Grid>
           <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.inhabitants`)}

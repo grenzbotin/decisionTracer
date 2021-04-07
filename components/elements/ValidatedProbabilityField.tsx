@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FormControl, Input, InputAdornment } from "@material-ui/core";
+import { toLocale } from "@/../lib/helpers";
 
 function regex(value: string): boolean {
   return /^[+]?\d+([.,]\d+)?$/.test(value);
@@ -21,6 +22,7 @@ interface Props {
 
 const ValidatedProbabilityField: React.FC<Props> = ({ onChange, value, disabled = false }) => {
   const prevValue = usePrevious(value);
+  const [isFocus, setIsFocus] = useState<boolean>(false);
   const ref = useRef(null);
   const [localValue, setLocalValue] = useState<number | string>(value);
   const [error, setError] = useState(false);
@@ -58,9 +60,11 @@ const ValidatedProbabilityField: React.FC<Props> = ({ onChange, value, disabled 
       <Input
         ref={ref}
         error={error}
-        value={localValue}
+        value={isFocus ? localValue : toLocale(localValue)}
         onChange={handleProbabiltyChange}
         onKeyPress={handleKeyPress}
+        onFocus={() => setIsFocus(true)}
+        onBlur={() => setIsFocus(false)}
         endAdornment={
           <InputAdornment disableTypography position="end" style={{ fontSize: "0.8rem" }}>
             %
