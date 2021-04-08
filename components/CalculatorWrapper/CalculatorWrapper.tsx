@@ -15,7 +15,6 @@ import Questionnaire from "./Questionnaire";
 
 const activeSelectors = {
   corona: ["questionnaire", "tree", "card"],
-  ["corona-2"]: ["tree", "card"],
   ["coin-toss"]: ["questionnaire", "tree", "card"],
   custom: ["tree", "card"]
 };
