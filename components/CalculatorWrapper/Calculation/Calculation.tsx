@@ -58,7 +58,7 @@ export default function Calculation(): JSX.Element {
                 {decision.title}
               </div>
               <div>
-                {i18next.t("calculator.value")}: {getResult(decision)}
+                {i18next.t("calculator.expected_utility")}: {getResult(decision)}
               </div>
             </AccordionSummary>
             <AccordionDetails>
