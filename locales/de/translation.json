@@ -161,7 +161,7 @@
       },
       "description": "Entscheidungshilfe mit einfachem Entscheidungsbaum",
       "get_data_for": "Lade Daten für",
-      "get_data_tooltip": "Mit Klick auf diesen Button lädst Du die aktuellen Corona-Daten in Deutschland vom Robert Koch-Institut (RKI).\n \n Für die Anzahl der Infizierten nutzen wir die offizielle Angabe des RKI zur 7-Tage-Fallzahl. Da Betroffene des Corona-Virus in aller Regel länger ansteckend sind, kann diese Zahl nur als absolutes Minimum verstanden werden. \n \n Die Daten wurden bereitgestellt durch Marlon Lueckert (https://github.com/marlon360/rki-covid-api).",
+      "get_data_tooltip": "Mit Klick auf diesen Button lädst Du die aktuellen Corona-Daten in Deutschland vom Robert Koch-Institut (RKI). \n Die Daten wurden bereitgestellt durch Marlon Lueckert (https://github.com/marlon360/rki-covid-api).",
       "meta": {
         "description": "Impfung: Ja oder nein? Sind die Nachteile einer Impfung es wert, nicht geimpft zu werden?",
         "keywords": "Corona, Impfung, Entscheidung, Hilfe, Rechner",

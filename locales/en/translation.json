@@ -161,7 +161,7 @@
       },
       "description": "Decision guidance with simple decision tree",
       "get_data_for": "Load data for",
-      "get_data_tooltip": "Clicking this button will get you data about the current corona situation in Germany (Robert Koch-Institut).\n \n Für die Anzahl der Infizierten nutzen wir die offizielle Angabe des RKI zur 7-Tage-Fallzahl. Da Betroffene des Corona-Virus in aller Regel länger ansteckend sind, kann diese Zahl nur als absolutes Minimum verstanden werden. \n \n Data provided by Marlon Lueckert (https://github.com/marlon360/rki-covid-api).",
+      "get_data_tooltip": "Clicking this button will get you data about the current corona situation in Germany (Robert Koch-Institut).\n Data provided by Marlon Lueckert (https://github.com/marlon360/rki-covid-api).",
       "meta": {
         "description": "Vaccination: Yes or no? Are disadvantages of a vaccination higher than the benefits?",
         "keywords": "Corona, vaccination, decision, help, calculator",

@@ -53,10 +53,11 @@ export default function CoronaCases({
     if (onGetInfected) {
       loadCoronaDataGermany()
         .then((response) => {
-          const { casesPerWeek } = response.data;
+          const { cases, deaths, recovered } = response.data;
+          const activeCases = cases - deaths - recovered;
 
-          setCases(casesPerWeek);
-          onGetInfected(casesPerWeek);
+          setCases(activeCases);
+          onGetInfected(activeCases);
         })
         .catch(() => {
           setError(true);

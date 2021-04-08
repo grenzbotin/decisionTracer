@@ -16,7 +16,7 @@ export default function Q0(): JSX.Element {
   const firstRender = useFirstRender();
 
   const [calc, setCalc] = useState({
-    knownInfected: 100000,
+    knownInfected: 200000,
     darkFigure: 3,
     actualInfected: 300000,
     unknownInfected: 200000,
