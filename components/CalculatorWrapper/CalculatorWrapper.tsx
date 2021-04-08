@@ -5,6 +5,7 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import AccountTreeIcon from "@material-ui/icons/AccountTree";
 import ViewAgendaIcon from "@material-ui/icons/ViewAgenda";
 import LiveHelpIcon from "@material-ui/icons/LiveHelp";
+import ExposureIcon from "@material-ui/icons/Exposure";
 
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { getUniqueNumber } from "@/../lib/helpers";
@@ -12,11 +13,12 @@ import { GlobalUiContext } from "@/../hooks/GlobalUiContextProvider";
 import TreeFlow from "./TreeFlow";
 import Calculator from "./Calculator";
 import Questionnaire from "./Questionnaire";
+import Calculation from "./Calculation";
 
 const activeSelectors = {
-  corona: ["questionnaire", "tree", "card"],
-  ["coin-toss"]: ["questionnaire", "tree", "card"],
-  custom: ["tree", "card"]
+  corona: ["questionnaire", "tree", "card", "calculation"],
+  ["coin-toss"]: ["questionnaire", "tree", "card", "calculation"],
+  custom: ["tree", "card", "calculation"]
 };
 
 const SELECTORS = {
@@ -31,6 +33,10 @@ const SELECTORS = {
   questionnaire: {
     id: "questionnaire",
     icon: <LiveHelpIcon />
+  },
+  calculation: {
+    id: "calculation",
+    icon: <ExposureIcon />
   }
 };
 
@@ -46,6 +52,8 @@ const getComponentFromMode = (
       return <Calculator lastAdded={lastAddedDecision} setLastAdded={setLastAddedDecision} />;
     case "questionnaire":
       return <Questionnaire />;
+    case "calculation":
+      return <Calculation />;
     default:
       return <Calculator lastAdded={lastAddedDecision} setLastAdded={setLastAddedDecision} />;
   }

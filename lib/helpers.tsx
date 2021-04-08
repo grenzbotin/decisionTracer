@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { generateColors } from "../components/theme";
-import { CaseItem, Decision, SubCaseItem, SubItem } from "./presets";
+import { CaseItem, Decision as DecisionType, SubCaseItem, SubItem } from "./presets";
 import { Elements } from "react-flow-renderer";
 import i18next from "i18next";
 
 export function getPresetValueByField(
-  decisions: Decision[],
+  decisions: DecisionType[],
   type: "probability" | "value",
   decKey: string,
   subKey: string,
@@ -45,7 +46,7 @@ export function getRoundedValue(value: number, digits: number): string {
   return toLocale(value.toFixed(digits));
 }
 
-export function getValueFromChilds(node: SubItem | SubCaseItem | Decision, child: string): number {
+export function getValueFromChilds(node: SubItem | SubCaseItem | DecisionType, child: string): number {
   let value = 0;
   node[child].forEach((item: SubItem | SubCaseItem | CaseItem) => {
     value += item.value * (item.probability / 100);
@@ -72,7 +73,7 @@ const lineProps = {
   labelBgStyle: { color: "#fff", fillOpacity: 0.8 }
 };
 
-export function createTreeDataFromPreset(decisions: Array<Decision>): Elements<any> {
+export function createTreeDataFromPreset(decisions: Array<DecisionType>): Elements<any> {
   const elements = [] as Elements<any>;
   const colors = generateColors(decisions.length);
 
@@ -184,3 +185,12 @@ export const applyFormatting = (text: string): (string | JSX.Element)[] => {
       return parsed;
     });
 };
+
+export function getResult(decision: DecisionType): number | string {
+  let total = 0;
+  decision.sub.forEach((item) => {
+    total += item.value * (item.probability / 100);
+  });
+
+  return getRoundedValue(total, 3);
+}

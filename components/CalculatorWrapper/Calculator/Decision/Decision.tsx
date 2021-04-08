@@ -11,16 +11,7 @@ import EditableTitle from "@/../components/elements/EditableTitle";
 import SubItem from "../SubItem";
 import CustomIcon from "@/../assets/CustomIcon";
 import CardMenu from "../../../elements/CardMenu";
-import { getRoundedValue, getUniqueNumber, scrollToTargetOffset } from "@/../lib/helpers";
-
-function getResult(decision: DecisionType): number | string {
-  let total = 0;
-  decision.sub.forEach((item) => {
-    total += item.value * (item.probability / 100);
-  });
-
-  return getRoundedValue(total, 2);
-}
+import { getResult, getUniqueNumber, scrollToTargetOffset } from "@/../lib/helpers";
 
 export default function Decision({ decision, color }: { decision: DecisionType; color: string }): JSX.Element {
   const { setTitle, removeItem, addItem } = useContext(GlobalDecisionContext);
