@@ -12,7 +12,7 @@ export default function Q3(): JSX.Element {
       <Typography variant="body2" component="p" style={{ marginBottom: ".6rem" }}>
         {applyFormatting(i18next.t(`${i18nPrefix}.text_1`))}
       </Typography>
-      <img src="/decisionTracer/images/tut3.png" alt="Spiel 2" width="320px" style={{ marginBottom: "1rem" }} />
+      <img src="/decisionTracer/images/tut3.png" alt="Spiel 2" width="280px" style={{ marginBottom: "1rem" }} />
       <Typography variant="body2" component="p">
         {applyFormatting(i18next.t(`${i18nPrefix}.text_2`))}
       </Typography>

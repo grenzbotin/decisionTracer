@@ -15,7 +15,7 @@ export default function Q2(): JSX.Element {
       <img
         src="/decisionTracer/images/tut2.png"
         alt="Spiel 1 vs Nicht spielen"
-        width="320px"
+        width="280px"
         style={{ marginBottom: "1rem" }}
       />
     </>
