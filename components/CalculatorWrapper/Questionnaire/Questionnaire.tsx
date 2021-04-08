@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import SwipeableViews from "react-swipeable-views";
+import i18next from "i18next";
 import { makeStyles, Theme, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
-import { Grid, IconButton } from "@material-ui/core";
+import { Button, Grid, IconButton } from "@material-ui/core";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import AccountTreeIcon from "@material-ui/icons/AccountTree";
 
-import Q0 from "./Corona/Q0";
-import Q1 from "./Corona/Q1";
-import Q2 from "./Corona/Q2";
-import Q3 from "./Corona/Q3";
-import Q4 from "./Corona/Q4";
+import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
+import { TABS } from "./constants";
+import { GlobalUiContext } from "@/../hooks/GlobalUiContextProvider";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -63,38 +63,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const TABS = [
-  {
-    id: 0,
-    label: 1,
-    content: <Q0 />
-  },
-  {
-    id: 1,
-    label: 2,
-    content: <Q1 />
-  },
-  {
-    id: 2,
-    label: 3,
-    content: <Q2 />
-  },
-  {
-    id: 3,
-    label: 4,
-    content: <Q3 />
-  },
-  {
-    id: 4,
-    label: 5,
-    content: <Q4 />
-  }
-];
-
 export default function FullWidthTabs(): JSX.Element {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = useState(0);
+  const { active } = useContext(GlobalDecisionContext);
+  const { setVisualMode } = useContext(GlobalUiContext);
 
   const handleChange = (event: React.ChangeEvent<unknown>, newValue: number): void => {
     setValue(newValue);
@@ -116,7 +90,7 @@ export default function FullWidthTabs(): JSX.Element {
             variant="fullWidth"
             aria-label="full width tabs example"
           >
-            {TABS.map((t) => (
+            {TABS[active.key].map((t: { id: number; label: number }) => (
               <Tab
                 key={t.id}
                 className={classes.tab}
@@ -135,7 +109,7 @@ export default function FullWidthTabs(): JSX.Element {
           index={value}
           onChangeIndex={handleChangeIndex}
         >
-          {TABS.map((t) => (
+          {TABS[active.key].map((t: { id: number; label: number; content: JSX.Element }) => (
             <TabPanel key={t.id} value={value} index={t.id} dir={theme.direction}>
               {t.content}
 
@@ -143,13 +117,25 @@ export default function FullWidthTabs(): JSX.Element {
                 <IconButton color="primary" disabled={t.id === 0} onClick={() => handleChangeIndex(t.id - 1)}>
                   <ArrowBackIosIcon fontSize="small" />
                 </IconButton>
-                <IconButton
-                  color="primary"
-                  disabled={t.id === TABS.length - 1}
-                  onClick={() => handleChangeIndex(t.id + 1)}
-                >
-                  <ArrowForwardIosIcon fontSize="small" />
-                </IconButton>
+                {t.id === TABS[active.key].length - 1 ? (
+                  <Button
+                    size="small"
+                    variant="contained"
+                    color="primary"
+                    onClick={() => setVisualMode("tree")}
+                    startIcon={<AccountTreeIcon />}
+                  >
+                    {i18next.t("common.decision_tree")}
+                  </Button>
+                ) : (
+                  <IconButton
+                    color="primary"
+                    disabled={t.id === TABS[active.key].length - 1}
+                    onClick={() => handleChangeIndex(t.id + 1)}
+                  >
+                    <ArrowForwardIosIcon fontSize="small" />
+                  </IconButton>
+                )}
               </div>
             </TabPanel>
           ))}

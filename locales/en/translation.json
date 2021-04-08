@@ -6,6 +6,9 @@
     "add_sub_case": "Add sub case",
     "expected_utility": "Expected utility",
     "independent": "independent",
+    "interpretation": "Interpretation",
+    "interpretation_text": "{{ decision }} seems to be the better alternative for you.",
+    "interpretation_text_pl": "{{ decision }} seem to be the better alternatives for you.",
     "new_decision": "Decision",
     "no_decisions_created": "No decisions created",
     "probability": "Occurence probability",
@@ -15,9 +18,6 @@
     "remove_scenario": "Delete scenario",
     "remove_sub_case": "Delete sub case",
     "result": "Result",
-    "interpretation": "Interpretation",
-    "interpretation_text": "{{ decision }} seems to be the better alternative for you.",
-    "interpretation_text_pl": "{{ decision }} seem to be the better alternatives for you.",
     "subCasesItems": "Sub cases",
     "subcases": "Cases",
     "value": "Utility"
@@ -29,29 +29,21 @@
     "navbar": {
       "home": "Overview"
     },
-    "route_leaving_confirm": "Are you sure that you want to leave the page? Your changes can not be saved."
+    "route_leaving_confirm": "Are you sure that you want to leave the page? Your changes can not be saved.",
+    "decision_tree": "Decision tree"
   },
   "home": {
+    "intro": "Mit unserem Tool wollen wir Dich dabei unterstützen, eine rationale Entscheidung zu treffen. Du kannst Alternativen gegenüberstellen, Ihre Vor- und Nachteile bewerten und Dir ein Ergebnis berechnen lassen.\n Du kannst Dinge, die Du berücksichtigen möchtest, hinzufügen oder bestehende Elemente verändern. Alle Werte, die Du eingibst oder übernimmst, kannst Du später verändern und schauen, ob dadurch die Entscheidung kippt.\nNatürlich kann das Tool lediglich eine Hilfe sein. Wir wollen Dir helfen, Deine Entscheidung zu reflektieren. Das Ergebnis hängt von Deinen Eingaben ab. Du bist für Deine Entscheidung verantwortlich, Du musst sie treffen.\n Um das Prinzip zu verstehen, solltest Du Dir zunächst das Tutorial anschauen. (Siehe Karte: 'Kopf oder Zahl')\n Eine rationale Entscheidung bezüglich der Corona-Impfung kannst Du Dir mit Klick auf die zweite Karte herleiten. (Siehe Karte 'Corona')\n Du kannst aber auch etwas ganz Eigenes entwerfen. (Siehe Karte 'Eigener Entscheidungsbaum')\n Viel Spaß!",
     "meta": {
       "description": "Make the right choice with ease",
       "keywords": "Calculator, Decision helper, Corona",
       "title": "Decision Tracer | Home"
-    },
-    "intro": "Mit unserem Tool wollen wir Dich dabei unterstützen, eine rationale Entscheidung zu treffen. Du kannst Alternativen gegenüberstellen, Ihre Vor- und Nachteile bewerten und Dir ein Ergebnis berechnen lassen.\n Du kannst Dinge, die Du berücksichtigen möchtest, hinzufügen oder bestehende Elemente verändern. Alle Werte, die Du eingibst oder übernimmst, kannst Du später verändern und schauen, ob dadurch die Entscheidung kippt.\nNatürlich kann das Tool lediglich eine Hilfe sein. Wir wollen Dir helfen, Deine Entscheidung zu reflektieren. Das Ergebnis hängt von Deinen Eingaben ab. Du bist für Deine Entscheidung verantwortlich, Du musst sie treffen.\n Um das Prinzip zu verstehen, solltest Du Dir zunächst das Tutorial anschauen. (Siehe Karte: 'Kopf oder Zahl')\n Eine rationale Entscheidung bezüglich der Corona-Impfung kannst Du Dir mit Klick auf die zweite Karte herleiten. (Siehe Karte 'Corona')\n Du kannst aber auch etwas ganz Eigenes entwerfen. (Siehe Karte 'Eigener Entscheidungsbaum')\n Viel Spaß!"
+    }
   },
   "presets": {
     "coin-toss": {
-      "description": "A little tutorial for understanding the tool",
-      "question": "Tutorial",
-      "title": "Head or Tail?",
-      "meta": {
-        "description": "Head or Tail: Should I bet or not? Das Tutorial von Decision Tracer",
-        "keywords": "Head or Tail, Tutorial, Decision, Help, Calculator",
-        "title": "Head or Tail? | Decision Tracer"
-      },
       "decisions": {
         "0": {
-          "title": "Game 1",
           "sub": {
             "0": {
               "title": "Game 1: Head"
@@ -59,18 +51,18 @@
             "1": {
               "title": "Game 1: Tail"
             }
-          }
+          },
+          "title": "Game 1"
         },
         "1": {
-          "title": "No game",
           "sub": {
             "0": {
               "title": "Saving 5,- Euro"
             }
-          }
+          },
+          "title": "No game"
         },
         "2": {
-          "title": "Game 2",
           "sub": {
             "0": {
               "title": "Game 2: Head"
@@ -78,14 +70,40 @@
             "1": {
               "title": "Game 2: Tail"
             }
-          }
+          },
+          "title": "Game 2"
         }
-      }
+      },
+      "description": "A little tutorial for understanding the tool",
+      "meta": {
+        "description": "Head or Tail: Should I bet or not? Das Tutorial von Decision Tracer",
+        "keywords": "Head or Tail, Tutorial, Decision, Help, Calculator",
+        "title": "Head or Tail? | Decision Tracer"
+      },
+      "question": "Tutorial",
+      "questionnaire": {
+        "0": {
+          "text": "Unser kleines Tool soll Euch eine Entscheidungshilfe sein. Es soll Euch dabei unterstützen, in komplizierten Situationen den Überblick zu bewahren und Eure Entscheidung zu reflektieren.\nVor allem, wenn viele Aspekte zu berücksichtigen sind und das Gesamtbild schwer zu überblicken ist, verlassen sich Menschen auf ihr Bauchgefühl. Geht es um die Wandfarbe im Flur, ist das völlig in Ordnung. Geht es wie bei Corona um Fragen mit enormer Tragweite, so sollte die Entscheidung möglichst rational sein. Wir sollten möglichst alle relevanten Informationen berücksichtigen.\nInsbesondere, wenn kleine Wahrscheinlichkeiten ins Spiel kommen, können uns Entscheidungen aus dem Bauch heraus hinters Licht führen. Wir können intuitiv kaum zwischen einer 0,001%igen und einer 0,00001%igen Eintrittswahrscheinlichkeit unterscheiden, obwohl die eine Variante 100 mal wahrscheinlicher ist. Beide sind für uns _extrem unwahrscheinlich_.\nWas unser Tool macht, ist eigentlich einfache Wahrscheinlichkeitsrechnung. Da bekanntlich Stochastik nicht für alle das Highlight des Mathe-Unterrichts war, möchten wir Euch erklären, wie unser Tool und die Berechnungen dahinter funktionieren."
+        },
+        "1": {
+          "text_1": "Nehmen wir an, jemand bietet uns eine kleine Wette an: Eine Münze wird geworfen, bei Kopf bekommen wir 10,- Euro, bei Zahl bekommen wir nichts. Die beiden Möglichkeiten – Kopf oder Zahl – die eintreten können, heißen bei uns _Szenarien_. Die Möglichkeit, dass die Münze genau auf der Kante stehenbleibt, ignorieren wir. Beide Szenarien haben jeweils eine Eintrittswahrscheinlichkeit von 50%. In unserem Tool wird die Situation so dargestellt:",
+          "text_2": "Eine Eintrittswahrscheinlichkeit von 50%, bedeutet, dass in 50 von hundert Fällen, das jeweilige Ereignis eintritt. (_Prozent bedeutet von hundert_). 50%, also 50 von 100 ist in der Mathematik 50 / 100 = 0,5. Da sich die Ereignisse Kopf und Zahl gegenseitig ausschließen, aber auf jeden Fall eines von beiden eintritt, ist die Summe der Wahrscheinlichkeiten 100% oder 1.\nWas wir berechnen wollen, ist der sogenannte _Erwartungswert_. Dazu muss die Eintrittswahrscheinlichkeit mit der Auszahlung in Euro – also 0 bzw. 10 Euro – multipliziert werden. Der Erwartungswert von Kopf ist demnach 0,5 x 10 = 5. Der Erwartungswert von Zahl ist 0,5 x 0 = 0. Der Erwartungswert von Spiel 1, also des Münzwurfs, ist die Summe der beiden einzelnen Erwartungswerte, also 5 + 0 = 5.\nDoch was bringt uns jetzt dieses Ergebnis? Dazu müssen wir uns vor Augen halten, was der Erwartungswert eigentlich bedeutet. Bei einem einzigen Münzwurf ist die Wahrscheinlichkeit 10,- Euro oder gar nichts zu bekommen fifty-fifty. Die Möglichkeit, 5,- Euro zu bekommen, gibt es nicht. Doch je häufiger ich die Münze werfe, desto mehr wird sich der _Durchschnitt_ der Ergebnisse der 5 annähern."
+        },
+        "2": {
+          "text_1": "Wenn die Teilnahme an diesem Münzwurf-Spiel also Geld kostet, dann sollten wir das nur tun, wenn der Preis unter 5,- Euro liegt. Bei diesem einfachen Beispiel wäre das vermutlich auch ohne komplizierte Berechnung klar gewesen.\nDie Alternative zum Spiel ist natürlich, dass wir nicht spielen. Dann bleiben die 5,- Euro mit hundertprozentiger Sicherheit bei uns in der Tasche. Der Erwartungswert dieser Entscheidung ist also 5. Natürlich sollten wir uns für die Alternative mit dem höchsten Erwartungswert entscheiden. In unserem Tool sieht die Situation so aus:"
+        },
+        "3": {
+          "text_1": "Doch was ist, wenn die Münze gezinkt ist, so dass die Wahrscheinlichkeit, dass Kopf fällt, bei 53% liegt? Und was, wenn die Auszahlung bei Kopf nicht 10,- Euro, sondern 12,- Euro ist und wir bei Zahl zusätzlich 2,- Euro zahlen müssen? Sollten wir das Spiel für 5,- Euro spielen? Hilft uns jetzt unser Bauchgefühl weiter?",
+          "text_2": "Der Erwartungswert ist jetzt (0,53 x 12) + (0,47 x (-2)) = 5,42. Bei einem Preis von 5,- Euro pro Spiel sollten wir also spielen, es wird sich langfristig auszahlen, zumindest bei sehr vielen Spielen."
+        },
+        "4": {
+          "text_1": "Doch wir wollen Euch ja nicht bei Münzwurf-Spielen, sondern bei ganz allgemeinen Entscheidungen (wie der Impfentscheidung) unterstützen. Und da gibt es keine Ein- oder Auszahlungen. Wie kommen wir hier weiter?\nFür die Entscheidung ist eigentlich nicht der absolute Wert der Auszahlung, sondern nur das Verhältnis der Werte zueinander entscheidend! Ich kann die Auszahlungen und den Preis des Spiels verdoppeln, am Ergebnis ändert sich nichts. Diese Tatsache können wir nutzen, indem wir den verschiedenen Szenarien Punkte zuordnen: Pluspunkte für Dinge, die uns freuen, Minuspunkte für Dinge, die wir nicht wollen. Ist uns etwas egal, bekommt es 0 Punkte. Je mehr wir etwas wollen oder nicht wollen, desto mehr Plus- oder Minuspunkte bekommt es. Hier könnt und müsst Ihr mit den Eingaben spielen bis sie Eurer eigenen Bewertung entsprechen.\nWahrscheinlichkeiten solltet Ihr aus seriösen Studien entnehmen, wir haben Euch einige verlinkt. Es ist gewollt, dass Ihr mit den Werten zu spielt. Bleibt aber realistisch, damit ihr Euch nicht selbst betrügt. Passt auf, dass ihr nicht nur das seht, was ihr sehen wollt\nIm nächsten Bildschirm gelangt Ihr zu den Münzwurf-Spielen. Wenn Ihr das Prinzip verstanden habt, könnt Ihr nicht nur mit den Zahlen spielen, sondern auch Szenarien verändern oder eigene Szenarien hinzufügen.\nGeht Ihr zurück zur Startseite oder in das Menü, könnt Ihr Euch anschauen, unter welchen Bedingungen man sich gegen Corona impfen lassen sollte oder nicht. Und selbstverständlich könnt Ihr das Tool auch völlig frei verwenden und eigene Entscheidungsbäume entwerfen: Masern-Impfung, Wandfarbe im Flur oder in Eurem Unternehmen die Investitions-Entscheidung des nächsten Maschinenkaufs. Viel Spaß!"
+        }
+      },
+      "title": "Head or Tail?"
     },
     "corona": {
       "data_loaded": "Updated",
-      "get_data_for": "Load data for",
-      "get_data_tooltip": "Clicking this button will get you data about the current corona situation in Germany (Robert Koch-Institut).\n Data provided by Marlon Lueckert (https://github.com/marlon360/rki-covid-api).",
       "decisions": {
         "0": {
           "sub": {
@@ -142,6 +160,8 @@
         }
       },
       "description": "Decision guidance with simple decision tree",
+      "get_data_for": "Load data for",
+      "get_data_tooltip": "Clicking this button will get you data about the current corona situation in Germany (Robert Koch-Institut).\n Data provided by Marlon Lueckert (https://github.com/marlon360/rki-covid-api).",
       "meta": {
         "description": "Vaccination: Yes or no? Are disadvantages of a vaccination higher than the benefits?",
         "keywords": "Corona, vaccination, decision, help, calculator",
@@ -168,14 +188,14 @@
         },
         "1": {
           "calc": {
+            "not_100": "The total probability value should sum up to 100% for a meaningful calculation.",
             "probability_asymptomatic": "Probability for asymptomatic disease",
             "probability_death": "Probability to die of covid",
             "probability_difficult": "Probability of difficult progression",
             "probability_mild": "Probability of mild progression",
             "tooltip_disabled": "Deactivated fields appear because the related case got deleted in the calculator. To fix the problem, you need to restart the calculation with reloading the page.",
             "unvaccinated": "Unvaccinated",
-            "vaccinated": "Vaccinated",
-            "not_100": "The total probability value should sum up to 100% for a meaningful calculation."
+            "vaccinated": "Vaccinated"
           },
           "subtitle": "Wenn Du auf den Info-Button klickst, geben wir Dir einen kurzen Überblick über die aktuelle Studienlage.",
           "title": "Wie hoch ist die Wahrscheinlichkeit der möglichen Krankheitsverläufe, wenn man sich infiziert hat?",
@@ -185,12 +205,12 @@
           "0": "Mit welchem Wert möchtest Du rechnen?",
           "calc": {
             "cvt": "Cases",
-            "tooltip_cvt_cases": "Please note! We try to keep this value as updated as possible, but we do not have any technical and official source to pull the data automatically. Please adapt this value manually.",
             "damage_title": "Cerebral venous thrombosis (CVT) (Astra-Zeneca)",
             "dead": "Deaths",
             "death_title": "Deaths of covid",
             "in": "in",
             "infected": "Infected",
+            "tooltip_cvt_cases": "Please note! We try to keep this value as updated as possible, but we do not have any technical and official source to pull the data automatically. Please adapt this value manually.",
             "vaccinated": "Vaccinated"
           },
           "damage_probability": "Probability of getting difficult vaccination damage",

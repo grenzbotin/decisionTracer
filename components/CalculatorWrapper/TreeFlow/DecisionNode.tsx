@@ -1,9 +1,9 @@
-import CustomIcon from "@/../assets/CustomIcon";
-import { getRoundedValue } from "@/../lib/helpers";
 import { Paper, Typography } from "@material-ui/core";
 import React, { memo } from "react";
-
 import { Handle, NodeProps, Position } from "react-flow-renderer";
+
+import CustomIcon from "@/../assets/CustomIcon";
+import { getRoundedValue } from "@/../lib/helpers";
 
 const DecisionNode = memo(({ data, selected, sourcePosition = Position.Bottom }: NodeProps) => {
   return (

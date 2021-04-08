@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { Paper, Typography } from "@material-ui/core";
-
 import { Handle, NodeProps, Position } from "react-flow-renderer";
+
 import { getRoundedValue } from "@/../lib/helpers";
 
 const SubCaseEndNode = memo(({ data, selected, targetPosition = Position.Top }: NodeProps) => {

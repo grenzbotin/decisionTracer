@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Container, Divider, Grid, Typography } from "@material-ui/core";
 import i18next from "i18next";
+
 import CustomTooltip from "@/../components/elements/CustomTooltip";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import ValidatedInputField from "@/../components/elements/ValidatedInputField";

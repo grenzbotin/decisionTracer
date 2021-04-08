@@ -13,6 +13,28 @@ import TreeFlow from "./TreeFlow";
 import Calculator from "./Calculator";
 import Questionnaire from "./Questionnaire";
 
+const activeSelectors = {
+  corona: ["questionnaire", "tree", "card"],
+  ["corona-2"]: ["tree", "card"],
+  ["coin-toss"]: ["questionnaire", "tree", "card"],
+  custom: ["tree", "card"]
+};
+
+const SELECTORS = {
+  tree: {
+    id: "tree",
+    icon: <AccountTreeIcon />
+  },
+  card: {
+    id: "card",
+    icon: <ViewAgendaIcon />
+  },
+  questionnaire: {
+    id: "questionnaire",
+    icon: <LiveHelpIcon />
+  }
+};
+
 const getComponentFromMode = (
   mode: string,
   lastAddedDecision: string,
@@ -45,21 +67,15 @@ export default function CalculatorWrapper(): JSX.Element {
     <Grid container spacing={2}>
       <Grid container item xs={12} style={{ display: "flex", justifyContent: "flex-end" }}>
         <ButtonGroup color="primary" size="small" style={{ marginRight: ".5rem" }}>
-          {/* REFACTOR: Make this logic nicer. Only for corona preset we want to have the questionnaire */}
-          {active.key === "corona" && (
+          {activeSelectors[active.key].map((selector: string) => (
             <Button
-              variant={visualMode === "questionnaire" ? "contained" : "outlined"}
-              onClick={() => setVisualMode("questionnaire")}
+              key={selector}
+              variant={visualMode === SELECTORS[selector].id ? "contained" : "outlined"}
+              onClick={() => setVisualMode(SELECTORS[selector].id)}
             >
-              <LiveHelpIcon />
+              {SELECTORS[selector].icon}
             </Button>
-          )}
-          <Button variant={visualMode === "tree" ? "contained" : "outlined"} onClick={() => setVisualMode("tree")}>
-            <AccountTreeIcon />
-          </Button>
-          <Button variant={visualMode === "card" ? "contained" : "outlined"} onClick={() => setVisualMode("card")}>
-            <ViewAgendaIcon />
-          </Button>
+          ))}
         </ButtonGroup>
         <Button variant="contained" color="primary" onClick={handleClickAddItem} startIcon={<AddCircleIcon />}>
           {i18next.t("calculator.new_decision")}

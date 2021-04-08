@@ -26,7 +26,7 @@ export default function LangIndex(): JSX.Element {
   useEffect(() => {
     if (!active || active.key !== "coin-toss") {
       setActiveFromPreset("coin-toss");
-      setVisualMode("tree");
+      setVisualMode("questionnaire");
     }
   }, [active, setActiveFromPreset, setVisualMode]);
 

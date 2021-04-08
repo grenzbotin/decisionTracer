@@ -142,7 +142,7 @@ function Result({ height = 300, mobile = false }: { height?: number; mobile?: bo
           {i18next.t(
             bestAlternatives.length > 1 ? "calculator.interpretation_text_pl" : "calculator.interpretation_text",
             {
-              decision: bestAlternatives.join(", ")
+              decision: bestAlternatives.join(" & ")
             }
           )}
         </>

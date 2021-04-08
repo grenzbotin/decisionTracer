@@ -162,3 +162,26 @@ export function createTreeDataFromPreset(decisions: Array<Decision>): Elements<a
 
   return elements;
 }
+
+const regex = {
+  paragraph: /(?:\r\n){2,}/g,
+  formatting: /(_.*?_)|(\*.*?\*)/g
+};
+
+export const applyFormatting = (text: string): (string | JSX.Element)[] => {
+  console.log(text);
+  return text
+    .split(regex.formatting)
+    .filter((n) => n)
+    .map((str) => {
+      const parsed =
+        str[0] == "_" ? (
+          <em key={str}>{applyFormatting(str.substr(1, str.length - 2))}</em>
+        ) : str[0] == "*" ? (
+          <b key={str}>{applyFormatting(str.substr(1, str.length - 2))}</b>
+        ) : (
+          str
+        );
+      return parsed;
+    });
+};
