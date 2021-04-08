@@ -169,7 +169,6 @@ const regex = {
 };
 
 export const applyFormatting = (text: string): (string | JSX.Element)[] => {
-  console.log(text);
   return text
     .split(regex.formatting)
     .filter((n) => n)
