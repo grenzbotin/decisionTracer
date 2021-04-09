@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { Fragment, useContext } from "react";
 import {
   Accordion,
   AccordionDetails,
@@ -68,7 +68,7 @@ export default function Calculation(): JSX.Element {
                     <Grid item xs={12}>
                       <Card variant="outlined" style={{ padding: ".5rem", backgroundColor: `${colors[b]}1A` }}>
                         {sub.title}
-                        <Grid container item style={{ marginTop: "1rem" }}>
+                        <Grid container item>
                           {sub.cases.map((c, l) => (
                             <Grid
                               key={c.key}
@@ -99,10 +99,9 @@ export default function Calculation(): JSX.Element {
                                         {sc.title}
                                         <Divider style={{ margin: ".5rem 0" }} />
                                         <div style={{ display: "flex", alignItems: "center" }}>
+                                          {getRoundedValue(sc.probability, 2)}% * {getRoundedValue(sc.value, 2)}{" "}
                                           <DragHandleIcon style={{ color: colors[b] }} />{" "}
-                                          {getRoundedValue(sc.probability, 3)}% * {getRoundedValue(sc.value, 3)}{" "}
-                                          <DragHandleIcon style={{ color: colors[b] }} />{" "}
-                                          {getRoundedValue((sc.probability / 100) * sc.value, 3)}
+                                          {getRoundedValue((sc.probability / 100) * sc.value, 2)}
                                         </div>
                                       </Card>
                                       <Grid
@@ -110,62 +109,85 @@ export default function Calculation(): JSX.Element {
                                         xs={12}
                                         style={{ marginTop: "1rem", alignItems: "center", display: "flex" }}
                                       >
+                                        {k !== c.subCases.length - 1 && <AddIcon style={{ color: colors[b] }} />}
+                                      </Grid>
+                                    </Grid>
+                                  ))}
+                                  <div style={{ alignItems: "center", display: "flex" }}>
+                                    {c.subCases.map((sc, k) => (
+                                      <Fragment key={sc.key}>
+                                        {getRoundedValue((sc.probability / 100) * sc.value, 2)}
                                         {k === c.subCases.length - 1 ? (
                                           <>
                                             <DragHandleIcon style={{ color: colors[b] }} />
-                                            {getRoundedValue(c.value, 3)}
+                                            {getRoundedValue(c.value, 2)}
                                           </>
                                         ) : (
                                           <AddIcon style={{ color: colors[b] }} />
                                         )}
-                                      </Grid>
-                                    </Grid>
-                                  ))}
-                                  {c.subCases.length === 0 && (
-                                    <div style={{ display: "flex", alignItems: "center" }}>
-                                      <DragHandleIcon style={{ color: colors[b] }} />
-                                      {getRoundedValue(c.value, 3)} * {getRoundedValue(c.probability, 3)}%{" "}
-                                      <DragHandleIcon style={{ color: colors[b] }} />
-                                      {getRoundedValue((c.probability / 100) * c.value, 3)}
-                                    </div>
-                                  )}
+                                      </Fragment>
+                                    ))}
+                                  </div>
+                                  {/* result */}
+                                  <Grid
+                                    item
+                                    xs={12}
+                                    style={{ marginTop: "1rem", alignItems: "center", display: "flex" }}
+                                  >
+                                    {getRoundedValue(c.value, 2)} * {getRoundedValue(c.probability, 2)}%
+                                    <DragHandleIcon style={{ color: colors[b] }} />{" "}
+                                    {getRoundedValue((c.probability / 100) * c.value, 2)}
+                                  </Grid>
                                 </Grid>
                               </Card>
                               <Grid item xs={12} style={{ marginTop: "1rem", alignItems: "center", display: "flex" }}>
-                                {l === sub.cases.length - 1 ? (
+                                {l !== sub.cases.length - 1 && <AddIcon style={{ color: colors[b] }} />}
+                              </Grid>
+                            </Grid>
+                          ))}
+                          <Grid item xs={12} style={{ marginTop: "1rem", alignItems: "center", display: "flex" }}>
+                            {sub.cases.map((c, k) => (
+                              <Fragment key={c.key}>
+                                {getRoundedValue((c.probability / 100) * c.value, 2)}
+                                {k === sub.cases.length - 1 ? (
                                   <>
                                     <DragHandleIcon style={{ color: colors[b] }} />
-                                    {getRoundedValue(sub.value, 3)} * {getRoundedValue(sub.probability, 3)}%{" "}
-                                    <DragHandleIcon style={{ color: colors[b] }} />
-                                    {getRoundedValue((sub.probability / 100) * sub.value, 3)}
+                                    {getRoundedValue(sub.value, 2)}
                                   </>
                                 ) : (
                                   <AddIcon style={{ color: colors[b] }} />
                                 )}
-                              </Grid>
-                            </Grid>
-                          ))}
-                          {sub.cases.length === 0 && (
-                            <div style={{ display: "flex", alignItems: "center" }}>
-                              <DragHandleIcon style={{ color: colors[b] }} />
-                              {getRoundedValue(sub.value, 3)} * {getRoundedValue(sub.probability, 3)}%{" "}
-                              <DragHandleIcon style={{ color: colors[b] }} />
-                              {getRoundedValue((sub.probability / 100) * sub.value, 3)}
-                            </div>
-                          )}
+                              </Fragment>
+                            ))}
+                          </Grid>
+                          <Grid item xs={12} style={{ alignItems: "center", display: "flex" }}>
+                            {getRoundedValue(sub.value, 3)} * {getRoundedValue(sub.probability, 2)}%
+                            <DragHandleIcon style={{ color: colors[b] }} />{" "}
+                            {getRoundedValue((sub.probability / 100) * sub.value, 2)}
+                          </Grid>
                         </Grid>
                       </Card>
                     </Grid>
                     <Grid item xs={12} style={{ marginTop: "1rem", alignItems: "center", display: "flex" }}>
-                      {i === decision.sub.length - 1 ? (
-                        <DragHandleIcon style={{ color: colors[b] }} />
-                      ) : (
-                        <AddIcon style={{ color: colors[b] }} />
-                      )}
-                      {i === decision.sub.length - 1 && getResult(decision)}
+                      {i !== decision.sub.length - 1 && <AddIcon style={{ color: colors[b] }} />}
                     </Grid>
                   </Grid>
                 ))}
+                <Grid item xs={12} style={{ alignItems: "center", display: "flex" }}>
+                  {decision.sub.map((sub, k) => (
+                    <Fragment key={sub.key}>
+                      {getRoundedValue((sub.probability / 100) * sub.value, 2)}
+                      {k === decision.sub.length - 1 ? (
+                        <>
+                          <DragHandleIcon style={{ color: colors[b] }} />
+                          {getResult(decision)}
+                        </>
+                      ) : (
+                        <AddIcon style={{ color: colors[b] }} />
+                      )}
+                    </Fragment>
+                  ))}
+                </Grid>
               </Grid>
             </AccordionDetails>
           </Accordion>

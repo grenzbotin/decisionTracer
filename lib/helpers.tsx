@@ -192,5 +192,5 @@ export function getResult(decision: DecisionType): number | string {
     total += item.value * (item.probability / 100);
   });
 
-  return getRoundedValue(total, 3);
+  return getRoundedValue(total, 2);
 }
