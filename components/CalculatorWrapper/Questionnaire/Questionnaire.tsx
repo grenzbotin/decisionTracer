@@ -112,7 +112,6 @@ export default function FullWidthTabs(): JSX.Element {
           {TABS[active.key].map((t: { id: number; label: number; content: JSX.Element }) => (
             <TabPanel key={t.id} value={value} index={t.id} dir={theme.direction}>
               {t.content}
-
               <div style={{ display: "flex", justifyContent: "space-between", marginTop: "2rem" }}>
                 <IconButton color="primary" disabled={t.id === 0} onClick={() => handleChangeIndex(t.id - 1)}>
                   <ArrowBackIosIcon fontSize="small" />

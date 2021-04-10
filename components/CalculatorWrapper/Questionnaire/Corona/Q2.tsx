@@ -9,44 +9,29 @@ import ValidatedInputField from "@/../components/elements/ValidatedInputField";
 import ValidatedProbabilityField from "@/../components/elements/ValidatedProbabilityField";
 import CustomTooltip from "@/../components/elements/CustomTooltip";
 import CoronaCases from "./CoronaCases";
+import { CoronaPresetContext } from "./CoronaPresetContextProvider";
 
 export default function Q2(): JSX.Element {
   const i18nPrefix = "presets.corona.questionnaire.2";
   const { active, setProbability } = useContext(GlobalDecisionContext);
+  const { q2, setValuesByStep } = useContext(CoronaPresetContext);
 
   // Taking default values from current active context
-  const [calc, setCalc] = useState({
-    vaccination_damage: getPresetValueByField(
-      active.decisions,
-      "probability",
-      "vaccinated",
-      "vaccinated-vaccination_damage"
-    ),
-    deaths: {
-      amount: 73500,
-      infected: 2833173
-    },
-    damage: {
-      amount: 31,
-      vaccinated: 2847585
-    }
-  });
+  const [vaccinationDamage, setVaccinationDamage] = useState(
+    getPresetValueByField(active.decisions, "probability", "vaccinated", "vaccinated-vaccination_damage")
+  );
 
   const handleChange = (value: number, category: "deaths" | "damage", item: string): void => {
-    setCalc({
-      ...calc,
-      [category]: {
-        ...calc[category],
-        [item]: value
-      }
-    });
+    const newValues = {
+      ...q2,
+      [`${category}_${item}`]: value
+    };
+
+    setValuesByStep(newValues, "q2");
   };
 
   const handleVaccinationDamageChange = (value: number): void => {
-    setCalc({
-      ...calc,
-      vaccination_damage: value
-    });
+    setVaccinationDamage(value);
 
     if (
       getPresetValueByField(active.decisions, "probability", "vaccinated", "vaccinated-vaccination_damage") !== null
@@ -65,17 +50,7 @@ export default function Q2(): JSX.Element {
     deaths: number;
     astraZenecaVacc: number;
   }): void => {
-    setCalc({
-      ...calc,
-      deaths: {
-        amount: deaths,
-        infected: cases
-      },
-      damage: {
-        ...calc.damage,
-        vaccinated: astraZenecaVacc
-      }
-    });
+    setValuesByStep({ ...q2, deaths_amount: deaths, deaths_infected: cases, damage_vaccinated: astraZenecaVacc });
   };
 
   return (
@@ -99,7 +74,7 @@ export default function Q2(): JSX.Element {
           <Grid item xs={5}>
             <ValidatedInputField
               label={i18next.t(`${i18nPrefix}.calc.dead`)}
-              value={calc.deaths.amount}
+              value={q2.deaths_amount}
               onChange={(value) => handleChange(value, "deaths", "amount")}
             />
           </Grid>
@@ -107,7 +82,7 @@ export default function Q2(): JSX.Element {
           <Grid item xs={5} style={{ display: "flex", alignItems: "center" }}>
             <ValidatedInputField
               label={i18next.t(`${i18nPrefix}.calc.cvt`)}
-              value={calc.damage.amount}
+              value={q2.damage_amount}
               onChange={(value) => handleChange(value, "damage", "amount")}
             />
             <CustomTooltip
@@ -125,7 +100,7 @@ export default function Q2(): JSX.Element {
           <Grid item xs={5}>
             <ValidatedInputField
               label={i18next.t(`${i18nPrefix}.calc.infected`)}
-              value={calc.deaths.infected}
+              value={q2.deaths_infected}
               onChange={(value) => handleChange(value, "deaths", "infected")}
             />
           </Grid>
@@ -133,26 +108,21 @@ export default function Q2(): JSX.Element {
           <Grid item xs={5}>
             <ValidatedInputField
               label={i18next.t(`${i18nPrefix}.calc.vaccinated`)}
-              value={calc.damage.vaccinated}
+              value={q2.damage_vaccinated}
               onChange={(value) => handleChange(value, "damage", "vaccinated")}
             />
           </Grid>
           <Grid item xs={5}>
-            <b>
-              {calc.deaths.infected > 0 ? getRoundedValue((calc.deaths.amount / calc.deaths.infected) * 100, 5) : 0} %
-            </b>
+            <b>{q2.deaths_infected > 0 ? getRoundedValue((q2.deaths_amount / q2.deaths_infected) * 100, 5) : 0} %</b>
           </Grid>
           <Grid item xs={2}></Grid>
           <Grid item xs={5}>
-            <b>
-              {calc.damage.vaccinated > 0 ? getRoundedValue((calc.damage.amount / calc.damage.vaccinated) * 100, 5) : 0}
-              %
-            </b>
+            <b>{q2.damage_vaccinated > 0 ? getRoundedValue((q2.damage_amount / q2.damage_vaccinated) * 100, 5) : 0}%</b>
             <IconButton
               color="primary"
-              disabled={calc.vaccination_damage === null}
+              disabled={vaccinationDamage === null}
               size="small"
-              onClick={() => handleVaccinationDamageChange((calc.damage.amount / calc.damage.vaccinated) * 100)}
+              onClick={() => handleVaccinationDamageChange((q2.damage_amount / q2.damage_vaccinated) * 100)}
               style={{ marginLeft: ".5rem" }}
             >
               <FileCopyIcon fontSize="small" />
@@ -164,10 +134,7 @@ export default function Q2(): JSX.Element {
         </Typography>
         <Typography variant="body2">
           {i18next.t(`${i18nPrefix}.interpretation_text`, {
-            value: getRoundedValue(
-              calc.deaths.amount / calc.deaths.infected / (calc.damage.amount / calc.damage.vaccinated),
-              2
-            )
+            value: getRoundedValue(q2.deaths_amount / q2.deaths_infected / (q2.damage_amount / q2.damage_vaccinated), 2)
           })}
         </Typography>
         <Typography variant="subtitle2" gutterBottom style={{ marginTop: "2rem" }}>
@@ -180,11 +147,11 @@ export default function Q2(): JSX.Element {
           <Grid item xs={2}></Grid>
           <Grid item xs={5}>
             <ValidatedProbabilityField
-              disabled={calc.vaccination_damage === null}
-              value={calc.vaccination_damage === null ? 0 : calc.vaccination_damage}
+              disabled={vaccinationDamage === null}
+              value={vaccinationDamage === null ? 0 : vaccinationDamage}
               onChange={handleVaccinationDamageChange}
             />
-            {calc.vaccination_damage === null && (
+            {vaccinationDamage === null && (
               <CustomTooltip
                 content={<Typography variant="caption">{i18next.t(`${i18nPrefix}.tooltip_disabled`)}</Typography>}
               />

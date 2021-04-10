@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
-import T from "prop-types";
 import { Decision, PRESETS, Preset } from "../lib/presets";
 import { Node } from "react-flow-renderer";
 import i18next from "i18next";
@@ -863,8 +862,4 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
       {state && children}
     </GlobalDecisionContext.Provider>
   );
-};
-
-GlobalDecisionContextProvider.propTypes = {
-  children: T.node.isRequired
 };

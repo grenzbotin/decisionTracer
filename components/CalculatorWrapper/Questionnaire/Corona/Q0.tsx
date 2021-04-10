@@ -6,38 +6,17 @@ import CustomTooltip from "@/../components/elements/CustomTooltip";
 import ValidatedInputField from "@/../components/elements/ValidatedInputField";
 import { getPresetValueByField, getRoundedValue } from "@/../lib/helpers";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
-import { useFirstRender } from "@/../hooks/helpers";
 import CoronaCases from "./CoronaCases";
+import { CoronaPresetContext } from "./CoronaPresetContextProvider";
 
 export default function Q0(): JSX.Element {
   const i18nPrefix = "presets.corona.questionnaire.0";
   const { active, setProbability } = useContext(GlobalDecisionContext);
+  const { q0, setValuesByStep } = useContext(CoronaPresetContext);
 
-  const firstRender = useFirstRender();
-
-  const [calc, setCalc] = useState({
-    knownInfected: 200000,
-    darkFigure: 3,
-    actualInfected: 300000,
-    unknownInfected: 200000,
-    inhabitants: 83019213,
-    probabilityInfection: 0.0024,
-    peopleToMeet: 15,
-    injectionDuration: 12,
-    ownRisk: getPresetValueByField(active.decisions, "probability", "unvaccinated", "unvaccinated-infection") || 0
-  });
-
-  useEffect(() => {
-    if (firstRender) {
-      setCalc({
-        ...calc,
-        ownRisk:
-          calc.unknownInfected > 0
-            ? calc.peopleToMeet * calc.injectionDuration * (calc.unknownInfected / calc.inhabitants) * 100
-            : 0
-      });
-    }
-  }, [calc, firstRender]);
+  const [ownRisk, setOwnRisk] = useState(
+    getPresetValueByField(active.decisions, "probability", "unvaccinated", "unvaccinated-infection") || 0
+  );
 
   useEffect(() => {
     // only if context probability is still existent
@@ -54,7 +33,7 @@ export default function Q0(): JSX.Element {
       "vaccinated-infection"
     );
 
-    const compareValue = calc.ownRisk > 100 ? 100 : calc.ownRisk;
+    const compareValue = ownRisk > 100 ? 100 : ownRisk;
 
     if (contextNonVacProbability !== null && compareValue !== contextNonVacProbability) {
       setProbability(compareValue, "unvaccinated", "unvaccinated-infection");
@@ -62,66 +41,81 @@ export default function Q0(): JSX.Element {
     if (contextVacProbability !== null && compareValue !== contextVacProbability) {
       setProbability(compareValue, "vaccinated", "vaccinated-infection");
     }
-  }, [calc.ownRisk, setProbability, active.decisions]);
+  }, [ownRisk, setProbability, active.decisions]);
 
   const handleChangeKnownInfected = (value: number): void => {
-    const actualInfected = value * calc.darkFigure;
+    // calc in form
+    const actualInfected = value * q0.darkFigure;
     const unknownInfected = actualInfected - value;
 
-    setCalc({
-      ...calc,
-      knownInfected: value,
-      actualInfected,
-      unknownInfected,
-      probabilityInfection: unknownInfected / calc.inhabitants,
-      ownRisk:
-        unknownInfected > 0
-          ? calc.peopleToMeet * calc.injectionDuration * (unknownInfected / calc.inhabitants) * 100
-          : 0
-    });
+    const newValues = {
+      ...q0,
+      knownInfected: value
+    };
+
+    setOwnRisk(
+      unknownInfected > 0 ? q0.peopleToMeet * q0.injectionDuration * (unknownInfected / q0.inhabitants) * 100 : 0
+    );
+
+    setValuesByStep(newValues, "q0");
   };
 
   const handleChangeDarkFigure = (value: number): void => {
-    const actualInfected = calc.knownInfected * value;
-    const unknownInfected = actualInfected - calc.knownInfected;
+    const actualInfected = q0.knownInfected * value;
+    const unknownInfected = actualInfected - q0.knownInfected;
 
-    setCalc({
-      ...calc,
-      darkFigure: value,
-      actualInfected,
-      unknownInfected,
-      probabilityInfection: unknownInfected / calc.inhabitants,
-      ownRisk:
-        unknownInfected > 0
-          ? calc.peopleToMeet * calc.injectionDuration * (unknownInfected / calc.inhabitants) * 100
-          : 0
-    });
+    const newValues = {
+      ...q0,
+      darkFigure: value
+    };
+
+    setOwnRisk(
+      unknownInfected > 0 ? q0.peopleToMeet * q0.injectionDuration * (unknownInfected / q0.inhabitants) * 100 : 0
+    );
+
+    setValuesByStep(newValues, "q0");
   };
 
   const handleChangeInhabitants = (value: number): void => {
-    setCalc({
-      ...calc,
-      inhabitants: value,
-      probabilityInfection: (calc.unknownInfected / value) * 100,
-      ownRisk:
-        calc.unknownInfected > 0 ? calc.peopleToMeet * calc.injectionDuration * (calc.unknownInfected / value) * 100 : 0
-    });
+    const actualInfected = q0.knownInfected * q0.darkFigure;
+    const unknownInfected = actualInfected - q0.knownInfected;
+
+    const newValues = {
+      ...q0,
+      inhabitants: value
+    };
+
+    setOwnRisk(unknownInfected > 0 ? q0.peopleToMeet * q0.injectionDuration * (unknownInfected / value) * 100 : 0);
+
+    setValuesByStep(newValues, "q0");
   };
 
   const handleChangePeopleToMeet = (value: number): void => {
-    setCalc({
-      ...calc,
-      peopleToMeet: value,
-      ownRisk: value * calc.injectionDuration * calc.probabilityInfection * 100
-    });
+    const actualInfected = q0.knownInfected * q0.darkFigure;
+    const unknownInfected = actualInfected - value;
+    const probability = unknownInfected / q0.inhabitants;
+
+    const newValues = {
+      ...q0,
+      peopleToMeet: value
+    };
+
+    setOwnRisk(value * q0.injectionDuration * probability * 100);
+    setValuesByStep(newValues, "q0");
   };
 
   const handleChangeInjectionDuration = (value: number): void => {
-    setCalc({
-      ...calc,
-      injectionDuration: value,
-      ownRisk: calc.peopleToMeet * value * calc.probabilityInfection * 100
-    });
+    const actualInfected = q0.knownInfected * q0.darkFigure;
+    const unknownInfected = actualInfected - value;
+    const probability = unknownInfected / q0.inhabitants;
+
+    const newValues = {
+      ...q0,
+      injectionDuration: value
+    };
+
+    setOwnRisk(q0.peopleToMeet * value * probability * 100);
+    setValuesByStep(newValues, "q0");
   };
 
   return (
@@ -155,55 +149,55 @@ export default function Q0(): JSX.Element {
             {i18next.t(`${i18nPrefix}.calc.infected_known`)}
           </Grid>
           <Grid item xs={4}>
-            <ValidatedInputField value={calc.knownInfected} onChange={handleChangeKnownInfected} />
+            <ValidatedInputField value={q0.knownInfected} onChange={handleChangeKnownInfected} />
           </Grid>
           <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.dark_figure`)}
           </Grid>
           <Grid item xs={4}>
-            <ValidatedInputField value={calc.darkFigure} onChange={handleChangeDarkFigure} />
+            <ValidatedInputField value={q0.darkFigure} onChange={handleChangeDarkFigure} />
           </Grid>
           <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.infected_actual`)}
           </Grid>
           <Grid item xs={4}>
-            {getRoundedValue(calc.actualInfected, 0)}
+            {getRoundedValue(q0.knownInfected * q0.darkFigure, 0)}
           </Grid>
           <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.infected_unknown`)}
           </Grid>
           <Grid item xs={4}>
-            {getRoundedValue(calc.unknownInfected, 0)}
+            {getRoundedValue(q0.knownInfected * q0.darkFigure - q0.knownInfected, 0)}
           </Grid>
           <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.inhabitants`)}
           </Grid>
           <Grid item xs={4}>
-            <ValidatedInputField value={calc.inhabitants} onChange={handleChangeInhabitants} />
+            <ValidatedInputField value={q0.inhabitants} onChange={handleChangeInhabitants} />
           </Grid>
           <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.potential_infected`)}
           </Grid>
           <Grid item xs={4}>
-            {getRoundedValue(calc.probabilityInfection * 100, 2)}%
+            {getRoundedValue(((q0.knownInfected * q0.darkFigure - q0.knownInfected) / q0.inhabitants) * 100, 2)}%
           </Grid>
           <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.people_meet`)}
           </Grid>
           <Grid item xs={4}>
-            <ValidatedInputField value={calc.peopleToMeet} onChange={handleChangePeopleToMeet} />
+            <ValidatedInputField value={q0.peopleToMeet} onChange={handleChangePeopleToMeet} />
           </Grid>
           <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.injection_duration`)}
           </Grid>
           <Grid item xs={4}>
-            <ValidatedInputField value={calc.injectionDuration} onChange={handleChangeInjectionDuration} />
+            <ValidatedInputField value={q0.injectionDuration} onChange={handleChangeInjectionDuration} />
           </Grid>
           <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.infection_risk`)}
           </Grid>
           <Grid item xs={4}>
-            <b>{getRoundedValue(calc.ownRisk, 2)}%</b> {calc.ownRisk > 100 && `(100%)`}
+            <b>{getRoundedValue(ownRisk, 2)}%</b> {ownRisk > 100 && `(100%)`}
           </Grid>
         </Grid>
       </Container>

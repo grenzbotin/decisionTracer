@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
-import T from "prop-types";
 
 // Context for defining the global scope: UI Settings
 export const GlobalUiContext = React.createContext({
@@ -42,8 +41,4 @@ export const GlobalUiContextProvider: React.FC<T> = ({ children }) => {
       {state && children}
     </GlobalUiContext.Provider>
   );
-};
-
-GlobalUiContextProvider.propTypes = {
-  children: T.node.isRequired
 };

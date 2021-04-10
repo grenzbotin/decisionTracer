@@ -8,6 +8,8 @@ import dynamic from "next/dynamic";
 import { getAllLanguageSlugs, getLanguage } from "../../lib/lang";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { useRouteLeavingCheck } from "@/../hooks/helpers";
+// eslint-disable-next-line max-len
+import { CoronaPresetContextProvider } from "@/../components/CalculatorWrapper/Questionnaire/Corona/CoronaPresetContextProvider";
 
 const HtmlHeader = dynamic(() => import("../../components/HtmlHeader"));
 const CalculatorWrapper = dynamic(() => import("../../components/CalculatorWrapper"));
@@ -32,7 +34,7 @@ export default function LangIndex(): JSX.Element {
 
   return (
     active && (
-      <>
+      <CoronaPresetContextProvider>
         <HtmlHeader
           title={i18next.t("presets.corona.meta.title")}
           description={i18next.t("presets.corona.meta.description")}
@@ -55,7 +57,7 @@ export default function LangIndex(): JSX.Element {
             <MobileSelectedNode />
           </Hidden>
         </Grid>
-      </>
+      </CoronaPresetContextProvider>
     )
   );
 }

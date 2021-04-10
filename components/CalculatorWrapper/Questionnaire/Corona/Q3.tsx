@@ -7,12 +7,14 @@ import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider
 import ValidatedInputField from "@/../components/elements/ValidatedInputField";
 import { getPresetValueByField, getRoundedValue } from "@/../lib/helpers";
 import ValidatedValueField from "@/../components/elements/ValidatedValueField";
+import { CoronaPresetContext } from "./CoronaPresetContextProvider";
 
 const getInterpretationValues = (
-  calc: { mild: { day_value: number }; difficult: { day_value: number }; death: { value: number } },
+  { mild_day_value, difficult_day_value }: { mild_day_value: number; difficult_day_value: number },
+  deathValue: number,
   type: "mild" | "difficult"
 ): { years: number; days: string } => {
-  const totalDays = calc.death.value / calc[type].day_value;
+  const totalDays = deathValue / (type === "mild" ? mild_day_value : difficult_day_value);
   const years = Math.trunc(totalDays / 365);
   const days = getRoundedValue(totalDays - years * 365, 1);
 
@@ -22,50 +24,41 @@ const getInterpretationValues = (
 export default function Q3(): JSX.Element {
   const i18nPrefix = "presets.corona.questionnaire.3";
   const { active, setValue } = useContext(GlobalDecisionContext);
+  const { q3, setValuesByStep } = useContext(CoronaPresetContext);
 
-  // Taking default values from current active context
-  const [calc, setCalc] = useState({
-    mild: {
-      day_value: -1,
-      days_duration: 14
-    },
-    difficult: {
-      day_value: -5,
-      days_duration: 40
-    },
-    death: {
-      value:
-        getPresetValueByField(
-          active.decisions,
-          "value",
-          "vaccinated",
-          "vaccinated-infection",
-          "vaccinated-infection-death"
-        ) ||
-        getPresetValueByField(
-          active.decisions,
-          "value",
-          "unvaccinated",
-          "unvaccinated-infection",
-          "unvaccinated-infection-death"
-        )
+  const [deathValue, setDeathValue] = useState(
+    getPresetValueByField(
+      active.decisions,
+      "value",
+      "vaccinated",
+      "vaccinated-infection",
+      "vaccinated-infection-death"
+    ) ||
+      getPresetValueByField(
+        active.decisions,
+        "value",
+        "unvaccinated",
+        "unvaccinated-infection",
+        "unvaccinated-infection-death"
+      ) ||
+      0
+  );
+
+  const handleChange = (value: number, category: "mild" | "difficult" | "death", item?: string): void => {
+    let newValues = { ...q3 };
+
+    if (category !== "death") {
+      newValues = {
+        ...q3,
+        [`${category}_${item}`]: value
+      };
+      setValuesByStep(newValues, "q3");
+    } else {
+      setDeathValue(value);
     }
-  });
-
-  const handleChange = (value: number, category: "mild" | "difficult" | "death", item: string): void => {
-    const newValues = {
-      ...calc,
-      [category]: {
-        ...calc[category],
-        [item]: value
-      }
-    };
-    setCalc({ ...newValues });
 
     const valueToSet =
-      category === "death"
-        ? newValues[category].value
-        : newValues[category].day_value * newValues[category].days_duration;
+      category === "death" ? value : newValues[`${category}_day_value`] * newValues[`${category}_days_duration`];
 
     const vaccinatedValue = getPresetValueByField(
       active.decisions,
@@ -93,8 +86,8 @@ export default function Q3(): JSX.Element {
   };
 
   const interpretation = {
-    mild: getInterpretationValues(calc, "mild"),
-    difficult: getInterpretationValues(calc, "difficult")
+    mild: getInterpretationValues(q3, deathValue, "mild"),
+    difficult: getInterpretationValues(q3, deathValue, "difficult")
   };
 
   const current = {
@@ -167,7 +160,7 @@ export default function Q3(): JSX.Element {
           </Grid>
           <Grid item xs={4}>
             <ValidatedValueField
-              value={calc.mild.day_value}
+              value={q3.mild_day_value}
               onChange={(value) => handleChange(value, "mild", "day_value")}
             />
           </Grid>
@@ -176,7 +169,7 @@ export default function Q3(): JSX.Element {
           </Grid>
           <Grid item xs={4}>
             <ValidatedInputField
-              value={calc.mild.days_duration}
+              value={q3.mild_days_duration}
               onChange={(value) => handleChange(value, "mild", "days_duration")}
             />
           </Grid>
@@ -205,7 +198,7 @@ export default function Q3(): JSX.Element {
           </Grid>
           <Grid item xs={4}>
             <ValidatedValueField
-              value={calc.difficult.day_value}
+              value={q3.difficult_day_value}
               onChange={(value) => handleChange(value, "difficult", "day_value")}
             />
           </Grid>
@@ -214,7 +207,7 @@ export default function Q3(): JSX.Element {
           </Grid>
           <Grid item xs={4}>
             <ValidatedInputField
-              value={calc.difficult.days_duration}
+              value={q3.difficult_days_duration}
               onChange={(value) => handleChange(value, "difficult", "days_duration")}
             />
           </Grid>
@@ -243,11 +236,11 @@ export default function Q3(): JSX.Element {
           </Grid>
           <Grid item xs={4}>
             <ValidatedValueField
-              disabled={calc.death.value === null}
-              value={calc.death.value !== null ? calc.death.value : 0}
-              onChange={(value) => handleChange(value, "death", "value")}
+              disabled={deathValue === null}
+              value={deathValue !== null ? deathValue : 0}
+              onChange={(value) => handleChange(value, "death")}
             />
-            {calc.death.value === null && (
+            {deathValue === null && (
               <CustomTooltip
                 content={<Typography variant="caption">{i18next.t(`${i18nPrefix}.calc.tooltip_no_value`)}</Typography>}
               />
