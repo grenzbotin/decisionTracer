@@ -13,7 +13,7 @@ const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const defaultOptions = {
   chart: {
-    id: "basicValues",
+    id: "option-values",
     type: "bar"
   },
   plotOptions: {
@@ -48,6 +48,14 @@ const defaultOptions = {
         borderWidth: 2
       }
     ]
+  },
+  dataLabels: {
+    enabled: true,
+    offsetY: -20,
+    style: {
+      fontSize: "12px",
+      colors: ["#304758"]
+    }
   }
 };
 
@@ -93,7 +101,6 @@ function Result({ height = 300, mobile = false }: { height?: number; mobile?: bo
   const results = getResultValues(decisions);
   const colors = generateColors(decisions.length);
   const absMax = Math.max(...results.map((a) => Math.abs(a)));
-
   const bestAlternatives = getBestAlternatives(results, Math.max(...results), categories);
 
   return (
@@ -117,17 +124,16 @@ function Result({ height = 300, mobile = false }: { height?: number; mobile?: bo
             <Chart
               options={{
                 ...defaultOptions,
+                chart: {
+                  ...defaultOptions.chart,
+                  id: `option-values${Math.random()}`
+                },
                 colors,
                 xaxis: { categories },
                 yaxis: { ...defaultOptions.yaxis, min: -absMax, max: absMax, forceNiceScale: true },
                 dataLabels: {
-                  enabled: true,
-                  formatter: (val: number) => getIcon(val, results),
-                  offsetY: -20,
-                  style: {
-                    fontSize: "12px",
-                    colors: ["#304758"]
-                  }
+                  ...defaultOptions.dataLabels,
+                  formatter: (val: number) => getIcon(val, results)
                 }
               }}
               series={[{ name: i18next.t("calculator.expected_utility"), data: results }]}
