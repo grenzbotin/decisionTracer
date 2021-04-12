@@ -12,10 +12,6 @@ import { Decision as DecisionType } from "@/../lib/presets";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const defaultOptions = {
-  chart: {
-    id: "option-values",
-    type: "bar"
-  },
   plotOptions: {
     bar: {
       borderRadius: 6,
@@ -125,8 +121,8 @@ function Result({ height = 300, mobile = false }: { height?: number; mobile?: bo
               options={{
                 ...defaultOptions,
                 chart: {
-                  ...defaultOptions.chart,
-                  id: `option-values${Math.random()}`
+                  type: "bar",
+                  id: `option-values-${Math.random()}`
                 },
                 colors,
                 xaxis: { categories },
