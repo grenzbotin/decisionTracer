@@ -8,7 +8,7 @@
     "independent": "independent",
     "interpretation": "Interpretation",
     "interpretation_text": "{{ decision }} seems to be the better alternative for you.",
-    "interpretation_text_pl": "{{ decision }} seem to be the better alternatives for you.",
+    "interpretation_text_pl": "{{ decision }} seem to be the better alternative for you.",
     "new_decision": "Decision",
     "no_decisions_created": "No decisions created",
     "probability": "Occurence probability",
@@ -33,7 +33,7 @@
     "decision_tree": "Decision tree"
   },
   "home": {
-    "intro": "Mit unserem Tool wollen wir Dich dabei unterstützen, eine rationale Entscheidung zu treffen. Du kannst Alternativen gegenüberstellen, Ihre Vor- und Nachteile bewerten und Dir ein Ergebnis berechnen lassen.\n Du kannst Dinge, die Du berücksichtigen möchtest, hinzufügen oder bestehende Elemente verändern. Alle Werte, die Du eingibst oder übernimmst, kannst Du später verändern und schauen, ob dadurch die Entscheidung kippt.\nNatürlich kann das Tool lediglich eine Hilfe sein. Wir wollen Dir helfen, Deine Entscheidung zu reflektieren. Das Ergebnis hängt von Deinen Eingaben ab. Du bist für Deine Entscheidung verantwortlich, Du musst sie treffen.\n Um das Prinzip zu verstehen, solltest Du Dir zunächst das Tutorial anschauen. (Siehe Karte: 'Kopf oder Zahl')\n Eine rationale Entscheidung bezüglich der Corona-Impfung kannst Du Dir mit Klick auf die zweite Karte herleiten. (Siehe Karte 'Corona')\n Du kannst aber auch etwas ganz Eigenes entwerfen. (Siehe Karte 'Eigener Entscheidungsbaum')\n Viel Spaß!",
+    "intro": "With our tool we want to support you to make a rational decision. You can compare alternatives, score their advantages and disadvanteges and calculate a result.\n You can add things you want to consider or modify existing elements.\nThis tool only can be an assistance, of course. We want to help you to reflect your decision making. The result depends on your inputs. You are responsible for your decision, you have to decide.\n For understanding the principle you should have a look at the tutorial. (card: 'Heads or tails')\nYou can have a look at a deduction for a rational decision regarding the corona vaccination with a click on the second card. (card: 'Corona')\n You can also conceive something completey new. (card: 'own decision tree')\n Have fun!",
     "meta": {
       "description": "Make the right choice with ease",
       "keywords": "Calculator, Decision helper, Corona",
@@ -76,31 +76,31 @@
       },
       "description": "A little tutorial for understanding the tool",
       "meta": {
-        "description": "Head or Tail: Should I bet or not? Das Tutorial von Decision Tracer",
-        "keywords": "Head or Tail, Tutorial, Decision, Help, Calculator",
-        "title": "Head or Tail? | Decision Tracer"
+        "description": "Heads or Tails: Should I bet or not? The tutorial of Decision Tracer",
+        "keywords": "Heads or Tails, Tutorial, Decision, Help, Calculator",
+        "title": "Heads or Tails? | Decision Tracer"
       },
       "question": "Tutorial",
       "questionnaire": {
         "0": {
-          "text": "Unser kleines Tool soll Euch eine Entscheidungshilfe sein. Es soll Euch dabei unterstützen, in komplizierten Situationen den Überblick zu bewahren und Eure Entscheidung zu reflektieren.\nVor allem, wenn viele Aspekte zu berücksichtigen sind und das Gesamtbild schwer zu überblicken ist, verlassen sich Menschen auf ihr Bauchgefühl. Geht es um die Wandfarbe im Flur, ist das völlig in Ordnung. Geht es wie bei Corona um Fragen mit enormer Tragweite, so sollte die Entscheidung möglichst rational sein. Wir sollten möglichst alle relevanten Informationen berücksichtigen.\nInsbesondere, wenn kleine Wahrscheinlichkeiten ins Spiel kommen, können uns Entscheidungen aus dem Bauch heraus hinters Licht führen. Wir können intuitiv kaum zwischen einer 0,001%igen und einer 0,00001%igen Eintrittswahrscheinlichkeit unterscheiden, obwohl die eine Variante 100 mal wahrscheinlicher ist. Beide sind für uns _extrem unwahrscheinlich_.\nWas unser Tool macht, ist eigentlich einfache Wahrscheinlichkeitsrechnung. Da bekanntlich Stochastik nicht für alle das Highlight des Mathe-Unterrichts war, möchten wir Euch erklären, wie unser Tool und die Berechnungen dahinter funktionieren."
+          "text": "Our little tool should be a help for your decision making.\nEspecially if there are many aspects to consider and the total picture is difficult to overview people trust their gut feeling. Is the question about the color of the wall this is completey ok. Is the question about vast consequences like in the case of the corona vaccination the decision making should be as rational as possible. We should consider all relevant information.\nEspecially if we have to handle with little occurrence probability intuitiv decisions may cheat us. It is hard to distinguish between a 0,001 percent and a 0,00001 percent occurrence probability although one is 100 times more likely. For us both are _very unlikely_.\nWhat our tool is doing is simple probability calculation. Since stochastics wasn't the highlight of everyones math lessons we want to explain how the tool and calculations behind are working."
         },
         "1": {
-          "text_1": "Nehmen wir an, jemand bietet uns eine kleine Wette an: Eine Münze wird geworfen, bei Kopf bekommen wir 10,- Euro, bei Zahl bekommen wir nichts. Die beiden Möglichkeiten – Kopf oder Zahl – die eintreten können, heißen bei uns _Szenarien_. Die Möglichkeit, dass die Münze genau auf der Kante stehenbleibt, ignorieren wir. Beide Szenarien haben jeweils eine Eintrittswahrscheinlichkeit von 50%. In unserem Tool wird die Situation so dargestellt:",
-          "text_2": "Eine Eintrittswahrscheinlichkeit von 50%, bedeutet, dass in 50 von hundert Fällen, das jeweilige Ereignis eintritt. (_Prozent bedeutet von hundert_). 50%, also 50 von 100 ist in der Mathematik 50 / 100 = 0,5. Da sich die Ereignisse Kopf und Zahl gegenseitig ausschließen, aber auf jeden Fall eines von beiden eintritt, ist die Summe der Wahrscheinlichkeiten 100% oder 1.\nWas wir berechnen wollen, ist der sogenannte _Erwartungswert_. Dazu muss die Eintrittswahrscheinlichkeit mit der Auszahlung in Euro – also 0 bzw. 10 Euro – multipliziert werden. Der Erwartungswert von Kopf ist demnach 0,5 x 10 = 5. Der Erwartungswert von Zahl ist 0,5 x 0 = 0. Der Erwartungswert von Spiel 1, also des Münzwurfs, ist die Summe der beiden einzelnen Erwartungswerte, also 5 + 0 = 5.\nDoch was bringt uns jetzt dieses Ergebnis? Dazu müssen wir uns vor Augen halten, was der Erwartungswert eigentlich bedeutet. Bei einem einzigen Münzwurf ist die Wahrscheinlichkeit 10,- Euro oder gar nichts zu bekommen fifty-fifty. Die Möglichkeit, 5,- Euro zu bekommen, gibt es nicht. Doch je häufiger ich die Münze werfe, desto mehr wird sich der _Durchschnitt_ der Ergebnisse der 5 annähern."
+          "text_1": "We assume that someone is offering a little bet: A coin is flipped, if it shows heads we get 10,- Euros, if it shows tails we get nothing. The two possibilities - heads or tails - are named _scenarios_. We ignore the option that the coin can land on its edge. Both scenarios have a probability of 50%. In our tool this situation looks like this:",
+          "text_2": "An occurrence probability of 50% means that the respective option will occur in 50 of 100 cases. (_Percent_ means _of hundred_) 50% or 50 of 100 in math is 50 / 100 = 0.5. Since the options heads or tails exclude each other but one of the both will occur definitly the sum of the probabilities is 100% or 1.\nWhat we want to know is the so called _expectancy value_. For this purpose we have to multiply the occurrence probability with the payout in euros - 0 or 10 euros. The expectancy value of heads is 0.5 x 10 = 5. The expectancy value of tails is 0.5 x 0 = 0. The expectancy value of game 1, the coin flipping, is the sum ob these both single expectancy values, therefore 5 + 0 = 0.\n But what does this result mean? At a single coin flip the probability to get 10,- euros or nothing ist fifty-fifty. The possiblity to get 5,- euros doesn't exist. But the more often the coin is flipped the more the _average_ of the results will approach the number 5."
         },
         "2": {
-          "text_1": "Wenn die Teilnahme an diesem Münzwurf-Spiel also Geld kostet, dann sollten wir das nur tun, wenn der Preis unter 5,- Euro liegt. Bei diesem einfachen Beispiel wäre das vermutlich auch ohne komplizierte Berechnung klar gewesen.\nDie Alternative zum Spiel ist natürlich, dass wir nicht spielen. Dann bleiben die 5,- Euro mit hundertprozentiger Sicherheit bei uns in der Tasche. Der Erwartungswert dieser Entscheidung ist also 5. Natürlich sollten wir uns für die Alternative mit dem höchsten Erwartungswert entscheiden. In unserem Tool sieht die Situation so aus:"
+          "text_1": "So if the game costs money we should only play if it costs less then 5,- euros. Probably this would be clear without intricate calculation in this simple example.\nThe alternative of course is to play not. The 5,- euros stay definitly at our pocket then. So the expectancy value of this possiblity is 5. We should choose the possiblity with the highest expectancy value, of course. In our tool the situation looks like this:"
         },
         "3": {
-          "text_1": "Doch was ist, wenn die Münze gezinkt ist, so dass die Wahrscheinlichkeit, dass Kopf fällt, bei 53% liegt? Und was, wenn die Auszahlung bei Kopf nicht 10,- Euro, sondern 12,- Euro ist und wir bei Zahl zusätzlich 2,- Euro zahlen müssen? Sollten wir das Spiel für 5,- Euro spielen? Hilft uns jetzt unser Bauchgefühl weiter?",
-          "text_2": "Der Erwartungswert ist jetzt (0,53 x 12) + (0,47 x (-2)) = 5,42. Bei einem Preis von 5,- Euro pro Spiel sollten wir also spielen, es wird sich langfristig auszahlen, zumindest bei sehr vielen Spielen."
+          "text_1": "But what is if the coin is pronged? Let's say the possiblity of heads is now 53%, the disbursement of heads is 12,- euros and we have to pay 2,- euros if the coin shows tails. Shall we play the game for 5,- euros? Is our intuition helping?",
+          "text_2": "The expectancy value is now (0.53 x 12) + (0.47 x -2) = 5.42. Therefore at a price of 5,- euros we should play. It will pay off, at least at many bouts."
         },
         "4": {
-          "text_1": "Doch wir wollen Euch ja nicht bei Münzwurf-Spielen, sondern bei ganz allgemeinen Entscheidungen (wie der Impfentscheidung) unterstützen. Und da gibt es keine Ein- oder Auszahlungen. Wie kommen wir hier weiter?\nFür die Entscheidung ist eigentlich nicht der absolute Wert der Auszahlung, sondern nur das Verhältnis der Werte zueinander entscheidend! Ich kann die Auszahlungen und den Preis des Spiels verdoppeln, am Ergebnis ändert sich nichts. Diese Tatsache können wir nutzen, indem wir den verschiedenen Szenarien Punkte zuordnen: Pluspunkte für Dinge, die uns freuen, Minuspunkte für Dinge, die wir nicht wollen. Ist uns etwas egal, bekommt es 0 Punkte. Je mehr wir etwas wollen oder nicht wollen, desto mehr Plus- oder Minuspunkte bekommt es. Hier könnt und müsst Ihr mit den Eingaben spielen bis sie Eurer eigenen Bewertung entsprechen.\nWahrscheinlichkeiten solltet Ihr aus seriösen Studien entnehmen, wir haben Euch einige verlinkt. Es ist gewollt, dass Ihr mit den Werten zu spielt. Bleibt aber realistisch, damit ihr Euch nicht selbst betrügt. Passt auf, dass ihr nicht nur das seht, was ihr sehen wollt\nIm nächsten Bildschirm gelangt Ihr zu den Münzwurf-Spielen. Wenn Ihr das Prinzip verstanden habt, könnt Ihr nicht nur mit den Zahlen spielen, sondern auch Szenarien verändern oder eigene Szenarien hinzufügen.\nGeht Ihr zurück zur Startseite oder in das Menü, könnt Ihr Euch anschauen, unter welchen Bedingungen man sich gegen Corona impfen lassen sollte oder nicht. Und selbstverständlich könnt Ihr das Tool auch völlig frei verwenden und eigene Entscheidungsbäume entwerfen: Masern-Impfung, Wandfarbe im Flur oder in Eurem Unternehmen die Investitions-Entscheidung des nächsten Maschinenkaufs. Viel Spaß!"
+          "text_1": "But we don't want to help you with coin flipping games. We want to help with general decisions (like the vaccination decision). And here there are no disbursements. What shall we do?\nFor the decision the absolute value of the disbursement is actually not decisive, it is the relation of the values to each other. It does not change the result if we double the disbursements and the price of the game. We can use this fact by assigning points to the scenarios: positive points for things we want and negative points for things we don't want. If we are indifferent we assign 0 points. The more we want something or do not want something the more positive or negative points a scenario gets. Here you have to play with the values until they represent your own assessment.\nYou should take probabilities from serious studies. We give you some links. We want you to play with the values. But stay realistic for not cheating yourself. Take care that you not only see what you want to see.\nThe next screen shows the coin flipping games. When you understood the principle you can not only play with the values but modify or add complete new scenarios.\nIf you go to the cover page or the menu you can have a look at the corona vaccination decision. An of course you can use the tool for something completly different and conceive own decision trees: measles vaccination, the color of your wall or the next investment decision in your company. Have fun!"
         }
       },
-      "title": "Head or Tail?"
+      "title": "Heads or Tails?"
     },
     "corona": {
       "data_loaded": "Updated",
@@ -161,7 +161,7 @@
       },
       "description": "Decision guidance with simple decision tree",
       "get_data_for": "Load data for",
-      "get_data_tooltip": "Clicking this button will get you data about the current corona situation in Germany (Robert Koch-Institut).\n Data provided by Marlon Lueckert (https://github.com/marlon360/rki-covid-api).",
+      "get_data_tooltip": "Clicking this button will load data about the current corona situation in Germany (Robert Koch-Institut). We calculate the number of currently infected persons as difference of the complete number of infected persons minus recovered persons and deaths.\n Data provided by Marlon Lueckert (https://github.com/marlon360/rki-covid-api).",
       "meta": {
         "description": "Vaccination: Yes or no? Are disadvantages of a vaccination higher than the benefits?",
         "keywords": "Corona, vaccination, decision, help, calculator",
@@ -171,20 +171,20 @@
       "questionnaire": {
         "0": {
           "calc": {
-            "dark_figure": "Dark figure (x times as many infected as known)",
-            "infected_actual": "Actually infected persons",
+            "dark_figure": "Dark figure (x times as many cases as known)",
+            "infected_actual": "Currently infected persons",
             "infected_known": "Known Corona-infected persons",
-            "infected_unknown": "Persons that do not know of their infection",
-            "infection_risk": "Risk getting infected if I meet one person",
+            "infected_unknown": "Persons that do not know about their infection",
+            "infection_risk": "Contagion risk",
             "inhabitants": "Inhabitants",
             "injection_duration": "How many months does the injection last?",
             "people_meet": "Amount of people I meet in a month",
-            "potential_infected": "Probability a person is infected"
+            "potential_infected": "Probability that a person is infected"
           },
-          "intro": "Mit unserem kleinen Tool wollen wir so rational wie möglich an die Impfentscheidung herangehen. Alle für Dich relevanten Aspekte sollen berücksichtigt und bewertet werden. Um den Einstieg zu erleichtern haben wir eine Basis-Konfiguration erstellt, die Du nach Belieben anpassen und erweitern kannst. Alle Werte, die Du eingibst oder übernimmst, kannst Du später verändern und schauen, ob dadurch die Entscheidung kippt.",
-          "subtitle": "In einem ersten Schritt wollen wir die Wahrscheinlichkeit berechnen, einer infizierten Person zu begegnen:",
-          "title": "Wie wahrscheinlich ist es, dass man sich mit Corona infiziert?",
-          "tooltip": "Personen treffen bedeutet in diesem Zusammenhang mit Anderen so Kontakt zu haben, dass ich mich bei ihnen anstecken könnte, wenn sie infektiös sind.\n Nach einer Impfung würden wir uns bald wieder normal verhalten und andere Menschen treffen. Lässt man sich nicht impfen, so wird man sich auf absehbare Zeit trotzdem normal verhalten (oder auf Dauer von der Gesellschaft isolieren).\nDa wir „Impfen“ mit „Nicht Impfen“ vergleichen wollen, müssen wir das für den gleichen Zeitraum tun. Wenn wir glauben, dass die Impfung einmal pro Jahr aufgefrischt werden muss, dann sollten wir uns überlegen, wie viele Menschen wir in einem Jahr treffen.\nDie Impfung senkt die Infektionswahrscheinlichkeit möglicherweise über viele Jahre. Verändert sich das Virus, kann auch eine jährliche Impfung notwendig werden, das wissen wir jetzt noch nicht. Wenn wir nicht Äpfel mit Birnen vergleichen wollen, müssen wir den gleichen Zeitraum für die beiden Möglichkeiten betrachten. Wir müssen uns also fragen, wie viele Menschen wir treffen, bevor wir uns erneut impfen lassen.\nSo kann die rechnerische (!) Wahrscheinlichkeit einer Infektion leicht 100% überschreiten. Das ist nicht falsch. Wenn das Virus weiterhin in der Welt kursiert und wir uns verhalten wie vor der Pandemie, werden wir uns früher oder später anstecken. In diesem Fall nehmen wir als Voreinstellung eine Wahrscheinlichkeit von 90% an, Du kannst das gern ändern."
+          "intro": "With our little tool we want to approach the vaccination decision as rational as possible. All your relevant aspects should be considered and assessed. To make it easier we prepared a base configuration you can modify and extend as you want. You can change all values you entered or took over later and see if the decision overturns.",
+          "subtitle": "In a first step we want to calculate the risk to meet an infected person:",
+          "title": "How likely is it to meet an infected person?",
+          "tooltip": "_To meet a person_ means in this case to meet a person in a way that you can get infected if the person is contagious.\nAfter a vaccination we will quickly behave like before the pandemic. If we wouldn't get the vaccination we would behave normal as well (or isolate ourself durable from society).\nWe want to compare _vaccination_ with _no vaccination_ so we have to know how many people we will meet in the period until the next corona vaccination. If we think we have to refresh the vaccination once a year we have to consider how many persons we will meet in this period.\nThe vaccination will possibly lower the infection probability for many years, we don't know this yet. If we don't want to compare apples and oranges we have to compare the two possibilities for the same period. We have to ask ourselves how many people we will meet until we have to get our next vaccination.\nThe calculated (!) probability can exceed 100% so. This is not wrong. If the virus is still in the world and we will act like before the pandemic we will get infected sooner or later. In this case we will take a probability of 100%. You can change that if you want."
         },
         "1": {
           "calc": {
@@ -197,12 +197,12 @@
             "unvaccinated": "Unvaccinated",
             "vaccinated": "Vaccinated"
           },
-          "subtitle": "Wenn Du auf den Info-Button klickst, geben wir Dir einen kurzen Überblick über die aktuelle Studienlage.",
-          "title": "Wie hoch ist die Wahrscheinlichkeit der möglichen Krankheitsverläufe, wenn man sich infiziert hat?",
-          "tooltip": "Studien"
+          "subtitle": "If you click on the button you will get a short overview over some actual studies.",
+          "title": "What are the possibilities once you are infected?",
+          "tooltip": "Studies"
         },
         "2": {
-          "0": "Mit welchem Wert möchtest Du rechnen?",
+          "0": "What value do you want to count on?",
           "calc": {
             "cvt": "Cases",
             "damage_title": "Cerebral venous thrombosis (CVT) (Astra-Zeneca)",
@@ -216,8 +216,8 @@
           "damage_probability": "Probability of getting difficult vaccination damage",
           "interpretation": "Interpretation",
           "interpretation_text": "The chance to die of covid is {{value}} higher than the chance to get a difficult vaccination damage after becoming vaccinated.",
-          "subtitle": "Im Rahmen der Impfung mit dem AstraZeneca-Impfstoff kam es in Deutschland in 31 Fällen zu Hirnvenenthrombosen, die vermutlich in Zusammenhang mit der Impfung stehen. Mit dem Wirkstoff wurden rund 2,85 Millionen Deutsche geimpft.",
-          "title": "Wie hoch ist das Risiko, einen schweren Impfschaden zu erleiden?",
+          "subtitle": "In germany there were 31 cases of cerebral venous thrombosis in connection with the AstraZeneca vaccine. 2.85 mio people got this vaccine.\nThe following overview ignores the fact that the probability to die from covid as well as the probability to get a cerebral venous thrombosis depend on individual factors like age or vaccine. At this point we just want to show a proportion.",
+          "title": "What ist the probability to get a difficult progression?",
           "tooltip_disabled": "The field for taking the vaccination damage into consideration got deleted in the calculator. To fix the problem, you need to restart the calculation with reloading the page."
         },
         "3": {
@@ -230,15 +230,15 @@
             "days_duration_mild": "Duration of mild progression (days)",
             "death_value": "Points for death",
             "interpretation": "Interpretation",
-            "interpretation_difficult": "Der Tod ist für Dich in etwa gleich schlimm wie {{years}} Jahr(e) und {{days}} Tag(e) lang mit schweren Symptomen im Krankenhaus zu liegen. Bevor Du einen Tag länger im Krankenhaus liegen würdest, wärst Du lieber tot.",
-            "interpretation_mild": "Der Tod ist für Dich in etwa gleich schlimm wie {{years}} Jahr(e) und {{days}} Tag(e) milde Erkältungssymptome. Bevor Du einen Tag länger milde Erkältungssymptome hättest, wärst Du lieber tot.",
+            "interpretation_difficult": "For you death is as bad as being {{years}} year(s) and {{days}} day(s) with heavy symptoms in hospital. Instead of being in hospital one more day you would like to be dead.",
+            "interpretation_mild": "For you death is as bad as having {{years}} year(s) and {{days}} day(s) cold symptoms. Instead of having a cold one more day you would like to be dead.",
             "no_value": "Not applicable",
             "tooltip_no_value": "The field for taking the value into consideration got deleted in the calculator. To fix the problem, you need to restart the calculation with reloading the page."
           },
-          "subtitle": "Um die möglichen Verläufe miteinander vergleichen zu können, benötigen wir neben der Eintrittswahrscheinlichkeit einen Wert, der beispielsweise aufzeigt, dass der Tod schlimmer als ein milder Verlauf ist. \nDazu vergeben wir Punkte: Pluspunkte für Dinge, die uns freuen, Minuspunkte für Dinge, die wir nicht wollen. Ist uns etwas egal, bekommt es 0 Punkte. Je mehr wir etwas wollen oder nicht wollen, desto mehr Plus- oder Minuspunkte bekommt es. Hier könnt und müsst Ihr mit den Eingaben spielen bis sie Eurer eigenen Bewertung entsprechen.",
-          "title": "Wie schlimm sind für Dich die möglichen Verläufe?",
-          "tooltip": "Wie finde ich die richtige Punktebewertung? Hier ein Vorschlag:\nSagen wir, ein Tag mit Erkältungssymptomen bekommt einen Minuspunkt. Nehmen wir an, ein milder Covid-Verlauf dauert 14 Tage, dann sollte das Szenario 14 Minuspunkte bekommen.\nEinen Tag im Krankenhaus zu liegen, eventuell beatmet zu werden, ist schlimmer, als mit Erkältungssymptomen daheim zu liegen. Daher bekommt ein Tag mit schwerem Verlauf 5 Minuspunkte. Schwere Verläufe bei Covid dauern im Durchschnitt XXX Tage, das Szenario bekommt also YYY Punkte.\nDer Tod ist sehr schwer zu bewerten. Als kleine Hilfestellung überlegen wir uns, wie viele Tage mit mildem bzw. schwerem Verlauf gleich schlimm sind wie der Tod. Hat ein Tag mit Erkältungssymptomen einen Minuspunkt, dann hat ein Jahr mit Erkältungssymptomen 365 Minuspunkte, 10 Jahre haben 3650 Minuspunkte. Ist der Tod für Dich gleich schlimm wie 10 Jahre Erkältungssymptome zu haben, dann bekommt er auch 3650 Minuspunkte.",
-          "tooltipText": "Eine mögliche Herangehensweise siehst Du mit Klick auf den Info-Button."
+          "subtitle": "We want to compare different progressions. For that purpose we need a value that shows for example that death is more bad than a mild progression.\nWe award points: plus points for things we like, minus points for things we don't want. If we don't care we award 0 points. The more we want or don't want something the more plus or minus points we award. At this point you have to play with the values until they represent your own assessment.",
+          "title": "How bad are the possible progressions for you?",
+          "tooltip": "How do you find the right score? A proposal:\nLet's say one day with cold symptoms (mild progression) gets one minus point. Let's assume a mild progression lasts 14 days. So this scenario should get 14 minus points.\nTo be in hospital, eventually being ventilated, is more bad as being at home with cold symptoms. So one day with difficult progression gets 5 minus points. Difficult progressions in the case of covid lasts XXX days in average, so this scenario gets YYY minus points.\nIt is hard to assess death. But we can try to estimate how many days with mild or difficult progression are as bad as death. If one day with cold symptoms gets one minus point one year with cold symptoms get round about 365 minus points, 10 years get 3650 minus points. If death is as bad as 10 years with cold symptoms it should get 3650 minus points, too.",
+          "tooltipText": "You can see a possible approach with click on the info button."
         },
         "4": {
           "subtitle": "In der medialen Diskussion dreht sich viel um Inzidenz, R-Wert und Todesfälle. Dabei wird manchmal übersehen, dass eine Corona-Infektion langfristige Gesundheitsschäden nach sich ziehen kann. Diese Krankheit wird Long Covid genannt.\nNach aktueller Studienlage bekommen etwa … Menschen Long Covid:",
