@@ -59,7 +59,7 @@ export default function Q2(): JSX.Element {
         3. {i18next.t(`${i18nPrefix}.title`)}
       </Typography>
       <Typography variant="body2">{applyFormatting(i18next.t(`${i18nPrefix}.subtitle`))}</Typography>
-      <Container maxWidth="sm" style={{ marginTop: "3rem", padding: 0 }}>
+      <Container maxWidth="md" style={{ marginTop: "3rem", padding: 0 }}>
         <Grid container spacing={2} style={{ fontSize: ".8rem" }}>
           <Grid item xs={12}>
             <CoronaCases onGetTotalNumbers={handleGetCoronaData} />

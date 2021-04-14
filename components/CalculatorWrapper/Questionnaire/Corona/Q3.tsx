@@ -153,7 +153,7 @@ export default function Q3(): JSX.Element {
           }
         />
       </Typography>
-      <Container maxWidth="sm" style={{ marginTop: "3rem", padding: 0 }}>
+      <Container maxWidth="md" style={{ marginTop: "3rem", padding: 0 }}>
         <Grid container spacing={2} style={{ fontSize: "0.8rem" }}>
           <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.day_mild_value`)}

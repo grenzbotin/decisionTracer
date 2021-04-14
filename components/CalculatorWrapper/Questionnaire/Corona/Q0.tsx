@@ -140,7 +140,7 @@ export default function Q0(): JSX.Element {
           }
         />
       </Typography>
-      <Container maxWidth="sm" style={{ marginTop: "2rem", fontSize: "0.8rem", padding: 0 }}>
+      <Container maxWidth="md" style={{ marginTop: "2rem", fontSize: "0.8rem", padding: 0 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <CoronaCases onGetInfected={handleChangeKnownInfected} />

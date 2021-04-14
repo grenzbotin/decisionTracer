@@ -17,7 +17,7 @@ const SelectedNode = dynamic(() => import("../../components/SelectedNode"));
 const MobileSelectedNode = dynamic(() => import("../../components/SelectedNode/MobileSelectedNode"));
 
 export default function LangIndex(): JSX.Element {
-  const { mobileFooter, setVisualMode } = useContext(GlobalUiContext);
+  const { mobileFooter, updateUIState, showResult } = useContext(GlobalUiContext);
   const { active, setActiveFromPreset } = useContext(GlobalDecisionContext);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -25,10 +25,10 @@ export default function LangIndex(): JSX.Element {
 
   useEffect(() => {
     if (!active || active.key !== "coin-toss") {
+      updateUIState({ visualMode: "questionnaire", showResult: false });
       setActiveFromPreset("coin-toss");
-      setVisualMode("questionnaire");
     }
-  }, [active, setActiveFromPreset, setVisualMode]);
+  }, [active, setActiveFromPreset, updateUIState]);
 
   return (
     active && (
@@ -39,21 +39,31 @@ export default function LangIndex(): JSX.Element {
           keywords={i18next.t("presetss.coin-toss.meta.keywords")}
         />
         <Grid container spacing={2}>
-          <Grid item xs={12} md={12} lg={9} style={{ marginBottom: mobileFooter && isMobile ? "220px" : "50px" }}>
+          <Grid
+            item
+            xs={12}
+            md={12}
+            lg={showResult ? 9 : 12}
+            style={{ marginBottom: mobileFooter && isMobile ? "220px" : "50px" }}
+          >
             <CalculatorWrapper />
           </Grid>
-          <Hidden mdDown>
-            <Grid item xs={12} md={12} lg={3} style={{ position: "relative" }}>
-              <div style={{ position: "sticky", top: "calc(1rem + 60px)" }}>
-                <Result />
-                <SelectedNode />
-              </div>
-            </Grid>
-          </Hidden>
-          <Hidden smUp>
-            <FooterResult />
-            <MobileSelectedNode />
-          </Hidden>
+          {showResult && (
+            <>
+              <Hidden mdDown>
+                <Grid item xs={12} md={12} lg={3} style={{ position: "relative" }}>
+                  <div style={{ position: "sticky", top: "calc(1rem + 60px)" }}>
+                    <Result />
+                    <SelectedNode />
+                  </div>
+                </Grid>
+              </Hidden>
+              <Hidden smUp>
+                <FooterResult />
+                <MobileSelectedNode />
+              </Hidden>
+            </>
+          )}
         </Grid>
       </>
     )

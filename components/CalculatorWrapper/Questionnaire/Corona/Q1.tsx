@@ -122,7 +122,7 @@ export default function Q1(): JSX.Element {
           }
         />
       </Typography>
-      <Container maxWidth="sm" style={{ marginTop: "2rem", fontSize: "0.8rem", padding: 0 }}>
+      <Container maxWidth="md" style={{ marginTop: "2rem", fontSize: "0.8rem", padding: 0 }}>
         <Grid container spacing={2}>
           <Grid item xs={6}></Grid>
           {LEVEL.map((d) => (

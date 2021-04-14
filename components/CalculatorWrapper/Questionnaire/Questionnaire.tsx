@@ -68,7 +68,7 @@ export default function FullWidthTabs(): JSX.Element {
   const theme = useTheme();
   const [value, setValue] = useState(0);
   const { active } = useContext(GlobalDecisionContext);
-  const { setVisualMode } = useContext(GlobalUiContext);
+  const { updateUIState } = useContext(GlobalUiContext);
 
   const handleChange = (event: React.ChangeEvent<unknown>, newValue: number): void => {
     setValue(newValue);
@@ -121,7 +121,7 @@ export default function FullWidthTabs(): JSX.Element {
                     size="small"
                     variant="contained"
                     color="primary"
-                    onClick={() => setVisualMode("tree")}
+                    onClick={() => updateUIState({ visualMode: "tree", showResult: true })}
                     startIcon={<AccountTreeIcon />}
                   >
                     {i18next.t("common.decision_tree")}
