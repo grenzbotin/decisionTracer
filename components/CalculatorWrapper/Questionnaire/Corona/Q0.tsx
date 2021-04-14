@@ -4,7 +4,7 @@ import i18next from "i18next";
 
 import CustomTooltip from "@/../components/elements/CustomTooltip";
 import ValidatedInputField from "@/../components/elements/ValidatedInputField";
-import { getPresetValueByField, getRoundedValue } from "@/../lib/helpers";
+import { applyFormatting, getPresetValueByField, getRoundedValue } from "@/../lib/helpers";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import CoronaCases from "./CoronaCases";
 import { CoronaPresetContext } from "./CoronaPresetContextProvider";
@@ -124,7 +124,7 @@ export default function Q0(): JSX.Element {
         1. {i18next.t(`${i18nPrefix}.title`)}
       </Typography>
       <Typography variant="body2" style={{ display: "flex", alignItems: "center" }}>
-        {i18next.t(`${i18nPrefix}.subtitle`)}
+        {applyFormatting(i18next.t(`${i18nPrefix}.subtitle`))}
         <CustomTooltip
           content={
             <>
@@ -133,7 +133,7 @@ export default function Q0(): JSX.Element {
                 .split("\n")
                 .map((c) => (
                   <Typography key={c} variant="caption" component="p" style={{ marginBottom: ".4rem" }}>
-                    {c}
+                    {applyFormatting(c)}
                   </Typography>
                 ))}
             </>
@@ -146,55 +146,55 @@ export default function Q0(): JSX.Element {
             <CoronaCases onGetInfected={handleChangeKnownInfected} />
           </Grid>
           <Grid item xs={8}>
-            {i18next.t(`${i18nPrefix}.calc.infected_known`)}
+            {applyFormatting(i18next.t(`${i18nPrefix}.calc.infected_known`))}
           </Grid>
           <Grid item xs={4}>
             <ValidatedInputField value={q0.knownInfected} onChange={handleChangeKnownInfected} />
           </Grid>
           <Grid item xs={8}>
-            {i18next.t(`${i18nPrefix}.calc.dark_figure`)}
+            {applyFormatting(i18next.t(`${i18nPrefix}.calc.dark_figure`))}
           </Grid>
           <Grid item xs={4}>
             <ValidatedInputField value={q0.darkFigure} onChange={handleChangeDarkFigure} />
           </Grid>
           <Grid item xs={8}>
-            {i18next.t(`${i18nPrefix}.calc.infected_actual`)}
+            {applyFormatting(i18next.t(`${i18nPrefix}.calc.infected_actual`))}
           </Grid>
           <Grid item xs={4}>
             {getRoundedValue(q0.knownInfected * q0.darkFigure, 0)}
           </Grid>
           <Grid item xs={8}>
-            {i18next.t(`${i18nPrefix}.calc.infected_unknown`)}
+            {applyFormatting(i18next.t(`${i18nPrefix}.calc.infected_unknown`))}
           </Grid>
           <Grid item xs={4}>
             {getRoundedValue(q0.knownInfected * q0.darkFigure - q0.knownInfected, 0)}
           </Grid>
           <Grid item xs={8}>
-            {i18next.t(`${i18nPrefix}.calc.inhabitants`)}
+            {applyFormatting(i18next.t(`${i18nPrefix}.calc.inhabitants`))}
           </Grid>
           <Grid item xs={4}>
             <ValidatedInputField value={q0.inhabitants} onChange={handleChangeInhabitants} />
           </Grid>
           <Grid item xs={8}>
-            {i18next.t(`${i18nPrefix}.calc.potential_infected`)}
+            {applyFormatting(i18next.t(`${i18nPrefix}.calc.potential_infected`))}
           </Grid>
           <Grid item xs={4}>
             {getRoundedValue(((q0.knownInfected * q0.darkFigure - q0.knownInfected) / q0.inhabitants) * 100, 2)}%
           </Grid>
           <Grid item xs={8}>
-            {i18next.t(`${i18nPrefix}.calc.people_meet`)}
+            {applyFormatting(i18next.t(`${i18nPrefix}.calc.people_meet`))}
           </Grid>
           <Grid item xs={4}>
             <ValidatedInputField value={q0.peopleToMeet} onChange={handleChangePeopleToMeet} />
           </Grid>
           <Grid item xs={8}>
-            {i18next.t(`${i18nPrefix}.calc.injection_duration`)}
+            {applyFormatting(i18next.t(`${i18nPrefix}.calc.injection_duration`))}
           </Grid>
           <Grid item xs={4}>
             <ValidatedInputField value={q0.injectionDuration} onChange={handleChangeInjectionDuration} />
           </Grid>
           <Grid item xs={8}>
-            {i18next.t(`${i18nPrefix}.calc.infection_risk`)}
+            {applyFormatting(i18next.t(`${i18nPrefix}.calc.infection_risk`))}
           </Grid>
           <Grid item xs={4}>
             <b>{getRoundedValue(ownRisk, 2)}%</b> {ownRisk > 100 && `(100%)`}

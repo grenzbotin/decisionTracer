@@ -12,7 +12,7 @@ import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider
 import { SubItem as SubItemType } from "@/../lib/presets";
 import CaseItem from "../CaseItem";
 import CardMenu from "../../../elements/CardMenu";
-import { getUniqueNumber } from "@/../lib/helpers";
+import { applyFormatting, getUniqueNumber } from "@/../lib/helpers";
 import EditableTitle from "@/../components/elements/EditableTitle";
 import ValidatedProbabilityField from "@/../components/elements/ValidatedProbabilityField";
 import NonLinearSlider from "@/../components/elements/NonLinearSlider";
@@ -129,7 +129,7 @@ export default function SubItem({
                 }}
               >
                 <Typography variant="caption" display="block" gutterBottom>
-                  {i18next.t("calculator.value")}
+                  {applyFormatting(i18next.t("calculator.value"))}
                 </Typography>
                 <div style={{ display: "flex" }}>
                   <IconButton
@@ -151,7 +151,7 @@ export default function SubItem({
           ) : (
             <>
               <Typography variant="caption" display="block" style={{ marginTop: "1rem" }} gutterBottom>
-                {i18next.t("calculator.subcases")}
+                {applyFormatting(i18next.t("calculator.subcases"))}
               </Typography>
               {item.cases.map((caseItem) => (
                 <CaseItem

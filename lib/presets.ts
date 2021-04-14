@@ -77,7 +77,7 @@ const CORONA_PRESET = {
           key: "unvaccinated-infection",
           title: "presets.corona.decisions.0.sub.1.title",
           probability: 0,
-          value: 0,
+          value: -35.25,
           cases: [
             {
               key: "unvaccinated-infection-asymptomatic",
@@ -131,7 +131,7 @@ const CORONA_PRESET = {
           key: "vaccinated-infection",
           title: "presets.corona.decisions.1.sub.1.title",
           probability: 0,
-          value: 0,
+          value: -2.8,
           cases: [
             {
               key: "vaccinated-infection-asymptomatic",

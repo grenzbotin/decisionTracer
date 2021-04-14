@@ -17,7 +17,7 @@ import ValidatedProbabilityField from "@/../components/elements/ValidatedProbabi
 import NonLinearSlider from "@/../components/elements/NonLinearSlider";
 import ValidatedValueField from "@/../components/elements/ValidatedValueField";
 import GrowingSlider from "@/../components/elements/GrowingSlider";
-import { getRoundedValue } from "@/../lib/helpers";
+import { applyFormatting, getRoundedValue } from "@/../lib/helpers";
 
 const Accordion = withStyles({
   root: {
@@ -149,7 +149,7 @@ export default function SubCaseItem({
         />
         <div style={{ display: "flex", marginTop: "1.5rem", justifyContent: "space-between", alignItems: "flex-end" }}>
           <Typography variant="caption" display="block" gutterBottom>
-            {i18next.t("calculator.value")}
+            {applyFormatting(i18next.t("calculator.value"))}
           </Typography>
           <div style={{ display: "flex" }}>
             <IconButton

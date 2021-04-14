@@ -7,6 +7,7 @@ import i18next from "i18next";
 import { loadCoronaDataGermany, loadVaccinationDataGermany } from "@/../assets/api";
 import CustomIcon from "@/../assets/CustomIcon";
 import CustomTooltip from "@/../components/elements/CustomTooltip";
+import { applyFormatting } from "@/../lib/helpers";
 
 export default function CoronaCases({
   onGetInfected,
@@ -90,7 +91,7 @@ export default function CoronaCases({
               .split("\n")
               .map((c) => (
                 <Typography key={c} variant="caption" component="p" style={{ marginBottom: ".4rem" }}>
-                  {c}
+                  {applyFormatting(c)}
                 </Typography>
               ))}
           </>

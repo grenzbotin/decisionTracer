@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import { DRAWER_WIDTH } from "./theme";
 import { PRESETS } from "../lib/presets";
 import CustomIcon from "../assets/CustomIcon";
+import { applyFormatting } from "../lib/helpers";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -89,7 +90,10 @@ export default function SideBar({ open, handleClose }: { open: boolean; handleCl
               <ListItemIcon>
                 <CustomIcon name={preset.icon} />
               </ListItemIcon>
-              <ListItemText primary={i18next.t(preset.title)} secondary={i18next.t(preset.question)} />
+              <ListItemText
+                primary={applyFormatting(i18next.t(preset.title))}
+                secondary={applyFormatting(i18next.t(preset.question))}
+              />
             </ListItem>
           </Link>
         ))}

@@ -195,7 +195,8 @@
             "probability_mild": "Probability of mild progression",
             "tooltip_disabled": "Deactivated fields appear because the related case got deleted in the calculator. To fix the problem, you need to restart the calculation with reloading the page.",
             "unvaccinated": "Unvaccinated",
-            "vaccinated": "Vaccinated"
+            "vaccinated": "Vaccinated",
+            "total": "Total"
           },
           "subtitle": "If you click on the button you will get a short overview over some actual studies.",
           "title": "What are the possibilities once you are infected?",

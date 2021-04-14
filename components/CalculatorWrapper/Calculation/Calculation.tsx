@@ -17,7 +17,7 @@ import TurnedInNotIcon from "@material-ui/icons/TurnedInNot";
 import { generateColors } from "../../theme";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { Decision as DecisionType } from "@/../lib/presets";
-import { getResult, getRoundedValue } from "@/../lib/helpers";
+import { applyFormatting, getResult, getRoundedValue } from "@/../lib/helpers";
 import CustomIcon from "@/../assets/CustomIcon";
 
 const AccordionSummary = withStyles({
@@ -58,7 +58,7 @@ export default function Calculation(): JSX.Element {
                 {decision.title}
               </div>
               <div>
-                {i18next.t("calculator.expected_utility")}: {getResult(decision)}
+                {applyFormatting(i18next.t("calculator.expected_utility"))}: {getResult(decision)}
               </div>
             </AccordionSummary>
             <AccordionDetails>

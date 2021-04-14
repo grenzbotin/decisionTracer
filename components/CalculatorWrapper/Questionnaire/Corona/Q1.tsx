@@ -5,7 +5,7 @@ import i18next from "i18next";
 import CustomTooltip from "@/../components/elements/CustomTooltip";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import ValidatedProbabilityField from "@/../components/elements/ValidatedProbabilityField";
-import { getPresetValueByField } from "@/../lib/helpers";
+import { applyFormatting, getPresetValueByField } from "@/../lib/helpers";
 
 const DISEASES = ["asymptomatic", "mild", "difficult", "death"];
 const LEVEL = ["unvaccinated", "vaccinated"];
@@ -107,11 +107,11 @@ export default function Q1(): JSX.Element {
         2. {i18next.t(`${i18nPrefix}.title`)}
       </Typography>
       <Typography variant="body2">
-        {i18next.t(`${i18nPrefix}.subtitle`)}
+        {applyFormatting(i18next.t(`${i18nPrefix}.subtitle`))}
         <CustomTooltip
           content={
             <>
-              <Typography variant="caption">{i18next.t(`${i18nPrefix}.tooltip`)}</Typography>
+              <Typography variant="caption">{applyFormatting(i18next.t(`${i18nPrefix}.tooltip`))}</Typography>
               <Divider style={{ margin: ".5rem 0" }} />
               <img
                 src="/decisionTracer/images/studies_corona_mortality.jpg"
@@ -145,7 +145,9 @@ export default function Q1(): JSX.Element {
                   {calc[l][d] === null && (
                     <CustomTooltip
                       content={
-                        <Typography variant="caption">{i18next.t(`${i18nPrefix}.calc.tooltip_disabled`)}</Typography>
+                        <Typography variant="caption">
+                          {applyFormatting(i18next.t(`${i18nPrefix}.calc.tooltip_disabled`))}
+                        </Typography>
                       }
                     />
                   )}
@@ -154,7 +156,7 @@ export default function Q1(): JSX.Element {
             </Fragment>
           ))}
           <Grid item xs={6}>
-            <b>Gesamt</b>
+            <b>{i18next.t(`${i18nPrefix}.calc.total`)}</b>
           </Grid>
           {LEVEL.map((l) => {
             let total = 0;
@@ -165,7 +167,11 @@ export default function Q1(): JSX.Element {
                 {total !== 100 && (
                   <CustomTooltip
                     alert
-                    content={<Typography variant="caption">{i18next.t(`${i18nPrefix}.calc.not_100`)}</Typography>}
+                    content={
+                      <Typography variant="caption">
+                        {applyFormatting(i18next.t(`${i18nPrefix}.calc.not_100`))}
+                      </Typography>
+                    }
                   />
                 )}
               </Grid>

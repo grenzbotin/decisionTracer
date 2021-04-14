@@ -4,7 +4,7 @@ import i18next from "i18next";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
-import { getPresetValueByField, getRoundedValue } from "@/../lib/helpers";
+import { applyFormatting, getPresetValueByField, getRoundedValue } from "@/../lib/helpers";
 import ValidatedInputField from "@/../components/elements/ValidatedInputField";
 import ValidatedProbabilityField from "@/../components/elements/ValidatedProbabilityField";
 import CustomTooltip from "@/../components/elements/CustomTooltip";
@@ -58,7 +58,7 @@ export default function Q2(): JSX.Element {
       <Typography variant="h6" gutterBottom>
         3. {i18next.t(`${i18nPrefix}.title`)}
       </Typography>
-      <Typography variant="body2">{i18next.t(`${i18nPrefix}.subtitle`)}</Typography>
+      <Typography variant="body2">{applyFormatting(i18next.t(`${i18nPrefix}.subtitle`))}</Typography>
       <Container maxWidth="sm" style={{ marginTop: "3rem", padding: 0 }}>
         <Grid container spacing={2} style={{ fontSize: ".8rem" }}>
           <Grid item xs={12}>
@@ -153,7 +153,11 @@ export default function Q2(): JSX.Element {
             />
             {vaccinationDamage === null && (
               <CustomTooltip
-                content={<Typography variant="caption">{i18next.t(`${i18nPrefix}.tooltip_disabled`)}</Typography>}
+                content={
+                  <Typography variant="caption">
+                    {applyFormatting(i18next.t(`${i18nPrefix}.tooltip_disabled`))}
+                  </Typography>
+                }
               />
             )}
           </Grid>

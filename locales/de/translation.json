@@ -195,7 +195,8 @@
             "probability_mild": "Wahrscheinlichkeit, einen milden Verlauf zu haben",
             "tooltip_disabled": "Deaktivierte Felder bedeuten, dass der Fall, auf den Bezug genommen wird, im Berechner gelöscht wurde. Um das Problem zu beheben, muss der Rechner neu gestartet und die Seite neu geladen werden.",
             "unvaccinated": "Ungeimpft",
-            "vaccinated": "Geimpft"
+            "vaccinated": "Geimpft",
+            "total": "Gesamt"
           },
           "subtitle": "Wenn Du auf den Info-Button klickst, geben wir Dir einen kurzen Überblick über die aktuelle Studienlage.",
           "title": "Wie hoch ist die Wahrscheinlichkeit der möglichen Krankheitsverläufe, wenn man sich infiziert hat?",
@@ -216,7 +217,7 @@
           "damage_probability": "Wahrscheinlichkeit, einen schweren Impfschaden zu erleiden",
           "interpretation": "Interpretation",
           "interpretation_text": "Die Wahrscheinlichkeit, nach einer Infektion an Covid zu sterben ist {{value}} höher als die Wahrscheinlichkeit, nach einer Impfung einen schweren Impfschaden zu bekommen.",
-          "subtitle": "Im Rahmen der Impfung mit dem AstraZeneca-Impfstoff kam es in Deutschland in 31 Fällen zu Hirnvenenthrombosen, die vermutlich in Zusammenhang mit der Impfung stehen. Mit dem Wirkstoff wurden rund 2,85 Millionen Deutsche geimpft.\nDie folgende Übersicht ignoriert die Tatsache, dass sowohl die Wahrscheinlichkeit, an Covid zu sterben als auch die Wahrscheinlichkeit, eine Hirnvenenthrombose zu erleiden, von individuellen Faktoren wie dem Alter bzw. dem Impfstoff abhängt. Es geht uns an dieser Stelle lediglich um eine Darstellung der Größenverhältnisse.",
+          "subtitle": "Im Rahmen der Impfung mit dem AstraZeneca-Impfstoff kam es in Deutschland in 31 Fällen zu Hirnvenenthrombosen, die vermutlich in Zusammenhang mit der Impfung stehen. Mit dem Wirkstoff wurden rund 2,85 Millionen Deutsche geimpft.\nDie folgende Übersicht ignoriert die Tatsache, dass sowohl die Wahrscheinlichkeit, an Covid zu sterben, als auch die Wahrscheinlichkeit, eine Hirnvenenthrombose zu erleiden, von individuellen Faktoren wie dem Alter bzw. dem Impfstoff abhängt. Es geht uns an dieser Stelle lediglich um eine Darstellung der Größenverhältnisse.",
           "title": "Wie hoch ist das Risiko, einen schweren Impfschaden zu erleiden?",
           "tooltip_disabled": "Das Feld zum Einbezug des schweren Impfschadens wurde im Berechner gelöscht und kann daher nicht verändert werden. Um das Problem zu beheben, muss der Rechner neu gestartet und die Seite neu geladen werden."
         },
@@ -234,7 +235,7 @@
           },
           "interpretation": "Interpretation",
           "interpretation_difficult": "Der Tod ist für Dich in etwa gleich schlimm wie {{years}} Jahr(e) und {{days}} Tag(e) lang mit schweren Symptomen im Krankenhaus zu liegen. Bevor Du einen Tag länger im Krankenhaus liegen würdest, wärst Du lieber tot.",
-          "interpretation_mild": "Der Tod ist für Dich in etwa gleich schlimm wie {{years}} Jahr(e) und {{days}} Tag(e) mit Erkältungssymptomen. Bevor Du einen Tag länger milde Erkältungssymptome hättest, wärst Du lieber tot.",
+          "interpretation_mild": "Der Tod ist für Dich in etwa gleich schlimm wie {{years}} Jahr(e) und {{days}} Tag(e) mit Erkältungssymptomen. Bevor Du einen Tag länger Erkältungssymptome hättest, wärst Du lieber tot.",
           "subtitle": "Um die möglichen Verläufe miteinander vergleichen zu können, benötigen wir neben der Eintrittswahrscheinlichkeit einen Wert, der beispielsweise aufzeigt, dass der Tod schlimmer als ein milder Verlauf ist.\nDazu vergeben wir Punkte: Pluspunkte für Dinge, die uns freuen, Minuspunkte für Dinge, die wir nicht wollen. Ist uns etwas egal, bekommt es 0 Punkte. Je mehr wir etwas wollen oder nicht wollen, desto mehr Plus- oder Minuspunkte bekommt es. Hier könnt und müsst Ihr mit den Eingaben spielen, bis sie Eurer eigenen Bewertung entsprechen.",
           "title": "Wie schlimm sind für Dich die möglichen Verläufe?",
           "tooltip": "Wie finde ich die richtige Punktebewertung? Hier ein Vorschlag:\nSagen wir, ein Tag mit Erkältungssymptomen (milder Verlauf) bekommt einen Minuspunkt. Nehmen wir an, ein milder Covid-Verlauf dauert 14 Tage, dann sollte das Szenario 14 Minuspunkte bekommen.\nEinen Tag im Krankenhaus zu liegen, eventuell beatmet zu werden (schwerer Verlauf), ist schlimmer, als mit Erkältungssymptomen daheim zu liegen. Daher bekommt ein Tag mit schwerem Verlauf 5 Minuspunkte. Schwere Verläufe bei Covid dauern im Durchschnitt XXX Tage, das Szenario bekommt also YYY Punkte.\nDer Tod ist sehr schwer zu bewerten. Wir können uns jedoch überlegen, wie viele Tage mit mildem bzw. schwerem Verlauf gleich schlimm sind wie der Tod. Hat ein Tag mit Erkältungssymptomen einen Minuspunkt, dann hat ein Jahr mit Erkältungssymptomen 365 Minuspunkte, 10 Jahre haben 3650 Minuspunkte. Ist der Tod für Dich gleich schlimm wie 10 Jahre Erkältungssymptome zu haben, dann bekommt er auch 3650 Minuspunkte.",

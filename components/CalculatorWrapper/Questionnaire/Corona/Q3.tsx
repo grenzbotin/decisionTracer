@@ -5,7 +5,7 @@ import i18next from "i18next";
 import CustomTooltip from "@/../components/elements/CustomTooltip";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import ValidatedInputField from "@/../components/elements/ValidatedInputField";
-import { getPresetValueByField, getRoundedValue } from "@/../lib/helpers";
+import { applyFormatting, getPresetValueByField, getRoundedValue } from "@/../lib/helpers";
 import ValidatedValueField from "@/../components/elements/ValidatedValueField";
 import { CoronaPresetContext } from "./CoronaPresetContextProvider";
 
@@ -133,7 +133,7 @@ export default function Q3(): JSX.Element {
         .split("\n")
         .map((c) => (
           <Typography key={c} variant="body2" component="p" style={{ marginBottom: ".4rem" }}>
-            {c}
+            {applyFormatting(c)}
           </Typography>
         ))}
       <Typography variant="body2">
@@ -146,7 +146,7 @@ export default function Q3(): JSX.Element {
                 .split("\n")
                 .map((c) => (
                   <Typography key={c} variant="caption" component="p" style={{ marginBottom: ".4rem" }}>
-                    {c}
+                    {applyFormatting(c)}
                   </Typography>
                 ))}
             </>
