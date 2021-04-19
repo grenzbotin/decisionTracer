@@ -11,7 +11,7 @@ export default function Calculator({
   setLastAdded
 }: {
   lastAdded: string;
-  setLastAdded: (_value: null | number) => void;
+  setLastAdded: (_value: null | string) => void;
 }): JSX.Element {
   const { active } = useContext(GlobalDecisionContext);
   const decisions = active.decisions as DecisionType[];

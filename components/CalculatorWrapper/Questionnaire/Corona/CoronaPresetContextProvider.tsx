@@ -19,10 +19,16 @@ export const CoronaPresetContext = React.createContext({
   q3: {
     mild_day_value: -1,
     mild_days_duration: 14,
-    difficult_day_value: -5,
-    difficult_days_duration: 40
+    hospitalised_day_value: -5,
+    hospitalised_days_duration: 40,
+    "severely-hospitalised_day_value": -10,
+    "severely-hospitalised_days_duration": 40
   },
-  setValuesByStep: (_value?: Record<string, number>, _step?: string) => undefined
+  q5: {
+    age: "50",
+    sex: "F"
+  },
+  setValuesByStep: (_value?: Record<string, number | string>, _step?: string) => undefined
 });
 
 interface T {
@@ -47,12 +53,18 @@ export const CoronaPresetContextProvider: React.FC<T> = ({ children }) => {
     q3: {
       mild_day_value: -1,
       mild_days_duration: 14,
-      difficult_day_value: -5,
-      difficult_days_duration: 40
+      hospitalised_day_value: -5,
+      hospitalised_days_duration: 40,
+      "severely-hospitalised_day_value": -10,
+      "severely-hospitalised_days_duration": 40
+    },
+    q5: {
+      age: "50",
+      sex: "F"
     }
   });
 
-  const setValuesByStep = (value: Record<string, number>, step: string): void => {
+  const setValuesByStep = (value: Record<string, number | string>, step: string): void => {
     setState({ ...state, [step]: { ...state[step], ...value } });
   };
 

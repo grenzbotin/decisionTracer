@@ -1,8 +1,5 @@
-import Q0 from "./Corona/Q0";
-import Q1 from "./Corona/Q1";
-import Q2 from "./Corona/Q2";
-import Q3 from "./Corona/Q3";
-import Q4 from "./Corona/Q4";
+import ValuesProgression from "./Corona/ValuesProgression";
+import PersonalData from "./Corona/PersonalData";
 
 import Coin0 from "./CoinToss/Q0";
 import Coin1 from "./CoinToss/Q1";
@@ -15,27 +12,12 @@ export const TABS = {
     {
       id: 0,
       label: 1,
-      content: <Q0 />
+      content: <PersonalData />
     },
     {
       id: 1,
       label: 2,
-      content: <Q1 />
-    },
-    {
-      id: 2,
-      label: 3,
-      content: <Q2 />
-    },
-    {
-      id: 3,
-      label: 4,
-      content: <Q3 />
-    },
-    {
-      id: 4,
-      label: 5,
-      content: <Q4 />
+      content: <ValuesProgression />
     }
   ],
   ["coin-toss"]: [

@@ -9,9 +9,9 @@ import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider
 import CoronaCases from "./CoronaCases";
 import { CoronaPresetContext } from "./CoronaPresetContextProvider";
 
-export default function Q0(): JSX.Element {
+export default function ProbabilityInfection(): JSX.Element {
   const i18nPrefix = "presets.corona.questionnaire.0";
-  const { active, setProbability } = useContext(GlobalDecisionContext);
+  const { active, setProbabilityByKey } = useContext(GlobalDecisionContext);
   const { q0, setValuesByStep } = useContext(CoronaPresetContext);
 
   const [ownRisk, setOwnRisk] = useState(
@@ -36,12 +36,12 @@ export default function Q0(): JSX.Element {
     const compareValue = ownRisk > 100 ? 100 : ownRisk;
 
     if (contextNonVacProbability !== null && compareValue !== contextNonVacProbability) {
-      setProbability(compareValue, "unvaccinated", "unvaccinated-infection");
+      setProbabilityByKey(compareValue, "unvaccinated", "unvaccinated-infection");
     }
     if (contextVacProbability !== null && compareValue !== contextVacProbability) {
-      setProbability(compareValue, "vaccinated", "vaccinated-infection");
+      setProbabilityByKey(compareValue, "vaccinated", "vaccinated-infection");
     }
-  }, [ownRisk, setProbability, active.decisions]);
+  }, [ownRisk, setProbabilityByKey, active.decisions]);
 
   const handleChangeKnownInfected = (value: number): void => {
     // calc in form
@@ -121,7 +121,7 @@ export default function Q0(): JSX.Element {
   return (
     <>
       <Typography variant="h6" gutterBottom>
-        1. {i18next.t(`${i18nPrefix}.title`)}
+        {i18next.t(`${i18nPrefix}.title`)}
       </Typography>
       <Typography variant="body2" style={{ display: "flex", alignItems: "center" }}>
         {applyFormatting(i18next.t(`${i18nPrefix}.subtitle`))}

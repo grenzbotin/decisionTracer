@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FormControl, Input, InputAdornment } from "@material-ui/core";
+import { FormControl, OutlinedInput, InputAdornment } from "@material-ui/core";
 
 import { toLocale } from "@/../lib/helpers";
 
@@ -57,8 +57,8 @@ const ValidatedProbabilityField: React.FC<Props> = ({ onChange, value, disabled 
   };
 
   return (
-    <FormControl disabled={disabled} size="small" style={{ maxWidth: "75px" }}>
-      <Input
+    <FormControl disabled={disabled} variant="outlined" size="small" style={{ maxWidth: "100px" }}>
+      <OutlinedInput
         ref={ref}
         error={error}
         value={isFocus ? localValue : toLocale(localValue)}

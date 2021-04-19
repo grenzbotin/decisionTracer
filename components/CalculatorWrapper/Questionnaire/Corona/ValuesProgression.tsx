@@ -10,18 +10,25 @@ import ValidatedValueField from "@/../components/elements/ValidatedValueField";
 import { CoronaPresetContext } from "./CoronaPresetContextProvider";
 
 const getInterpretationValues = (
-  { mild_day_value, difficult_day_value }: { mild_day_value: number; difficult_day_value: number },
+  {
+    mild_day_value,
+    hospitalised_day_value,
+    "severely-hospitalised_day_value": severelyhospitalised_dayValue
+  }: { mild_day_value: number; hospitalised_day_value: number; "severely-hospitalised_day_value": number },
   deathValue: number,
-  type: "mild" | "difficult"
+  type: "mild" | "hospitalised" | "severely-hospitalised"
 ): { years: number; days: string } => {
-  const totalDays = deathValue / (type === "mild" ? mild_day_value : difficult_day_value);
+  const value =
+    type === "mild" ? mild_day_value : type === "hospitalised" ? hospitalised_day_value : severelyhospitalised_dayValue;
+
+  const totalDays = deathValue / value;
   const years = Math.trunc(totalDays / 365);
   const days = getRoundedValue(totalDays - years * 365, 1);
 
   return { years, days };
 };
 
-export default function Q3(): JSX.Element {
+export default function ValuesProgression(): JSX.Element {
   const i18nPrefix = "presets.corona.questionnaire.3";
   const { active, setValue } = useContext(GlobalDecisionContext);
   const { q3, setValuesByStep } = useContext(CoronaPresetContext);
@@ -44,7 +51,11 @@ export default function Q3(): JSX.Element {
       0
   );
 
-  const handleChange = (value: number, category: "mild" | "difficult" | "death", item?: string): void => {
+  const handleChange = (
+    value: number,
+    category: "mild" | "hospitalised" | "severely-hospitalised" | "death",
+    item?: string
+  ): void => {
     let newValues = { ...q3 };
 
     if (category !== "death") {
@@ -87,7 +98,8 @@ export default function Q3(): JSX.Element {
 
   const interpretation = {
     mild: getInterpretationValues(q3, deathValue, "mild"),
-    difficult: getInterpretationValues(q3, deathValue, "difficult")
+    hospitalised: getInterpretationValues(q3, deathValue, "hospitalised"),
+    "severely-hospitalised": getInterpretationValues(q3, deathValue, "severely-hospitalised")
   };
 
   const current = {
@@ -106,37 +118,52 @@ export default function Q3(): JSX.Element {
         "unvaccinated-infection",
         "unvaccinated-infection-mild"
       ),
-    difficult:
+    hospitalised:
       getPresetValueByField(
         active.decisions,
         "value",
         "vaccinated",
         "vaccinated-infection",
-        "vaccinated-infection-difficult"
+        "vaccinated-infection-hospitalised"
       ) ||
       getPresetValueByField(
         active.decisions,
         "value",
         "unvaccinated",
         "unvaccinated-infection",
-        "unvaccinated-infection-difficult"
+        "unvaccinated-infection-hospitalised"
+      ),
+    "severely-hospitalised":
+      getPresetValueByField(
+        active.decisions,
+        "value",
+        "vaccinated",
+        "vaccinated-infection",
+        "vaccinated-infection-severely-hospitalised"
+      ) ||
+      getPresetValueByField(
+        active.decisions,
+        "value",
+        "unvaccinated",
+        "unvaccinated-infection",
+        "unvaccinated-infection-severely-hospitalised"
       )
   };
 
   return (
     <>
       <Typography variant="h6" gutterBottom>
-        4. {i18next.t(`${i18nPrefix}.title`)}
+        {i18next.t(`${i18nPrefix}.title`)}
       </Typography>
       {i18next
         .t(`${i18nPrefix}.subtitle`)
         .split("\n")
         .map((c) => (
-          <Typography key={c} variant="body2" component="p" style={{ marginBottom: ".4rem" }}>
+          <Typography key={c} variant="body1" component="p" style={{ marginBottom: ".4rem" }}>
             {applyFormatting(c)}
           </Typography>
         ))}
-      <Typography variant="body2">
+      <Typography variant="body1">
         {i18next.t(`${i18nPrefix}.tooltipText`)}{" "}
         <CustomTooltip
           content={
@@ -165,7 +192,7 @@ export default function Q3(): JSX.Element {
             />
           </Grid>
           <Grid item xs={8}>
-            {i18next.t(`${i18nPrefix}.calc.days_duration_mild`)}
+            {applyFormatting(i18next.t(`${i18nPrefix}.calc.days_duration_mild`))}
           </Grid>
           <Grid item xs={4}>
             <ValidatedInputField
@@ -174,14 +201,14 @@ export default function Q3(): JSX.Element {
             />
           </Grid>
           <Grid item xs={8}>
-            {i18next.t(`${i18nPrefix}.calc.current_value_mild`)}
+            {applyFormatting(i18next.t(`${i18nPrefix}.calc.current_value_mild`))}
           </Grid>
           <Grid item xs={4}>
             {current.mild ? (
               current.mild
             ) : (
               <>
-                {i18next.t(`${i18nPrefix}.calc.no_value`)}{" "}
+                {applyFormatting(i18next.t(`${i18nPrefix}.calc.no_value`))}{" "}
                 <CustomTooltip
                   content={
                     <Typography variant="caption">{i18next.t(`${i18nPrefix}.calc.tooltip_no_value`)}</Typography>
@@ -194,35 +221,78 @@ export default function Q3(): JSX.Element {
             <Divider />
           </Grid>
           <Grid item xs={8}>
-            {i18next.t(`${i18nPrefix}.calc.day_difficult_value`)}
+            {applyFormatting(i18next.t(`${i18nPrefix}.calc.day_hospitalised_value`))}
           </Grid>
           <Grid item xs={4}>
             <ValidatedValueField
-              value={q3.difficult_day_value}
-              onChange={(value) => handleChange(value, "difficult", "day_value")}
+              value={q3.hospitalised_day_value}
+              onChange={(value) => handleChange(value, "hospitalised", "day_value")}
             />
           </Grid>
           <Grid item xs={8}>
-            {i18next.t(`${i18nPrefix}.calc.days_duration_difficult`)}
+            {applyFormatting(i18next.t(`${i18nPrefix}.calc.days_duration_hospitalised`))}
           </Grid>
           <Grid item xs={4}>
             <ValidatedInputField
-              value={q3.difficult_days_duration}
-              onChange={(value) => handleChange(value, "difficult", "days_duration")}
+              value={q3.hospitalised_days_duration}
+              onChange={(value) => handleChange(value, "hospitalised", "days_duration")}
             />
           </Grid>
           <Grid item xs={8}>
-            {i18next.t(`${i18nPrefix}.calc.current_value_difficult`)}
+            {applyFormatting(i18next.t(`${i18nPrefix}.calc.current_value_hospitalised`))}
           </Grid>
           <Grid item xs={4}>
-            {current.difficult ? (
-              current.difficult
+            {current.hospitalised ? (
+              current.hospitalised
             ) : (
               <>
                 {i18next.t(`${i18nPrefix}.calc.no_value`)}{" "}
                 <CustomTooltip
                   content={
-                    <Typography variant="caption">{i18next.t(`${i18nPrefix}.calc.tooltip_no_value`)}</Typography>
+                    <Typography variant="caption">
+                      {applyFormatting(i18next.t(`${i18nPrefix}.calc.tooltip_no_value`))}
+                    </Typography>
+                  }
+                />
+              </>
+            )}
+          </Grid>
+          <Grid item xs={12}>
+            <Divider />
+          </Grid>
+
+          <Grid item xs={8}>
+            {applyFormatting(i18next.t(`${i18nPrefix}.calc.day_severely-hospitalised_value`))}
+          </Grid>
+          <Grid item xs={4}>
+            <ValidatedValueField
+              value={q3["severely-hospitalised_day_value"]}
+              onChange={(value) => handleChange(value, "severely-hospitalised", "day_value")}
+            />
+          </Grid>
+          <Grid item xs={8}>
+            {applyFormatting(i18next.t(`${i18nPrefix}.calc.days_duration_hospitalised`))}
+          </Grid>
+          <Grid item xs={4}>
+            <ValidatedInputField
+              value={q3["severely-hospitalised_days_duration"]}
+              onChange={(value) => handleChange(value, "severely-hospitalised", "days_duration")}
+            />
+          </Grid>
+          <Grid item xs={8}>
+            {applyFormatting(i18next.t(`${i18nPrefix}.calc.current_value_severely-hospitalised`))}
+          </Grid>
+          <Grid item xs={4}>
+            {current["severely-hospitalised"] ? (
+              current["severely-hospitalised"]
+            ) : (
+              <>
+                {i18next.t(`${i18nPrefix}.calc.no_value`)}{" "}
+                <CustomTooltip
+                  content={
+                    <Typography variant="caption">
+                      {applyFormatting(i18next.t(`${i18nPrefix}.calc.tooltip_no_value`))}
+                    </Typography>
                   }
                 />
               </>
@@ -232,7 +302,7 @@ export default function Q3(): JSX.Element {
             <Divider />
           </Grid>
           <Grid item xs={8}>
-            {i18next.t(`${i18nPrefix}.calc.death_value`)}
+            {applyFormatting(i18next.t(`${i18nPrefix}.calc.death_value`))}
           </Grid>
           <Grid item xs={4}>
             <ValidatedValueField
@@ -242,7 +312,11 @@ export default function Q3(): JSX.Element {
             />
             {deathValue === null && (
               <CustomTooltip
-                content={<Typography variant="caption">{i18next.t(`${i18nPrefix}.calc.tooltip_no_value`)}</Typography>}
+                content={
+                  <Typography variant="caption">
+                    {applyFormatting(i18next.t(`${i18nPrefix}.calc.tooltip_no_value`))}
+                  </Typography>
+                }
               />
             )}
           </Grid>
@@ -251,16 +325,28 @@ export default function Q3(): JSX.Element {
           {i18next.t(`${i18nPrefix}.interpretation`)}
         </Typography>
         <Typography variant="body2" component="p" gutterBottom>
-          {i18next.t(`${i18nPrefix}.interpretation_mild`, {
-            years: interpretation.mild.years,
-            days: interpretation.mild.days
-          })}
+          {applyFormatting(
+            i18next.t(`${i18nPrefix}.interpretation_mild`, {
+              years: interpretation.mild.years,
+              days: interpretation.mild.days
+            })
+          )}
+        </Typography>
+        <Typography variant="body2" component="p" gutterBottom>
+          {applyFormatting(
+            i18next.t(`${i18nPrefix}.interpretation_hospitalised`, {
+              years: interpretation.hospitalised.years,
+              days: interpretation.hospitalised.days
+            })
+          )}
         </Typography>
         <Typography variant="body2" component="p">
-          {i18next.t(`${i18nPrefix}.interpretation_difficult`, {
-            years: interpretation.difficult.years,
-            days: interpretation.difficult.days
-          })}
+          {applyFormatting(
+            i18next.t(`${i18nPrefix}.interpretation_severely-hospitalised`, {
+              years: interpretation["severely-hospitalised"].years,
+              days: interpretation["severely-hospitalised"].days
+            })
+          )}
         </Typography>
       </Container>
     </>

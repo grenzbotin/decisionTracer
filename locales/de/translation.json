@@ -20,7 +20,8 @@
     "result": "Ergebnis",
     "subCasesItems": "Fälle",
     "subcases": "Sub-Szenarien",
-    "value": "Nutzwert"
+    "value": "Nutzwert",
+    "helper_title": "Hilfe"
   },
   "common": {
     "heading": {
@@ -105,23 +106,26 @@
     "corona": {
       "data_loaded": "Aktualisiert",
       "decisions": {
-        "0": {
+        "unvaccinated": {
           "sub": {
-            "0": {
+            "noInfection": {
               "title": "Keine Ansteckung"
             },
-            "1": {
+            "infection": {
               "cases": {
-                "0": {
+                "asymptomatic": {
                   "title": "Asymptomatisch"
                 },
-                "1": {
+                "mild": {
                   "title": "Milder Verlauf"
                 },
-                "2": {
-                  "title": "Schwerer Verlauf"
+                "hospitalised": {
+                  "title": "Krankenhausaufenthalt"
                 },
-                "3": {
+                "severelyHospitalised": {
+                  "title": "Intensivstation"
+                },
+                "death": {
                   "title": "Tod"
                 }
               },
@@ -130,29 +134,32 @@
           },
           "title": "Nicht impfen"
         },
-        "1": {
+        "vaccinated": {
           "sub": {
-            "0": {
+            "noInfection": {
               "title": "Keine Ansteckung"
             },
-            "1": {
+            "infection": {
               "cases": {
-                "0": {
+                "asymptomatic": {
                   "title": "Asymptomatisch"
                 },
-                "1": {
+                "mild": {
                   "title": "Milder Verlauf"
                 },
-                "2": {
-                  "title": "Schwerer Verlauf"
+                "hospitalised": {
+                  "title": "Krankenhausaufenthalt"
                 },
-                "3": {
+                "severelyHospitalised": {
+                  "title": "Intensivstation"
+                },
+                "death": {
                   "title": "Tod"
                 }
               },
               "title": "Corona"
             },
-            "2": {
+            "vaccinationDamage": {
               "title": "Impfschaden"
             }
           },
@@ -191,7 +198,8 @@
             "not_100": "Für eine sinnvolle Berechnung sollte die Gesamtwahrscheinlichkeit 100% betragen.",
             "probability_asymptomatic": "Wahrscheinlichkeit, einen asymptomatischen Verlauf zu haben",
             "probability_death": "Wahrscheinlichkeit, an Covid zu sterben",
-            "probability_difficult": "Wahrscheinlichkeit, einen schweren Verlauf zu haben",
+            "probability_hospitalised": "Wahrscheinlichkeit, im Krankenhaus zu sein",
+            "probability_severely-hospitalised": "Wahrscheinlichkeit, auf der Intensivstation zu sein",
             "probability_mild": "Wahrscheinlichkeit, einen milden Verlauf zu haben",
             "tooltip_disabled": "Deaktivierte Felder bedeuten, dass der Fall, auf den Bezug genommen wird, im Berechner gelöscht wurde. Um das Problem zu beheben, muss der Rechner neu gestartet und die Seite neu geladen werden.",
             "unvaccinated": "Ungeimpft",
@@ -223,18 +231,22 @@
         },
         "3": {
           "calc": {
-            "current_value_difficult": "Punkte des Szenarios _schwerer Verlauf_",
+            "current_value_hospitalised": "Punkte des Szenarios _Krankenhaus_",
+            "day_hospitalised_value": "Punkte pro Tag für Szenario Krankenhaus",
+            "days_duration_hospitalised": "Dauer eines Verlaufs mit Krankenhausaufenthalt in Tagen",
             "current_value_mild": "Punkte des Szenarios _milder Verlauf_",
-            "day_difficult_value": "Punkte pro Tag mit schwerem Verlauf",
-            "day_mild_value": "Punkte pro Tag mit leichtem Verlauf",
-            "days_duration_difficult": "Dauer eines schweren Verlaufs in Tagen",
+            "day_mild_value": "Punkte pro Tag mit mildem Verlauf",
             "days_duration_mild": "Dauer eines milden Verlaufs in Tagen",
+            "current_value_severely-hospitalised": "Punkte des Szenarios _Intensivstation_",
+            "day_severely-hospitalised_value": "Punkte pro Tag für Szenario Intensivstation",
+            "days_duration_severely-hospitalised": "Dauer eines Verlaufs mit Intensivstation in Tagen",
             "death_value": "Punkte des Szenarios _Tod_",
             "no_value": "Nicht berücksichtigt",
             "tooltip_no_value": "Das Feld zum Einbezug des Wertes wurde im Berechner gelöscht und kann daher nicht verändert werden. Um das Problem zu beheben, muss der Rechner neu gestartet und die Seite neu geladen werden."
           },
           "interpretation": "Interpretation",
-          "interpretation_difficult": "Der Tod ist für Dich in etwa gleich schlimm wie {{years}} Jahr(e) und {{days}} Tag(e) lang mit schweren Symptomen im Krankenhaus zu liegen. Bevor Du einen Tag länger im Krankenhaus liegen würdest, wärst Du lieber tot.",
+          "interpretation_hospitalised": "Der Tod ist für Dich in etwa gleich schlimm wie {{years}} Jahr(e) und {{days}} Tag(e) lang mit schweren Symptomen im Krankenhaus zu liegen. Bevor Du einen Tag länger im Krankenhaus liegen würdest, wärst Du lieber tot.",
+          "interpretation_severely-hospitalised": "Der Tod ist für Dich in etwa gleich schlimm wie {{years}} Jahr(e) und {{days}} Tag(e) lang mit schweren Symptomen auf der Intensivstation zu liegen. Bevor Du einen Tag länger auf der Intensivstation liegen würdest, wärst Du lieber tot.",
           "interpretation_mild": "Der Tod ist für Dich in etwa gleich schlimm wie {{years}} Jahr(e) und {{days}} Tag(e) mit Erkältungssymptomen. Bevor Du einen Tag länger Erkältungssymptome hättest, wärst Du lieber tot.",
           "subtitle": "Um die möglichen Verläufe miteinander vergleichen zu können, benötigen wir neben der Eintrittswahrscheinlichkeit einen Wert, der beispielsweise aufzeigt, dass der Tod schlimmer als ein milder Verlauf ist.\nDazu vergeben wir Punkte: Pluspunkte für Dinge, die uns freuen, Minuspunkte für Dinge, die wir nicht wollen. Ist uns etwas egal, bekommt es 0 Punkte. Je mehr wir etwas wollen oder nicht wollen, desto mehr Plus- oder Minuspunkte bekommt es. Hier könnt und müsst Ihr mit den Eingaben spielen, bis sie Eurer eigenen Bewertung entsprechen.",
           "title": "Wie schlimm sind für Dich die möglichen Verläufe?",
@@ -246,8 +258,13 @@
           "title": "Wie beurteilst Du Long Covid?"
         },
         "5": {
-          "subtitle": "Häufig ist zu hören, dass derzeit überhaupt noch nicht klar ist, ob sich irgendwann in der Zukunft Schäden …",
-          "title": "Unabsehbare Spätfolgen"
+          "subtitle": "Um die Wahrscheinlichkeiten der verschiedenen Krankheitsverläufe durch Covid-19 zu bestimmen, benötigen wir die Angabe von Alter und Geschlecht.",
+          "title": "Persönliche Daten",
+          "tooltip": "Die zugrunde liegenden Daten werden regelmäßig vom European Centre for Disease Prevention and Control (ecdc) entnommen. https://covid19-surveillance-report.ecdc.europa.eu",
+          "female": "weiblich",
+          "male": "männlich",
+          "age": "Alter",
+          "gender": "Geschlecht"
         }
       },
       "title": "Corona"

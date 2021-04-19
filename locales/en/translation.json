@@ -20,7 +20,8 @@
     "result": "Result",
     "subCasesItems": "Sub cases",
     "subcases": "Cases",
-    "value": "Utility"
+    "value": "Utility",
+    "helper_title": "Help"
   },
   "common": {
     "heading": {
@@ -105,23 +106,26 @@
     "corona": {
       "data_loaded": "Updated",
       "decisions": {
-        "0": {
+        "unvaccinated": {
           "sub": {
-            "0": {
+            "noInfection": {
               "title": "No infection"
             },
-            "1": {
+            "infection": {
               "cases": {
-                "0": {
+                "asymptomatic": {
                   "title": "Asymptomatic"
                 },
-                "1": {
+                "mild": {
                   "title": "Mild progression"
                 },
-                "2": {
-                  "title": "Difficult progression"
+                "hospitalised": {
+                  "title": "Hospitalised"
                 },
-                "3": {
+                "severelyHospitalised": {
+                  "title": "Severely hospitalised"
+                },
+                "death": {
                   "title": "Death"
                 }
               },
@@ -130,29 +134,32 @@
           },
           "title": "No vaccination"
         },
-        "1": {
+        "vaccinated": {
           "sub": {
-            "0": {
+            "noInfection": {
               "title": "No infection"
             },
-            "1": {
+            "infection": {
               "cases": {
-                "0": {
+                "asymptomatic": {
                   "title": "Asymptomatic"
                 },
-                "1": {
+                "mild": {
                   "title": "Mild progression"
                 },
-                "2": {
-                  "title": "Difficult progression"
+                "hospitalised": {
+                  "title": "Hospitalised"
                 },
-                "3": {
+                "severelyHospitalised": {
+                  "title": "Severely hospitalised"
+                },
+                "death": {
                   "title": "Death"
                 }
               },
               "title": "Corona"
             },
-            "2": {
+            "vaccinationDamage": {
               "title": "Vaccination damage"
             }
           },
@@ -191,7 +198,8 @@
             "not_100": "The total probability value should sum up to 100% for a meaningful calculation.",
             "probability_asymptomatic": "Probability for asymptomatic disease",
             "probability_death": "Probability to die of covid",
-            "probability_difficult": "Probability of difficult progression",
+            "probability_hospitalised": "Probability for hospitalisation",
+            "probability_severely-hospitalised": "Probabilty for intensive care unit",
             "probability_mild": "Probability of mild progression",
             "tooltip_disabled": "Deactivated fields appear because the related case got deleted in the calculator. To fix the problem, you need to restart the calculation with reloading the page.",
             "unvaccinated": "Unvaccinated",
@@ -223,19 +231,26 @@
         },
         "3": {
           "calc": {
-            "current_value_difficult": "Current value",
+            "current_value_hospitalised": "Current value",
             "current_value_mild": "Current value",
-            "day_difficult_value": "Points per day with difficult progression",
+            "current_value_severely-hospitalised": "Current value",
+            "day_hospitalised_value": "Points per day in hospital",
             "day_mild_value": "Points per day with mild progression",
-            "days_duration_difficult": "Duration of difficult progression (days)",
+            "day_severely-hospitalised_value": "Points per day with with scenario _intensive care unit_",
+            "days_duration_hospitalised": "Duration of progression in hospital (days)",
             "days_duration_mild": "Duration of mild progression (days)",
+            "days_duration_severely-hospitalised": "Duration of progression in hospital with intensive care unit (days)",
             "death_value": "Points for death",
             "interpretation": "Interpretation",
-            "interpretation_difficult": "For you death is as bad as being {{years}} year(s) and {{days}} day(s) with heavy symptoms in hospital. Instead of being in hospital one more day you would like to be dead.",
+            "interpretation_hospitalised": "For you death is as bad as being {{years}} year(s) and {{days}} day(s) with heavy symptoms in hospital. Instead of being in hospital one more day you would like to be dead.",
             "interpretation_mild": "For you death is as bad as having {{years}} year(s) and {{days}} day(s) cold symptoms. Instead of having a cold one more day you would like to be dead.",
             "no_value": "Not applicable",
             "tooltip_no_value": "The field for taking the value into consideration got deleted in the calculator. To fix the problem, you need to restart the calculation with reloading the page."
           },
+          "interpretation": "Interpretation",
+          "interpretation_hospitalised": "Der Tod ist für Dich in etwa gleich schlimm wie {{years}} Jahr(e) und {{days}} Tag(e) lang mit schweren Symptomen im Krankenhaus zu liegen. Bevor Du einen Tag länger im Krankenhaus liegen würdest, wärst Du lieber tot.",
+          "interpretation_severely-hospitalised": "Der Tod ist für Dich in etwa gleich schlimm wie {{years}} Jahr(e) und {{days}} Tag(e) lang mit schweren Symptomen auf der Intensivstation zu liegen. Bevor Du einen Tag länger auf der Intensivstation liegen würdest, wärst Du lieber tot.",
+          "interpretation_mild": "Der Tod ist für Dich in etwa gleich schlimm wie {{years}} Jahr(e) und {{days}} Tag(e) mit Erkältungssymptomen. Bevor Du einen Tag länger Erkältungssymptome hättest, wärst Du lieber tot.",
           "subtitle": "We want to compare different progressions. For that purpose we need a value that shows for example that death is more bad than a mild progression.\nWe award points: plus points for things we like, minus points for things we don't want. If we don't care we award 0 points. The more we want or don't want something the more plus or minus points we award. At this point you have to play with the values until they represent your own assessment.",
           "title": "How bad are the possible progressions for you?",
           "tooltip": "How do you find the right score? A proposal:\nLet's say one day with cold symptoms (mild progression) gets one minus point. Let's assume a mild progression lasts 14 days. So this scenario should get 14 minus points.\nTo be in hospital, eventually being ventilated, is more bad as being at home with cold symptoms. So one day with difficult progression gets 5 minus points. Difficult progressions in the case of covid lasts XXX days in average, so this scenario gets YYY minus points.\nIt is hard to assess death. But we can try to estimate how many days with mild or difficult progression are as bad as death. If one day with cold symptoms gets one minus point one year with cold symptoms get round about 365 minus points, 10 years get 3650 minus points. If death is as bad as 10 years with cold symptoms it should get 3650 minus points, too.",
@@ -246,8 +261,13 @@
           "title": "Wie beurteilst Du Long Covid?"
         },
         "5": {
-          "subtitle": "Häufig ist zu hören, dass derzeit überhaupt noch nicht klar ist, ob sich irgendwann in der Zukunft Schäden …",
-          "title": "Unabsehbare Spätfolgen"
+          "subtitle": "Um die Wahrscheinlichkeiten der verschiedenen Krankheitsverläufe durch Covid-19 zu bestimmen, benötigen wir die Angabe von Alter und Geschlecht.",
+          "title": "Personal data",
+          "tooltip": "Die zugrunde liegenden Daten werden regelmäßig vom European Centre for Disease Prevention and Control (ecdc) entnommen. https://covid19-surveillance-report.ecdc.europa.eu",
+          "female": "female",
+          "male": "male",
+          "age": "Age",
+          "gender": "Gender"
         }
       },
       "title": "Corona"

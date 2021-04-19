@@ -6,6 +6,8 @@ export const GlobalUiContext = React.createContext({
   mobileFooter: false,
   visualMode: "card",
   showResult: true,
+  lastAddedDecision: null,
+  setLastAddedDecision: (_value: string) => undefined,
   toggleMobileFooter: () => undefined,
   setVisualMode: (_mode: string) => undefined,
   updateUIState: (_options: Record<string, boolean | string>) => undefined
@@ -16,12 +18,24 @@ interface T {
 }
 
 export const GlobalUiContextProvider: React.FC<T> = ({ children }) => {
-  const [state, setState] = useState({ mobileFooter: false, visualMode: "card", showResult: true });
+  const [state, setState] = useState({
+    lastAddedDecision: null,
+    mobileFooter: false,
+    visualMode: "card",
+    showResult: true
+  });
 
   const setVisualMode = (mode: string): void => {
     setState({
       ...state,
       visualMode: mode
+    });
+  };
+
+  const setLastAddedDecision = (value: string): void => {
+    setState({
+      ...state,
+      lastAddedDecision: value
     });
   };
 
@@ -45,7 +59,8 @@ export const GlobalUiContextProvider: React.FC<T> = ({ children }) => {
         ...state,
         toggleMobileFooter,
         setVisualMode,
-        updateUIState
+        updateUIState,
+        setLastAddedDecision
       }}
     >
       {state && children}

@@ -69,12 +69,12 @@ export default function SubCaseItem({
   color: string;
   open?: boolean;
 }): JSX.Element {
-  const { setTitle, setProbability, setValue, removeItem, toggleIndependent, toggleClose } = useContext(
+  const { setTitle, setProbabilityByKey, setValue, removeItem, toggleIndependent, toggleClose } = useContext(
     GlobalDecisionContext
   );
 
   const handleProbabilityChange = (value: number): void => {
-    setProbability(value, decisionKey, itemKey, caseKey, subCaseItem.key);
+    setProbabilityByKey(value, decisionKey, itemKey, caseKey, subCaseItem.key);
   };
 
   const handleValueChange = (value: number): void => {
@@ -142,7 +142,7 @@ export default function SubCaseItem({
             { value: 100, label: 100 }
           ]}
           steps={1000}
-          onChange={(value: number) => setProbability(value, decisionKey, itemKey, caseKey, subCaseItem.key)}
+          onChange={(value: number) => setProbabilityByKey(value, decisionKey, itemKey, caseKey, subCaseItem.key)}
           style={{ color: color }}
           value={subCaseItem.probability}
           numFormatter={(val: number) => Math.round(val)}

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FormControl, Input, InputLabel } from "@material-ui/core";
+import { FormControl, OutlinedInput, FormHelperText } from "@material-ui/core";
 
 import { toLocale } from "../../lib/helpers";
 
@@ -65,9 +65,8 @@ const ValidatedInputField: React.FC<Props> = ({ onChange, value, label, disabled
   };
 
   return (
-    <FormControl disabled={disabled} size="small" style={{ maxWidth: "75px" }}>
-      {label && <InputLabel htmlFor="label">{label}</InputLabel>}
-      <Input
+    <FormControl disabled={disabled} variant="outlined" size="small" style={{ maxWidth: "100px" }}>
+      <OutlinedInput
         ref={ref}
         error={error}
         value={isFocus ? localValue : toLocale(localValue)}
@@ -82,6 +81,7 @@ const ValidatedInputField: React.FC<Props> = ({ onChange, value, label, disabled
           }
         }}
       />
+      {label && <FormHelperText id={`text-label-${label}`}>{label}</FormHelperText>}
     </FormControl>
   );
 };

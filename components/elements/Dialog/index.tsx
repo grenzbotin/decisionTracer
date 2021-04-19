@@ -7,7 +7,7 @@ import DialogActions from "./DialogActions";
 
 export interface HeaderProps {
   children: ReactNode;
-  onClose: () => undefined;
+  onClose: () => void | undefined;
 }
 
 export interface BodyProps {
@@ -22,7 +22,7 @@ interface DialogProps {
   open: boolean;
   fullScreen?: boolean;
   maxWidth?: false | "xs" | "sm" | "md" | "lg" | "xl";
-  children: JSX.Element;
+  children: ReactNode;
 }
 
 interface DialogComposition {

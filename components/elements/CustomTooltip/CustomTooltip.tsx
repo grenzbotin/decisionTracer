@@ -20,10 +20,12 @@ const TooltipWrapper = withStyles((theme: Theme) => ({
 
 export default function CustomTooltip({
   content,
-  alert = false
+  alert = false,
+  style = {}
 }: {
   content: JSX.Element | string;
   alert?: boolean;
+  style?: Record<string, number | string>;
 }): JSX.Element {
   const [open, setOpen] = useState(false);
 
@@ -59,7 +61,14 @@ export default function CustomTooltip({
         disableHoverListener
         disableTouchListener
       >
-        <IconButton size="small" color="primary" aria-label="meeting a person?" component="span" onClick={handleOpen}>
+        <IconButton
+          size="small"
+          color="primary"
+          aria-label="meeting a person?"
+          component="span"
+          onClick={handleOpen}
+          style={style}
+        >
           {getCustomTooltipIcon()}
         </IconButton>
       </TooltipWrapper>

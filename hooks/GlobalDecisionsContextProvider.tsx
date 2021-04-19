@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Decision, PRESETS, Preset } from "../lib/presets";
 import { Node } from "react-flow-renderer";
 import i18next from "i18next";
-import { getValueFromChilds } from "../lib/helpers";
+import { getPresetValueByField, getValueFromChilds } from "../lib/helpers";
 
 const getNewProbabilty = (
   itemProbabilty: number,
@@ -29,7 +29,7 @@ export const GlobalDecisionContext = React.createContext({
   setTitle: (_title: string, _decKey?: string, _subKey?: string, _caseKey?: string, _subCaseKey?: string) => undefined,
   setValue: (_value: number | number[], _decKey: string, _subKey: string, _caseKey?: string, _subCaseKey?: string) =>
     undefined,
-  setProbability: (
+  setProbabilityByKey: (
     _value: number | number[],
     _decKey: string,
     _subKey: string,
@@ -260,196 +260,205 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
   };
 
   // Set probability
-  const setProbability = (
+  const setProbabilityByKey = (
     value: number | number[],
     decKey: string,
     subKey: string,
     caseKey?: string,
     subCaseKey?: string
-  ): void => {
-    if (instanceOfPreset(root)) {
-      let newState = {} as { active: Preset; selectedNode: Node | null };
+  ): Promise<boolean> =>
+    new Promise((resolve) => {
+      if (instanceOfPreset(root)) {
+        let newState = {} as { active: Preset; selectedNode: Node | null };
 
-      if (subCaseKey) {
-        // Get information about changed subcase
-        const targetSubCases = root.decisions
-          .find((item) => item.key === decKey)
-          .sub.find((sub) => sub.key === subKey)
-          .cases.find((c) => c.key === caseKey).subCases;
-        const targetSubCaseItem = targetSubCases.find((sc) => sc.key === subCaseKey);
-        const isIndependent = targetSubCaseItem.isIndependent;
-        const targetChange = typeof value === "number" && value - targetSubCaseItem.probability;
+        if (getPresetValueByField(root.decisions, "probability", decKey, subKey, caseKey) !== null) {
+          if (subCaseKey) {
+            // Get information about changed subcase
+            const targetSubCases = root.decisions
+              .find((item) => item.key === decKey)
+              .sub.find((sub) => sub.key === subKey)
+              .cases.find((c) => c.key === caseKey).subCases;
+            const targetSubCaseItem = targetSubCases.find((sc) => sc.key === subCaseKey);
+            const isIndependent = targetSubCaseItem.isIndependent;
+            const targetChange = typeof value === "number" && value - targetSubCaseItem.probability;
 
-        // Get all other decisions that need to change according to the total change
-        const nonTargets = targetSubCases.filter((sc) => sc.key !== subCaseKey && !sc.isIndependent);
-        const probabiltySum = !isIndependent
-          ? nonTargets.map((d) => d.probability).reduce((a: number, b: number) => a + b, 0)
-          : 0;
-        const rest = !isIndependent
-          ? typeof value === "number" && 100 - value - probabiltySum >= 0
-            ? 100 - value - probabiltySum
-            : 0
-          : 0;
-        const equal = !isIndependent ? rest / nonTargets.length : 0;
+            // Get all other decisions that need to change according to the total change
+            const nonTargets = targetSubCases.filter((sc) => sc.key !== subCaseKey && !sc.isIndependent);
+            const probabiltySum = !isIndependent
+              ? nonTargets.map((d) => d.probability).reduce((a: number, b: number) => a + b, 0)
+              : 0;
+            const rest = !isIndependent
+              ? typeof value === "number" && 100 - value - probabiltySum >= 0
+                ? 100 - value - probabiltySum
+                : 0
+              : 0;
+            const equal = !isIndependent ? rest / nonTargets.length : 0;
 
-        newState = {
-          ...state,
-          active: {
-            ...state.active,
-            decisions: root.decisions.map((decision) =>
-              decision.key === decKey
-                ? {
-                    ...decision,
-                    sub: decision.sub.map((sub) =>
-                      sub.key === subKey
-                        ? {
-                            ...sub,
-                            cases: sub.cases.map((c) =>
-                              c.key === caseKey
-                                ? {
-                                    ...c,
-                                    subCases: c.subCases.map((sc) =>
-                                      sc.key === subCaseKey
-                                        ? {
-                                            ...sc,
-                                            probability: typeof value === "number" && value
-                                          }
-                                        : {
-                                            ...sc,
-                                            probability:
-                                              !isIndependent && !sc.isIndependent
-                                                ? getNewProbabilty(sc.probability, equal, probabiltySum, targetChange)
-                                                : sc.probability
-                                          }
-                                    )
-                                  }
-                                : c
-                            )
-                          }
-                        : sub
-                    )
-                  }
-                : decision
-            )
+            newState = {
+              ...state,
+              active: {
+                ...state.active,
+                decisions: root.decisions.map((decision) =>
+                  decision.key === decKey
+                    ? {
+                        ...decision,
+                        sub: decision.sub.map((sub) =>
+                          sub.key === subKey
+                            ? {
+                                ...sub,
+                                cases: sub.cases.map((c) =>
+                                  c.key === caseKey
+                                    ? {
+                                        ...c,
+                                        subCases: c.subCases.map((sc) =>
+                                          sc.key === subCaseKey
+                                            ? {
+                                                ...sc,
+                                                probability: typeof value === "number" && value
+                                              }
+                                            : {
+                                                ...sc,
+                                                probability:
+                                                  !isIndependent && !sc.isIndependent
+                                                    ? getNewProbabilty(
+                                                        sc.probability,
+                                                        equal,
+                                                        probabiltySum,
+                                                        targetChange
+                                                      )
+                                                    : sc.probability
+                                              }
+                                        )
+                                      }
+                                    : c
+                                )
+                              }
+                            : sub
+                        )
+                      }
+                    : decision
+                )
+              }
+            };
+          } else if (caseKey) {
+            // Get information about changed case
+            const targetCases = root.decisions.find((item) => item.key === decKey).sub.find((sub) => sub.key === subKey)
+              .cases;
+            const targetCaseItem = targetCases.find((c) => c.key === caseKey);
+            const isIndependent = targetCaseItem.isIndependent;
+            const targetChange = typeof value === "number" && value - targetCaseItem.probability;
+
+            // Get all other decisions that need to change according to the total change
+            const nonTargets = targetCases.filter((sc) => sc.key !== caseKey && !sc.isIndependent);
+            const probabiltySum = !isIndependent
+              ? nonTargets.map((d) => d.probability).reduce((a: number, b: number) => a + b, 0)
+              : 0;
+            const rest = !isIndependent
+              ? typeof value === "number" && 100 - value - probabiltySum >= 0
+                ? 100 - value - probabiltySum
+                : 0
+              : 0;
+            const equal = !isIndependent ? rest / nonTargets.length : 0;
+
+            newState = {
+              ...state,
+              active: {
+                ...state.active,
+                decisions: root.decisions.map((decision) =>
+                  decision.key === decKey
+                    ? {
+                        ...decision,
+                        sub: decision.sub.map((sub) =>
+                          sub.key === subKey
+                            ? {
+                                ...sub,
+                                cases: sub.cases.map((c) =>
+                                  c.key === caseKey
+                                    ? { ...c, probability: typeof value === "number" && value }
+                                    : {
+                                        ...c,
+                                        probability:
+                                          !isIndependent && !c.isIndependent
+                                            ? getNewProbabilty(c.probability, equal, probabiltySum, targetChange)
+                                            : c.probability
+                                      }
+                                )
+                              }
+                            : sub
+                        )
+                      }
+                    : decision
+                )
+              }
+            };
+          } else if (subKey) {
+            // Get information about changed case
+            const targetSubs = root.decisions.find((item) => item.key === decKey).sub;
+            const targetSubItem = targetSubs.find((sub) => sub.key === subKey);
+            const targetChange = typeof value === "number" && value - targetSubItem.probability;
+            const isIndependent = targetSubItem.isIndependent;
+
+            // Get all other decisions that need to change according to the total change
+            const nonTargets = targetSubs.filter((sc) => sc.key !== subKey && !sc.isIndependent);
+            const probabiltySum = !isIndependent
+              ? nonTargets.map((d) => d.probability).reduce((a: number, b: number) => a + b, 0)
+              : 0;
+            const rest = !isIndependent
+              ? typeof value === "number" && 100 - value - probabiltySum >= 0
+                ? 100 - value - probabiltySum
+                : 0
+              : 0;
+            const equal = !isIndependent ? rest / nonTargets.length : 0;
+
+            newState = {
+              ...state,
+              active: {
+                ...state.active,
+                decisions: root.decisions.map((decision) =>
+                  decision.key === decKey
+                    ? {
+                        ...decision,
+                        sub: decision.sub.map((sub) =>
+                          sub.key === subKey
+                            ? { ...sub, probability: typeof value === "number" && value }
+                            : {
+                                ...sub,
+                                probability:
+                                  !isIndependent && !sub.isIndependent
+                                    ? getNewProbabilty(sub.probability, equal, probabiltySum, targetChange)
+                                    : sub.probability
+                              }
+                        )
+                      }
+                    : decision
+                )
+              }
+            };
           }
-        };
-      } else if (caseKey) {
-        // Get information about changed case
-        const targetCases = root.decisions.find((item) => item.key === decKey).sub.find((sub) => sub.key === subKey)
-          .cases;
-        const targetCaseItem = targetCases.find((c) => c.key === caseKey);
-        const isIndependent = targetCaseItem.isIndependent;
-        const targetChange = typeof value === "number" && value - targetCaseItem.probability;
 
-        // Get all other decisions that need to change according to the total change
-        const nonTargets = targetCases.filter((sc) => sc.key !== caseKey && !sc.isIndependent);
-        const probabiltySum = !isIndependent
-          ? nonTargets.map((d) => d.probability).reduce((a: number, b: number) => a + b, 0)
-          : 0;
-        const rest = !isIndependent
-          ? typeof value === "number" && 100 - value - probabiltySum >= 0
-            ? 100 - value - probabiltySum
-            : 0
-          : 0;
-        const equal = !isIndependent ? rest / nonTargets.length : 0;
-
-        newState = {
-          ...state,
-          active: {
-            ...state.active,
-            decisions: root.decisions.map((decision) =>
-              decision.key === decKey
-                ? {
-                    ...decision,
-                    sub: decision.sub.map((sub) =>
-                      sub.key === subKey
-                        ? {
-                            ...sub,
-                            cases: sub.cases.map((c) =>
-                              c.key === caseKey
-                                ? { ...c, probability: typeof value === "number" && value }
-                                : {
-                                    ...c,
-                                    probability:
-                                      !isIndependent && !c.isIndependent
-                                        ? getNewProbabilty(c.probability, equal, probabiltySum, targetChange)
-                                        : c.probability
-                                  }
-                            )
-                          }
-                        : sub
-                    )
-                  }
-                : decision
-            )
-          }
-        };
-      } else if (subKey) {
-        // Get information about changed case
-        const targetSubs = root.decisions.find((item) => item.key === decKey).sub;
-        const targetSubItem = targetSubs.find((sub) => sub.key === subKey);
-        const targetChange = typeof value === "number" && value - targetSubItem.probability;
-        const isIndependent = targetSubItem.isIndependent;
-
-        // Get all other decisions that need to change according to the total change
-        const nonTargets = targetSubs.filter((sc) => sc.key !== subKey && !sc.isIndependent);
-        const probabiltySum = !isIndependent
-          ? nonTargets.map((d) => d.probability).reduce((a: number, b: number) => a + b, 0)
-          : 0;
-        const rest = !isIndependent
-          ? typeof value === "number" && 100 - value - probabiltySum >= 0
-            ? 100 - value - probabiltySum
-            : 0
-          : 0;
-        const equal = !isIndependent ? rest / nonTargets.length : 0;
-
-        newState = {
-          ...state,
-          active: {
-            ...state.active,
-            decisions: root.decisions.map((decision) =>
-              decision.key === decKey
-                ? {
-                    ...decision,
-                    sub: decision.sub.map((sub) =>
-                      sub.key === subKey
-                        ? { ...sub, probability: typeof value === "number" && value }
-                        : {
-                            ...sub,
-                            probability:
-                              !isIndependent && !sub.isIndependent
-                                ? getNewProbabilty(sub.probability, equal, probabiltySum, targetChange)
-                                : sub.probability
-                          }
-                    )
-                  }
-                : decision
-            )
-          }
-        };
-      }
-
-      const updatedState = {
-        ...newState,
-        active: {
-          ...newState.active,
-          decisions: newState.active.decisions.map((decision: Decision) => ({
-            ...decision,
-            sub: decision.sub.map((sub) => ({
-              ...sub,
-              value: sub.cases.length > 0 ? getValueFromChilds(sub, "cases") : sub.value,
-              cases: sub.cases.map((c) => ({
-                ...c,
-                value: c.subCases.length > 0 ? getValueFromChilds(c, "subCases") : c.value
+          const updatedState = {
+            ...newState,
+            active: {
+              ...newState.active,
+              decisions: newState.active.decisions.map((decision: Decision) => ({
+                ...decision,
+                sub: decision.sub.map((sub) => ({
+                  ...sub,
+                  value: sub.cases.length > 0 ? getValueFromChilds(sub, "cases") : sub.value,
+                  cases: sub.cases.map((c) => ({
+                    ...c,
+                    value: c.subCases.length > 0 ? getValueFromChilds(c, "subCases") : c.value
+                  }))
+                }))
               }))
-            }))
-          }))
-        }
-      };
+            }
+          };
 
-      setState({ ...updatedState });
-    }
-  };
+          setState({ ...updatedState });
+        }
+      }
+      resolve(true);
+    });
 
   // Independent settings
   const toggleIndependent = (decKey: string, subKey: string, caseKey?: string, subCaseKey?: string): void => {
@@ -850,7 +859,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
         ...state,
         setTitle,
         setValue,
-        setProbability,
+        setProbabilityByKey,
         removeItem,
         addItem,
         toggleIndependent,

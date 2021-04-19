@@ -7,12 +7,12 @@ import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider
 import ValidatedProbabilityField from "@/../components/elements/ValidatedProbabilityField";
 import { applyFormatting, getPresetValueByField } from "@/../lib/helpers";
 
-const DISEASES = ["asymptomatic", "mild", "difficult", "death"];
+const DISEASES = ["asymptomatic", "mild", "hospitalised", "severely-hospitalised", "death"];
 const LEVEL = ["unvaccinated", "vaccinated"];
 
-export default function Q1(): JSX.Element {
+export default function ProbabilityDisease(): JSX.Element {
   const i18nPrefix = "presets.corona.questionnaire.1";
-  const { active, setProbability } = useContext(GlobalDecisionContext);
+  const { active, setProbabilityByKey } = useContext(GlobalDecisionContext);
 
   // Taking default values from current active context
   const [calc, setCalc] = useState({
@@ -31,12 +31,19 @@ export default function Q1(): JSX.Element {
         "vaccinated-infection",
         "vaccinated-infection-mild"
       ),
-      difficult: getPresetValueByField(
+      hospitalised: getPresetValueByField(
         active.decisions,
         "probability",
         "vaccinated",
         "vaccinated-infection",
-        "vaccinated-infection-difficult"
+        "vaccinated-infection-hospitalised"
+      ),
+      "severely-hospitalised": getPresetValueByField(
+        active.decisions,
+        "probability",
+        "vaccinated",
+        "vaccinated-infection",
+        "vaccinated-infection-severely-hospitalised"
       ),
       death: getPresetValueByField(
         active.decisions,
@@ -61,12 +68,19 @@ export default function Q1(): JSX.Element {
         "unvaccinated-infection",
         "unvaccinated-infection-mild"
       ),
-      difficult: getPresetValueByField(
+      hospitalised: getPresetValueByField(
         active.decisions,
         "probability",
         "unvaccinated",
         "unvaccinated-infection",
-        "unvaccinated-infection-difficult"
+        "unvaccinated-infection-hospitalised"
+      ),
+      "severely-hospitalised": getPresetValueByField(
+        active.decisions,
+        "probability",
+        "unvaccinated",
+        "unvaccinated-infection",
+        "unvaccinated-infection-severely-hospitalised"
       ),
       death: getPresetValueByField(
         active.decisions,
@@ -97,14 +111,14 @@ export default function Q1(): JSX.Element {
       ) !== null
     ) {
       const valueToSet = value > 100 ? 100 : value;
-      setProbability(valueToSet, category, `${category}-infection`, `${category}-infection-${item}`);
+      setProbabilityByKey(valueToSet, category, `${category}-infection`, `${category}-infection-${item}`);
     }
   };
 
   return (
     <>
       <Typography variant="h6" gutterBottom>
-        2. {i18next.t(`${i18nPrefix}.title`)}
+        {i18next.t(`${i18nPrefix}.title`)}
       </Typography>
       <Typography variant="body2">
         {applyFormatting(i18next.t(`${i18nPrefix}.subtitle`))}
@@ -163,7 +177,7 @@ export default function Q1(): JSX.Element {
             DISEASES.forEach((d) => (total += calc[l][d]));
             return (
               <Grid key={l} item xs={3}>
-                <b>{total}%</b>{" "}
+                <b>{total.toPrecision(5)}%</b>{" "}
                 {total !== 100 && (
                   <CustomTooltip
                     alert

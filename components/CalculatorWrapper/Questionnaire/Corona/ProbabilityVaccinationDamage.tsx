@@ -11,9 +11,9 @@ import CustomTooltip from "@/../components/elements/CustomTooltip";
 import CoronaCases from "./CoronaCases";
 import { CoronaPresetContext } from "./CoronaPresetContextProvider";
 
-export default function Q2(): JSX.Element {
+export default function ProbabilityVaccinationDamage(): JSX.Element {
   const i18nPrefix = "presets.corona.questionnaire.2";
-  const { active, setProbability } = useContext(GlobalDecisionContext);
+  const { active, setProbabilityByKey } = useContext(GlobalDecisionContext);
   const { q2, setValuesByStep } = useContext(CoronaPresetContext);
 
   // Taking default values from current active context
@@ -37,7 +37,7 @@ export default function Q2(): JSX.Element {
       getPresetValueByField(active.decisions, "probability", "vaccinated", "vaccinated-vaccination_damage") !== null
     ) {
       const valueToSet = value > 100 ? 100 : value;
-      setProbability(valueToSet, "vaccinated", "vaccinated-vaccination_damage");
+      setProbabilityByKey(valueToSet, "vaccinated", "vaccinated-vaccination_damage");
     }
   };
 
@@ -56,7 +56,7 @@ export default function Q2(): JSX.Element {
   return (
     <>
       <Typography variant="h6" gutterBottom>
-        3. {i18next.t(`${i18nPrefix}.title`)}
+        {i18next.t(`${i18nPrefix}.title`)}
       </Typography>
       <Typography variant="body2">{applyFormatting(i18next.t(`${i18nPrefix}.subtitle`))}</Typography>
       <Container maxWidth="md" style={{ marginTop: "3rem", padding: 0 }}>
