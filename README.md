@@ -7,6 +7,50 @@ Make your decisions based on rational thoughts
 - English: https://grenzbotin.github.io/decisionTracer/en
 - German: https://grenzbotin.github.io/decisionTracer/de
 
+### Data
+
+#### Disease Probabilty:
+
+European Center for Disease prevention and control
+https://covid19-surveillance-report.ecdc.europa.eu/
+
+#### Vaccination efficacy:
+
+Paul Ehrlich Institut
+https://www.pei.de/DE/arzneimittel/impfstoffe/covid-19/covid-19-node.html
+
+# Vektor
+
+Astra Zeneca
+————————
+
+- mild: -59.5%
+- hospitalised: -59.5%
+- severely hospitalised: -59.5%
+
+Johnson & Johnson
+————————
+
+- mild: -67%
+- hospitalised: -67%
+- severely reduction: -67%
+
+# mRNA
+
+BioNTech
+————————
+
+- mild: -95%
+- hospitalised: -95%
+- severely reduction: -95%
+
+Moderna
+————————
+
+- mild: -94.1%
+- hospitalised: -90.9%
+- severely reduction: -90.9%
+
 ### Development status
 
 - [x] Data structure ready for presets
@@ -30,8 +74,10 @@ Make your decisions based on rational thoughts
 - [x] Tooltips
 - [x] Simple confirmation on route leaving from calculator page
 - [x] Tutorial preset
-- [] Tutorial Questionnaire
-- [] Save changes via local storage
+- [x] Tutorial Questionnaire
+- [x] Corona Preset: Implement data for disease probability via age + sex
+- [] Corona Preset: Improve UI with more graphis
+- [] Corona Preset: Implement vaccination efficacy data by vaccination type (?)
 
 ### Icons
 

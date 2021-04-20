@@ -13,7 +13,7 @@ export const CoronaPresetContext = React.createContext({
   q2: {
     deaths_amount: 78249,
     deaths_infected: 2980413,
-    damage_amount: 31,
+    damage_amount: 42,
     damage_vaccinated: 3584225
   },
   q3: {
@@ -38,17 +38,17 @@ interface T {
 export const CoronaPresetContextProvider: React.FC<T> = ({ children }) => {
   const [state, setState] = useState({
     q0: {
-      knownInfected: 240624,
+      knownInfected: 279387,
       darkFigure: 3,
       inhabitants: 83019213,
       peopleToMeet: 15,
       injectionDuration: 12
     },
     q2: {
-      deaths_amount: 78249,
-      deaths_infected: 2980413,
-      damage_amount: 31,
-      damage_vaccinated: 3584225
+      deaths_amount: 80303,
+      deaths_infected: 3163308,
+      damage_amount: 42,
+      damage_vaccinated: 4639447
     },
     q3: {
       mild_day_value: -1,

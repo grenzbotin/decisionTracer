@@ -50,7 +50,7 @@ export default function ProbabilityVaccinationDamage(): JSX.Element {
     deaths: number;
     astraZenecaVacc: number;
   }): void => {
-    setValuesByStep({ ...q2, deaths_amount: deaths, deaths_infected: cases, damage_vaccinated: astraZenecaVacc });
+    setValuesByStep({ ...q2, deaths_amount: deaths, deaths_infected: cases, damage_vaccinated: astraZenecaVacc }, "q2");
   };
 
   return (
