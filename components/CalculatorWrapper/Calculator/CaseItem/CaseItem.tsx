@@ -13,7 +13,7 @@ import LockIcon from "@material-ui/icons/Lock";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { CaseItem as CaseItemType } from "@/../lib/presets";
 import CardMenu from "../../../elements/CardMenu";
-import { getRoundedValue, getUniqueNumber } from "@/../lib/helpers";
+import { getHasChangeableSiblings, getRoundedValue, getUniqueNumber } from "@/../lib/helpers";
 import SubCaseItem from "../SubCaseItem";
 import EditableTitle from "@/../components/elements/EditableTitle";
 import ValidatedProbabilityField from "@/../components/elements/ValidatedProbabilityField";
@@ -22,6 +22,7 @@ import ValidatedValueField from "@/../components/elements/ValidatedValueField";
 import GrowingSlider from "@/../components/elements/GrowingSlider";
 import Dialog from "@/../components/elements/Dialog";
 import { HELPER_DIALOGS } from "../constants";
+import CustomIcon from "@/../assets/CustomIcon";
 
 const Accordion = withStyles({
   root: {
@@ -71,9 +72,17 @@ export default function CaseItem({
   color: string;
   open?: boolean;
 }): JSX.Element {
-  const { setTitle, setProbabilityByKey, setValue, removeItem, toggleIndependent, toggleClose, addItem } = useContext(
-    GlobalDecisionContext
-  );
+  const {
+    setTitle,
+    setProbabilityByKey,
+    setValue,
+    removeItem,
+    toggleIndependent,
+    toggleIntersecting,
+    toggleClose,
+    addItem,
+    active
+  } = useContext(GlobalDecisionContext);
   const [popUp, setPopUp] = useState(null);
 
   const handleProbabilityChange = (value: number): void => {
@@ -87,6 +96,10 @@ export default function CaseItem({
   const handlePopUpClose = (): void => {
     setPopUp(null);
   };
+
+  const isProbabilityChangeable = caseItem.isProbabilityIntersecting
+    ? getHasChangeableSiblings(active.decisions, decisionKey, itemKey, caseItem.key)
+    : true;
 
   return (
     <>
@@ -136,17 +149,31 @@ export default function CaseItem({
             <Typography variant="caption">{i18next.t("calculator.probability_short")}</Typography>
             <div style={{ display: "flex" }}>
               <IconButton
+                size="small"
+                onClick={() => toggleIntersecting(decisionKey, itemKey, caseItem.key)}
+                style={{
+                  marginRight: ".2rem",
+                  color: caseItem.isProbabilityIntersecting ? color : null
+                }}
+              >
+                <CustomIcon fontSize="small" name="intersectioning" />
+              </IconButton>
+              <IconButton
                 onClick={() => toggleIndependent(decisionKey, itemKey, caseItem.key)}
                 size="small"
                 style={{ marginRight: ".5rem" }}
               >
-                {caseItem.isIndependent ? (
+                {caseItem.isProbabilityLocked ? (
                   <LockIcon fontSize="small" style={{ color: color }} />
                 ) : (
                   <LockOpenIcon fontSize="small" />
                 )}
               </IconButton>
-              <ValidatedProbabilityField value={caseItem.probability} onChange={handleProbabilityChange} />
+              <ValidatedProbabilityField
+                disabled={!isProbabilityChangeable}
+                value={caseItem.probability}
+                onChange={handleProbabilityChange}
+              />
               {caseItem.probabilityHelper && (
                 <Button
                   style={{
@@ -167,6 +194,7 @@ export default function CaseItem({
             </div>
           </div>
           <NonLinearSlider
+            disabled={!isProbabilityChangeable}
             marks={[
               { value: 0, label: 0 },
               { value: 0.0001, label: 0.0001 },
@@ -178,7 +206,7 @@ export default function CaseItem({
             ]}
             steps={1000}
             onChange={(value: number) => setProbabilityByKey(value, decisionKey, itemKey, caseItem.key)}
-            style={{ color: color }}
+            style={{ color: isProbabilityChangeable ? color : "grey" }}
             value={caseItem.probability}
             numFormatter={(val: number) => Math.round(val)}
           />
@@ -201,7 +229,7 @@ export default function CaseItem({
                     size="small"
                     style={{ marginRight: ".2rem" }}
                   >
-                    {caseItem.isClosed ? (
+                    {caseItem.isValueLocked ? (
                       <LockIcon fontSize="small" style={{ color: color }} />
                     ) : (
                       <LockOpenIcon fontSize="small" />

@@ -39,6 +39,7 @@ export const GlobalDecisionContext = React.createContext({
   removeItem: (_decKey: string, _subKey?: string, _caseKey?: string, _subCaseKey?: string) => undefined,
   addItem: (_newKey: string, _decKey?: string, _subKey?: string, _caseKey?: string) => undefined,
   toggleIndependent: (_decKey: string, _subKey?: string, _caseKey?: string, _subCaseKey?: string) => undefined,
+  toggleIntersecting: (_decKey: string, _subKey?: string, _caseKey?: string, _subCaseKey?: string) => undefined,
   toggleClose: (_decKey: string, _subKey?: string, _caseKey?: string, _subCaseKey?: string) => undefined,
   setActiveFromPreset: (_key?: string) => undefined,
   selectedNode: null,
@@ -177,7 +178,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
   ): void => {
     if (instanceOfPreset(root)) {
       let title = "";
-      let isClosed = false;
+      let isValueLocked = false;
 
       if (subCaseKey) {
         const item = root.decisions
@@ -186,7 +187,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
           .cases.find((c) => c.key === caseKey)
           .subCases.find((sc) => sc.key === subCaseKey);
         title = item.title;
-        isClosed = item.isClosed;
+        isValueLocked = item.isValueLocked;
       } else if (caseKey) {
         const item = root.decisions
           .find((decision) => decision.key === decKey)
@@ -194,12 +195,12 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
           .cases.find((c) => c.key === caseKey);
 
         title = item.title;
-        isClosed = item.isClosed;
+        isValueLocked = item.isValueLocked;
       } else if (subKey) {
         const item = root.decisions.find((decision) => decision.key === decKey).sub.find((sub) => sub.key === subKey);
 
         title = item.title;
-        isClosed = item.isClosed;
+        isValueLocked = item.isValueLocked;
       }
 
       const newState = {
@@ -211,20 +212,24 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
             sub: decision.sub.map((sub) => ({
               ...sub,
               value:
-                sub.title === title && ((!isClosed && !sub.isClosed) || sub.key === subKey) && typeof value === "number"
+                sub.title === title &&
+                ((!isValueLocked && !sub.isValueLocked) || sub.key === subKey) &&
+                typeof value === "number"
                   ? value
                   : sub.value,
               cases: sub.cases.map((c) => ({
                 ...c,
                 value:
-                  c.title === title && ((!isClosed && !c.isClosed) || c.key === caseKey) && typeof value === "number"
+                  c.title === title &&
+                  ((!isValueLocked && !c.isValueLocked) || c.key === caseKey) &&
+                  typeof value === "number"
                     ? value
                     : c.value,
                 subCases: c.subCases.map((sc) => ({
                   ...sc,
                   value:
                     sc.title === title &&
-                    ((!isClosed && !sc.isClosed) || sub.key === subCaseKey) &&
+                    ((!isValueLocked && !sc.isValueLocked) || sub.key === subCaseKey) &&
                     typeof value === "number"
                       ? value
                       : sc.value
@@ -279,20 +284,27 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
               .sub.find((sub) => sub.key === subKey)
               .cases.find((c) => c.key === caseKey).subCases;
             const targetSubCaseItem = targetSubCases.find((sc) => sc.key === subCaseKey);
-            const isIndependent = targetSubCaseItem.isIndependent;
+
+            // Is probability an intersecting value?
+            const isProbabilityIntersecting = targetSubCaseItem.isProbabilityIntersecting;
             const targetChange = typeof value === "number" && value - targetSubCaseItem.probability;
 
             // Get all other decisions that need to change according to the total change
-            const nonTargets = targetSubCases.filter((sc) => sc.key !== subCaseKey && !sc.isIndependent);
-            const probabiltySum = !isIndependent
-              ? nonTargets.map((d) => d.probability).reduce((a: number, b: number) => a + b, 0)
+            const changingTargets = targetSubCases.filter(
+              (sc) => sc.key !== subCaseKey && sc.isProbabilityIntersecting && !sc.isProbabilityLocked
+            );
+            console.log(changingTargets);
+            const currentProbabiltySum = isProbabilityIntersecting
+              ? changingTargets.map((d) => d.probability).reduce((a: number, b: number) => a + b, 0)
               : 0;
-            const rest = !isIndependent
-              ? typeof value === "number" && 100 - value - probabiltySum >= 0
-                ? 100 - value - probabiltySum
+
+            const rest = isProbabilityIntersecting
+              ? typeof value === "number" && 100 - value - currentProbabiltySum >= 0
+                ? 100 - value - currentProbabiltySum
                 : 0
               : 0;
-            const equal = !isIndependent ? rest / nonTargets.length : 0;
+
+            const equal = isProbabilityIntersecting ? rest / changingTargets.length : 0;
 
             newState = {
               ...state,
@@ -319,11 +331,13 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                                             : {
                                                 ...sc,
                                                 probability:
-                                                  !isIndependent && !sc.isIndependent
+                                                  isProbabilityIntersecting &&
+                                                  sc.isProbabilityIntersecting &&
+                                                  !sc.isProbabilityLocked
                                                     ? getNewProbabilty(
                                                         sc.probability,
                                                         equal,
-                                                        probabiltySum,
+                                                        currentProbabiltySum,
                                                         targetChange
                                                       )
                                                     : sc.probability
@@ -345,20 +359,22 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
             const targetCases = root.decisions.find((item) => item.key === decKey).sub.find((sub) => sub.key === subKey)
               .cases;
             const targetCaseItem = targetCases.find((c) => c.key === caseKey);
-            const isIndependent = targetCaseItem.isIndependent;
+            const isProbabilityIntersecting = targetCaseItem.isProbabilityIntersecting;
             const targetChange = typeof value === "number" && value - targetCaseItem.probability;
 
             // Get all other decisions that need to change according to the total change
-            const nonTargets = targetCases.filter((sc) => sc.key !== caseKey && !sc.isIndependent);
-            const probabiltySum = !isIndependent
-              ? nonTargets.map((d) => d.probability).reduce((a: number, b: number) => a + b, 0)
+            const changingTargets = targetCases.filter(
+              (sc) => sc.key !== caseKey && sc.isProbabilityIntersecting && !sc.isProbabilityLocked
+            );
+            const currentProbabiltySum = isProbabilityIntersecting
+              ? changingTargets.map((d) => d.probability).reduce((a: number, b: number) => a + b, 0)
               : 0;
-            const rest = !isIndependent
-              ? typeof value === "number" && 100 - value - probabiltySum >= 0
-                ? 100 - value - probabiltySum
+            const rest = isProbabilityIntersecting
+              ? typeof value === "number" && 100 - value - currentProbabiltySum >= 0
+                ? 100 - value - currentProbabiltySum
                 : 0
               : 0;
-            const equal = !isIndependent ? rest / nonTargets.length : 0;
+            const equal = isProbabilityIntersecting ? rest / changingTargets.length : 0;
 
             newState = {
               ...state,
@@ -378,8 +394,10 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                                     : {
                                         ...c,
                                         probability:
-                                          !isIndependent && !c.isIndependent
-                                            ? getNewProbabilty(c.probability, equal, probabiltySum, targetChange)
+                                          isProbabilityIntersecting &&
+                                          c.isProbabilityIntersecting &&
+                                          !c.isProbabilityLocked
+                                            ? getNewProbabilty(c.probability, equal, currentProbabiltySum, targetChange)
                                             : c.probability
                                       }
                                 )
@@ -396,19 +414,21 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
             const targetSubs = root.decisions.find((item) => item.key === decKey).sub;
             const targetSubItem = targetSubs.find((sub) => sub.key === subKey);
             const targetChange = typeof value === "number" && value - targetSubItem.probability;
-            const isIndependent = targetSubItem.isIndependent;
+            const isProbabilityIntersecting = targetSubItem.isProbabilityIntersecting;
 
             // Get all other decisions that need to change according to the total change
-            const nonTargets = targetSubs.filter((sc) => sc.key !== subKey && !sc.isIndependent);
-            const probabiltySum = !isIndependent
-              ? nonTargets.map((d) => d.probability).reduce((a: number, b: number) => a + b, 0)
+            const changingTargets = targetSubs.filter(
+              (sc) => sc.key !== subKey && sc.isProbabilityIntersecting && !sc.isProbabilityLocked
+            );
+            const currentProbabiltySum = isProbabilityIntersecting
+              ? changingTargets.map((d) => d.probability).reduce((a: number, b: number) => a + b, 0)
               : 0;
-            const rest = !isIndependent
-              ? typeof value === "number" && 100 - value - probabiltySum >= 0
-                ? 100 - value - probabiltySum
+            const rest = isProbabilityIntersecting
+              ? typeof value === "number" && 100 - value - currentProbabiltySum >= 0
+                ? 100 - value - currentProbabiltySum
                 : 0
               : 0;
-            const equal = !isIndependent ? rest / nonTargets.length : 0;
+            const equal = isProbabilityIntersecting ? rest / changingTargets.length : 0;
 
             newState = {
               ...state,
@@ -424,8 +444,8 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                             : {
                                 ...sub,
                                 probability:
-                                  !isIndependent && !sub.isIndependent
-                                    ? getNewProbabilty(sub.probability, equal, probabiltySum, targetChange)
+                                  isProbabilityIntersecting && sub.isProbabilityIntersecting
+                                    ? getNewProbabilty(sub.probability, equal, currentProbabiltySum, targetChange)
                                     : sub.probability
                               }
                         )
@@ -484,8 +504,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                                       sc.key === subCaseKey
                                         ? {
                                             ...sc,
-                                            isIndependent: !sc.isIndependent,
-                                            probability: sc.isIndependent ? 0 : sc.probability
+                                            isProbabilityLocked: !sc.isProbabilityLocked
                                           }
                                         : sc
                                     )
@@ -517,8 +536,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                               c.key === caseKey
                                 ? {
                                     ...c,
-                                    isIndependent: !c.isIndependent,
-                                    probability: c.isIndependent ? 0 : c.probability
+                                    isProbabilityLocked: !c.isProbabilityLocked
                                   }
                                 : c
                             )
@@ -543,8 +561,104 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                       sub.key === subKey
                         ? {
                             ...sub,
-                            isIndependent: !sub.isIndependent,
-                            probability: sub.isIndependent ? 0 : sub.probability
+                            isProbabilityLocked: !sub.isProbabilityLocked
+                          }
+                        : sub
+                    )
+                  }
+                : decision
+            )
+          }
+        });
+      }
+    }
+  };
+
+  // Toggle intersecting
+  const toggleIntersecting = (decKey: string, subKey: string, caseKey?: string, subCaseKey?: string): void => {
+    if (instanceOfPreset(root)) {
+      if (subCaseKey) {
+        setState({
+          ...state,
+          active: {
+            ...state.active,
+            decisions: root.decisions.map((decision) =>
+              decision.key === decKey
+                ? {
+                    ...decision,
+                    sub: decision.sub.map((sub) =>
+                      sub.key === subKey
+                        ? {
+                            ...sub,
+                            cases: sub.cases.map((c) =>
+                              c.key === caseKey
+                                ? {
+                                    ...c,
+                                    subCases: c.subCases.map((sc) =>
+                                      sc.key === subCaseKey
+                                        ? {
+                                            ...sc,
+                                            isProbabilityIntersecting: !sc.isProbabilityIntersecting,
+                                            probability: !sc.isProbabilityIntersecting ? 0 : sc.probability
+                                          }
+                                        : sc
+                                    )
+                                  }
+                                : c
+                            )
+                          }
+                        : sub
+                    )
+                  }
+                : decision
+            )
+          }
+        });
+      } else if (caseKey) {
+        setState({
+          ...state,
+          active: {
+            ...state.active,
+            decisions: root.decisions.map((decision) =>
+              decision.key === decKey
+                ? {
+                    ...decision,
+                    sub: decision.sub.map((sub) =>
+                      sub.key === subKey
+                        ? {
+                            ...sub,
+                            cases: sub.cases.map((c) =>
+                              c.key === caseKey
+                                ? {
+                                    ...c,
+                                    isProbabilityIntersecting: !c.isProbabilityIntersecting,
+                                    probability: !c.isProbabilityIntersecting ? 0 : c.probability
+                                  }
+                                : c
+                            )
+                          }
+                        : sub
+                    )
+                  }
+                : decision
+            )
+          }
+        });
+      } else if (subKey) {
+        setState({
+          ...state,
+          active: {
+            ...state.active,
+            decisions: root.decisions.map((decision) =>
+              decision.key === decKey
+                ? {
+                    ...decision,
+                    sub: decision.sub.map((sub) =>
+                      sub.key === subKey
+                        ? {
+                            ...sub,
+                            isProbabilityIntersecting: !sub.isProbabilityIntersecting,
+                            probability: !sub.isProbabilityIntersecting ? 0 : sub.probability
                           }
                         : sub
                     )
@@ -581,7 +695,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                                       sc.key === subCaseKey
                                         ? {
                                             ...sc,
-                                            isClosed: !sc.isClosed
+                                            isValueLocked: !sc.isValueLocked
                                           }
                                         : sc
                                     )
@@ -613,7 +727,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                               c.key === caseKey
                                 ? {
                                     ...c,
-                                    isClosed: !c.isClosed
+                                    isValueLocked: !c.isValueLocked
                                   }
                                 : c
                             )
@@ -638,7 +752,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
                       sub.key === subKey
                         ? {
                             ...sub,
-                            isClosed: !sub.isClosed
+                            isValueLocked: !sub.isValueLocked
                           }
                         : sub
                     )
@@ -863,6 +977,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
         removeItem,
         addItem,
         toggleIndependent,
+        toggleIntersecting,
         setActiveFromPreset,
         toggleClose,
         setSelectedNode

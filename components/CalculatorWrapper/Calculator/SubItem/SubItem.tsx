@@ -12,7 +12,7 @@ import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider
 import { SubItem as SubItemType } from "@/../lib/presets";
 import CaseItem from "../CaseItem";
 import CardMenu from "../../../elements/CardMenu";
-import { applyFormatting, getUniqueNumber } from "@/../lib/helpers";
+import { applyFormatting, getHasChangeableSiblings, getUniqueNumber } from "@/../lib/helpers";
 import EditableTitle from "@/../components/elements/EditableTitle";
 import ValidatedProbabilityField from "@/../components/elements/ValidatedProbabilityField";
 import NonLinearSlider from "@/../components/elements/NonLinearSlider";
@@ -20,6 +20,7 @@ import ValidatedValueField from "@/../components/elements/ValidatedValueField";
 import GrowingSlider from "@/../components/elements/GrowingSlider";
 import Dialog from "@/../components/elements/Dialog";
 import { HELPER_DIALOGS } from "../constants";
+import CustomIcon from "@/../assets/CustomIcon";
 
 const CardHeader = withStyles({
   root: {
@@ -41,9 +42,17 @@ export default function SubItem({
   decisionKey: string;
   color: string;
 }): JSX.Element {
-  const { setTitle, setProbabilityByKey, setValue, removeItem, addItem, toggleIndependent, toggleClose } = useContext(
-    GlobalDecisionContext
-  );
+  const {
+    setTitle,
+    setProbabilityByKey,
+    setValue,
+    removeItem,
+    addItem,
+    toggleIndependent,
+    toggleIntersecting,
+    toggleClose,
+    active
+  } = useContext(GlobalDecisionContext);
 
   const [popUp, setPopUp] = useState(null);
 
@@ -58,6 +67,10 @@ export default function SubItem({
   const handlePopUpClose = (): void => {
     setPopUp(null);
   };
+
+  const isProbabilityChangeable = item.isProbabilityIntersecting
+    ? getHasChangeableSiblings(active.decisions, decisionKey, item.key)
+    : true;
 
   return (
     <>
@@ -105,16 +118,30 @@ export default function SubItem({
               <div style={{ display: "flex" }}>
                 <IconButton
                   size="small"
+                  onClick={() => toggleIntersecting(decisionKey, item.key)}
+                  style={{
+                    marginRight: ".2rem",
+                    color: item.isProbabilityIntersecting ? color : null
+                  }}
+                >
+                  <CustomIcon fontSize="small" name="intersectioning" />
+                </IconButton>
+                <IconButton
+                  size="small"
                   onClick={() => toggleIndependent(decisionKey, item.key)}
                   style={{ marginRight: ".2rem" }}
                 >
-                  {item.isIndependent ? (
+                  {item.isProbabilityLocked ? (
                     <LockIcon fontSize="small" style={{ color: color }} />
                   ) : (
                     <LockOpenIcon fontSize="small" />
                   )}
                 </IconButton>
-                <ValidatedProbabilityField onChange={handleProbabilityChange} value={item.probability} />
+                <ValidatedProbabilityField
+                  disabled={!isProbabilityChangeable}
+                  onChange={handleProbabilityChange}
+                  value={item.probability}
+                />
                 {item.probabilityHelper && (
                   <Button
                     style={{
@@ -135,6 +162,7 @@ export default function SubItem({
               </div>
             </div>
             <NonLinearSlider
+              disabled={!isProbabilityChangeable}
               marks={[
                 { value: 0, label: 0 },
                 { value: 0.0001, label: 0.0001 },
@@ -146,7 +174,7 @@ export default function SubItem({
               ]}
               steps={1000}
               onChange={(value: number) => setProbabilityByKey(value, decisionKey, item.key)}
-              style={{ color: color }}
+              style={{ color: isProbabilityChangeable ? color : "grey" }}
               value={item.probability}
               numFormatter={(val: number) => Math.round(val)}
             />
@@ -169,7 +197,7 @@ export default function SubItem({
                       size="small"
                       style={{ marginRight: ".2rem" }}
                     >
-                      {item.isClosed ? (
+                      {item.isValueLocked ? (
                         <LockIcon fontSize="small" style={{ color: color }} />
                       ) : (
                         <LockOpenIcon fontSize="small" />

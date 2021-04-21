@@ -198,3 +198,42 @@ export function getResult(decision: DecisionType): number | string {
 
   return getRoundedValue(total, 2);
 }
+
+export function getHasChangeableSiblings(
+  decisions: DecisionType[],
+  decKey: string,
+  subKey: string,
+  caseKey?: string,
+  subCaseKey?: string
+): boolean {
+  if (subCaseKey) {
+    const decision = decisions.find((item) => item.key === decKey);
+    const sub = decision.sub.find((item) => item.key === subKey);
+    const c = sub.cases.find((item) => item.key === caseKey);
+
+    return (
+      c.subCases.filter(
+        (item) => item.isProbabilityIntersecting && !item.isProbabilityLocked && item.key !== subCaseKey
+      ).length > 0
+    );
+  }
+
+  if (caseKey) {
+    const decision = decisions.find((item) => item.key === decKey);
+    const sub = decision.sub.find((item) => item.key === subKey);
+
+    return (
+      sub.cases.filter((item) => item.isProbabilityIntersecting && !item.isProbabilityLocked && item.key !== caseKey)
+        .length > 0
+    );
+  }
+
+  if (subKey) {
+    const decision = decisions.find((item) => item.key === decKey);
+
+    return (
+      decision.sub.filter((item) => item.isProbabilityIntersecting && !item.isProbabilityLocked && item.key !== subKey)
+        .length > 0
+    );
+  }
+}

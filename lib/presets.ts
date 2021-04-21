@@ -2,9 +2,12 @@ export interface SubCaseItem {
   key: string;
   title: string;
   probability: number;
+  probabilityHelper?: string;
   value: number;
-  isIndependent?: boolean;
-  isClosed?: boolean;
+  valueHelper?: string;
+  isProbabilityLocked?: boolean;
+  isProbabilityIntersecting?: boolean;
+  isValueLocked?: boolean;
 }
 
 export interface CaseItem {
@@ -14,8 +17,9 @@ export interface CaseItem {
   probabilityHelper?: string;
   value: number;
   valueHelper?: string;
-  isIndependent?: boolean;
-  isClosed?: boolean;
+  isProbabilityLocked?: boolean;
+  isProbabilityIntersecting?: boolean;
+  isValueLocked?: boolean;
   subCases?: SubCaseItem[];
 }
 
@@ -26,8 +30,9 @@ export interface SubItem {
   probabilityHelper?: string;
   value: number;
   valueHelper?: string;
-  isIndependent?: boolean;
-  isClosed?: boolean;
+  isProbabilityLocked?: boolean;
+  isProbabilityIntersecting?: boolean;
+  isValueLocked?: boolean;
   cases?: CaseItem[];
 }
 
@@ -74,6 +79,7 @@ const CORONA_PRESET = {
           key: "unvaccinated-noInfection",
           title: "presets.corona.decisions.unvaccinated.sub.noInfection.title",
           probability: 50,
+          isProbabilityIntersecting: true,
           value: 0,
           cases: [] as CaseItem[]
         },
@@ -82,6 +88,7 @@ const CORONA_PRESET = {
           title: "presets.corona.decisions.unvaccinated.sub.infection.title",
           probability: 50,
           probabilityHelper: 'coronaProbabilityInfection',
+          isProbabilityIntersecting: true,
           value: -28.15,
           cases: [
             {
@@ -91,7 +98,7 @@ const CORONA_PRESET = {
               probabilityHelper: 'coronaPersonalData',
               value: 0,
               valueHelper: 'coronaValuesProgression',
-              isIndependent: true,
+              isProbabilityIntersecting: true,
               subCases: [] as SubCaseItem[]
             },
             {
@@ -101,7 +108,7 @@ const CORONA_PRESET = {
               probabilityHelper: 'coronaPersonalData',
               value: -14,
               valueHelper: 'coronaValuesProgression',
-              isIndependent: true,
+              isProbabilityIntersecting: true,
               subCases: [] as SubCaseItem[]
             },
             {
@@ -111,7 +118,7 @@ const CORONA_PRESET = {
               probabilityHelper: 'coronaPersonalData',
               value: -200,
               valueHelper: 'coronaValuesProgression',
-              isIndependent: true,
+              isProbabilityIntersecting: true,
               subCases: [] as SubCaseItem[]
             },
             {
@@ -121,7 +128,7 @@ const CORONA_PRESET = {
               probabilityHelper: 'coronaPersonalData',
               value: -400,
               valueHelper: 'coronaValuesProgression',
-              isIndependent: true,
+              isProbabilityIntersecting: true,
               subCases: [] as SubCaseItem[],
             },
             {
@@ -131,7 +138,7 @@ const CORONA_PRESET = {
               probabilityHelper: 'coronaPersonalData',
               value: -3650,
               valueHelper: 'coronaValuesProgression',
-              isIndependent: true,
+              isProbabilityIntersecting: true,
               subCases: [] as SubCaseItem[]
             }
           ]
@@ -147,6 +154,7 @@ const CORONA_PRESET = {
           key: "vaccinated-noInfection",
           title: "presets.corona.decisions.vaccinated.sub.noInfection.title",
           probability: 50,
+          isProbabilityIntersecting: true,
           value: 0,
           cases: [] as CaseItem[]
         },
@@ -154,6 +162,7 @@ const CORONA_PRESET = {
           key: "vaccinated-infection",
           title: "presets.corona.decisions.vaccinated.sub.infection.title",
           probability: 50,
+          isProbabilityIntersecting: true,
           probabilityHelper: 'coronaProbabilityInfection',
           value: -5.26,
           cases: [
@@ -164,7 +173,7 @@ const CORONA_PRESET = {
               probabilityHelper: 'coronaPersonalData',
               value: 0,
               valueHelper: 'coronaValuesProgression',
-              isIndependent: true,
+              isProbabilityIntersecting: true,
               subCases: [] as SubCaseItem[]
             },
             {
@@ -174,7 +183,7 @@ const CORONA_PRESET = {
               probabilityHelper: 'coronaPersonalData',
               value: -14,
               valueHelper: 'coronaValuesProgression',
-              isIndependent: true,
+              isProbabilityIntersecting: true,
               subCases: [] as SubCaseItem[]
             },
             {
@@ -184,7 +193,7 @@ const CORONA_PRESET = {
               probabilityHelper: 'coronaPersonalData',
               value: -200,
               valueHelper: 'coronaValuesProgression',
-              isIndependent: true,
+              isProbabilityIntersecting: true,
               subCases: [] as SubCaseItem[]
             },
             {
@@ -194,7 +203,7 @@ const CORONA_PRESET = {
               probabilityHelper: 'coronaPersonalData',
               value: -400,
               valueHelper: 'coronaValuesProgression',
-              isIndependent: true,
+              isProbabilityIntersecting: true,
               subCases: [] as SubCaseItem[],
             },
             {
@@ -204,7 +213,7 @@ const CORONA_PRESET = {
               probabilityHelper: 'coronaPersonalData',
               value: -3650,
               valueHelper: 'coronaValuesProgression',
-              isIndependent: true,
+              isProbabilityIntersecting: true,
               subCases: [] as SubCaseItem[]
             }
           ]
@@ -215,7 +224,6 @@ const CORONA_PRESET = {
           probability: 0.22,
           probabilityHelper: 'coronaProbabilityVaccinationDamage',
           value: -400,
-          isIndependent: true,
           cases: [] as CaseItem[]
         }
       ]

@@ -51,6 +51,7 @@ const createScale = (
 };
 
 interface Props {
+  disabled?: boolean;
   marks: Array<{ value: number; label?: string | number }>;
   steps: number;
   onChange: (_value: number) => void;
@@ -60,6 +61,7 @@ interface Props {
 }
 
 const NonLinearSlider: React.FC<Props> = ({
+  disabled = false,
   marks = [{ value: 0 }, { value: 1 }],
   steps = 200,
   onChange = (x: number) => x,
@@ -85,6 +87,7 @@ const NonLinearSlider: React.FC<Props> = ({
 
   return (
     <Slider
+      disabled={disabled}
       value={unscale(value)}
       min={0}
       step={1 / steps}

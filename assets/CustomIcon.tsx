@@ -9,6 +9,7 @@ import DeFlag from "./svg/de.svg";
 import EnFlag from "./svg/en.svg";
 import Custom from "./svg/custom.svg";
 import Coin from "./svg/coins.svg";
+import Intersectioning from "./svg/intersectioning.svg";
 
 const ICONS = {
   virus: {
@@ -42,6 +43,10 @@ const ICONS = {
   coin: {
     path: Coin,
     viewbox: "0 0 60 60"
+  },
+  intersectioning: {
+    path: Intersectioning,
+    viewbox: "0 0 377 160"
   }
 };
 
