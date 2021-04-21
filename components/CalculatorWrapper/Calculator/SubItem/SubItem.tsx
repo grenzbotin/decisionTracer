@@ -1,4 +1,4 @@
-import { Card, Grid, CardContent, Typography, IconButton } from "@material-ui/core";
+import { Card, Grid, CardContent, Typography, IconButton, Button } from "@material-ui/core";
 import MuiCardHeader from "@material-ui/core/CardHeader";
 import { withStyles } from "@material-ui/core/styles";
 import i18next from "i18next";
@@ -7,7 +7,6 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import LockIcon from "@material-ui/icons/Lock";
-import LiveHelpIcon from "@material-ui/icons/LiveHelp";
 
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { SubItem as SubItemType } from "@/../lib/presets";
@@ -104,11 +103,6 @@ export default function SubItem({
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <Typography variant="caption">{i18next.t("calculator.probability_short")}</Typography>
               <div style={{ display: "flex" }}>
-                {item.probabilityHelper && (
-                  <IconButton onClick={() => setPopUp(item.probabilityHelper)} size="small">
-                    <LiveHelpIcon fontSize="small" />
-                  </IconButton>
-                )}
                 <IconButton
                   size="small"
                   onClick={() => toggleIndependent(decisionKey, item.key)}
@@ -121,14 +115,31 @@ export default function SubItem({
                   )}
                 </IconButton>
                 <ValidatedProbabilityField onChange={handleProbabilityChange} value={item.probability} />
+                {item.probabilityHelper && (
+                  <Button
+                    style={{
+                      borderColor: color,
+                      padding: 0,
+                      color: "#fff",
+                      marginLeft: ".2rem",
+                      minWidth: "40px",
+                      backgroundColor: color
+                    }}
+                    variant="outlined"
+                    onClick={() => setPopUp(item.probabilityHelper)}
+                    size="small"
+                  >
+                    Info
+                  </Button>
+                )}
               </div>
             </div>
             <NonLinearSlider
               marks={[
                 { value: 0, label: 0 },
+                { value: 0.0001, label: 0.0001 },
                 { value: 0.1, label: 0.1 },
                 { value: 1, label: 1 },
-                { value: 10, label: 10 },
                 { value: 20, label: 20 },
                 { value: 50, label: 50 },
                 { value: 100, label: 100 }
@@ -153,11 +164,6 @@ export default function SubItem({
                     {applyFormatting(i18next.t("calculator.value"))}
                   </Typography>
                   <div style={{ display: "flex" }}>
-                    {item.valueHelper && (
-                      <IconButton onClick={() => setPopUp(item.valueHelper)} size="small">
-                        <LiveHelpIcon fontSize="small" />
-                      </IconButton>
-                    )}
                     <IconButton
                       onClick={() => toggleClose(decisionKey, item.key)}
                       size="small"
@@ -170,6 +176,23 @@ export default function SubItem({
                       )}
                     </IconButton>
                     <ValidatedValueField onChange={handleValueChange} value={item.value} />
+                    {item.valueHelper && (
+                      <Button
+                        style={{
+                          borderColor: color,
+                          padding: 0,
+                          color: "#fff",
+                          marginLeft: ".2rem",
+                          minWidth: "40px",
+                          backgroundColor: color
+                        }}
+                        variant="outlined"
+                        onClick={() => setPopUp(item.valueHelper)}
+                        size="small"
+                      >
+                        Info
+                      </Button>
+                    )}
                   </div>
                 </div>
                 <GrowingSlider onChange={handleValueChange} value={item.value} />

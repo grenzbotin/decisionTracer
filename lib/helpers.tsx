@@ -43,7 +43,11 @@ export function toLocale(value: string | number): string {
 }
 
 export function getRoundedValue(value: number, digits: number): string {
-  return toLocale(value.toFixed(digits));
+  if (value < 1 && value > -1) {
+    return toLocale(value.toFixed(7));
+  } else {
+    return toLocale(value.toFixed(digits));
+  }
 }
 
 export function getValueFromChilds(node: SubItem | SubCaseItem | DecisionType, child: string): number {

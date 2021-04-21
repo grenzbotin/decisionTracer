@@ -73,14 +73,14 @@ const CORONA_PRESET = {
         {
           key: "unvaccinated-noInfection",
           title: "presets.corona.decisions.unvaccinated.sub.noInfection.title",
-          probability: 0,
+          probability: 50,
           value: 0,
           cases: [] as CaseItem[]
         },
         {
           key: "unvaccinated-infection",
           title: "presets.corona.decisions.unvaccinated.sub.infection.title",
-          probability: 0,
+          probability: 50,
           probabilityHelper: 'coronaProbabilityInfection',
           value: -28.15,
           cases: [
@@ -146,21 +146,21 @@ const CORONA_PRESET = {
         {
           key: "vaccinated-noInfection",
           title: "presets.corona.decisions.vaccinated.sub.noInfection.title",
-          probability: 0,
+          probability: 50,
           value: 0,
           cases: [] as CaseItem[]
         },
         {
           key: "vaccinated-infection",
           title: "presets.corona.decisions.vaccinated.sub.infection.title",
-          probability: 0,
+          probability: 50,
           probabilityHelper: 'coronaProbabilityInfection',
-          value: -28.15,
+          value: -5.26,
           cases: [
             {
               key: "vaccinated-infection-asymptomatic",
               title: "presets.corona.decisions.vaccinated.sub.infection.cases.asymptomatic.title",
-              probability: 24.47296093845960000,
+              probability: 85.87644369549194,
               probabilityHelper: 'coronaPersonalData',
               value: 0,
               valueHelper: 'coronaValuesProgression',
@@ -170,7 +170,7 @@ const CORONA_PRESET = {
             {
               key: "vaccinated-infection-mild",
               title: "presets.corona.decisions.vaccinated.sub.infection.cases.mild.title",
-              probability: 70.94414076894730000,
+              probability: 13.266554323793148,
               probabilityHelper: 'coronaPersonalData',
               value: -14,
               valueHelper: 'coronaValuesProgression',
@@ -180,7 +180,7 @@ const CORONA_PRESET = {
             {
               key: "vaccinated-infection-hospitalised",
               title: "presets.corona.decisions.vaccinated.sub.infection.cases.hospitalised.title",
-              probability: 4.08234553494657000,
+              probability: 0.7633986150350088,
               probabilityHelper: 'coronaPersonalData',
               value: -200,
               valueHelper: 'coronaValuesProgression',
@@ -190,7 +190,7 @@ const CORONA_PRESET = {
             {
               key: "vaccinated-infection-severely-hospitalised",
               title: "presets.corona.decisions.vaccinated.sub.infection.cases.severelyHospitalised.title",
-              probability: 0.25296339516030000,
+              probability: 0.047304154894976115,
               probabilityHelper: 'coronaPersonalData',
               value: -400,
               valueHelper: 'coronaValuesProgression',
@@ -200,7 +200,7 @@ const CORONA_PRESET = {
             {
               key: "vaccinated-infection-death",
               title: "presets.corona.decisions.vaccinated.sub.infection.cases.death.title",
-              probability: 0.24758936248618100,
+              probability: 0.04629921078491587,
               probabilityHelper: 'coronaPersonalData',
               value: -3650,
               valueHelper: 'coronaValuesProgression',
@@ -212,9 +212,9 @@ const CORONA_PRESET = {
         {
           key: "vaccinated-vaccination_damage",
           title: "presets.corona.decisions.vaccinated.sub.vaccinationDamage.title",
-          probability: 0,
+          probability: 0.22,
           probabilityHelper: 'coronaProbabilityVaccinationDamage',
-          value: 0,
+          value: -400,
           isIndependent: true,
           cases: [] as CaseItem[]
         }

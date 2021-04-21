@@ -1,4 +1,4 @@
-import { Typography, AccordionDetails, IconButton } from "@material-ui/core";
+import { Typography, AccordionDetails, IconButton, Button } from "@material-ui/core";
 import MuiAccordion from "@material-ui/core/Accordion";
 import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
 import i18next from "i18next";
@@ -9,7 +9,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import LockIcon from "@material-ui/icons/Lock";
-import LiveHelpIcon from "@material-ui/icons/LiveHelp";
 
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { CaseItem as CaseItemType } from "@/../lib/presets";
@@ -135,12 +134,7 @@ export default function CaseItem({
         <AccordionDetails style={{ flexDirection: "column", padding: "1rem" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <Typography variant="caption">{i18next.t("calculator.probability_short")}</Typography>
-            <div>
-              {caseItem.probabilityHelper && (
-                <IconButton onClick={() => setPopUp(caseItem.probabilityHelper)} size="small">
-                  <LiveHelpIcon fontSize="small" />
-                </IconButton>
-              )}
+            <div style={{ display: "flex" }}>
               <IconButton
                 onClick={() => toggleIndependent(decisionKey, itemKey, caseItem.key)}
                 size="small"
@@ -153,14 +147,31 @@ export default function CaseItem({
                 )}
               </IconButton>
               <ValidatedProbabilityField value={caseItem.probability} onChange={handleProbabilityChange} />
+              {caseItem.probabilityHelper && (
+                <Button
+                  style={{
+                    borderColor: color,
+                    padding: 0,
+                    color: "#fff",
+                    marginLeft: ".2rem",
+                    minWidth: "40px",
+                    backgroundColor: color
+                  }}
+                  variant="outlined"
+                  onClick={() => setPopUp(caseItem.probabilityHelper)}
+                  size="small"
+                >
+                  Info
+                </Button>
+              )}
             </div>
           </div>
           <NonLinearSlider
             marks={[
               { value: 0, label: 0 },
+              { value: 0.0001, label: 0.0001 },
               { value: 0.1, label: 0.1 },
               { value: 1, label: 1 },
-              { value: 10, label: 10 },
               { value: 20, label: 20 },
               { value: 50, label: 50 },
               { value: 100, label: 100 }
@@ -185,11 +196,6 @@ export default function CaseItem({
                   {i18next.t("calculator.value")}
                 </Typography>
                 <div style={{ display: "flex" }}>
-                  {caseItem.valueHelper && (
-                    <IconButton onClick={() => setPopUp(caseItem.valueHelper)} size="small">
-                      <LiveHelpIcon fontSize="small" />
-                    </IconButton>
-                  )}
                   <IconButton
                     onClick={() => toggleClose(decisionKey, itemKey, caseItem.key)}
                     size="small"
@@ -202,6 +208,23 @@ export default function CaseItem({
                     )}
                   </IconButton>
                   <ValidatedValueField onChange={handleValueChange} value={caseItem.value} />
+                  {caseItem.valueHelper && (
+                    <Button
+                      style={{
+                        borderColor: color,
+                        padding: 0,
+                        color: "#fff",
+                        marginLeft: ".2rem",
+                        minWidth: "40px",
+                        backgroundColor: color
+                      }}
+                      variant="outlined"
+                      onClick={() => setPopUp(caseItem.valueHelper)}
+                      size="small"
+                    >
+                      Info
+                    </Button>
+                  )}
                 </div>
               </div>
               <GrowingSlider value={caseItem.value} onChange={handleValueChange} />

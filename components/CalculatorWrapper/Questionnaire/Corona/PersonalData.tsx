@@ -17,9 +17,17 @@ async function fetchCsv(): Promise<string> {
     return reader.read().then((result) => decoder.decode(result.value));
   });
 }
-
+const VACCINATION_EFFICACY = 0.813;
+const VACCINATION_REDUCTION = 1 - VACCINATION_EFFICACY;
 const CATEGORIES = ["vaccinated", "unvaccinated"];
 const ITEMS = ["asymptomatic", "mild", "hospitalised", "severely-hospitalised", "death"];
+const FACTORS = [
+  [VACCINATION_EFFICACY, 1],
+  [VACCINATION_REDUCTION, 1],
+  [VACCINATION_REDUCTION, 1],
+  [VACCINATION_REDUCTION, 1],
+  [VACCINATION_REDUCTION, 1]
+];
 
 export default function PersonalData(): JSX.Element {
   const i18nPrefix = "presets.corona.questionnaire.5";
@@ -57,11 +65,16 @@ export default function PersonalData(): JSX.Element {
       asymptomatic: parseFloat(stAsymptomatic.replace(",", "."))
     };
 
-    CATEGORIES.forEach((category) => {
-      ITEMS.forEach((item) => {
+    CATEGORIES.forEach((category, key) => {
+      ITEMS.forEach((item, itemKey) => {
+        let probability = probabilities[item] * FACTORS[itemKey][key] * 100;
+        if (item === "asymptomatic" && category === "vaccinated") {
+          probability = (probabilities[item] * VACCINATION_REDUCTION + FACTORS[itemKey][key]) * 100;
+        }
+
         setTasks((queue) => [
           ...queue,
-          [probabilities[item] * 100, category, `${category}-infection`, `${category}-infection-${item}`]
+          [probability, category, `${category}-infection`, `${category}-infection-${item}`]
         ]);
       });
     });

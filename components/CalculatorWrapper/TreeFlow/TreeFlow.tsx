@@ -6,8 +6,6 @@ import ReactFlow, {
   ControlButton,
   removeElements,
   Elements,
-  Node,
-  Edge,
   useZoomPanHelper,
   isNode
 } from "react-flow-renderer";
@@ -32,9 +30,9 @@ function TreeFlow({ elements, setElements }: { elements: Elements<any>; setEleme
     setElements((els: any) => removeElements(elementsToRemove, els));
   };
 
-  const handleElementClick = (e: React.MouseEvent<Element, MouseEvent>, element: Node<any> | Edge<any>): void => {
-    if (isNode(element)) {
-      setSelectedNode(element.data);
+  const handleClick = (elements: Elements<any>): void => {
+    if (elements && elements.length > 0 && isNode(elements[0])) {
+      setSelectedNode(elements[0].data);
     } else {
       setSelectedNode(null);
     }
@@ -59,8 +57,8 @@ function TreeFlow({ elements, setElements }: { elements: Elements<any>; setEleme
         elementsSelectable
         minZoom={0.1}
         onLoad={() => fitView()}
-        onElementClick={handleElementClick}
         onElementsRemove={handleElementRemove}
+        onSelectionChange={handleClick}
         snapToGrid={true}
         snapGrid={[15, 15]}
         nodeTypes={nodeTypes}
