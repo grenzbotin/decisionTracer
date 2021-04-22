@@ -3,9 +3,17 @@ import ProbabilityInfection from "../Questionnaire/Corona/ProbabilityInfection";
 import ProbabilityVaccinationDamage from "../Questionnaire/Corona/ProbabilityVaccinationDamage";
 import ValuesProgression from "../Questionnaire/Corona/ValuesProgression";
 
-export const HELPER_DIALOGS = {
-  coronaProbabilityInfection: <ProbabilityInfection />,
-  coronaPersonalData: <PersonalData />,
-  coronaValuesProgression: <ValuesProgression />,
-  coronaProbabilityVaccinationDamage: <ProbabilityVaccinationDamage />
-};
+export function getHelperDialog(mode: string, props: Record<string, undefined | (() => void)>): JSX.Element {
+  switch (mode) {
+    case "coronaProbabilityInfection":
+      return <ProbabilityInfection {...props} />;
+    case "coronaPersonalData":
+      return <PersonalData {...props} />;
+    case "coronaValuesProgression":
+      return <ValuesProgression {...props} />;
+    case "coronaProbabilityVaccinationDamage":
+      return <ProbabilityVaccinationDamage {...props} />;
+    default:
+      return null;
+  }
+}

@@ -174,6 +174,7 @@
         "keywords": "Corona, Impfung, Entscheidung, Hilfe, Rechner",
         "title": "Soll ich mich impfen lassen? | Decision Tracer"
       },
+      "save": "Übernehmen",
       "question": "Soll ich mich impfen lassen?",
       "questionnaire": {
         "0": {
@@ -212,21 +213,10 @@
         },
         "2": {
           "0": "Mit welchem Wert möchtest Du rechnen?",
-          "calc": {
-            "cvt": "Fälle",
-            "damage_title": "Hirnvenen-Thrombosen bei Geimpften (Astra-Zeneca)",
-            "dead": "Tote",
-            "death_title": "Tote bei Corona-Infizierten",
-            "in": "bei",
-            "infected": "Infizierten",
-            "tooltip_cvt_cases": "Bitte beachten! Wir versuchen diese Angabe möglichst aktuell zu halten, haben jedoch keinen Zugriff auf aktuelle Daten via offizielle Quellen. Bitte im Zweifel eigenständig angeben.",
-            "vaccinated": "Geimpften"
-          },
           "damage_probability": "Wahrscheinlichkeit, einen schweren Impfschaden zu erleiden",
-          "interpretation": "Interpretation",
-          "interpretation_text": "Die Wahrscheinlichkeit, nach einer Infektion an Covid zu sterben ist {{value}} höher als die Wahrscheinlichkeit, nach einer Impfung einen schweren Impfschaden zu bekommen.",
-          "subtitle": "Im Rahmen der Impfung mit dem AstraZeneca-Impfstoff kam es in Deutschland in 31 Fällen zu Hirnvenenthrombosen, die vermutlich in Zusammenhang mit der Impfung stehen. Mit dem Wirkstoff wurden rund 2,85 Millionen Deutsche geimpft.\nDie folgende Übersicht ignoriert die Tatsache, dass sowohl die Wahrscheinlichkeit, an Covid zu sterben, als auch die Wahrscheinlichkeit, eine Hirnvenenthrombose zu erleiden, von individuellen Faktoren wie dem Alter bzw. dem Impfstoff abhängt. Es geht uns an dieser Stelle lediglich um eine Darstellung der Größenverhältnisse.",
+          "subtitle": "Das wichtigste Argument gegen die Corona-Impfung ist offenbar die Möglichkeit, einen schweren Impfschaden zu erleiden. Wir betrachten hier schwerwiegende, dauerhafte Impfschäden. Ein Szenario mit leichten Impfreaktionen kannst Du natürlich gern selbst hinzufügen.\nImpfschäden treten innerhalb weniger Tage, spätestens Wochen auf. Langzeitfolgen bedeutet, dass eine Folge langfristige Auswirkungen hat. Die Symptome treten aber stets kurz nach der Impfung auf, der Impfschaden ist also vergleichsweise schnell bekannt.\n Mit den Corona-Impfstoffen wurden zunächst überproportional viele ältere und kranke Menschen geimpft. Treten eine Woche nach der Impfung schwerwiegende Symptome auf oder stirbt gar der Patient, so ist die Todesursache meist die bestehende Vorerkrankung. Trotzdem werden derartige Fälle als Verdachtsfälle vom Paul-Ehrlich-Institut erfasst. Bei den Corona-Impfstoffen sind es bei den schwerwiegenden Verdachtsfällen 0,02 Fälle pro 100 Impfungen (0,02%).\n Bereits die Erfassung dieser Fälle scheint Verunsicherung zu wecken. So ging eine Meldung durch die Medien, dass in einem Altenheim in Norwegen innerhalb von 6 Tagen nach der Corona-Impfung 33 Bewohner starben. Eine Untersuchung ergab, dass das der üblichen Sterberate in dieser Altersgruppe entspricht.\n Natürlich ist beim größten Teil dieser Fälle nicht die Impfung die Ursache für die Symptome. Das Paul-Ehrlich-Institut untersucht 42 Fälle (Deutschland, Stand 10.04.2021) bei denen eine Impfung mit dem Astra-Zeneca-Wirkstoff die Ursache von Sinusvenenthrombosen sein könnte. Zu diesem Zeitpunkt wurden rund 5,5 Millionen Menschen in Deutschland mit diesem Impfstoff geimpft. Daraus ergibt sich eine rechnerische Wahrscheinlichkeit von 0,00076%. (Dieser Wert ist die Voreinstellung.)",
           "title": "Wie hoch ist das Risiko, einen schweren Impfschaden zu erleiden?",
+          "warning": "_Du hast eine Wahrscheinlichkeit über {{preset_vaccination_damage}} eingestellt. Es gibt keinerlei Belege für diese Annahme. Möchtest Du wirklich mit diesem Wert rechnen?_",
           "tooltip_disabled": "Das Feld zum Einbezug des schweren Impfschadens wurde im Berechner gelöscht und kann daher nicht verändert werden. Um das Problem zu beheben, muss der Rechner neu gestartet und die Seite neu geladen werden."
         },
         "3": {

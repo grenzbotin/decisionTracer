@@ -4,6 +4,12 @@ import { CaseItem, Decision as DecisionType, SubCaseItem, SubItem } from "./pres
 import { Elements } from "react-flow-renderer";
 import i18next from "i18next";
 
+export function getPath(): string {
+  const isLocal = window.location.origin.includes("localhost");
+
+  return isLocal ? "" : "decisionTracer";
+}
+
 export function getPresetValueByField(
   decisions: DecisionType[],
   type: "probability" | "value",

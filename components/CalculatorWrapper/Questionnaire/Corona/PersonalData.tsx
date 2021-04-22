@@ -4,13 +4,13 @@ import i18next from "i18next";
 import Papa from "papaparse";
 
 import CustomTooltip from "@/../components/elements/CustomTooltip";
-import { applyFormatting } from "@/../lib/helpers";
+import { applyFormatting, getPath } from "@/../lib/helpers";
 import { CoronaPresetContext } from "./CoronaPresetContextProvider";
 import { Autocomplete } from "@material-ui/lab";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 
 async function fetchCsv(): Promise<string> {
-  return fetch("/decisionTracer/datasets/output.csv").then((response) => {
+  return fetch(`${getPath()}/datasets/output.csv`).then((response) => {
     const reader = response.body.getReader();
     const decoder = new TextDecoder("utf-8");
 

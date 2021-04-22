@@ -174,6 +174,7 @@
         "keywords": "Corona, vaccination, decision, help, calculator",
         "title": "Should I get vaccinated? | Decision Tracer"
       },
+      "save": "Save",
       "question": "Should I get vaccinated?",
       "questionnaire": {
         "0": {
@@ -211,22 +212,11 @@
           "tooltip": "Studies"
         },
         "2": {
-          "0": "What value do you want to count on?",
-          "calc": {
-            "cvt": "Cases",
-            "damage_title": "Cerebral venous thrombosis (CVT) (Astra-Zeneca)",
-            "dead": "Deaths",
-            "death_title": "Deaths of covid",
-            "in": "in",
-            "infected": "Infected",
-            "tooltip_cvt_cases": "Please note! We try to keep this value as updated as possible, but we do not have any technical and official source to pull the data automatically. Please adapt this value manually.",
-            "vaccinated": "Vaccinated"
-          },
-          "damage_probability": "Probability of getting difficult vaccination damage",
-          "interpretation": "Interpretation",
-          "interpretation_text": "The chance to die of covid is {{value}} higher than the chance to get a difficult vaccination damage after becoming vaccinated.",
-          "subtitle": "In germany there were 31 cases of cerebral venous thrombosis in connection with the AstraZeneca vaccine. 2.85 mio people got this vaccine.\nThe following overview ignores the fact that the probability to die from covid as well as the probability to get a cerebral venous thrombosis depend on individual factors like age or vaccine. At this point we just want to show a proportion.",
+          "0": "What value do you want to count with?",
+          "damage_probability": "Probability of getting severe vaccination damage",
+          "subtitle": "Das wichtigste Argument gegen die Corona-Impfung ist offenbar die Möglichkeit, einen schweren Impfschaden zu erleiden. Wir betrachten hier schwerwiegende, dauerhafte Impfschäden. Ein Szenario mit leichten Impfreaktionen kannst Du natürlich gern selbst hinzufügen.\nImpfschäden treten innerhalb weniger Tage, spätestens Wochen auf. Langzeitfolgen bedeutet, dass eine Folge langfristige Auswirkungen hat. Die Symptome treten aber stets kurz nach der Impfung auf, der Impfschaden ist also vergleichsweise schnell bekannt.\n Mit den Corona-Impfstoffen wurden zunächst überproportional viele ältere und kranke Menschen geimpft. Treten eine Woche nach der Impfung schwerwiegende Symptome auf oder stirbt gar der Patient, so ist die Todesursache meist die bestehende Vorerkrankung. Trotzdem werden derartige Fälle als Verdachtsfälle vom Paul-Ehrlich-Institut erfasst. Bei den Corona-Impfstoffen sind es bei den schwerwiegenden Verdachtsfällen 0,02 Fälle pro 100 Impfungen (0,02%).\n Bereits die Erfassung dieser Fälle scheint Verunsicherung zu wecken. So ging eine Meldung durch die Medien, dass in einem Altenheim in Norwegen innerhalb von 6 Tagen nach der Corona-Impfung 33 Bewohner starben. Eine Untersuchung ergab, dass das der üblichen Sterberate in dieser Altersgruppe entspricht.\n Natürlich ist beim größten Teil dieser Fälle nicht die Impfung die Ursache für die Symptome. Das Paul-Ehrlich-Institut untersucht 42 Fälle (Deutschland, Stand 10.04.2021) bei denen eine Impfung mit dem Astra-Zeneca-Wirkstoff die Ursache von Sinusvenenthrombosen sein könnte. Zu diesem Zeitpunkt wurden rund 5,5 Millionen Menschen in Deutschland mit diesem Impfstoff geimpft. Daraus ergibt sich eine rechnerische Wahrscheinlichkeit von 0,00076%. (Dieser Wert ist die Voreinstellung.)",
           "title": "What ist the probability to get a difficult progression?",
+          "warning": "Du hast eine Wahrscheinlichkeit über 0,02% eingestellt. Es gibt keinerlei Belege für diese Annahme. Möchtest Du wirklich mit diesem Wert rechnen?",
           "tooltip_disabled": "The field for taking the vaccination damage into consideration got deleted in the calculator. To fix the problem, you need to restart the calculation with reloading the page."
         },
         "3": {

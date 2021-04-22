@@ -47,10 +47,18 @@ export const getNodeForm = (
 
     if (subCaseKey && node) {
       return (
-        <SubCaseItem decisionKey={decKey} caseKey={caseKey} itemKey={subKey} subCaseItem={node} color={color} open />
+        <SubCaseItem
+          decisionKey={decKey}
+          caseKey={caseKey}
+          itemKey={subKey}
+          subCaseItem={node}
+          color={color}
+          open
+          noBottomMargin
+        />
       );
     } else if (caseKey && node) {
-      return <CaseItem decisionKey={decKey} itemKey={subKey} color={color} caseItem={node} open />;
+      return <CaseItem decisionKey={decKey} itemKey={subKey} color={color} caseItem={node} open noBottomMargin />;
     } else if (subKey && node) {
       return <SubItem decisionKey={decKey} color={color} item={node} />;
     } else if (decKey && node) {

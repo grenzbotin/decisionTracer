@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Grid, Typography, Container } from "@material-ui/core";
+import React, { useContext, useState } from "react";
+import { Grid, Typography, Container, Button } from "@material-ui/core";
 import i18next from "i18next";
 
 import CustomTooltip from "@/../components/elements/CustomTooltip";
@@ -9,16 +9,21 @@ import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider
 import CoronaCases from "./CoronaCases";
 import { CoronaPresetContext } from "./CoronaPresetContextProvider";
 
-export default function ProbabilityInfection(): JSX.Element {
+export default function ProbabilityInfection({ handleClose }: { handleClose?: () => void }): JSX.Element {
   const i18nPrefix = "presets.corona.questionnaire.0";
   const { active, setProbabilityByKey } = useContext(GlobalDecisionContext);
   const { q0, setValuesByStep } = useContext(CoronaPresetContext);
 
   const [ownRisk, setOwnRisk] = useState(
-    getPresetValueByField(active.decisions, "probability", "unvaccinated", "unvaccinated-infection") || 0
+    q0.knownInfected * q0.darkFigure - q0.knownInfected > 0
+      ? q0.peopleToMeet *
+          q0.injectionDuration *
+          ((q0.knownInfected * q0.darkFigure - q0.knownInfected) / q0.inhabitants) *
+          100
+      : 0
   );
 
-  useEffect(() => {
+  const handleSave = (): void => {
     // only if context probability is still existent
     const contextNonVacProbability = getPresetValueByField(
       active.decisions,
@@ -41,7 +46,9 @@ export default function ProbabilityInfection(): JSX.Element {
     if (contextVacProbability !== null && compareValue !== contextVacProbability) {
       setProbabilityByKey(compareValue, "vaccinated", "vaccinated-infection");
     }
-  }, [ownRisk, setProbabilityByKey, active.decisions]);
+
+    handleClose();
+  };
 
   const handleChangeKnownInfected = (value: number): void => {
     // calc in form
@@ -198,6 +205,11 @@ export default function ProbabilityInfection(): JSX.Element {
           </Grid>
           <Grid item xs={4}>
             <b>{getRoundedValue(ownRisk, 2)}%</b> {ownRisk > 100 && `(100%)`}
+          </Grid>
+          <Grid item style={{ marginTop: "2rem", textAlign: "center" }} xs={12}>
+            <Button color="primary" variant="contained" onClick={handleSave}>
+              {i18next.t("presets.corona.save")}
+            </Button>
           </Grid>
         </Grid>
       </Container>

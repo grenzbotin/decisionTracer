@@ -21,7 +21,7 @@ import NonLinearSlider from "@/../components/elements/NonLinearSlider";
 import ValidatedValueField from "@/../components/elements/ValidatedValueField";
 import GrowingSlider from "@/../components/elements/GrowingSlider";
 import Dialog from "@/../components/elements/Dialog";
-import { HELPER_DIALOGS } from "../constants";
+import { getHelperDialog } from "../constants";
 import CustomIcon from "@/../assets/CustomIcon";
 
 const Accordion = withStyles({
@@ -64,13 +64,15 @@ export default function CaseItem({
   decisionKey,
   caseItem,
   color,
-  open = false
+  open = false,
+  noBottomMargin = false
 }: {
   itemKey: string;
   caseItem: CaseItemType;
   decisionKey: string;
   color: string;
   open?: boolean;
+  noBottomMargin?: boolean;
 }): JSX.Element {
   const {
     setTitle,
@@ -106,10 +108,10 @@ export default function CaseItem({
       {popUp && (
         <Dialog open={popUp !== null}>
           <Dialog.Header onClose={handlePopUpClose}>Helper</Dialog.Header>
-          <Dialog.Body>{HELPER_DIALOGS[popUp]}</Dialog.Body>
+          <Dialog.Body>{getHelperDialog(popUp, { handleClose: handlePopUpClose })}</Dialog.Body>
         </Dialog>
       )}
-      <Accordion defaultExpanded={open} style={{ borderLeft: `2px solid ${color}` }}>
+      <Accordion defaultExpanded={open} style={{ borderLeft: `2px solid ${color}`, marginBottom: noBottomMargin && 0 }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon fontSize="small" />}
           IconButtonProps={{

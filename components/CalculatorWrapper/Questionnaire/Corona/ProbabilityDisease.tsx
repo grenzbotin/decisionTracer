@@ -5,7 +5,7 @@ import i18next from "i18next";
 import CustomTooltip from "@/../components/elements/CustomTooltip";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import ValidatedProbabilityField from "@/../components/elements/ValidatedProbabilityField";
-import { applyFormatting, getPresetValueByField } from "@/../lib/helpers";
+import { applyFormatting, getPath, getPresetValueByField } from "@/../lib/helpers";
 
 const DISEASES = ["asymptomatic", "mild", "hospitalised", "severely-hospitalised", "death"];
 const LEVEL = ["unvaccinated", "vaccinated"];
@@ -128,7 +128,7 @@ export default function ProbabilityDisease(): JSX.Element {
               <Typography variant="caption">{applyFormatting(i18next.t(`${i18nPrefix}.tooltip`))}</Typography>
               <Divider style={{ margin: ".5rem 0" }} />
               <img
-                src="/decisionTracer/images/studies_corona_mortality.jpg"
+                src={`${getPath()}/images/studies_corona_mortality.jpg`}
                 alt="Absolute 28-day mortality risk associated with B.1.1.7"
                 width="320px"
               />

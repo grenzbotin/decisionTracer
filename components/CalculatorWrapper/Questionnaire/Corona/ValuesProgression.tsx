@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Container, Divider, Grid, Typography } from "@material-ui/core";
+import React, { useContext, useEffect, useState } from "react";
+import { Button, Container, Divider, Grid, Typography } from "@material-ui/core";
 import i18next from "i18next";
 
 import CustomTooltip from "@/../components/elements/CustomTooltip";
@@ -28,10 +28,12 @@ const getInterpretationValues = (
   return { years, days };
 };
 
-export default function ValuesProgression(): JSX.Element {
+export default function ValuesProgression({ handleClose }: { handleClose?: () => void }): JSX.Element {
   const i18nPrefix = "presets.corona.questionnaire.3";
   const { active, setValue } = useContext(GlobalDecisionContext);
   const { q3, setValuesByStep } = useContext(CoronaPresetContext);
+  const [tasks, setTasks] = useState([]);
+  const [shouldClose, setShouldClose] = useState(false);
 
   const [deathValue, setDeathValue] = useState(
     getPresetValueByField(
@@ -51,6 +53,66 @@ export default function ValuesProgression(): JSX.Element {
       0
   );
 
+  useEffect(() => {
+    if (handleClose && shouldClose) {
+      // Ensure to change one by one
+      if (tasks.length > 0) {
+        if (getPresetValueByField(active.decisions, "value", tasks[0][1], tasks[0][2], tasks[0][3])) {
+          setValue(tasks[0][0], tasks[0][1], tasks[0][2], tasks[0][3]).then(
+            (val: boolean) => val && setTasks((tasks) => tasks.slice(1))
+          );
+        } else {
+          tasks.slice(1);
+        }
+      } else {
+        handleClose();
+      }
+    }
+  }, [tasks, setValue, handleClose, shouldClose, active]);
+
+  const handleSave = (): void => {
+    const deathValueToSet = deathValue > 100 ? 100 : deathValue;
+    // setup tasks
+    const tasks: Array<Array<string | number | number[]>> = [
+      [
+        q3.mild_day_value * q3.mild_days_duration,
+        "unvaccinated",
+        "unvaccinated-infection",
+        "unvaccinated-infection-mild"
+      ],
+      [
+        q3.hospitalised_day_value * q3.hospitalised_days_duration,
+        "unvaccinated",
+        "unvaccinated-infection",
+        "unvaccinated-infection-hospitalised"
+      ],
+      [
+        q3["severely-hospitalised_day_value"] * q3["severely-hospitalised_days_duration"],
+        "unvaccinated",
+        "unvaccinated-infection",
+        "unvaccinated-infection-severely-hospitalised"
+      ],
+      [deathValueToSet, "unvaccinated", "unvaccinated-infection", "unvaccinated-infection-death"],
+      [q3.mild_day_value * q3.mild_days_duration, "vaccinated", "vaccinated-infection", "vaccinated-infection-mild"],
+      [
+        q3.hospitalised_day_value * q3.hospitalised_days_duration,
+        "vaccinated",
+        "vaccinated-infection",
+        "vaccinated-infection-hospitalised"
+      ],
+      [
+        q3["severely-hospitalised_day_value"] * q3["severely-hospitalised_days_duration"],
+        "vaccinated",
+        "vaccinated-infection",
+        "vaccinated-infection-severely-hospitalised"
+      ],
+      [deathValueToSet, "vaccinated", "vaccinated-infection", "vaccinated-infection-death"]
+    ];
+
+    setTasks(tasks);
+    setShouldClose(true);
+  };
+
   const handleChange = (
     value: number,
     category: "mild" | "hospitalised" | "severely-hospitalised" | "death",
@@ -68,31 +130,33 @@ export default function ValuesProgression(): JSX.Element {
       setDeathValue(value);
     }
 
-    const valueToSet =
-      category === "death" ? value : newValues[`${category}_day_value`] * newValues[`${category}_days_duration`];
+    if (!handleClose) {
+      const valueToSet =
+        category === "death" ? value : newValues[`${category}_day_value`] * newValues[`${category}_days_duration`];
 
-    const vaccinatedValue = getPresetValueByField(
-      active.decisions,
-      "value",
-      "vaccinated",
-      "vaccinated-infection",
-      `vaccinated-infection-${category}`
-    );
+      const vaccinatedValue = getPresetValueByField(
+        active.decisions,
+        "value",
+        "vaccinated",
+        "vaccinated-infection",
+        `vaccinated-infection-${category}`
+      );
 
-    if (vaccinatedValue !== null && vaccinatedValue !== valueToSet) {
-      setValue(valueToSet, "vaccinated", "vaccinated-infection", `vaccinated-infection-${category}`);
-    }
+      if (vaccinatedValue !== null && vaccinatedValue !== valueToSet) {
+        setValue(valueToSet, "vaccinated", "vaccinated-infection", `vaccinated-infection-${category}`);
+      }
 
-    const unvaccinatedValue = getPresetValueByField(
-      active.decisions,
-      "value",
-      "unvaccinated",
-      "unvaccinated-infection",
-      `unvaccinated-infection-${category}`
-    );
+      const unvaccinatedValue = getPresetValueByField(
+        active.decisions,
+        "value",
+        "unvaccinated",
+        "unvaccinated-infection",
+        `unvaccinated-infection-${category}`
+      );
 
-    if (unvaccinatedValue !== null && unvaccinatedValue !== valueToSet) {
-      setValue(valueToSet, "unvaccinated", "unvaccinated-infection", `unvaccinated-infection-${category}`);
+      if (unvaccinatedValue !== null && unvaccinatedValue !== valueToSet) {
+        setValue(valueToSet, "unvaccinated", "unvaccinated-infection", `unvaccinated-infection-${category}`);
+      }
     }
   };
 
@@ -204,14 +268,16 @@ export default function ValuesProgression(): JSX.Element {
             {applyFormatting(i18next.t(`${i18nPrefix}.calc.current_value_mild`))}
           </Grid>
           <Grid item xs={4}>
-            {current.mild ? (
-              current.mild
-            ) : (
+            {q3.mild_day_value * q3.mild_days_duration}
+            {!current.mild && (
               <>
-                {applyFormatting(i18next.t(`${i18nPrefix}.calc.no_value`))}{" "}
+                {" "}
                 <CustomTooltip
+                  alert
                   content={
-                    <Typography variant="caption">{i18next.t(`${i18nPrefix}.calc.tooltip_no_value`)}</Typography>
+                    <Typography variant="caption">
+                      {applyFormatting(i18next.t(`${i18nPrefix}.calc.tooltip_no_value`))}
+                    </Typography>
                   }
                 />
               </>
@@ -242,12 +308,12 @@ export default function ValuesProgression(): JSX.Element {
             {applyFormatting(i18next.t(`${i18nPrefix}.calc.current_value_hospitalised`))}
           </Grid>
           <Grid item xs={4}>
-            {current.hospitalised ? (
-              current.hospitalised
-            ) : (
+            {q3.hospitalised_day_value * q3.hospitalised_days_duration}
+            {!current.hospitalised && (
               <>
-                {i18next.t(`${i18nPrefix}.calc.no_value`)}{" "}
+                {" "}
                 <CustomTooltip
+                  alert
                   content={
                     <Typography variant="caption">
                       {applyFormatting(i18next.t(`${i18nPrefix}.calc.tooltip_no_value`))}
@@ -260,7 +326,6 @@ export default function ValuesProgression(): JSX.Element {
           <Grid item xs={12}>
             <Divider />
           </Grid>
-
           <Grid item xs={8}>
             {applyFormatting(i18next.t(`${i18nPrefix}.calc.day_severely-hospitalised_value`))}
           </Grid>
@@ -283,12 +348,12 @@ export default function ValuesProgression(): JSX.Element {
             {applyFormatting(i18next.t(`${i18nPrefix}.calc.current_value_severely-hospitalised`))}
           </Grid>
           <Grid item xs={4}>
-            {current["severely-hospitalised"] ? (
-              current["severely-hospitalised"]
-            ) : (
+            {q3["severely-hospitalised_day_value"] * q3["severely-hospitalised_days_duration"]}
+            {!current["severely-hospitalised"] && (
               <>
-                {i18next.t(`${i18nPrefix}.calc.no_value`)}{" "}
+                {" "}
                 <CustomTooltip
+                  alert
                   content={
                     <Typography variant="caption">
                       {applyFormatting(i18next.t(`${i18nPrefix}.calc.tooltip_no_value`))}
@@ -312,6 +377,7 @@ export default function ValuesProgression(): JSX.Element {
             />
             {deathValue === null && (
               <CustomTooltip
+                alert
                 content={
                   <Typography variant="caption">
                     {applyFormatting(i18next.t(`${i18nPrefix}.calc.tooltip_no_value`))}
@@ -348,6 +414,15 @@ export default function ValuesProgression(): JSX.Element {
             })
           )}
         </Typography>
+        {handleClose && (
+          <Grid container>
+            <Grid item style={{ marginTop: "2rem", textAlign: "center" }} xs={12}>
+              <Button color="primary" variant="contained" onClick={handleSave}>
+                {i18next.t("presets.corona.save")}
+              </Button>
+            </Grid>
+          </Grid>
+        )}
       </Container>
     </>
   );

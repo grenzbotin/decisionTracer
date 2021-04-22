@@ -19,7 +19,7 @@ import NonLinearSlider from "@/../components/elements/NonLinearSlider";
 import ValidatedValueField from "@/../components/elements/ValidatedValueField";
 import GrowingSlider from "@/../components/elements/GrowingSlider";
 import Dialog from "@/../components/elements/Dialog";
-import { HELPER_DIALOGS } from "../constants";
+import { getHelperDialog } from "../constants";
 import CustomIcon from "@/../assets/CustomIcon";
 
 const CardHeader = withStyles({
@@ -77,7 +77,7 @@ export default function SubItem({
       {popUp && (
         <Dialog open={popUp !== null}>
           <Dialog.Header onClose={handlePopUpClose}>{i18next.t("calculator.helper_title")}</Dialog.Header>
-          <Dialog.Body>{HELPER_DIALOGS[popUp]}</Dialog.Body>
+          <Dialog.Body>{getHelperDialog(popUp, { handleClose: handlePopUpClose })}</Dialog.Body>
         </Dialog>
       )}
       <Grid id={item.key} key={item.key} item xs={12} sm={12} md={12} lg>

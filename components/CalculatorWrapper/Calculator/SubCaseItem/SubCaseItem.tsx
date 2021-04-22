@@ -20,7 +20,7 @@ import GrowingSlider from "@/../components/elements/GrowingSlider";
 import { applyFormatting, getHasChangeableSiblings, getRoundedValue } from "@/../lib/helpers";
 import CustomIcon from "@/../assets/CustomIcon";
 import Dialog from "@/../components/elements/Dialog";
-import { HELPER_DIALOGS } from "../constants";
+import { getHelperDialog } from "../constants";
 
 const Accordion = withStyles({
   root: {
@@ -63,7 +63,8 @@ export default function SubCaseItem({
   subCaseItem,
   decisionKey,
   color,
-  open = false
+  open = false,
+  noBottomMargin = false
 }: {
   itemKey: string;
   caseKey: string;
@@ -71,6 +72,7 @@ export default function SubCaseItem({
   decisionKey: string;
   color: string;
   open?: boolean;
+  noBottomMargin?: boolean;
 }): JSX.Element {
   const {
     setTitle,
@@ -105,10 +107,10 @@ export default function SubCaseItem({
       {popUp && (
         <Dialog open={popUp !== null}>
           <Dialog.Header onClose={handlePopUpClose}>Helper</Dialog.Header>
-          <Dialog.Body>{HELPER_DIALOGS[popUp]}</Dialog.Body>
+          <Dialog.Body>{getHelperDialog(popUp, { handleClose: handlePopUpClose })}</Dialog.Body>
         </Dialog>
       )}
-      <Accordion defaultExpanded={open} style={{ borderLeft: `1px solid ${color}` }}>
+      <Accordion defaultExpanded={open} style={{ borderLeft: `1px solid ${color}`, marginBottom: noBottomMargin && 0 }}>
         <AccordionSummary
           color={color}
           expandIcon={<ExpandMoreIcon fontSize="small" />}

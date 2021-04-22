@@ -175,94 +175,94 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
     subKey: string,
     caseKey?: string,
     subCaseKey?: string
-  ): void => {
-    if (instanceOfPreset(root)) {
-      let title = "";
-      let isValueLocked = false;
+  ): Promise<boolean> =>
+    new Promise((resolve) => {
+      if (instanceOfPreset(root)) {
+        let title = "";
+        let isValueLocked = false;
 
-      if (subCaseKey) {
-        const item = root.decisions
-          .find((decision) => decision.key === decKey)
-          .sub.find((sub) => sub.key === subKey)
-          .cases.find((c) => c.key === caseKey)
-          .subCases.find((sc) => sc.key === subCaseKey);
-        title = item.title;
-        isValueLocked = item.isValueLocked;
-      } else if (caseKey) {
-        const item = root.decisions
-          .find((decision) => decision.key === decKey)
-          .sub.find((sub) => sub.key === subKey)
-          .cases.find((c) => c.key === caseKey);
+        if (subCaseKey) {
+          const item = root.decisions
+            .find((decision) => decision.key === decKey)
+            .sub.find((sub) => sub.key === subKey)
+            .cases.find((c) => c.key === caseKey)
+            .subCases.find((sc) => sc.key === subCaseKey);
+          title = item.title;
+          isValueLocked = item.isValueLocked;
+        } else if (caseKey) {
+          const item = root.decisions
+            .find((decision) => decision.key === decKey)
+            .sub.find((sub) => sub.key === subKey)
+            .cases.find((c) => c.key === caseKey);
 
-        title = item.title;
-        isValueLocked = item.isValueLocked;
-      } else if (subKey) {
-        const item = root.decisions.find((decision) => decision.key === decKey).sub.find((sub) => sub.key === subKey);
+          title = item.title;
+          isValueLocked = item.isValueLocked;
+        } else if (subKey) {
+          const item = root.decisions.find((decision) => decision.key === decKey).sub.find((sub) => sub.key === subKey);
 
-        title = item.title;
-        isValueLocked = item.isValueLocked;
-      }
+          title = item.title;
+          isValueLocked = item.isValueLocked;
+        }
 
-      const newState = {
-        ...state,
-        active: {
-          ...state.active,
-          decisions: root.decisions.map((decision) => ({
-            ...decision,
-            sub: decision.sub.map((sub) => ({
-              ...sub,
-              value:
-                sub.title === title &&
-                ((!isValueLocked && !sub.isValueLocked) || sub.key === subKey) &&
-                typeof value === "number"
-                  ? value
-                  : sub.value,
-              cases: sub.cases.map((c) => ({
-                ...c,
+        const newState = {
+          ...state,
+          active: {
+            ...state.active,
+            decisions: root.decisions.map((decision) => ({
+              ...decision,
+              sub: decision.sub.map((sub) => ({
+                ...sub,
                 value:
-                  c.title === title &&
-                  ((!isValueLocked && !c.isValueLocked) || c.key === caseKey) &&
+                  sub.title === title &&
+                  ((!isValueLocked && !sub.isValueLocked) || sub.key === subKey) &&
                   typeof value === "number"
                     ? value
-                    : c.value,
-                subCases: c.subCases.map((sc) => ({
-                  ...sc,
+                    : sub.value,
+                cases: sub.cases.map((c) => ({
+                  ...c,
                   value:
-                    sc.title === title &&
-                    ((!isValueLocked && !sc.isValueLocked) || sub.key === subCaseKey) &&
+                    c.title === title &&
+                    ((!isValueLocked && !c.isValueLocked) || c.key === caseKey) &&
                     typeof value === "number"
                       ? value
-                      : sc.value
+                      : c.value,
+                  subCases: c.subCases.map((sc) => ({
+                    ...sc,
+                    value:
+                      sc.title === title &&
+                      ((!isValueLocked && !sc.isValueLocked) || sub.key === subCaseKey) &&
+                      typeof value === "number"
+                        ? value
+                        : sc.value
+                  }))
                 }))
               }))
             }))
-          }))
-        }
-      };
+          }
+        };
 
-      const updatedState = {
-        ...newState,
-        active: {
-          ...newState.active,
-          decisions: newState.active.decisions.map((decision: Decision) => ({
-            ...decision,
-            sub: decision.sub.map((sub) => ({
-              ...sub,
-              value: sub.cases.length > 0 ? getValueFromChilds(sub, "cases") : sub.value,
-              cases: sub.cases.map((c) => ({
-                ...c,
-                value: c.subCases.length > 0 ? getValueFromChilds(c, "subCases") : c.value
+        const updatedState = {
+          ...newState,
+          active: {
+            ...newState.active,
+            decisions: newState.active.decisions.map((decision: Decision) => ({
+              ...decision,
+              sub: decision.sub.map((sub) => ({
+                ...sub,
+                value: sub.cases.length > 0 ? getValueFromChilds(sub, "cases") : sub.value,
+                cases: sub.cases.map((c) => ({
+                  ...c,
+                  value: c.subCases.length > 0 ? getValueFromChilds(c, "subCases") : c.value
+                }))
               }))
             }))
-          }))
-        }
-      };
+          }
+        };
 
-      setState({
-        ...updatedState
-      });
-    }
-  };
+        setState({ ...updatedState });
+      }
+      resolve(true);
+    });
 
   // Set probability
   const setProbabilityByKey = (

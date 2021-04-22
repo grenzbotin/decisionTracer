@@ -2,7 +2,7 @@ import React from "react";
 import { Typography } from "@material-ui/core";
 import i18next from "i18next";
 
-import { applyFormatting } from "@/../lib/helpers";
+import { applyFormatting, getPath } from "@/../lib/helpers";
 
 export default function Q2(): JSX.Element {
   const i18nPrefix = "presets.coin-toss.questionnaire.2";
@@ -13,7 +13,7 @@ export default function Q2(): JSX.Element {
         {applyFormatting(i18next.t(`${i18nPrefix}.text_1`))}
       </Typography>
       <img
-        src="/decisionTracer/images/tut2.png"
+        src={`${getPath()}/images/tut2.png`}
         alt="Spiel 1 vs Nicht spielen"
         width="280px"
         style={{ marginBottom: "1rem" }}
