@@ -28,7 +28,14 @@ function TreeFlowWrapper(): JSX.Element {
 
   return (
     <Grid item xs={12}>
-      <Card style={{ height: "calc(100vh - 200px)", minHeight: "500px", position: "relative" }}>
+      <Card
+        style={{
+          height: "calc(100vh - 200px)",
+          minHeight: "500px",
+          position: "relative",
+          background: "rgba(255,255,255,0.2)"
+        }}
+      >
         {elements && (
           <ReactFlowProvider>
             <TreeFlow elements={elements} setElements={setElements} />

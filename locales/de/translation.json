@@ -37,7 +37,7 @@
     "intro": "Mit unserem Tool wollen wir Dich dabei unterstützen, eine rationale Entscheidung zu treffen. Du kannst Alternativen gegenüberstellen, Ihre Vor- und Nachteile bewerten und Dir ein Ergebnis berechnen lassen.\n Du kannst Dinge, die Du berücksichtigen möchtest, hinzufügen oder bestehende Elemente verändern. Alle Werte, die Du eingibst oder übernimmst, kannst Du später verändern und schauen, ob dadurch die Entscheidung kippt.\nNatürlich kann das Tool lediglich eine Hilfe sein. Wir wollen Dir helfen, Deine Entscheidung zu reflektieren. Das Ergebnis hängt von Deinen Eingaben ab. Du bist für Deine Entscheidung verantwortlich, Du musst sie treffen.\n Um das Prinzip zu verstehen, solltest Du Dir zunächst das Tutorial anschauen. (Siehe Karte: 'Kopf oder Zahl')\n Eine rationale Entscheidung bezüglich der Corona-Impfung kannst Du Dir mit Klick auf die zweite Karte herleiten. (Siehe Karte 'Corona')\n Du kannst aber auch etwas ganz Eigenes entwerfen. (Siehe Karte 'Eigener Entscheidungsbaum')\n Viel Spaß!",
     "meta": {
       "description": "Finde einfach und mit Substanz zu Deiner Entscheidung",
-      "keywords": "Rechner, Entscheidungshilfe, Corona",
+      "keywords": "Rechner, Entscheidungshilfe, Richtig entscheiden, Corona",
       "title": "Decision Tracer | Home"
     }
   },
@@ -171,7 +171,7 @@
       "get_data_tooltip": "Mit Klick auf diesen Button lädst Du die aktuellen Corona-Daten in Deutschland vom Robert Koch-Institut (RKI). Wir berechnen die aktuelle Infiziertenanzahl (aktive Fälle) als Differenz der Anzahl der Infizierten abzüglich der Genesenen und der Todesfälle in Deutschland . \n Die Daten wurden bereitgestellt durch Marlon Lueckert (https://github.com/marlon360/rki-covid-api).",
       "meta": {
         "description": "Impfung: Ja oder nein? Sind die Nachteile einer Impfung es wert, nicht geimpft zu werden?",
-        "keywords": "Corona, Impfung, Entscheidung, Hilfe, Rechner",
+        "keywords": "Corona, Impfung, Entscheidung, Hilfe, Entscheidungshilfe, Impffrage, Corona impfen, Rechner",
         "title": "Soll ich mich impfen lassen? | Decision Tracer"
       },
       "save": "Übernehmen",
@@ -268,7 +268,7 @@
       "description": "Erstelle einen eigenen Entscheidungsbaum ohne Voreinstellungen",
       "meta": {
         "description": "Eigener Entscheidungsbaum ohne Voreinstellungen",
-        "keywords": "Entscheidungsbaum, individuell, erstellen, Entscheidungshilfe, Rechner",
+        "keywords": "Entscheidungsbaum, individuell, erstellen, Entscheidungshilfe, Tool, Richtig entscheiden, Rechner",
         "title": "Eigener Entscheidungsbaum | Decision Tracer"
       },
       "question": "Was sollte ich tun?",

@@ -43,7 +43,7 @@ export default function LangIndex(): JSX.Element {
         <HtmlHeader
           title={i18next.t("presets.coin-toss.meta.title")}
           description={i18next.t("presets.coin-toss.meta.description")}
-          keywords={i18next.t("presetss.coin-toss.meta.keywords")}
+          keywords={i18next.t("presets.coin-toss.meta.keywords")}
         />
         <Grid container spacing={2}>
           <Grid

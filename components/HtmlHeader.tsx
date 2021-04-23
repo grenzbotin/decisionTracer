@@ -1,5 +1,4 @@
 import Head from "next/head";
-import i18next from "i18next";
 import { useRouter } from "next/router";
 
 const publicUrl = "https://grenzbotin.github.io/decisionTracer";
@@ -11,7 +10,7 @@ interface Props {
 }
 
 const HtmlHeader: React.FC<Props> = ({ title, description, keywords }) => {
-  const { pathname } = useRouter();
+  const { asPath } = useRouter();
 
   return (
     <Head>
@@ -19,8 +18,11 @@ const HtmlHeader: React.FC<Props> = ({ title, description, keywords }) => {
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
 
+      {/* Until release, we keep robots out */}
+      <meta name="robots" content="noindex" />
+
       <meta name="twitter:card" content="summary" key="twcard" />
-      <meta property="og:url" content={`${publicUrl}/${i18next.language}${pathname}`} key="ogurl" />
+      <meta property="og:url" content={`${publicUrl}${asPath}`} key="ogurl" />
       <meta property="og:image" content={`${publicUrl}/images/og.png`} key="ogimage" />
       <meta property="og:title" content={title} key="ogtitle" />
       <meta property="og:description" content={description} key="ogdesc" />

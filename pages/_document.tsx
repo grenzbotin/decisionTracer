@@ -1,12 +1,13 @@
 import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import i18next from "i18next";
 import { ServerStyleSheets } from "@material-ui/core/styles";
 import theme from "../components/theme";
 
 export default class MyDocument extends Document {
   render(): JSX.Element {
     return (
-      <Html lang="en">
+      <Html lang={i18next.language}>
         <Head>
           <meta name="theme-color" content={theme.palette.primary.main} />
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
