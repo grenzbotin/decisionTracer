@@ -33,7 +33,7 @@ function TreeFlowWrapper(): JSX.Element {
           height: "calc(100vh - 200px)",
           minHeight: "500px",
           position: "relative",
-          background: "rgba(255,255,255,0.2)"
+          background: "rgba(255,255,255,0.5)"
         }}
       >
         {elements && (
