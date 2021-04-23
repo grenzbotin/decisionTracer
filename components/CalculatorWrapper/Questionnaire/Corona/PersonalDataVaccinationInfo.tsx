@@ -1,13 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Grid, Typography, Container, RadioGroup, Radio, FormControlLabel, TextField } from "@material-ui/core";
+import React, { Fragment, useContext, useEffect, useState } from "react";
+import { Grid, Typography, Container, Button } from "@material-ui/core";
 import i18next from "i18next";
 import Papa from "papaparse";
 
-import CustomTooltip from "@/../components/elements/CustomTooltip";
 import { applyFormatting, getPath } from "@/../lib/helpers";
 import { CoronaPresetContext } from "./CoronaPresetContextProvider";
-import { Autocomplete } from "@material-ui/lab";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
+import ValidatedProbabilityField from "@/../components/elements/ValidatedProbabilityField";
 
 async function fetchCsv(): Promise<string> {
   return fetch(`${getPath()}/datasets/output.csv`).then((response) => {
@@ -18,11 +17,11 @@ async function fetchCsv(): Promise<string> {
   });
 }
 
-const CATEGORIES = ["vaccinated", "unvaccinated"];
+const CATEGORIES = ["vaccinated"];
 const ITEMS = ["asymptomatic", "mild", "hospitalised", "severely-hospitalised", "death"];
 
-export default function PersonalData(): JSX.Element {
-  const i18nPrefix = "presets.corona.questionnaire.5";
+export default function PersonalDataVaccinationInfo({ handleClose }: { handleClose?: () => void }): JSX.Element {
+  const i18nPrefix = "presets.corona.questionnaire.7";
   const { personalData, setValuesByStep } = useContext(CoronaPresetContext);
   const { setProbabilityByKeyHard } = useContext(GlobalDecisionContext);
 
@@ -37,6 +36,7 @@ export default function PersonalData(): JSX.Element {
 
   const [dataset, setDataset] = useState(null);
   const [tasks, setTasks] = useState([]);
+  const [shouldClose, setShouldClose] = useState(false);
 
   // We are loading csv data that is originated from: https://covid19-surveillance-report.ecdc.europa.eu
   useEffect(() => {
@@ -66,6 +66,7 @@ export default function PersonalData(): JSX.Element {
       asymptomatic: parseFloat(stAsymptomatic.replace(",", "."))
     };
 
+    const selectedTasks = [] as Array<Array<number | string>>;
     CATEGORIES.forEach((category, key) => {
       ITEMS.forEach((item, itemKey) => {
         let probability = probabilities[item] * FACTORS[itemKey][key] * 100;
@@ -73,12 +74,12 @@ export default function PersonalData(): JSX.Element {
           probability = (probabilities[item] * VACCINATION_REDUCTION + FACTORS[itemKey][key]) * 100;
         }
 
-        setTasks((queue) => [
-          ...queue,
-          [probability, category, `${category}-infection`, `${category}-infection-${item}`]
-        ]);
+        selectedTasks.push([probability, category, `${category}-infection`, `${category}-infection-${item}`]);
       });
     });
+
+    setTasks(selectedTasks);
+    setShouldClose(true);
   };
 
   useEffect(() => {
@@ -87,26 +88,15 @@ export default function PersonalData(): JSX.Element {
       setProbabilityByKeyHard(tasks[0][0], tasks[0][1], tasks[0][2], tasks[0][3]).then(
         (val: boolean) => val && setTasks((tasks) => tasks.slice(1))
       );
+    } else {
+      if (handleClose && shouldClose) {
+        handleClose();
+      }
     }
-  }, [tasks, setProbabilityByKeyHard]);
+  }, [tasks, setProbabilityByKeyHard, handleClose, shouldClose]);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleChangeAge = (
-    event: React.ChangeEvent<Record<string, never>>,
-    newValue: string | { value: string }
-  ): void => {
-    const valueToSet = typeof newValue === "string" && newValue;
-    if (valueToSet) {
-      setValuesByStep({ ...personalData, age: valueToSet }, "personalData");
-      getAndSaveProbabilities({ sex: personalData.sex, age: valueToSet });
-    }
-  };
-
-  const handleChangeSex = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    if (event.target.value) {
-      setValuesByStep({ ...personalData, sex: (event.target as HTMLInputElement).value }, "personalData");
-      getAndSaveProbabilities({ age: personalData.age, sex: event.target.value });
-    }
+  const handleVaccinationDamageChange = (value: number): void => {
+    setValuesByStep({ ...personalData, vaccinationEfficiacy: value / 100 }, "personalData");
   };
 
   return (
@@ -116,55 +106,33 @@ export default function PersonalData(): JSX.Element {
       </Typography>
       <Typography variant="body1" style={{ display: "flex", alignItems: "flex-start" }}>
         {applyFormatting(i18next.t(`${i18nPrefix}.subtitle`))}
-        <CustomTooltip
-          content={
-            <>
-              {i18next
-                .t(`${i18nPrefix}.tooltip`)
-                .split("\n")
-                .map((c) => (
-                  <Typography key={c} variant="caption" component="p" style={{ marginBottom: ".4rem" }}>
-                    {applyFormatting(c)}
-                  </Typography>
-                ))}
-            </>
-          }
-          style={{ marginLeft: "1rem" }}
-        />
       </Typography>
       <Container maxWidth="md" style={{ marginTop: "2rem", fontSize: "1rem", padding: 0 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            {i18next.t(`${i18nPrefix}.age`)}
-          </Grid>
-          <Grid item xs={6}>
-            <Autocomplete
-              id="age-selection"
-              autoHighlight
-              value={personalData.age}
-              options={[...Array(101).keys()].map((key) => key.toString())}
-              getOptionLabel={(option) => option}
-              style={{ width: 70 }}
-              size="small"
-              selectOnFocus
-              closeIcon={null}
-              onChange={handleChangeAge}
-              renderInput={(params) => <TextField variant="outlined" {...params} />}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            {i18next.t(`${i18nPrefix}.gender`)}
-          </Grid>
-          <Grid item xs={6}>
-            <RadioGroup aria-label="gender" name="gender-selection" value={personalData.sex} onChange={handleChangeSex}>
-              <FormControlLabel
-                value="F"
-                control={<Radio color="primary" />}
-                label={i18next.t(`${i18nPrefix}.female`)}
-              />
-              <FormControlLabel value="M" control={<Radio color="primary" />} label={i18next.t(`${i18nPrefix}.male`)} />
-            </RadioGroup>
-          </Grid>
+        {i18next
+          .t(`${i18nPrefix}.decreasing_probabilities`)
+          .split("\n")
+          .map((c) => (
+            <Typography key={c} variant="body2" component="p" style={{ marginBottom: ".4rem" }}>
+              {applyFormatting(c)}
+            </Typography>
+          ))}
+        <Typography variant="body2" component="p" style={{ margin: "1rem 0 .4rem 0" }}>
+          {applyFormatting(`${i18nPrefix}.question`)}
+        </Typography>
+        <ValidatedProbabilityField
+          value={personalData.vaccinationEfficiacy * 100}
+          onChange={handleVaccinationDamageChange}
+        />
+        <Grid item style={{ marginTop: "2rem", textAlign: "center" }} xs={12}>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={() =>
+              getAndSaveProbabilities({ sex: personalData.sex, age: personalData.age, country: "Germany" })
+            }
+          >
+            {i18next.t("presets.corona.save")}
+          </Button>
         </Grid>
       </Container>
     </>

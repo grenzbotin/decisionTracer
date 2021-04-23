@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 
+const VACCINATION_EFFICACY = 0.84975;
+
 // Context for defining and updating helper values for corona preset calculation
 export const CoronaPresetContext = React.createContext({
   q0: {
@@ -24,9 +26,10 @@ export const CoronaPresetContext = React.createContext({
     "severely-hospitalised_day_value": -10,
     "severely-hospitalised_days_duration": 40
   },
-  q5: {
+  personalData: {
     age: "50",
-    sex: "F"
+    sex: "F",
+    vaccinationEfficiacy: VACCINATION_EFFICACY
   },
   setValuesByStep: (_value?: Record<string, number | string>, _step?: string) => undefined
 });
@@ -58,9 +61,10 @@ export const CoronaPresetContextProvider: React.FC<T> = ({ children }) => {
       "severely-hospitalised_day_value": -10,
       "severely-hospitalised_days_duration": 40
     },
-    q5: {
+    personalData: {
       age: "50",
-      sex: "F"
+      sex: "F",
+      vaccinationEfficiacy: VACCINATION_EFFICACY
     }
   });
 

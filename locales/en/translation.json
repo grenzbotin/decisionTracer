@@ -194,23 +194,6 @@
           "title": "How likely is it to meet an infected person?",
           "tooltip": "_To meet a person_ means in this case to meet a person in a way that you can get infected if the person is contagious.\nAfter a vaccination we will quickly behave like before the pandemic. If we wouldn't get the vaccination we would behave normal as well (or isolate ourself durable from society).\nWe want to compare _vaccination_ with _no vaccination_ so we have to know how many people we will meet in the period until the next corona vaccination. If we think we have to refresh the vaccination once a year we have to consider how many persons we will meet in this period.\nThe vaccination will possibly lower the infection probability for many years, we don't know this yet. If we don't want to compare apples and oranges we have to compare the two possibilities for the same period. We have to ask ourselves how many people we will meet until we have to get our next vaccination.\nThe calculated (!) probability can exceed 100% so. This is not wrong. If the virus is still in the world and we will act like before the pandemic we will get infected sooner or later. In this case we will take a probability of 100%. You can change that if you want."
         },
-        "1": {
-          "calc": {
-            "not_100": "The total probability value should sum up to 100% for a meaningful calculation.",
-            "probability_asymptomatic": "Probability for asymptomatic disease",
-            "probability_death": "Probability to die of covid",
-            "probability_hospitalised": "Probability for hospitalisation",
-            "probability_severely-hospitalised": "Probabilty for intensive care unit",
-            "probability_mild": "Probability of mild progression",
-            "tooltip_disabled": "Deactivated fields appear because the related case got deleted in the calculator. To fix the problem, you need to restart the calculation with reloading the page.",
-            "unvaccinated": "Unvaccinated",
-            "vaccinated": "Vaccinated",
-            "total": "Total"
-          },
-          "subtitle": "If you click on the button you will get a short overview over some actual studies.",
-          "title": "What are the possibilities once you are infected?",
-          "tooltip": "Studies"
-        },
         "2": {
           "0": "What value do you want to count with?",
           "damage_probability": "Probability of getting severe vaccination damage",
@@ -258,6 +241,26 @@
           "male": "male",
           "age": "Age",
           "gender": "Gender"
+        },
+        "6": {
+          "title": "Wahrscheinlichkeiten des Krankheitsverlaufs",
+          "subtitle": "In Abhängigkeit Deiner Daten ({{ gender}}, {{ age }} Jahr(e)) haben wir folgende Wahrscheinlichkeiten für die unterschiedlichen Verläufe bei einer Corona-Infektion ohne Impfung berechnet:",
+          "tooltip": "Das ausgewiesene Ergebnis basiert auf den Daten (für Deutschland) des _European Center for Disease prevention and control_. Sie können hier eingesehen werden: https://covid19-surveillance-report.ecdc.europa.eu",
+          "diseases": {
+            "asymptomatic": "Asymptomatisch",
+            "mild": "Milder Verlauf",
+            "hospitalised": "Krankenhausaufenthalt",
+            "severely-hospitalised": "Intensivstation",
+            "death": "Tod"
+          },
+          "F": "Weiblich",
+          "M": "Männlich"
+        },
+        "7": {
+          "title": "Einfluss des Impfens auf den Krankheitsverlauf",
+          "subtitle": "Es ist noch nicht abschließend geklärt, wie stark die Impfung die Wahrscheinlichkeit der Verläufe senkt. Die EMA geht derzeit von folgenden Werten aus:",
+          "decreasing_probabilities": "Sinkende Wahrscheinlichkeit bei \nAstra Zeneca: 59,9%\nBioNTech: 95%\nModerna: 94,1% (milde Verläufe), 90,9% (schwere Verläufe)\nUnsere Voreinstellung ist der Mittelwert dieser Angaben:\n(59,9% + 95% + 94,1% + 90,9%) / 4 = 84,975%",
+          "question": "Mit welchem Wert möchtest Du rechnen?"
         }
       },
       "title": "Corona"

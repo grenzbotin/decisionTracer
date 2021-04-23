@@ -36,6 +36,13 @@ export const GlobalDecisionContext = React.createContext({
     _caseKey?: string,
     _subCaseKey?: string
   ) => undefined,
+  setProbabilityByKeyHard: (
+    _value: number | number[],
+    _decKey: string,
+    _subKey: string,
+    _caseKey?: string,
+    _subCaseKey?: string
+  ) => undefined,
   removeItem: (_decKey: string, _subKey?: string, _caseKey?: string, _subCaseKey?: string) => undefined,
   addItem: (_newKey: string, _decKey?: string, _subKey?: string, _caseKey?: string) => undefined,
   toggleIndependent: (_decKey: string, _subKey?: string, _caseKey?: string, _subCaseKey?: string) => undefined,
@@ -264,6 +271,162 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
       resolve(true);
     });
 
+  const setProbabilityByKeyHard = (
+    value: number | number[],
+    decKey: string,
+    subKey: string,
+    caseKey?: string,
+    subCaseKey?: string
+  ): Promise<boolean> =>
+    new Promise((resolve) => {
+      if (instanceOfPreset(root)) {
+        let newState = {} as { active: Preset; selectedNode: Node | null };
+
+        if (getPresetValueByField(root.decisions, "probability", decKey, subKey, caseKey) !== null) {
+          if (subCaseKey) {
+            newState = {
+              ...state,
+              active: {
+                ...state.active,
+                decisions: root.decisions.map((decision) =>
+                  decision.key === decKey
+                    ? {
+                        ...decision,
+                        sub: decision.sub.map((sub) =>
+                          sub.key === subKey
+                            ? {
+                                ...sub,
+                                cases: sub.cases.map((c) =>
+                                  c.key === caseKey
+                                    ? {
+                                        ...c,
+                                        subCases: c.subCases.map((sc) =>
+                                          sc.key === subCaseKey
+                                            ? {
+                                                ...sc,
+                                                probability: typeof value === "number" && value
+                                              }
+                                            : sc
+                                        )
+                                      }
+                                    : c
+                                )
+                              }
+                            : sub
+                        )
+                      }
+                    : decision
+                )
+              }
+            };
+          } else if (caseKey) {
+            // Get information about changed case
+            const targetCases = root.decisions.find((item) => item.key === decKey).sub.find((sub) => sub.key === subKey)
+              .cases;
+            const targetCaseItem = targetCases.find((c) => c.key === caseKey);
+            const isProbabilityIntersecting = targetCaseItem.isProbabilityIntersecting;
+            const targetChange = typeof value === "number" && value - targetCaseItem.probability;
+
+            // Get all other decisions that need to change according to the total change
+            const changingTargets = targetCases.filter(
+              (sc) => sc.key !== caseKey && sc.isProbabilityIntersecting && !sc.isProbabilityLocked
+            );
+            const currentProbabiltySum = isProbabilityIntersecting
+              ? changingTargets.map((d) => d.probability).reduce((a: number, b: number) => a + b, 0)
+              : 0;
+            const rest = isProbabilityIntersecting
+              ? typeof value === "number" && 100 - value - currentProbabiltySum >= 0
+                ? 100 - value - currentProbabiltySum
+                : 0
+              : 0;
+            const equal = isProbabilityIntersecting ? rest / changingTargets.length : 0;
+
+            newState = {
+              ...state,
+              active: {
+                ...state.active,
+                decisions: root.decisions.map((decision) =>
+                  decision.key === decKey
+                    ? {
+                        ...decision,
+                        sub: decision.sub.map((sub) =>
+                          sub.key === subKey
+                            ? {
+                                ...sub,
+                                cases: sub.cases.map((c) =>
+                                  c.key === caseKey ? { ...c, probability: typeof value === "number" && value } : c
+                                )
+                              }
+                            : sub
+                        )
+                      }
+                    : decision
+                )
+              }
+            };
+          } else if (subKey) {
+            // Get information about changed case
+            const targetSubs = root.decisions.find((item) => item.key === decKey).sub;
+            const targetSubItem = targetSubs.find((sub) => sub.key === subKey);
+            const targetChange = typeof value === "number" && value - targetSubItem.probability;
+            const isProbabilityIntersecting = targetSubItem.isProbabilityIntersecting;
+
+            // Get all other decisions that need to change according to the total change
+            const changingTargets = targetSubs.filter(
+              (sc) => sc.key !== subKey && sc.isProbabilityIntersecting && !sc.isProbabilityLocked
+            );
+            const currentProbabiltySum = isProbabilityIntersecting
+              ? changingTargets.map((d) => d.probability).reduce((a: number, b: number) => a + b, 0)
+              : 0;
+            const rest = isProbabilityIntersecting
+              ? typeof value === "number" && 100 - value - currentProbabiltySum >= 0
+                ? 100 - value - currentProbabiltySum
+                : 0
+              : 0;
+            const equal = isProbabilityIntersecting ? rest / changingTargets.length : 0;
+
+            newState = {
+              ...state,
+              active: {
+                ...state.active,
+                decisions: root.decisions.map((decision) =>
+                  decision.key === decKey
+                    ? {
+                        ...decision,
+                        sub: decision.sub.map((sub) =>
+                          sub.key === subKey ? { ...sub, probability: typeof value === "number" && value } : sub
+                        )
+                      }
+                    : decision
+                )
+              }
+            };
+          }
+
+          const updatedState = {
+            ...newState,
+            active: {
+              ...newState.active,
+              decisions: newState.active.decisions.map((decision: Decision) => ({
+                ...decision,
+                sub: decision.sub.map((sub) => ({
+                  ...sub,
+                  value: sub.cases.length > 0 ? getValueFromChilds(sub, "cases") : sub.value,
+                  cases: sub.cases.map((c) => ({
+                    ...c,
+                    value: c.subCases.length > 0 ? getValueFromChilds(c, "subCases") : c.value
+                  }))
+                }))
+              }))
+            }
+          };
+
+          setState({ ...updatedState });
+        }
+      }
+      resolve(true);
+    });
+
   // Set probability
   const setProbabilityByKey = (
     value: number | number[],
@@ -293,7 +456,6 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
             const changingTargets = targetSubCases.filter(
               (sc) => sc.key !== subCaseKey && sc.isProbabilityIntersecting && !sc.isProbabilityLocked
             );
-            console.log(changingTargets);
             const currentProbabiltySum = isProbabilityIntersecting
               ? changingTargets.map((d) => d.probability).reduce((a: number, b: number) => a + b, 0)
               : 0;
@@ -974,6 +1136,7 @@ export const GlobalDecisionContextProvider: React.FC<T> = ({ children }) => {
         setTitle,
         setValue,
         setProbabilityByKey,
+        setProbabilityByKeyHard,
         removeItem,
         addItem,
         toggleIndependent,

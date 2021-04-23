@@ -118,7 +118,8 @@ export function createTreeDataFromPreset(decisions: Array<DecisionType>): Elemen
         target: scenario.key,
         label: `${getRoundedValue(scenario.probability, 3)} %`,
         ...lineProps,
-        labelBgStyle: { fill: colors[key] }
+        labelBgStyle: { fill: scenario.isProbabilityIntersecting ? colors[key] : "#FFF" },
+        labelStyle: { fill: scenario.isProbabilityIntersecting ? "#FFF" : colors[key] }
       });
 
       scenario.cases.forEach((c) => {
@@ -141,7 +142,8 @@ export function createTreeDataFromPreset(decisions: Array<DecisionType>): Elemen
           target: c.key,
           label: `${getRoundedValue(c.probability, 3)} %`,
           ...lineProps,
-          labelBgStyle: { fill: colors[key] }
+          labelBgStyle: { fill: c.isProbabilityIntersecting ? colors[key] : "#FFF" },
+          labelStyle: { fill: c.isProbabilityIntersecting ? "#FFF" : colors[key] }
         });
 
         c.subCases.forEach((sc) => {
@@ -164,7 +166,8 @@ export function createTreeDataFromPreset(decisions: Array<DecisionType>): Elemen
             target: sc.key,
             label: `${getRoundedValue(sc.probability, 3)} %`,
             ...lineProps,
-            labelBgStyle: { fill: colors[key] }
+            labelBgStyle: { fill: c.isProbabilityIntersecting ? colors[key] : "#FFF" },
+            labelStyle: { fill: c.isProbabilityIntersecting ? "#FFF" : colors[key] }
           });
         });
       });
