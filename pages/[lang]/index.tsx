@@ -49,7 +49,7 @@ export default function LangIndex(): JSX.Element {
             <CardMedia
               // className={classes.cover}
               component="iframe"
-              image="https://www.youtube.com/embed/qRZys9H_ihc"
+              image="https://www.youtube-nocookie.com/embed/qRZys9H_ihc"
               title="Tutorial video"
               style={{ height: 200, width: 300 }}
             />
