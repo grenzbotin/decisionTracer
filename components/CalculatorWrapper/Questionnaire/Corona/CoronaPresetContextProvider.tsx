@@ -22,9 +22,9 @@ export const CoronaPresetContext = React.createContext({
     mild_day_value: -1,
     mild_days_duration: 14,
     hospitalised_day_value: -5,
-    hospitalised_days_duration: 40,
+    hospitalised_days_duration: 14,
     "severely-hospitalised_day_value": -10,
-    "severely-hospitalised_days_duration": 40
+    "severely-hospitalised_days_duration": 14
   },
   personalData: {
     age: "50",
@@ -57,9 +57,9 @@ export const CoronaPresetContextProvider: React.FC<T> = ({ children }) => {
       mild_day_value: -1,
       mild_days_duration: 14,
       hospitalised_day_value: -5,
-      hospitalised_days_duration: 40,
+      hospitalised_days_duration: 14,
       "severely-hospitalised_day_value": -10,
-      "severely-hospitalised_days_duration": 40
+      "severely-hospitalised_days_duration": 14
     },
     personalData: {
       age: "50",

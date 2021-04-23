@@ -117,7 +117,7 @@ export default function PersonalDataVaccinationInfo({ handleClose }: { handleClo
             </Typography>
           ))}
         <Typography variant="body2" component="p" style={{ margin: "1rem 0 .4rem 0" }}>
-          {applyFormatting(`${i18nPrefix}.question`)}
+          {applyFormatting(i18next.t(`${i18nPrefix}.question`))}
         </Typography>
         <ValidatedProbabilityField
           value={personalData.vaccinationEfficiacy * 100}
