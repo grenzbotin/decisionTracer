@@ -116,7 +116,7 @@ const CORONA_PRESET = {
               title: "presets.corona.decisions.unvaccinated.sub.infection.cases.hospitalised.title",
               probability: 4.08234553494657000,
               probabilityHelper: 'coronaPersonalDataSelectedInfo',
-              value: -200,
+              value: -70,
               valueHelper: 'coronaValuesProgression',
               isProbabilityIntersecting: true,
               subCases: [] as SubCaseItem[]
@@ -126,7 +126,7 @@ const CORONA_PRESET = {
               title: "presets.corona.decisions.unvaccinated.sub.infection.cases.severelyHospitalised.title",
               probability: 0.25296339516030000,
               probabilityHelper: 'coronaPersonalDataSelectedInfo',
-              value: -400,
+              value: -700,
               valueHelper: 'coronaValuesProgression',
               isProbabilityIntersecting: true,
               subCases: [] as SubCaseItem[],
@@ -191,7 +191,7 @@ const CORONA_PRESET = {
               title: "presets.corona.decisions.vaccinated.sub.infection.cases.hospitalised.title",
               probability: 0.7633986150350088,
               probabilityHelper: 'coronaPersonalDataVaccinationInfo',
-              value: -140,
+              value: -70,
               valueHelper: 'coronaValuesProgression',
               isProbabilityIntersecting: true,
               subCases: [] as SubCaseItem[]
