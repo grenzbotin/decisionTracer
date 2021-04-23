@@ -297,6 +297,21 @@ export default function ValuesProgression({ handleClose }: { handleClose?: () =>
           </Grid>
           <Grid item xs={8}>
             {applyFormatting(i18next.t(`${i18nPrefix}.calc.days_duration_hospitalised`))}
+            <CustomTooltip
+              content={
+                <>
+                  {i18next
+                    .t(`${i18nPrefix}.calc.tooltip_days_duration_hospitalised`)
+                    .split("\n")
+                    .map((c) => (
+                      <Typography key={c} variant="caption" component="p" style={{ marginBottom: ".4rem" }}>
+                        {applyFormatting(c)}
+                      </Typography>
+                    ))}
+                </>
+              }
+              style={{ marginLeft: ".5rem" }}
+            />
           </Grid>
           <Grid item xs={4}>
             <ValidatedInputField
@@ -337,6 +352,21 @@ export default function ValuesProgression({ handleClose }: { handleClose?: () =>
           </Grid>
           <Grid item xs={8}>
             {applyFormatting(i18next.t(`${i18nPrefix}.calc.days_duration_hospitalised`))}
+            <CustomTooltip
+              content={
+                <>
+                  {i18next
+                    .t(`${i18nPrefix}.calc.tooltip_days_duration_hospitalised`)
+                    .split("\n")
+                    .map((c) => (
+                      <Typography key={c} variant="caption" component="p" style={{ marginBottom: ".4rem" }}>
+                        {applyFormatting(c)}
+                      </Typography>
+                    ))}
+                </>
+              }
+              style={{ marginLeft: ".5rem" }}
+            />
           </Grid>
           <Grid item xs={4}>
             <ValidatedInputField

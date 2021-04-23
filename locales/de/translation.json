@@ -190,7 +190,7 @@
             "potential_infected": "Wahrscheinlichkeit, dass ein Mensch infiziert ist"
           },
           "intro": "Mit unserem kleinen Tool wollen wir so rational wie möglich an die Impfentscheidung herangehen. Alle für Dich relevanten Aspekte sollen berücksichtigt und bewertet werden. Um den Einstieg zu erleichtern haben wir eine Basis-Konfiguration erstellt, die Du nach Belieben anpassen und erweitern kannst. Alle Werte, die Du eingibst oder übernimmst, kannst Du später verändern und schauen, ob dadurch die Entscheidung kippt.",
-          "subtitle": "In einem ersten Schritt wollen wir die Wahrscheinlichkeit berechnen, einer infizierten Person zu begegnen:",
+          "subtitle": "In einem ersten Schritt wollen wir die Wahrscheinlichkeit berechnen, einer infizierten Person zu begegnen.",
           "title": "Wie wahrscheinlich ist es, dass man sich mit Corona infiziert?",
           "tooltip": "_Personen treffen_ bedeutet in diesem Zusammenhang mit Menschen Kontakt zu haben, so dass ich mich bei ihnen anstecken könnte, wenn sie infektiös sind.\n Nach einer Impfung würden wir uns bald wieder normal verhalten und andere Menschen treffen. Lässt man sich nicht impfen, so wird man sich auf absehbare Zeit trotzdem normal verhalten (oder auf Dauer von der Gesellschaft isolieren).\nDa wir _Impfen_ mit _Nicht Impfen_ vergleichen wollen, müssen wir das für den gleichen Zeitraum tun. Wenn wir glauben, dass die Impfung einmal pro Jahr aufgefrischt werden muss, dann sollten wir uns überlegen, wie viele Menschen wir in einem Jahr treffen.\nDie Impfung senkt die Infektionswahrscheinlichkeit möglicherweise über viele Jahre. Verändert sich das Virus, kann auch eine jährliche Impfung notwendig werden, das wissen wir jetzt noch nicht. Wenn wir nicht Äpfel mit Birnen vergleichen wollen, müssen wir den gleichen Zeitraum für die beiden Möglichkeiten betrachten. Wir müssen uns also fragen, wie viele Menschen wir treffen, bevor wir uns erneut impfen lassen.\nSo kann die rechnerische (!) Wahrscheinlichkeit einer Infektion leicht 100% überschreiten. Das ist nicht falsch. Wenn das Virus weiterhin in der Welt kursiert und wir uns verhalten wie vor der Pandemie, werden wir uns früher oder später anstecken. In diesem Fall nehmen wir als Voreinstellung eine Wahrscheinlichkeit von 100% an, Du kannst das gern ändern."
         },
@@ -215,6 +215,7 @@
             "days_duration_severely-hospitalised": "Dauer eines Verlaufs mit Intensivstation in Tagen",
             "death_value": "Punkte des Szenarios _Tod_",
             "no_value": "Nicht berücksichtigt",
+            "tooltip_days_duration_hospitalised": "Eine Analyse über vorliegende Daten hat eine Krankenhausaufenthaltsdauer von 4-21 Tagen ergeben. \nQuelle: COVID-19 length of hospital stay: a systematic review and data synthesis \nhttps://www.ncbi.nlm.nih.gov/pmc/articles/PMC7467845/",
             "tooltip_no_value": "Das Feld zum Einbezug des Wertes wurde im Berechner gelöscht und kann daher nicht verändert werden. Um das Problem zu beheben, muss der Rechner neu gestartet und die Seite neu geladen werden."
           },
           "interpretation": "Interpretation",
@@ -241,8 +242,8 @@
         },
         "6": {
           "title": "Wahrscheinlichkeiten des Krankheitsverlaufs",
-          "subtitle": "In Abhängigkeit Deiner Daten ({{ gender}}, {{ age }} Jahr(e)) haben wir folgende Wahrscheinlichkeiten für die unterschiedlichen Verläufe bei einer Corona-Infektion ohne Impfung berechnet:",
-          "tooltip": "Das ausgewiesene Ergebnis basiert auf den Daten (für Deutschland) des _European Center for Disease prevention and control_. Sie können hier eingesehen werden: https://covid19-surveillance-report.ecdc.europa.eu",
+          "subtitle": "In Abhängigkeit Deiner Daten ({{ gender}}, {{ age }} Jahr(e)) haben wir folgende Wahrscheinlichkeiten für die unterschiedlichen Verläufe bei einer Corona-Infektion ohne Impfung berechnet.",
+          "tooltip": "Das ausgewiesene Ergebnis basiert auf den Daten (für Deutschland) des _European Center for Disease prevention and control_. \n Quelle: https://covid19-surveillance-report.ecdc.europa.eu",
           "diseases": {
             "asymptomatic": "Asymptomatisch",
             "mild": "Milder Verlauf",
@@ -255,8 +256,9 @@
         },
         "7": {
           "title": "Einfluss des Impfens auf den Krankheitsverlauf",
-          "subtitle": "Es ist noch nicht abschließend geklärt, wie stark die Impfung die Wahrscheinlichkeit der Verläufe senkt. Die EMA geht derzeit von folgenden Werten aus:",
-          "decreasing_probabilities": "Sinkende Wahrscheinlichkeit bei \nAstra Zeneca: 59,9%\nBioNTech: 95%\nModerna: 94,1% (milde Verläufe), 90,9% (schwere Verläufe)\nUnsere Voreinstellung ist der Mittelwert dieser Angaben:\n(59,9% + 95% + 94,1% + 90,9%) / 4 = 84,975%",
+          "subtitle": "Es ist noch nicht abschließend geklärt, wie stark die Impfung die Wahrscheinlichkeit der Verläufe senkt. Die EMA geht derzeit von folgenden Werten aus.",
+          "tooltip": "Quellen:\n*Vaxzevria (COVID-19 Vaccine Astra-Zeneca)* https://www.ema.europa.eu/en/medicines/human/EPAR/vaxzevria-previously-covid-19-vaccine-astrazeneca\n*Comirnaty (BioNTech Manufacturing GmbH)* https://www.ema.europa.eu/en/medicines/human/EPAR/comirnaty \n *COVID-19 Vaccine Moderna (Moderna Biotech Spain, S.L.)* https://www.ema.europa.eu/en/medicines/human/EPAR/covid-19-vaccine-moderna",
+          "decreasing_probabilities": "Sinkende Wahrscheinlichkeit bei \nVaxzevria (Astra-Zeneca): 59,9%\nComirnaty (BioNTech): 95%\nModerna: 94,1% (milde Verläufe), 90,9% (schwere Verläufe)\nUnsere Voreinstellung ist der Mittelwert dieser Angaben:\n(59,9% + 95% + 94,1% + 90,9%) / 4 = 84,975%",
           "question": "Mit welchem Wert möchtest Du rechnen?"
         }
       },

@@ -7,7 +7,8 @@ import { applyFormatting, getPresetValueByField } from "@/../lib/helpers";
 import ValidatedProbabilityField from "@/../components/elements/ValidatedProbabilityField";
 import CustomTooltip from "@/../components/elements/CustomTooltip";
 
-const PRESET_VACCINATION_DAMAGE = 0.02;
+const PRESET_VACCINATION_DAMAGE = 0.00076;
+const MAX_VACCINATION_DAMAGE = 0.02;
 
 export default function ProbabilityVaccinationDamage({ handleClose }: { handleClose?: () => void }): JSX.Element {
   const i18nPrefix = "presets.corona.questionnaire.2";
@@ -33,12 +34,12 @@ export default function ProbabilityVaccinationDamage({ handleClose }: { handleCl
       <Typography variant="h6" gutterBottom>
         {i18next.t(`${i18nPrefix}.title`)}
       </Typography>
-      <Typography variant="body2">
+      <Typography variant="body2" component="span">
         {i18next
           .t(`${i18nPrefix}.subtitle`)
           .split("\n")
           .map((c) => (
-            <Typography key={c} variant="body2" component="p" style={{ marginBottom: ".4rem" }}>
+            <Typography key={c} style={{ marginBottom: ".4rem" }}>
               {applyFormatting(c)}
             </Typography>
           ))}
@@ -46,7 +47,7 @@ export default function ProbabilityVaccinationDamage({ handleClose }: { handleCl
       <Typography variant="subtitle2" gutterBottom style={{ marginTop: "2rem" }}>
         {i18next.t(`${i18nPrefix}.0`)}
       </Typography>
-      <Grid container spacing={2} style={{ fontSize: ".8rem" }}>
+      <Grid container spacing={2}>
         <Grid item xs={5}>
           {i18next.t(`${i18nPrefix}.damage_probability`)}
         </Grid>
@@ -67,10 +68,10 @@ export default function ProbabilityVaccinationDamage({ handleClose }: { handleCl
             />
           )}
         </Grid>
-        {vaccinationDamage > PRESET_VACCINATION_DAMAGE && (
+        {vaccinationDamage > MAX_VACCINATION_DAMAGE && (
           <Grid item xs={12}>
             {applyFormatting(
-              i18next.t(`${i18nPrefix}.warning`, { preset_vaccination_damage: `${PRESET_VACCINATION_DAMAGE}%` })
+              i18next.t(`${i18nPrefix}.warning`, { preset_vaccination_damage: `${MAX_VACCINATION_DAMAGE}%` })
             )}
           </Grid>
         )}

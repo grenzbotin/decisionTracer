@@ -129,7 +129,7 @@ export default function PersonalDataSelectedInfo({ handleClose }: { handleClose?
       <Typography variant="h6" gutterBottom>
         {applyFormatting(i18next.t(`${i18nPrefix}.title`))}
       </Typography>
-      <Typography variant="body1" style={{ display: "flex", alignItems: "flex-start" }}>
+      <Typography variant="body1">
         {applyFormatting(
           i18next.t(`${i18nPrefix}.subtitle`, {
             gender: i18next.t(`${i18nPrefix}.${personalData.sex}`),
@@ -149,7 +149,6 @@ export default function PersonalDataSelectedInfo({ handleClose }: { handleClose?
                 ))}
             </>
           }
-          style={{ marginLeft: "2rem" }}
         />
       </Typography>
       <Container maxWidth="md" style={{ marginTop: "2rem", fontSize: "1rem", padding: 0 }}>

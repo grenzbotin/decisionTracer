@@ -221,7 +221,7 @@ const CORONA_PRESET = {
         {
           key: "vaccinated-vaccination_damage",
           title: "presets.corona.decisions.vaccinated.sub.vaccinationDamage.title",
-          probability: 0.02,
+          probability: 0.00076,
           probabilityHelper: 'coronaProbabilityVaccinationDamage',
           value: -400,
           cases: [] as CaseItem[]

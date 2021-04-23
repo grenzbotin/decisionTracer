@@ -190,7 +190,7 @@
             "potential_infected": "Probability that a person is infected"
           },
           "intro": "With our little tool we want to approach the vaccination decision as rational as possible. All your relevant aspects should be considered and assessed. To make it easier we prepared a base configuration you can modify and extend as you want. You can change all values you entered or took over later and see if the decision overturns.",
-          "subtitle": "In a first step we want to calculate the risk to meet an infected person:",
+          "subtitle": "In a first step we want to calculate the risk to meet an infected person.",
           "title": "How likely is it to meet an infected person?",
           "tooltip": "_To meet a person_ means in this case to meet a person in a way that you can get infected if the person is contagious.\nAfter a vaccination we will quickly behave like before the pandemic. If we wouldn't get the vaccination we would behave normal as well (or isolate ourself durable from society).\nWe want to compare _vaccination_ with _no vaccination_ so we have to know how many people we will meet in the period until the next corona vaccination. If we think we have to refresh the vaccination once a year we have to consider how many persons we will meet in this period.\nThe vaccination will possibly lower the infection probability for many years, we don't know this yet. If we don't want to compare apples and oranges we have to compare the two possibilities for the same period. We have to ask ourselves how many people we will meet until we have to get our next vaccination.\nThe calculated (!) probability can exceed 100% so. This is not wrong. If the virus is still in the world and we will act like before the pandemic we will get infected sooner or later. In this case we will take a probability of 100%. You can change that if you want."
         },
@@ -199,7 +199,7 @@
           "damage_probability": "Probability of getting severe vaccination damage",
           "subtitle": "Das wichtigste Argument gegen die Corona-Impfung ist offenbar die Möglichkeit, einen schweren Impfschaden zu erleiden. Wir betrachten hier schwerwiegende, dauerhafte Impfschäden. Ein Szenario mit leichten Impfreaktionen kannst Du natürlich gern selbst hinzufügen.\nImpfschäden treten innerhalb weniger Tage, spätestens Wochen auf. Langzeitfolgen bedeutet, dass eine Folge langfristige Auswirkungen hat. Die Symptome treten aber stets kurz nach der Impfung auf, der Impfschaden ist also vergleichsweise schnell bekannt.\n Mit den Corona-Impfstoffen wurden zunächst überproportional viele ältere und kranke Menschen geimpft. Treten eine Woche nach der Impfung schwerwiegende Symptome auf oder stirbt gar der Patient, so ist die Todesursache meist die bestehende Vorerkrankung. Trotzdem werden derartige Fälle als Verdachtsfälle vom Paul-Ehrlich-Institut erfasst. Bei den Corona-Impfstoffen sind es bei den schwerwiegenden Verdachtsfällen 0,02 Fälle pro 100 Impfungen (0,02%).\n Bereits die Erfassung dieser Fälle scheint Verunsicherung zu wecken. So ging eine Meldung durch die Medien, dass in einem Altenheim in Norwegen innerhalb von 6 Tagen nach der Corona-Impfung 33 Bewohner starben. Eine Untersuchung ergab, dass das der üblichen Sterberate in dieser Altersgruppe entspricht.\n Natürlich ist beim größten Teil dieser Fälle nicht die Impfung die Ursache für die Symptome. Das Paul-Ehrlich-Institut untersucht 42 Fälle (Deutschland, Stand 10.04.2021) bei denen eine Impfung mit dem Astra-Zeneca-Wirkstoff die Ursache von Sinusvenenthrombosen sein könnte. Zu diesem Zeitpunkt wurden rund 5,5 Millionen Menschen in Deutschland mit diesem Impfstoff geimpft. Daraus ergibt sich eine rechnerische Wahrscheinlichkeit von 0,00076%. (Dieser Wert ist die Voreinstellung.)",
           "title": "What ist the probability to get a difficult progression?",
-          "warning": "Du hast eine Wahrscheinlichkeit über 0,02% eingestellt. Es gibt keinerlei Belege für diese Annahme. Möchtest Du wirklich mit diesem Wert rechnen?",
+          "warning": "_Du hast eine Wahrscheinlichkeit über {{preset_vaccination_damage}} eingestellt. Es gibt keinerlei Belege für diese Annahme. Möchtest Du wirklich mit diesem Wert rechnen?_",
           "tooltip_disabled": "The field for taking the vaccination damage into consideration got deleted in the calculator. To fix the problem, you need to restart the calculation with reloading the page."
         },
         "3": {
@@ -214,10 +214,8 @@
             "days_duration_mild": "Duration of mild progression (days)",
             "days_duration_severely-hospitalised": "Duration of progression in hospital with intensive care unit (days)",
             "death_value": "Points for death",
-            "interpretation": "Interpretation",
-            "interpretation_hospitalised": "For you death is as bad as being {{years}} year(s) and {{days}} day(s) with heavy symptoms in hospital. Instead of being in hospital one more day you would like to be dead.",
-            "interpretation_mild": "For you death is as bad as having {{years}} year(s) and {{days}} day(s) cold symptoms. Instead of having a cold one more day you would like to be dead.",
             "no_value": "Not applicable",
+            "tooltip_days_duration_hospitalised": "Eine Analyse über vorliegende Daten hat eine Krankenhausaufenthaltsdauer von 4-21 Tagen ergeben. \nQuelle: COVID-19 length of hospital stay: a systematic review and data synthesis \nhttps://www.ncbi.nlm.nih.gov/pmc/articles/PMC7467845/",
             "tooltip_no_value": "The field for taking the value into consideration got deleted in the calculator. To fix the problem, you need to restart the calculation with reloading the page."
           },
           "interpretation": "Interpretation",
@@ -244,8 +242,8 @@
         },
         "6": {
           "title": "Wahrscheinlichkeiten des Krankheitsverlaufs",
-          "subtitle": "In Abhängigkeit Deiner Daten ({{ gender}}, {{ age }} Jahr(e)) haben wir folgende Wahrscheinlichkeiten für die unterschiedlichen Verläufe bei einer Corona-Infektion ohne Impfung berechnet:",
-          "tooltip": "Das ausgewiesene Ergebnis basiert auf den Daten (für Deutschland) des _European Center for Disease prevention and control_. Sie können hier eingesehen werden: https://covid19-surveillance-report.ecdc.europa.eu",
+          "subtitle": "In Abhängigkeit Deiner Daten ({{ gender}}, {{ age }} Jahr(e)) haben wir folgende Wahrscheinlichkeiten für die unterschiedlichen Verläufe bei einer Corona-Infektion ohne Impfung berechnet.",
+          "tooltip": "Das ausgewiesene Ergebnis basiert auf den Daten (für Deutschland) des _European Center for Disease prevention and control_. \n Quelle: https://covid19-surveillance-report.ecdc.europa.eu",
           "diseases": {
             "asymptomatic": "Asymptomatisch",
             "mild": "Milder Verlauf",
@@ -258,8 +256,9 @@
         },
         "7": {
           "title": "Einfluss des Impfens auf den Krankheitsverlauf",
-          "subtitle": "Es ist noch nicht abschließend geklärt, wie stark die Impfung die Wahrscheinlichkeit der Verläufe senkt. Die EMA geht derzeit von folgenden Werten aus:",
-          "decreasing_probabilities": "Sinkende Wahrscheinlichkeit bei \nAstra Zeneca: 59,9%\nBioNTech: 95%\nModerna: 94,1% (milde Verläufe), 90,9% (schwere Verläufe)\nUnsere Voreinstellung ist der Mittelwert dieser Angaben:\n(59,9% + 95% + 94,1% + 90,9%) / 4 = 84,975%",
+          "subtitle": "Es ist noch nicht abschließend geklärt, wie stark die Impfung die Wahrscheinlichkeit der Verläufe senkt. Die EMA geht derzeit von folgenden Werten aus.",
+          "tooltip": "Quellen:\n*Vaxzevria (COVID-19 Vaccine Astra-Zeneca)* https://www.ema.europa.eu/en/medicines/human/EPAR/vaxzevria-previously-covid-19-vaccine-astrazeneca\n*Comirnaty (BioNTech Manufacturing GmbH)* https://www.ema.europa.eu/en/medicines/human/EPAR/comirnaty \n *COVID-19 Vaccine Moderna (Moderna Biotech Spain, S.L.)* https://www.ema.europa.eu/en/medicines/human/EPAR/covid-19-vaccine-moderna",
+          "decreasing_probabilities": "Sinkende Wahrscheinlichkeit bei \nVaxzevria (Astra-Zeneca): 59,9%\nComirnaty (BioNTech): 95%\nModerna: 94,1% (milde Verläufe), 90,9% (schwere Verläufe)\nUnsere Voreinstellung ist der Mittelwert dieser Angaben:\n(59,9% + 95% + 94,1% + 90,9%) / 4 = 84,975%",
           "question": "Mit welchem Wert möchtest Du rechnen?"
         }
       },

@@ -7,6 +7,7 @@ import { applyFormatting, getPath } from "@/../lib/helpers";
 import { CoronaPresetContext } from "./CoronaPresetContextProvider";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import ValidatedProbabilityField from "@/../components/elements/ValidatedProbabilityField";
+import CustomTooltip from "@/../components/elements/CustomTooltip";
 
 async function fetchCsv(): Promise<string> {
   return fetch(`${getPath()}/datasets/output.csv`).then((response) => {
@@ -104,8 +105,23 @@ export default function PersonalDataVaccinationInfo({ handleClose }: { handleClo
       <Typography variant="h6" gutterBottom>
         {applyFormatting(i18next.t(`${i18nPrefix}.title`))}
       </Typography>
-      <Typography variant="body1" style={{ display: "flex", alignItems: "flex-start" }}>
+      <Typography variant="body1">
         {applyFormatting(i18next.t(`${i18nPrefix}.subtitle`))}
+        <CustomTooltip
+          content={
+            <>
+              {i18next
+                .t(`${i18nPrefix}.tooltip`)
+                .split("\n")
+                .map((c) => (
+                  <Typography key={c} variant="caption" component="p" style={{ marginBottom: ".4rem" }}>
+                    {applyFormatting(c)}
+                  </Typography>
+                ))}
+            </>
+          }
+          style={{ marginLeft: ".5rem" }}
+        />
       </Typography>
       <Container maxWidth="md" style={{ marginTop: "2rem", fontSize: "1rem", padding: 0 }}>
         {i18next
