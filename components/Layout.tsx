@@ -96,7 +96,7 @@ export default function Layout({ children }: Props): JSX.Element {
 
   const pageAttrs = {
     icon: active ? active.icon : "question",
-    title: active ? i18next.t(active.question) : "Decision Tracer"
+    title: active ? i18next.t(active.question) : "Rational Decision"
   };
 
   return (

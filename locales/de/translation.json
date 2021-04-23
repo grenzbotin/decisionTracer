@@ -25,7 +25,7 @@
   },
   "common": {
     "heading": {
-      "logo": "Willkommen auf Decision Tracer"
+      "logo": "Willkommen auf Rational Decision"
     },
     "navbar": {
       "home": "Übersicht"
@@ -38,7 +38,7 @@
     "meta": {
       "description": "Finde einfach und mit Substanz zu Deiner Entscheidung",
       "keywords": "Rechner, Entscheidungshilfe, Richtig entscheiden, Corona",
-      "title": "Decision Tracer | Home"
+      "title": "Rational Decision | Home"
     }
   },
   "presets": {
@@ -77,9 +77,9 @@
       },
       "description": "Ein kleines Tutorial zum Verstehen und Ausprobieren des Tools",
       "meta": {
-        "description": "Kopf oder Zahl: Spielen oder nicht? Das Tutorial von Decision Tracer",
+        "description": "Kopf oder Zahl: Spielen oder nicht? Das Tutorial von Rational Decision",
         "keywords": "Kopf oder Zahl, Tutorial, Entscheidung, Hilfe, Rechner",
-        "title": "Kopf oder Zahl? | Decision Tracer"
+        "title": "Kopf oder Zahl? | Rational Decision"
       },
       "question": "Tutorial",
       "questionnaire": {
@@ -172,7 +172,7 @@
       "meta": {
         "description": "Impfung: Ja oder nein? Sind die Nachteile einer Impfung es wert, nicht geimpft zu werden?",
         "keywords": "Corona, Impfung, Entscheidung, Hilfe, Entscheidungshilfe, Impffrage, Corona impfen, Rechner",
-        "title": "Soll ich mich impfen lassen? | Decision Tracer"
+        "title": "Soll ich mich impfen lassen? | Rational Decision"
       },
       "save": "Übernehmen",
       "question": "Soll ich mich impfen lassen?",
@@ -269,7 +269,7 @@
       "meta": {
         "description": "Eigener Entscheidungsbaum ohne Voreinstellungen",
         "keywords": "Entscheidungsbaum, individuell, erstellen, Entscheidungshilfe, Tool, Richtig entscheiden, Rechner",
-        "title": "Eigener Entscheidungsbaum | Decision Tracer"
+        "title": "Eigener Entscheidungsbaum | Rational Decision"
       },
       "question": "Was sollte ich tun?",
       "title": "Eigener Entscheidungsbaum"

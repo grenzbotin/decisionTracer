@@ -25,8 +25,8 @@ const useStyles = makeStyles({
     backgroundColor: PRIMARY
   },
   media: {
-    height: 0,
-    paddingTop: "56.25%" // 16:9
+    height: "200px"
+    // width: "100%"
   },
   content: {
     "&.MuiCardContent-root:last-child": {
@@ -40,6 +40,8 @@ const useStyles = makeStyles({
 
 export default function PresetCard({ preset }: { preset: Preset }): JSX.Element {
   const classes = useStyles();
+  // eslint-disable-next-line max-len
+  const multipleSizes = require(`../../../assets/images/${preset.image}.jpg?resize&sizes[]=400&sizes[]=500&sizes[]=600`);
 
   return (
     <Link
@@ -57,7 +59,13 @@ export default function PresetCard({ preset }: { preset: Preset }): JSX.Element 
           }
           title={i18next.t(preset.title)}
         />
-        <CardMedia className={classes.media} image={`./images/${preset.image}.jpg`} title={i18next.t(preset.title)} />
+        <CardMedia
+          component="img"
+          srcSet={multipleSizes.srcSet}
+          src={multipleSizes.src}
+          className={classes.media}
+          title={i18next.t(preset.title)}
+        />
         <CardContent className={classes.content}>
           <div>
             <Typography variant="body2" component="p">

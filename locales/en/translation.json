@@ -25,7 +25,7 @@
   },
   "common": {
     "heading": {
-      "logo": "Welcome to Decision Tracer"
+      "logo": "Welcome to Rational Decision"
     },
     "navbar": {
       "home": "Overview"
@@ -38,7 +38,7 @@
     "meta": {
       "description": "Make the right choice with ease",
       "keywords": "Calculator, Decision helper, Corona",
-      "title": "Decision Tracer | Home"
+      "title": "Rational Decision | Home"
     }
   },
   "presets": {
@@ -77,9 +77,9 @@
       },
       "description": "A little tutorial for understanding the tool",
       "meta": {
-        "description": "Heads or Tails: Should I bet or not? The tutorial of Decision Tracer",
+        "description": "Heads or Tails: Should I bet or not? The tutorial from Rational Decision",
         "keywords": "Heads or Tails, Tutorial, Decision, Help, Calculator",
-        "title": "Heads or Tails? | Decision Tracer"
+        "title": "Heads or Tails? | Rational Decision"
       },
       "question": "Tutorial",
       "questionnaire": {
@@ -172,7 +172,7 @@
       "meta": {
         "description": "Vaccination: Yes or no? Are disadvantages of a vaccination higher than the benefits?",
         "keywords": "Corona, vaccination, decision, help, calculator",
-        "title": "Should I get vaccinated? | Decision Tracer"
+        "title": "Should I get vaccinated? | Rational Decision"
       },
       "save": "Save",
       "question": "Should I get vaccinated?",
@@ -269,7 +269,7 @@
       "meta": {
         "description": "Own decision tree without presettings",
         "keywords": "Decision tree, individual, create, decision helper, calculator",
-        "title": "Own decision tree | Decision Tracer"
+        "title": "Own decision tree | Rational Decision"
       },
       "question": "What should I do?",
       "title": "Own decision tree"

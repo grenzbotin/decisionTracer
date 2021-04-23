@@ -26,7 +26,7 @@ const HtmlHeader: React.FC<Props> = ({ title, description, keywords }) => {
       <meta property="og:image" content={`${publicUrl}/images/og.png`} key="ogimage" />
       <meta property="og:title" content={title} key="ogtitle" />
       <meta property="og:description" content={description} key="ogdesc" />
-      <meta property="og:site_name" content="Decision Tracer" key="ogsitename" />
+      <meta property="og:site_name" content="Rational Decision" key="ogsitename" />
 
       <meta httpEquiv="Content-Type" content="text/html" charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -35,15 +35,15 @@ const HtmlHeader: React.FC<Props> = ({ title, description, keywords }) => {
         // eslint-disable-next-line max-len
         content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,shrink-to-fit=no"
       />
-      <meta name="application-name" content="Decision Tracer" />
-      <meta name="msapplication-tooltip" content="Decision Tracer" />
+      <meta name="application-name" content="Rational Decision" />
+      <meta name="msapplication-tooltip" content="Rational Decision" />
       <meta name="msapplication-starturl" content="/" />
       <meta name="msapplication-tap-highlight" content="no" />
 
       <meta name="theme-color" content="#65a88b" />
       <meta name="mobile-web-app-capable" content="yes" />
 
-      <meta name="apple-mobile-web-app-title" content="Decision Tracer" />
+      <meta name="apple-mobile-web-app-title" content="Rational Decision" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 

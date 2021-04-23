@@ -1,8 +1,7 @@
 const withReactSvg = require('next-react-svg')
-// const withOptimizedImages = require('next-optimized-images');
+const optimizedImages = require('next-optimized-images');
+const withPlugins = require('next-compose-plugins');
 const path = require('path')
-
-const compose = (...fns) => (...args) => fns.reduceRight((y, f) => f(y), ...args);
 
 const nextConfig = {
   include: path.resolve(__dirname, 'assets/svg'),
@@ -10,5 +9,17 @@ const nextConfig = {
   assetPrefix: '/decisionTracer/',
 }
 
-
-module.exports = compose(withReactSvg)(nextConfig);
+module.exports = withPlugins([
+  [optimizedImages, {
+    handleImages: ['jpeg', 'png'],
+    optimizeImages: true,
+    optimizeImagesInDev: true,
+    mozjpeg: {
+      quality: 90
+    },
+    optipng: {
+      optimizationLevel: 5
+    }
+  }],
+  withReactSvg,
+], nextConfig);
