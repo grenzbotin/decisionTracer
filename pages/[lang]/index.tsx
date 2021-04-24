@@ -48,7 +48,6 @@ export default function LangIndex(): JSX.Element {
           </Grid>
           <Grid item md={4} sm={6} xs={12} style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
             <CardMedia
-              // className={classes.cover}
               component="iframe"
               image="https://www.youtube-nocookie.com/embed/qRZys9H_ihc"
               title="Tutorial video"

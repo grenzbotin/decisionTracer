@@ -70,18 +70,16 @@ export default function ProbabilityInfection({ handleClose }: { handleClose?: ()
   };
 
   const handleChangeKnownInfected = (value: number): void => {
-    // calc in form
     const actualInfected = value * q0.darkFigure;
     const unknownInfected = actualInfected - value;
+    const probability = unknownInfected / q0.inhabitants;
 
     const newValues = {
       ...q0,
       knownInfected: value
     };
 
-    setOwnRisk(
-      unknownInfected > 0 ? q0.peopleToMeet * q0.injectionDuration * (unknownInfected / q0.inhabitants) * 100 : 0
-    );
+    setOwnRisk(unknownInfected > 0 ? q0.peopleToMeet * q0.injectionDuration * probability * 100 : 0);
 
     setValuesByStep(newValues, "q0");
   };
@@ -89,15 +87,14 @@ export default function ProbabilityInfection({ handleClose }: { handleClose?: ()
   const handleChangeDarkFigure = (value: number): void => {
     const actualInfected = q0.knownInfected * value;
     const unknownInfected = actualInfected - q0.knownInfected;
+    const probability = unknownInfected / q0.inhabitants;
 
     const newValues = {
       ...q0,
       darkFigure: value
     };
 
-    setOwnRisk(
-      unknownInfected > 0 ? q0.peopleToMeet * q0.injectionDuration * (unknownInfected / q0.inhabitants) * 100 : 0
-    );
+    setOwnRisk(unknownInfected > 0 ? q0.peopleToMeet * q0.injectionDuration * probability * 100 : 0);
 
     setValuesByStep(newValues, "q0");
   };
@@ -105,20 +102,21 @@ export default function ProbabilityInfection({ handleClose }: { handleClose?: ()
   const handleChangeInhabitants = (value: number): void => {
     const actualInfected = q0.knownInfected * q0.darkFigure;
     const unknownInfected = actualInfected - q0.knownInfected;
+    const probability = unknownInfected / value;
 
     const newValues = {
       ...q0,
       inhabitants: value
     };
 
-    setOwnRisk(unknownInfected > 0 ? q0.peopleToMeet * q0.injectionDuration * (unknownInfected / value) * 100 : 0);
+    setOwnRisk(unknownInfected > 0 ? q0.peopleToMeet * q0.injectionDuration * probability * 100 : 0);
 
     setValuesByStep(newValues, "q0");
   };
 
   const handleChangePeopleToMeet = (value: number): void => {
     const actualInfected = q0.knownInfected * q0.darkFigure;
-    const unknownInfected = actualInfected - value;
+    const unknownInfected = actualInfected - q0.knownInfected;
     const probability = unknownInfected / q0.inhabitants;
 
     const newValues = {
@@ -132,7 +130,7 @@ export default function ProbabilityInfection({ handleClose }: { handleClose?: ()
 
   const handleChangeInjectionDuration = (value: number): void => {
     const actualInfected = q0.knownInfected * q0.darkFigure;
-    const unknownInfected = actualInfected - value;
+    const unknownInfected = actualInfected - q0.knownInfected;
     const probability = unknownInfected / q0.inhabitants;
 
     const newValues = {
