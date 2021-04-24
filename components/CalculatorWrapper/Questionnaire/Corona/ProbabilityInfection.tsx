@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Grid, Typography, Container, Button } from "@material-ui/core";
 import i18next from "i18next";
 
@@ -14,6 +14,9 @@ export default function ProbabilityInfection({ handleClose }: { handleClose?: ()
   const { active, setProbabilityByKey } = useContext(GlobalDecisionContext);
   const { q0, setValuesByStep } = useContext(CoronaPresetContext);
 
+  const [tasks, setTasks] = useState([]);
+  const [shouldClose, setShouldClose] = useState(false);
+
   const [ownRisk, setOwnRisk] = useState(
     q0.knownInfected * q0.darkFigure - q0.knownInfected > 0
       ? q0.peopleToMeet *
@@ -22,6 +25,19 @@ export default function ProbabilityInfection({ handleClose }: { handleClose?: ()
           100
       : 0
   );
+
+  useEffect(() => {
+    // Ensure to change one by one
+    if (tasks.length > 0) {
+      setProbabilityByKey(tasks[0][0], tasks[0][1], tasks[0][2]).then(
+        (val: boolean) => val && setTasks((tasks) => tasks.slice(1))
+      );
+    } else {
+      if (handleClose && shouldClose) {
+        handleClose();
+      }
+    }
+  }, [tasks, setProbabilityByKey, handleClose, shouldClose]);
 
   const handleSave = (): void => {
     // only if context probability is still existent
@@ -39,15 +55,18 @@ export default function ProbabilityInfection({ handleClose }: { handleClose?: ()
     );
 
     const compareValue = ownRisk > 100 ? 100 : ownRisk;
+    const selectedTasks = [];
 
     if (contextNonVacProbability !== null && compareValue !== contextNonVacProbability) {
-      setProbabilityByKey(compareValue, "unvaccinated", "unvaccinated-infection");
-    }
-    if (contextVacProbability !== null && compareValue !== contextVacProbability) {
-      setProbabilityByKey(compareValue, "vaccinated", "vaccinated-infection");
+      selectedTasks.push([compareValue, "unvaccinated", `unvaccinated-infection`]);
     }
 
-    handleClose();
+    if (contextVacProbability !== null && compareValue !== contextVacProbability) {
+      selectedTasks.push([compareValue, "vaccinated", `vaccinated-infection`]);
+    }
+
+    setTasks(selectedTasks);
+    setShouldClose(true);
   };
 
   const handleChangeKnownInfected = (value: number): void => {
