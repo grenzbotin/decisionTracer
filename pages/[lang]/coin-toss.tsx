@@ -44,6 +44,7 @@ export default function LangIndex(): JSX.Element {
           title={i18next.t("presets.coin-toss.meta.title")}
           description={i18next.t("presets.coin-toss.meta.description")}
           keywords={i18next.t("presets.coin-toss.meta.keywords")}
+          metaImg="meta_home"
         />
         <Grid container spacing={2}>
           <Grid

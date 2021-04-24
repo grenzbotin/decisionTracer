@@ -5,13 +5,15 @@ interface Props {
   title: string;
   description: string;
   keywords: string;
+  metaImg: string;
 }
 
-const HtmlHeader: React.FC<Props> = ({ title, description, keywords }) => {
+const HtmlHeader: React.FC<Props> = ({ title, description, keywords, metaImg }) => {
   const { asPath } = useRouter();
 
   // on github page, the site is available via /decisionTracer
   const basePath = asPath.includes("decisionTracer") ? "./decisionTracer" : ".";
+  const lang = asPath.includes("de") ? "de" : "en";
 
   return (
     <Head>
@@ -24,7 +26,7 @@ const HtmlHeader: React.FC<Props> = ({ title, description, keywords }) => {
 
       <meta name="twitter:card" content="summary" key="twcard" />
       <meta property="og:url" content={`${basePath}${asPath}`} key="ogurl" />
-      <meta property="og:image" content={`${basePath}/images/og.png`} key="ogimage" />
+      <meta property="og:image" content={`${basePath}/img/${metaImg}_${lang}.png`} key="ogimage" />
       <meta property="og:title" content={title} key="ogtitle" />
       <meta property="og:description" content={description} key="ogdesc" />
       <meta property="og:site_name" content="Rational Decision" key="ogsitename" />
