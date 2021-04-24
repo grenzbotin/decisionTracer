@@ -186,6 +186,7 @@
             "infection_risk": "Contagion risk",
             "inhabitants": "Inhabitants",
             "injection_duration": "How many months does the injection last?",
+            "injection_duration_tooltip": "Oder auch: der Zeitraum, der zu betrachten ist (in Monaten).",
             "people_meet": "Amount of people I meet in a month",
             "potential_infected": "Probability that a person is infected"
           },

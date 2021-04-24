@@ -186,6 +186,7 @@
             "infection_risk": "Ansteckungsrisiko",
             "inhabitants": "Einwohner",
             "injection_duration": "wie viele Monate 'hält' die Impfung",
+            "injection_duration_tooltip": "Oder auch: der Zeitraum, der zu betrachten ist (in Monaten).",
             "people_meet": "Personen, die ich pro Monat treffe",
             "potential_infected": "Wahrscheinlichkeit, dass ein Mensch infiziert ist"
           },

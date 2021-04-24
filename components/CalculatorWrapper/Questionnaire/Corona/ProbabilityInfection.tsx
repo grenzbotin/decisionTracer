@@ -213,6 +213,7 @@ export default function ProbabilityInfection({ handleClose }: { handleClose?: ()
           </Grid>
           <Grid item xs={8}>
             {applyFormatting(i18next.t(`${i18nPrefix}.calc.injection_duration`))}
+            <CustomTooltip content={i18next.t(`${i18nPrefix}.calc.injection_duration_tooltip`)} />
           </Grid>
           <Grid item xs={4}>
             <ValidatedInputField value={q0.injectionDuration} onChange={handleChangeInjectionDuration} />
