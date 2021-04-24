@@ -38,14 +38,14 @@ export default function LangIndex(): JSX.Element {
   };
 
   return (
-    active && (
-      <>
-        <HtmlHeader
-          title={i18next.t("presets.custom.meta.title")}
-          description={i18next.t("presets.custom.meta.description")}
-          keywords={i18next.t("presets.custom.meta.keywords")}
-          metaImg="meta_home"
-        />
+    <>
+      <HtmlHeader
+        title={i18next.t("presets.custom.meta.title")}
+        description={i18next.t("presets.custom.meta.description")}
+        keywords={i18next.t("presets.custom.meta.keywords")}
+        metaImg="meta_home"
+      />
+      {active && (
         <Grid container spacing={2}>
           <Grid item xs={12} md={9} style={{ marginBottom: mobileFooter && isMobile ? "220px" : "50px" }}>
             <CalculatorWrapper />
@@ -71,8 +71,8 @@ export default function LangIndex(): JSX.Element {
             <MobileSelectedNode />
           </Hidden>
         </Grid>
-      </>
-    )
+      )}
+    </>
   );
 }
 

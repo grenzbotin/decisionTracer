@@ -38,14 +38,14 @@ export default function LangIndex(): JSX.Element {
   };
 
   return (
-    active && (
-      <>
-        <HtmlHeader
-          title={i18next.t("presets.coin-toss.meta.title")}
-          description={i18next.t("presets.coin-toss.meta.description")}
-          keywords={i18next.t("presets.coin-toss.meta.keywords")}
-          metaImg="meta_home"
-        />
+    <>
+      <HtmlHeader
+        title={i18next.t("presets.coin-toss.meta.title")}
+        description={i18next.t("presets.coin-toss.meta.description")}
+        keywords={i18next.t("presets.coin-toss.meta.keywords")}
+        metaImg="meta_home"
+      />
+      {active && (
         <Grid container spacing={2}>
           <Grid
             item
@@ -80,8 +80,8 @@ export default function LangIndex(): JSX.Element {
             </>
           )}
         </Grid>
-      </>
-    )
+      )}
+    </>
   );
 }
 
