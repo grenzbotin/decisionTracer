@@ -40,50 +40,52 @@ export default function LangIndex(): JSX.Element {
   };
 
   return (
-    active && (
-      <CoronaPresetContextProvider>
-        <HtmlHeader
-          title={i18next.t("presets.corona.meta.title")}
-          description={i18next.t("presets.corona.meta.description")}
-          keywords={i18next.t("presets.corona.meta.keywords")}
-          metaImg="meta_corona"
-        />
-        <Grid container spacing={2}>
-          <Grid
-            item
-            xs={12}
-            md={showResult ? 9 : 12}
-            style={{ position: "relative", marginBottom: mobileFooter && isMobile ? "220px" : "50px" }}
-          >
-            <CalculatorWrapper />
+    <>
+      <HtmlHeader
+        title={i18next.t("presets.corona.meta.title")}
+        description={i18next.t("presets.corona.meta.description")}
+        keywords={i18next.t("presets.corona.meta.keywords")}
+        metaImg="meta_corona"
+      />
+      {active && (
+        <CoronaPresetContextProvider>
+          <Grid container spacing={2}>
+            <Grid
+              item
+              xs={12}
+              md={showResult ? 9 : 12}
+              style={{ position: "relative", marginBottom: mobileFooter && isMobile ? "220px" : "50px" }}
+            >
+              <CalculatorWrapper />
+            </Grid>
+            {showResult && (
+              <>
+                <Hidden smDown>
+                  <Grid item xs={12} md={3} style={{ position: "relative" }}>
+                    <div style={{ position: "sticky", top: "calc(1rem + 60px)" }}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleClickAddItem}
+                        startIcon={<AddCircleIcon />}
+                        style={{ marginBottom: "12px" }}
+                      >
+                        {i18next.t("calculator.new_decision")}
+                      </Button>
+                      <Result />
+                    </div>
+                  </Grid>
+                </Hidden>
+                <Hidden mdUp>
+                  <FooterResult />
+                  <MobileSelectedNode />
+                </Hidden>
+              </>
+            )}
           </Grid>
-          {showResult && (
-            <>
-              <Hidden smDown>
-                <Grid item xs={12} md={3} style={{ position: "relative" }}>
-                  <div style={{ position: "sticky", top: "calc(1rem + 60px)" }}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleClickAddItem}
-                      startIcon={<AddCircleIcon />}
-                      style={{ marginBottom: "12px" }}
-                    >
-                      {i18next.t("calculator.new_decision")}
-                    </Button>
-                    <Result />
-                  </div>
-                </Grid>
-              </Hidden>
-              <Hidden mdUp>
-                <FooterResult />
-                <MobileSelectedNode />
-              </Hidden>
-            </>
-          )}
-        </Grid>
-      </CoronaPresetContextProvider>
-    )
+        </CoronaPresetContextProvider>
+      )}
+    </>
   );
 }
 
