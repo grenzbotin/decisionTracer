@@ -12,7 +12,7 @@ const HtmlHeader: React.FC<Props> = ({ title, description, keywords, metaImg }) 
   const { asPath } = useRouter();
 
   // on github page, the site is available via /decisionTracer
-  const basePath = asPath.includes("decisionTracer") ? "./decisionTracer" : ".";
+  const basePath = asPath.includes("decisionTracer") ? "/decisionTracer" : "";
   const lang = asPath.includes("de") ? "de" : "en";
 
   return (
