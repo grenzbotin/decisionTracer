@@ -54,6 +54,7 @@ export default function CustomTooltip({
   return (
     <ClickAwayListener onClickAway={handleClose}>
       <TooltipWrapper
+        interactive
         open={open}
         onClose={handleClose}
         title={content}

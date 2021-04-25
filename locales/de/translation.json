@@ -168,7 +168,7 @@
       },
       "description": "Entscheidungshilfe mit einfachem Entscheidungsbaum",
       "get_data_for": "Lade Daten für",
-      "get_data_tooltip": "Mit Klick auf diesen Button lädst Du die aktuellen Corona-Daten in Deutschland vom Robert Koch-Institut (RKI). Wir berechnen die aktuelle Infiziertenanzahl (aktive Fälle) als Differenz der Anzahl der Infizierten abzüglich der Genesenen und der Todesfälle in Deutschland . \n Die Daten wurden bereitgestellt durch Marlon Lueckert (https://github.com/marlon360/rki-covid-api).",
+      "get_data_tooltip": "Mit Klick auf diesen Button lädst Du die aktuellen Corona-Daten in Deutschland vom Robert Koch-Institut (RKI). Wir berechnen die aktuelle Infiziertenanzahl (aktive Fälle) als Differenz der Anzahl der Infizierten abzüglich der Genesenen und der Todesfälle in Deutschland . \n Die Daten wurden bereitgestellt durch Marlon Lueckert \n https://github.com/marlon360/rki-covid-api",
       "meta": {
         "description": "Impfung: Ja oder nein? Sind die Nachteile einer Impfung es wert, nicht geimpft zu werden?",
         "keywords": "Corona, Impfung, Entscheidung, Hilfe, Entscheidungshilfe, Impffrage, Corona impfen, Rechner",
@@ -216,7 +216,7 @@
             "days_duration_severely-hospitalised": "Dauer eines Verlaufs mit Intensivstation in Tagen",
             "death_value": "Punkte des Szenarios _Tod_",
             "no_value": "Nicht berücksichtigt",
-            "tooltip_days_duration_hospitalised": "Eine Analyse über vorliegende Daten hat eine Krankenhausaufenthaltsdauer von 4-21 Tagen ergeben. \nQuelle: COVID-19 length of hospital stay: a systematic review and data synthesis \nhttps://www.ncbi.nlm.nih.gov/pmc/articles/PMC7467845/",
+            "tooltip_days_duration_hospitalised": "Eine Analyse über vorliegende Daten hat eine Krankenhausaufenthaltsdauer von 4-21 Tagen ergeben. \nQuelle: COVID-19 length of hospital stay: a systematic review and data synthesis \n https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7467845/",
             "tooltip_no_value": "Das Feld zum Einbezug des Wertes wurde im Berechner gelöscht und kann daher nicht verändert werden. Um das Problem zu beheben, muss der Rechner neu gestartet und die Seite neu geladen werden."
           },
           "interpretation": "Interpretation",
@@ -225,7 +225,7 @@
           "interpretation_mild": "Der Tod ist für Dich in etwa gleich schlimm wie {{years}} Jahr(e) und {{days}} Tag(e) mit Erkältungssymptomen. Bevor Du einen Tag länger Erkältungssymptome hättest, wärst Du lieber tot.",
           "subtitle": "Um die möglichen Verläufe miteinander vergleichen zu können, benötigen wir neben der Eintrittswahrscheinlichkeit einen Wert, der beispielsweise aufzeigt, dass der Tod schlimmer als ein milder Verlauf ist.\nDazu vergeben wir Punkte: Pluspunkte für Dinge, die uns freuen, Minuspunkte für Dinge, die wir nicht wollen. Ist uns etwas egal, bekommt es 0 Punkte. Je mehr wir etwas wollen oder nicht wollen, desto mehr Plus- oder Minuspunkte bekommt es. Hier könnt und müsst Ihr mit den Eingaben spielen, bis sie Eurer eigenen Bewertung entsprechen.",
           "title": "Wie schlimm sind für Dich die möglichen Verläufe?",
-          "tooltip": "Wie finde ich die richtige Punktebewertung? Hier ein Vorschlag:\nSagen wir, ein Tag mit Erkältungssymptomen (milder Verlauf) bekommt einen Minuspunkt. Nehmen wir an, ein milder Covid-Verlauf dauert 14 Tage, dann sollte das Szenario 14 Minuspunkte bekommen.\nEinen Tag im Krankenhaus zu liegen, eventuell beatmet zu werden (schwerer Verlauf), ist schlimmer, als mit Erkältungssymptomen daheim zu liegen. Daher bekommt ein Tag mit schwerem Verlauf 5 Minuspunkte. Schwere Verläufe bei Covid dauern im Durchschnitt XXX Tage, das Szenario bekommt also YYY Punkte.\nDer Tod ist sehr schwer zu bewerten. Wir können uns jedoch überlegen, wie viele Tage mit mildem bzw. schwerem Verlauf gleich schlimm sind wie der Tod. Hat ein Tag mit Erkältungssymptomen einen Minuspunkt, dann hat ein Jahr mit Erkältungssymptomen 365 Minuspunkte, 10 Jahre haben 3650 Minuspunkte. Ist der Tod für Dich gleich schlimm wie 10 Jahre Erkältungssymptome zu haben, dann bekommt er auch 3650 Minuspunkte.",
+          "tooltip": "Wie finde ich die richtige Punktebewertung? Hier ein Vorschlag:\nSagen wir, ein Tag mit Erkältungssymptomen (milder Verlauf) bekommt einen Minuspunkt. Nehmen wir an, ein milder Covid-Verlauf dauert 14 Tage, dann sollte das Szenario 14 Minuspunkte bekommen.\nEinen Tag im Krankenhaus zu liegen, eventuell beatmet zu werden (schwerer Verlauf), ist schlimmer, als mit Erkältungssymptomen daheim zu liegen. Daher bekommt ein Tag mit schwerem Verlauf 5 Minuspunkte. Schwere Verläufe bei Covid dauern im Durchschnitt 14 Tage, das Szenario bekommt also 70 Minuspunkte.\nDer Tod ist sehr schwer zu bewerten. Wir können uns jedoch überlegen, wie viele Tage mit mildem bzw. schwerem Verlauf gleich schlimm sind wie der Tod. Hat ein Tag mit Erkältungssymptomen einen Minuspunkt, dann hat ein Jahr mit Erkältungssymptomen 365 Minuspunkte, 10 Jahre haben 3650 Minuspunkte. Ist der Tod für Dich gleich schlimm wie 10 Jahre Erkältungssymptome zu haben, dann bekommt er auch 3650 Minuspunkte.",
           "tooltipText": "Eine mögliche Herangehensweise siehst Du mit Klick auf den Info-Button."
         },
         "4": {
@@ -235,7 +235,7 @@
         "5": {
           "subtitle": "Um die Wahrscheinlichkeiten der verschiedenen Krankheitsverläufe durch Covid-19 zu bestimmen, benötigen wir die Angabe von Alter und Geschlecht.",
           "title": "Persönliche Daten",
-          "tooltip": "Die zugrunde liegenden Daten werden regelmäßig vom European Centre for Disease Prevention and Control (ecdc) entnommen. https://covid19-surveillance-report.ecdc.europa.eu",
+          "tooltip": "Die zugrunde liegenden Daten werden regelmäßig vom European Centre for Disease Prevention and Control (ecdc) entnommen. \n https://covid19-surveillance-report.ecdc.europa.eu",
           "female": "weiblich",
           "male": "männlich",
           "age": "Alter",

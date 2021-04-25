@@ -179,10 +179,11 @@ export function createTreeDataFromPreset(decisions: Array<DecisionType>): Elemen
 
 const regex = {
   paragraph: /(?:\r\n){2,}/g,
-  formatting: /(_.*?_)|(\*.*?\*)/g
+  formatting: /(_.*?_)|(\*.*?\*)/g,
+  formatLinks: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/g
 };
 
-export const applyFormatting = (text: string): (string | JSX.Element)[] => {
+export const applyFormatting = (text: string): (JSX.Element | (string | JSX.Element)[])[] => {
   return text
     .split(regex.formatting)
     .filter((n) => n)
@@ -193,7 +194,15 @@ export const applyFormatting = (text: string): (string | JSX.Element)[] => {
         ) : str[0] == "*" ? (
           <b key={str}>{applyFormatting(str.substr(1, str.length - 2))}</b>
         ) : (
-          str
+          str.split(" ").map((part) =>
+            regex.formatLinks.test(part) ? (
+              <a href={part} target="_blank" rel="noreferrer" style={{ color: "inherit" }}>
+                {part}{" "}
+              </a>
+            ) : (
+              part + " "
+            )
+          )
         );
       return parsed;
     });

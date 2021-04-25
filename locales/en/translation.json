@@ -168,7 +168,7 @@
       },
       "description": "Decision guidance with simple decision tree",
       "get_data_for": "Load data for",
-      "get_data_tooltip": "Clicking this button will load data about the current corona situation in Germany (Robert Koch-Institut). We calculate the number of currently infected persons as difference of the complete number of infected persons minus recovered persons and deaths.\n Data provided by Marlon Lueckert (https://github.com/marlon360/rki-covid-api).",
+      "get_data_tooltip": "Clicking this button will load data about the current corona situation in Germany (Robert Koch-Institut). We calculate the number of currently infected persons as difference of the complete number of infected persons minus recovered persons and deaths.\n Data provided by Marlon Lueckert \n https://github.com/marlon360/rki-covid-api",
       "meta": {
         "description": "Vaccination: Yes or no? Are disadvantages of a vaccination higher than the benefits?",
         "keywords": "Corona, vaccination, decision, help, calculator",
@@ -216,7 +216,7 @@
             "days_duration_severely-hospitalised": "Duration of progression in hospital with intensive care unit (days)",
             "death_value": "Points for death",
             "no_value": "Not applicable",
-            "tooltip_days_duration_hospitalised": "Eine Analyse über vorliegende Daten hat eine Krankenhausaufenthaltsdauer von 4-21 Tagen ergeben. \nQuelle: COVID-19 length of hospital stay: a systematic review and data synthesis \nhttps://www.ncbi.nlm.nih.gov/pmc/articles/PMC7467845/",
+            "tooltip_days_duration_hospitalised": "Eine Analyse über vorliegende Daten hat eine Krankenhausaufenthaltsdauer von 4-21 Tagen ergeben. \nQuelle: COVID-19 length of hospital stay: a systematic review and data synthesis \n https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7467845/",
             "tooltip_no_value": "The field for taking the value into consideration got deleted in the calculator. To fix the problem, you need to restart the calculation with reloading the page."
           },
           "interpretation": "Interpretation",
@@ -225,7 +225,7 @@
           "interpretation_mild": "Der Tod ist für Dich in etwa gleich schlimm wie {{years}} Jahr(e) und {{days}} Tag(e) mit Erkältungssymptomen. Bevor Du einen Tag länger Erkältungssymptome hättest, wärst Du lieber tot.",
           "subtitle": "We want to compare different progressions. For that purpose we need a value that shows for example that death is more bad than a mild progression.\nWe award points: plus points for things we like, minus points for things we don't want. If we don't care we award 0 points. The more we want or don't want something the more plus or minus points we award. At this point you have to play with the values until they represent your own assessment.",
           "title": "How bad are the possible progressions for you?",
-          "tooltip": "How do you find the right score? A proposal:\nLet's say one day with cold symptoms (mild progression) gets one minus point. Let's assume a mild progression lasts 14 days. So this scenario should get 14 minus points.\nTo be in hospital, eventually being ventilated, is more bad as being at home with cold symptoms. So one day with difficult progression gets 5 minus points. Difficult progressions in the case of covid lasts XXX days in average, so this scenario gets YYY minus points.\nIt is hard to assess death. But we can try to estimate how many days with mild or difficult progression are as bad as death. If one day with cold symptoms gets one minus point one year with cold symptoms get round about 365 minus points, 10 years get 3650 minus points. If death is as bad as 10 years with cold symptoms it should get 3650 minus points, too.",
+          "tooltip": "How do you find the right score? A proposal:\nLet's say one day with cold symptoms (mild progression) gets one minus point. Let's assume a mild progression lasts 14 days. So this scenario should get 14 minus points.\nTo be in hospital, eventually being ventilated, is more bad as being at home with cold symptoms. So one day with difficult progression gets 5 minus points. Difficult progressions in the case of covid lasts 14 days in average, so this scenario gets 70 minus points.\nIt is hard to assess death. But we can try to estimate how many days with mild or difficult progression are as bad as death. If one day with cold symptoms gets one minus point one year with cold symptoms get round about 365 minus points, 10 years get 3650 minus points. If death is as bad as 10 years with cold symptoms it should get 3650 minus points, too.",
           "tooltipText": "You can see a possible approach with click on the info button."
         },
         "4": {
@@ -258,7 +258,7 @@
         "7": {
           "title": "Einfluss des Impfens auf den Krankheitsverlauf",
           "subtitle": "Es ist noch nicht abschließend geklärt, wie stark die Impfung die Wahrscheinlichkeit der Verläufe senkt. Die EMA geht derzeit von folgenden Werten aus.",
-          "tooltip": "Quellen:\n*Vaxzevria (COVID-19 Vaccine Astra-Zeneca)* https://www.ema.europa.eu/en/medicines/human/EPAR/vaxzevria-previously-covid-19-vaccine-astrazeneca\n*Comirnaty (BioNTech Manufacturing GmbH)* https://www.ema.europa.eu/en/medicines/human/EPAR/comirnaty \n *COVID-19 Vaccine Moderna (Moderna Biotech Spain, S.L.)* https://www.ema.europa.eu/en/medicines/human/EPAR/covid-19-vaccine-moderna",
+          "tooltip": "Quellen:\n*Vaxzevria (COVID-19 Vaccine Astra-Zeneca)* https://www.ema.europa.eu/en/medicines/human/EPAR/vaxzevria-previously-covid-19-vaccine-astrazeneca \n *Comirnaty (BioNTech Manufacturing GmbH)* https://www.ema.europa.eu/en/medicines/human/EPAR/comirnaty \n *COVID-19 Vaccine Moderna (Moderna Biotech Spain, S.L.)* https://www.ema.europa.eu/en/medicines/human/EPAR/covid-19-vaccine-moderna",
           "decreasing_probabilities": "Sinkende Wahrscheinlichkeit bei \nVaxzevria (Astra-Zeneca): 59,9%\nComirnaty (BioNTech): 95%\nModerna: 94,1% (milde Verläufe), 90,9% (schwere Verläufe)\nUnsere Voreinstellung ist der Mittelwert dieser Angaben:\n(59,9% + 95% + 94,1% + 90,9%) / 4 = 84,975%",
           "question": "Mit welchem Wert möchtest Du rechnen?"
         }

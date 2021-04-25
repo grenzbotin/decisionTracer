@@ -15,11 +15,7 @@ export default class MyDocument extends Document {
 
           <meta httpEquiv="Content-Type" content="text/html" charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-          <meta
-            name="viewport"
-            // eslint-disable-next-line max-len
-            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,shrink-to-fit=no"
-          />
+
           <meta name="application-name" content="Rational Decision" />
           <meta name="msapplication-tooltip" content="Rational Decision" />
           <meta name="msapplication-starturl" content="/" />

@@ -25,6 +25,12 @@ const HtmlHeader: React.FC<Props> = ({ title, description, keywords, metaImg }) 
       <meta property="og:image" content={`${basePath}/img/${metaImg}_${lang}.png`} key="ogimage" />
       <meta property="og:title" content={title} key="ogtitle" />
       <meta property="og:description" content={description} key="ogdesc" />
+
+      <meta
+        name="viewport"
+        // eslint-disable-next-line max-len
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,shrink-to-fit=no"
+      />
     </Head>
   );
 };
