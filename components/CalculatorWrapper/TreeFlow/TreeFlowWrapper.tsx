@@ -8,22 +8,53 @@ import "react-flow-renderer/dist/style.css";
 import "react-flow-renderer/dist/theme-default.css";
 
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
-import { createTreeDataFromPreset } from "@/../lib/helpers";
+import { createTreeDataFromPreset, updateTreeData } from "@/../lib/helpers";
 import TreeFlow from "./TreeFlow";
 import { getLayoutedElements } from "./helpers";
+import { Decision } from "@/../lib/presets";
 
 const SelectedNode = dynamic(() => import("../../SelectedNode"));
+
+const getTotalCaseNumber = (decisions: Decision[]): number => {
+  let countPrev = decisions.length;
+  decisions.forEach((item) => {
+    countPrev += item.sub.length;
+    item.sub.forEach((scenario) => {
+      countPrev += scenario.cases.length;
+      scenario.cases.forEach((c) => {
+        countPrev += c.subCases.length;
+      });
+    });
+  });
+
+  return countPrev;
+};
+
+const hasLengthChange = (prev: Decision[], decisions: Decision[]): boolean => {
+  const prevCaseNumber = getTotalCaseNumber(prev);
+  const currentCaseNumber = getTotalCaseNumber(decisions);
+
+  return prevCaseNumber !== currentCaseNumber;
+};
 
 function TreeFlowWrapper(): JSX.Element {
   const { active } = useContext(GlobalDecisionContext);
   const [elements, setElements] = useState(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const [prevDecisions, setPrevDecisions] = useState([]);
 
   useEffect(() => {
-    setElements(null);
-    const layoutedElements = getLayoutedElements(createTreeDataFromPreset(active.decisions));
-    setElements(layoutedElements);
+    if (hasLengthChange(prevDecisions, active.decisions)) {
+      setElements(null);
+      const layoutedElements = getLayoutedElements(createTreeDataFromPreset(active.decisions));
+      setElements(layoutedElements);
+      setPrevDecisions(active.decisions);
+    } else {
+      const updatedElements = updateTreeData(elements, active.decisions);
+      setElements(null);
+      setElements(updatedElements);
+    }
   }, [active]);
 
   return (

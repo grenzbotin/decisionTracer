@@ -83,6 +83,80 @@ const lineProps = {
   labelBgStyle: { color: "#fff", fillOpacity: 0.8 }
 };
 
+export function updateTreeData(oldElements: Elements<any>, decisions: Array<DecisionType>): Elements<any> {
+  const elements = [] as Elements<any>;
+  const colors = generateColors(decisions.length);
+
+  decisions.forEach((decision, key) => {
+    elements.push({
+      ...oldElements.find((oldElement) => oldElement.id === decision.key),
+      data: {
+        ...oldElements.find((oldElement) => oldElement.id === decision.key).data,
+        value: getValueFromChilds(decision, "sub"),
+        ...decision
+      }
+    });
+    decision.sub.forEach((scenario) => {
+      elements.push({
+        ...oldElements.find((oldElement) => oldElement.id === scenario.key),
+        data: {
+          ...oldElements.find((oldElement) => oldElement.id === scenario.key).data,
+          ...scenario
+        }
+      });
+      elements.push({
+        id: `${decision.key}-${scenario.key}-link`,
+        source: decision.key,
+        target: scenario.key,
+        label: `${getRoundedValue(scenario.probability, 3)} %`,
+        ...lineProps,
+        labelBgStyle: { fill: scenario.isProbabilityIntersecting ? colors[key] : "#FFF" },
+        labelStyle: { fill: scenario.isProbabilityIntersecting ? "#FFF" : colors[key] }
+      });
+
+      scenario.cases.forEach((c) => {
+        elements.push({
+          ...oldElements.find((oldElement) => oldElement.id === c.key),
+          data: {
+            ...oldElements.find((oldElement) => oldElement.id === c.key).data,
+            ...c
+          }
+        });
+        elements.push({
+          id: `${scenario.key}-${c.key}-link`,
+          source: scenario.key,
+          target: c.key,
+          label: `${getRoundedValue(c.probability, 3)} %`,
+          ...lineProps,
+          labelBgStyle: { fill: c.isProbabilityIntersecting ? colors[key] : "#FFF" },
+          labelStyle: { fill: c.isProbabilityIntersecting ? "#FFF" : colors[key] }
+        });
+
+        c.subCases.forEach((sc) => {
+          elements.push({
+            ...oldElements.find((oldElement) => oldElement.id === sc.key),
+            data: {
+              ...oldElements.find((oldElement) => oldElement.id === sc.key).data,
+              ...sc
+            }
+          });
+          elements.push({
+            id: `${c.key}-${sc.key}-link`,
+            source: c.key,
+            target: sc.key,
+            label: `${getRoundedValue(sc.probability, 3)} %`,
+            ...lineProps,
+            labelBgStyle: { fill: c.isProbabilityIntersecting ? colors[key] : "#FFF" },
+            labelStyle: { fill: c.isProbabilityIntersecting ? "#FFF" : colors[key] }
+          });
+        });
+      });
+    });
+  });
+
+  return elements;
+}
+
 export function createTreeDataFromPreset(decisions: Array<DecisionType>): Elements<any> {
   const elements = [] as Elements<any>;
   const colors = generateColors(decisions.length);
