@@ -48,7 +48,7 @@ const CaseNode = memo(
             justifyContent: "center"
           }}
         >
-          <Typography noWrap variant="caption">
+          <Typography noWrap variant="caption" style={{ color: "#A9A9A9" }}>
             {getRoundedValue(data.value, 2)}
           </Typography>
         </div>

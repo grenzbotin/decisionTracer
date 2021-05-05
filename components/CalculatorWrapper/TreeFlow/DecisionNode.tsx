@@ -2,7 +2,6 @@ import { Paper, Typography } from "@material-ui/core";
 import React, { memo } from "react";
 import { Handle, NodeProps, Position } from "react-flow-renderer";
 
-import CustomIcon from "@/../assets/CustomIcon";
 import { getRoundedValue } from "@/../lib/helpers";
 
 const DecisionNode = memo(({ data, selected, sourcePosition = Position.Bottom }: NodeProps) => {
@@ -14,28 +13,43 @@ const DecisionNode = memo(({ data, selected, sourcePosition = Position.Bottom }:
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
+        borderRadius: "75px",
         width: "140px",
+        height: "140px",
         background: selected && data.color,
-        color: selected && "#fff"
+        color: selected && "#fff",
+        padding: "1.1rem"
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", flex: 1, padding: ".5rem", lineHeight: 1.15 }}>
-        {data.icon && <CustomIcon fontSize="small" name={data.icon} style={{ marginRight: ".5rem" }} />}
-        {data.title}
-      </div>
       <div
         style={{
+          flex: 1,
           display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
           alignItems: "center",
-          borderTop: selected ? "1px solid #fff" : "1px solid rgba(0,0,0,0.40)",
           width: "100%",
-          height: "20px",
-          justifyContent: "center"
+          position: "relative",
+          paddingBottom: "1rem"
         }}
       >
-        <Typography noWrap variant="caption">
-          {getRoundedValue(data.value, 2)}
-        </Typography>
+        <div
+          style={{
+            maxHeight: "60px",
+            maxWidth: "70px",
+            overflow: "hidden",
+            textAlign: "center",
+            fontSize: "1.2rem",
+            fontWeight: 500
+          }}
+        >
+          {data.title}
+        </div>
+        <div style={{ position: "absolute", bottom: "0rem" }}>
+          <Typography noWrap variant="caption">
+            {getRoundedValue(data.value, 2)}
+          </Typography>
+        </div>
       </div>
       <Handle type="source" position={sourcePosition} />
     </Paper>

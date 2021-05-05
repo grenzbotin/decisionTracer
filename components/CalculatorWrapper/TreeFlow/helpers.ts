@@ -7,17 +7,21 @@ import DecisionNode from "./DecisionNode";
 import SubCaseEndNode from "./SubCaseEndNode";
 
 const nodeWidth = 140;
-const nodeHeight = 60;
+
+const NODE_HEIGHT = {
+  decisionNode: 140,
+  caseNode: 60,
+  subcaseNode: 60
+};
 
 export const nodeTypes = {
   decisionNode: DecisionNode,
   caseNode: CaseNode,
-  subCaseEndNode: SubCaseEndNode,
+  subCaseEndNode: SubCaseEndNode
 };
 
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
-
 
 export const getLayoutedElements = (elements: Elements<any>, direction = "TB"): Elements<any> => {
   const isHorizontal = direction === "LR";
@@ -25,7 +29,7 @@ export const getLayoutedElements = (elements: Elements<any>, direction = "TB"): 
 
   elements.forEach((el) => {
     if (isNode(el)) {
-      dagreGraph.setNode(el.id, { width: nodeWidth, height: nodeHeight });
+      dagreGraph.setNode(el.id, { width: nodeWidth, height: NODE_HEIGHT[el.type] || 60 });
     } else {
       dagreGraph.setEdge(el.source, el.target);
     }
@@ -41,7 +45,7 @@ export const getLayoutedElements = (elements: Elements<any>, direction = "TB"): 
 
       el.position = {
         x: nodeWithPosition.x - nodeWidth / 2 + Math.random() / 1000,
-        y: nodeWithPosition.y - nodeHeight / 2
+        y: nodeWithPosition.y - (NODE_HEIGHT[el.type] || 60) / 2
       };
     }
 

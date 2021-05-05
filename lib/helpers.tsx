@@ -193,7 +193,7 @@ export function createTreeDataFromPreset(decisions: Array<DecisionType>): Elemen
         label: `${getRoundedValue(scenario.probability, 3)} %`,
         ...lineProps,
         labelBgStyle: { fill: scenario.isProbabilityIntersecting ? colors[key] : "#FFF" },
-        labelStyle: { fill: scenario.isProbabilityIntersecting ? "#FFF" : colors[key] }
+        labelStyle: { fill: scenario.isProbabilityIntersecting ? "#FFF" : colors[key], fontSize: 14 }
       });
 
       scenario.cases.forEach((c) => {
@@ -217,7 +217,7 @@ export function createTreeDataFromPreset(decisions: Array<DecisionType>): Elemen
           label: `${getRoundedValue(c.probability, 3)} %`,
           ...lineProps,
           labelBgStyle: { fill: c.isProbabilityIntersecting ? colors[key] : "#FFF" },
-          labelStyle: { fill: c.isProbabilityIntersecting ? "#FFF" : colors[key] }
+          labelStyle: { fill: c.isProbabilityIntersecting ? "#FFF" : colors[key], fontSize: 14 }
         });
 
         c.subCases.forEach((sc) => {
@@ -240,8 +240,8 @@ export function createTreeDataFromPreset(decisions: Array<DecisionType>): Elemen
             target: sc.key,
             label: `${getRoundedValue(sc.probability, 3)} %`,
             ...lineProps,
-            labelBgStyle: { fill: c.isProbabilityIntersecting ? colors[key] : "#FFF" },
-            labelStyle: { fill: c.isProbabilityIntersecting ? "#FFF" : colors[key] }
+            labelBgStyle: { fill: sc.isProbabilityIntersecting ? colors[key] : "#FFF" },
+            labelStyle: { fill: sc.isProbabilityIntersecting ? "#FFF" : colors[key], fontSize: 14 }
           });
         });
       });
