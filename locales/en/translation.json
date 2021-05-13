@@ -31,7 +31,9 @@
       "home": "Overview"
     },
     "route_leaving_confirm": "Are you sure that you want to leave the page? Your changes can not be saved.",
-    "decision_tree": "Decision tree"
+    "decision_tree": "Decision tree",
+    "to_start": "Start again",
+    "expert_mode": "Expert mode"
   },
   "home": {
     "intro": "With our tool we want to support you to make a rational decision. You can compare alternatives, score their advantages and disadvanteges and calculate a result.\n You can add things you want to consider or modify existing elements.\nThis tool only can be an assistance, of course. We want to help you to reflect your decision making. The result depends on your inputs. You are responsible for your decision, you have to decide.\n For understanding the principle you should have a look at the tutorial. (card: 'Heads or tails')\nYou can have a look at a deduction for a rational decision regarding the corona vaccination with a click on the second card. (card: 'Corona')\n You can also conceive something completey new. (card: 'own decision tree')\n Have fun!",
@@ -202,6 +204,35 @@
           "title": "What ist the probability to get a difficult progression?",
           "warning": "_Du hast eine Wahrscheinlichkeit über {{preset_vaccination_damage}} eingestellt. Es gibt keinerlei Belege für diese Annahme. Möchtest Du wirklich mit diesem Wert rechnen?_",
           "tooltip_disabled": "The field for taking the vaccination damage into consideration got deleted in the calculator. To fix the problem, you need to restart the calculation with reloading the page."
+        },
+        "2b": {
+          "title": "Impfschaden - Wahrscheinlichkeit",
+          "subtitle": "Wir betrachten hier lediglich die schweren Impfschäden, keine _normalen_ Impfreaktionen. Für wie wahrscheinlich hältst Du es, einen schweren Impfschaden zu erleiden?",
+          "subtitle_2": "Mit wievielen schweren Impfschäden pro 5.500.000 Impfungen möchtest Du rechnen?",
+          "warning": "_Du hast eine Wahrscheinlichkeit über {{preset_vaccination_damage}} eingestellt. Es gibt keinerlei Belege für diese Annahme. Möchtest Du wirklich mit diesem Wert rechnen?_",
+          "slider": {
+            "42": "Es gibt 42 vermutete Impfschäden durch Astra Zeneca.\n- Verdachtsfälle werden von Wissenschaftlern untersucht\n- kausaler Zusammenhang wahrscheinlich",
+            "1100": "Es gibt 1100 Verdachtsfälle.\n- jeder kann Verdachtsfälle melden\n- zeitlicher Zusammenhang ist nicht klar",
+            "5500000": "Impfungen insgesamt (Zeitpunkt: Ende April 2021)"
+          }
+        },
+        "result": {
+          "title": "Ergebnis"
+        },
+        "3b": {
+          "title": "What kind of person are you?",
+          "subtitle": "How much more worse are possible disease progressions in relation to a mild progression?",
+          "tooltip": "As a per day basis value we use _-1_. Since current studies says a mild infection lasts for 14 days on average, our total basis is _-14_ for a mild progression",
+          "calc": {
+            "x_times_worse": "times worse than mild progression",
+            "type1": "Main goal: not dead!",
+            "type2": "Main goal: not permanently sick!",
+            "typecustom": "Own values",
+            "mild_progression": "Hospital without intensive care",
+            "severely-hospitalised": "Hospital with intensive care",
+            "death": "Death",
+            "vaccination-damage": "Severe vaccination damage"
+          }
         },
         "3": {
           "calc": {

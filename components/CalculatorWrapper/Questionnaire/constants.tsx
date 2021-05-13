@@ -1,5 +1,7 @@
-import ValuesProgression from "./Corona/ValuesProgression";
+import ValuesProgressionSelection from "./Corona/ValuesProgressionSelection";
 import PersonalData from "./Corona/PersonalData";
+import ProbabilityVaccinationDamageSelection from "./Corona/ProbabilityVaccinationDamageSelection";
+import CoronaResult from "./Corona/CoronaResult";
 
 import Coin0 from "./CoinToss/Q0";
 import Coin1 from "./CoinToss/Q1";
@@ -17,7 +19,17 @@ export const TABS = {
     {
       id: 1,
       label: 2,
-      content: <ValuesProgression />
+      content: <ValuesProgressionSelection />
+    },
+    {
+      id: 2,
+      label: 3,
+      content: <ProbabilityVaccinationDamageSelection />
+    },
+    {
+      id: 3,
+      label: 4,
+      content: <CoronaResult />
     }
   ],
   ["coin-toss"]: [

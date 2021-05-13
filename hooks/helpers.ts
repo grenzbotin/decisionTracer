@@ -28,5 +28,6 @@ export const useRouteLeavingCheck = (confirmText: string): void => {
       window.removeEventListener("beforeunload", handleWindowClose);
       Router.events.off("routeChangeStart", handleBrowseAway);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };

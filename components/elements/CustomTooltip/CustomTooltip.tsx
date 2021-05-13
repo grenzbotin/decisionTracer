@@ -21,13 +21,15 @@ const TooltipWrapper = withStyles((theme: Theme) => ({
 export default function CustomTooltip({
   content,
   alert = false,
-  style = {}
+  style = {},
+  isOpen = false
 }: {
   content: JSX.Element | string;
   alert?: boolean;
+  isOpen?: boolean;
   style?: Record<string, number | string>;
 }): JSX.Element {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(isOpen);
 
   const handleClose = (): void => {
     setOpen(false);

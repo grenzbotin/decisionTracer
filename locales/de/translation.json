@@ -31,7 +31,9 @@
       "home": "Übersicht"
     },
     "route_leaving_confirm": "Bist Du sicher, dass Du die Seite verlassen willst? Deine Änderungen können nicht gespeichert werden.",
-    "decision_tree": "Entscheidungsbaum"
+    "decision_tree": "Entscheidungsbaum",
+    "to_start": "Neu starten",
+    "expert_mode": "Profi-Modus"
   },
   "home": {
     "intro": "Mit unserem Tool wollen wir Dich dabei unterstützen, eine rationale Entscheidung zu treffen. Du kannst Alternativen gegenüberstellen, Ihre Vor- und Nachteile bewerten und Dir ein Ergebnis berechnen lassen.\n Du kannst Dinge, die Du berücksichtigen möchtest, hinzufügen oder bestehende Elemente verändern. Alle Werte, die Du eingibst oder übernimmst, kannst Du später verändern und schauen, ob dadurch die Entscheidung kippt.\nNatürlich kann das Tool lediglich eine Hilfe sein. Wir wollen Dir helfen, Deine Entscheidung zu reflektieren. Das Ergebnis hängt von Deinen Eingaben ab. Du bist für Deine Entscheidung verantwortlich, Du musst sie treffen.\n Um das Prinzip zu verstehen, solltest Du Dir zunächst das Tutorial anschauen. (Siehe Karte: 'Kopf oder Zahl')\n Eine rationale Entscheidung bezüglich der Corona-Impfung kannst Du Dir mit Klick auf die zweite Karte herleiten. (Siehe Karte 'Corona')\n Du kannst aber auch etwas ganz Eigenes entwerfen. (Siehe Karte 'Eigener Entscheidungsbaum')\n Viel Spaß!",
@@ -202,6 +204,35 @@
           "title": "Wie hoch ist das Risiko, einen schweren Impfschaden zu erleiden?",
           "warning": "_Du hast eine Wahrscheinlichkeit über {{preset_vaccination_damage}} eingestellt. Es gibt keinerlei Belege für diese Annahme. Möchtest Du wirklich mit diesem Wert rechnen?_",
           "tooltip_disabled": "Das Feld zum Einbezug des schweren Impfschadens wurde im Berechner gelöscht und kann daher nicht verändert werden. Um das Problem zu beheben, muss der Rechner neu gestartet und die Seite neu geladen werden."
+        },
+        "3b": {
+          "title": "Welcher Typ bist Du?",
+          "subtitle": "Wie schlimm sind für Dich mögliche Verläufe einer Infektion in Relation zu einem milden Verlauf?",
+          "tooltip": "Wir gehen hier von einem Grundbasis-Wert von _-1_ pro Tag milder Verlauf aus. Bisherige Studien gehen von einer anhaltenden Erkrankung von ca. 14 Tagen aus. Daher ist die Basis _milder Verlauf_ mit -14 Punkten gewertet.",
+          "calc": {
+            "type1": "Hauptsache: nicht tot!",
+            "type2": "Hauptsache: nicht dauerhaft krank!",
+            "typecustom": "Eigene Werte",
+            "x_times_worse": "mal schlimmer als ein milder Verlauf",
+            "hospitalised": "Krankenhaus ohne Intensivstation",
+            "severely-hospitalised": "Krankenhaus mit Intensivstation",
+            "death": "Tod",
+            "vaccination-damage": "Schwerer Impfschaden"
+          }
+        },
+        "2b": {
+          "title": "Impfschaden - Wahrscheinlichkeit",
+          "subtitle": "Wir betrachten hier lediglich die schweren Impfschäden, keine _normalen_ Impfreaktionen. Für wie wahrscheinlich hältst Du es, einen schweren Impfschaden zu erleiden?",
+          "subtitle_2": "Mit wievielen schweren Impfschäden pro 5.500.000 Impfungen möchtest Du rechnen?",
+          "warning": "_Du hast eine Wahrscheinlichkeit über {{preset_vaccination_damage}} eingestellt. Es gibt keinerlei Belege für diese Annahme. Möchtest Du wirklich mit diesem Wert rechnen?_",
+          "slider": {
+            "42": "Es gibt 42 vermutete Impfschäden durch Astra Zeneca.\n- Verdachtsfälle werden von Wissenschaftlern untersucht\n- kausaler Zusammenhang wahrscheinlich",
+            "1100": "Es gibt 1100 Verdachtsfälle.\n- jeder kann Verdachtsfälle melden\n- zeitlicher Zusammenhang ist nicht klar",
+            "5500000": "Impfungen insgesamt (Zeitpunkt: Ende April 2021)"
+          }
+        },
+        "result": {
+          "title": "Ergebnis"
         },
         "3": {
           "calc": {

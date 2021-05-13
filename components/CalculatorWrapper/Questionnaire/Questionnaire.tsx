@@ -9,7 +9,6 @@ import Box from "@material-ui/core/Box";
 import { Button, Grid, IconButton } from "@material-ui/core";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import AccountTreeIcon from "@material-ui/icons/AccountTree";
 
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { TABS } from "./constants";
@@ -117,15 +116,27 @@ export default function FullWidthTabs(): JSX.Element {
                   <ArrowBackIosIcon fontSize="small" />
                 </IconButton>
                 {t.id === TABS[active.key].length - 1 ? (
-                  <Button
-                    size="small"
-                    variant="contained"
-                    color="primary"
-                    onClick={() => updateUIState({ visualMode: "tree", showResult: true })}
-                    startIcon={<AccountTreeIcon />}
-                  >
-                    {i18next.t("common.decision_tree")}
-                  </Button>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    {active.key === "corona" && (
+                      <Button
+                        size="small"
+                        variant="outlined"
+                        color="primary"
+                        style={{ marginRight: "1rem" }}
+                        onClick={() => handleChangeIndex(0)}
+                      >
+                        {i18next.t("common.to_start")}
+                      </Button>
+                    )}
+                    <Button
+                      size="small"
+                      variant="contained"
+                      color="primary"
+                      onClick={() => updateUIState({ visualMode: "tree", showResult: true })}
+                    >
+                      {i18next.t(active.key === "corona" ? "common.expert_mode" : "common.decision_tree")}
+                    </Button>
+                  </div>
                 ) : (
                   <IconButton
                     color="primary"

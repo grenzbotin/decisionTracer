@@ -57,7 +57,9 @@ export default function ValuesProgression({ handleClose }: { handleClose?: () =>
     if (handleClose && shouldClose) {
       // Ensure to change one by one
       if (tasks.length > 0) {
-        if (getPresetValueByField(active.decisions, "value", tasks[0][1], tasks[0][2], tasks[0][3])) {
+        if (
+          typeof getPresetValueByField(active.decisions, "value", tasks[0][1], tasks[0][2], tasks[0][3]) === "number"
+        ) {
           setValue(tasks[0][0], tasks[0][1], tasks[0][2], tasks[0][3]).then(
             (val: boolean) => val && setTasks((tasks) => tasks.slice(1))
           );

@@ -2,8 +2,8 @@ import React from "react";
 import Slider from "@material-ui/core/Slider";
 
 const zip = (
-  ...arrays: Array<Array<{ value: number; label?: string | number }>>
-): Array<{ value: number; label?: string | number }[]> =>
+  ...arrays: Array<Array<{ value: number; label?: string | number | JSX.Element }>>
+): Array<{ value: number; label?: string | number | JSX.Element }[]> =>
   [...new Array(Math.max(...arrays.map((a) => a.length)))].map((_, i) => i).map((i) => arrays.map((a) => a[i]));
 
 const createRange = ([fromMin, fromMax]: Array<number>, [toMin, toMax]: Array<number>): ((val: number) => number) => {
@@ -16,7 +16,7 @@ const createRange = ([fromMin, fromMax]: Array<number>, [toMin, toMax]: Array<nu
 const createScale = (
   min: number,
   max: number,
-  marks: Array<{ value: number; label?: string | number }>
+  marks: Array<{ value: number; label?: string | number | JSX.Element }>
 ): Array<(val: number) => number> => {
   const zippedMarks = zip([undefined].concat(marks), marks);
   const zone = (max - min) / (marks.length - 1);
@@ -52,7 +52,7 @@ const createScale = (
 
 interface Props {
   disabled?: boolean;
-  marks: Array<{ value: number; label?: string | number }>;
+  marks: Array<{ value: number; label?: string | number | JSX.Element }>;
   steps: number;
   onChange: (_value: number) => void;
   value: number;
