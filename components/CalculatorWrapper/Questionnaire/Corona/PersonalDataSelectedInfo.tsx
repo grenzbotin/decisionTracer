@@ -151,7 +151,7 @@ export default function PersonalDataSelectedInfo({ handleClose }: { handleClose?
           }
         />
       </Typography>
-      <Container maxWidth="md" style={{ marginTop: "2rem", fontSize: "1rem", padding: 0 }}>
+      <Container maxWidth="lg" style={{ marginTop: "2rem", fontSize: "1rem", padding: 0 }}>
         <Grid container spacing={2}>
           {ITEMS.map((item) => (
             <Fragment key={item}>

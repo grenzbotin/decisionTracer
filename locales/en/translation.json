@@ -224,7 +224,7 @@
           "subtitle": "How much more worse are possible disease progressions in relation to a mild progression?",
           "tooltip": "As a per day basis value we use _-1_. Since current studies says a mild infection lasts for 14 days on average, our total basis is _-14_ for a mild progression",
           "calc": {
-            "x_times_worse": "times worse than mild progression",
+            "x_times_worse": "times worse",
             "type1": "Main goal: not dead!",
             "type2": "Main goal: not permanently sick!",
             "typecustom": "Own values",

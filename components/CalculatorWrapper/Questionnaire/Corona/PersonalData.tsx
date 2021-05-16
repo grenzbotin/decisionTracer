@@ -111,30 +111,30 @@ export default function PersonalData(): JSX.Element {
 
   return (
     <>
-      <Typography variant="h6" gutterBottom>
-        {applyFormatting(i18next.t(`${i18nPrefix}.title`))}
-      </Typography>
-      <Typography variant="body1" style={{ display: "flex", alignItems: "flex-start" }}>
-        {applyFormatting(i18next.t(`${i18nPrefix}.subtitle`))}
-        <CustomTooltip
-          content={
-            <>
-              {i18next
-                .t(`${i18nPrefix}.tooltip`)
-                .split("\n")
-                .map((c) => (
-                  <Typography key={c} variant="caption" component="p" style={{ marginBottom: ".4rem" }}>
-                    {applyFormatting(c)}
-                  </Typography>
-                ))}
-            </>
-          }
-          style={{ marginLeft: "1rem" }}
-        />
-      </Typography>
-      <Container maxWidth="md" style={{ marginTop: "2rem", fontSize: "1rem", padding: 0 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
+      <Container maxWidth="lg" style={{ fontSize: "1rem", padding: 0 }}>
+        <Typography variant="h6" gutterBottom>
+          {applyFormatting(i18next.t(`${i18nPrefix}.title`))}
+        </Typography>
+        <Typography variant="body1" style={{ display: "flex", alignItems: "flex-start" }}>
+          {applyFormatting(i18next.t(`${i18nPrefix}.subtitle`))}
+          <CustomTooltip
+            content={
+              <>
+                {i18next
+                  .t(`${i18nPrefix}.tooltip`)
+                  .split("\n")
+                  .map((c) => (
+                    <Typography key={c} variant="caption" component="p" style={{ marginBottom: ".4rem" }}>
+                      {applyFormatting(c)}
+                    </Typography>
+                  ))}
+              </>
+            }
+            style={{ marginLeft: "1rem" }}
+          />
+        </Typography>
+        <Grid container spacing={4} style={{ marginTop: "2rem" }}>
+          <Grid item xs={6} style={{ justifyContent: "flex-end", alignItems: "center", display: "flex" }}>
             {i18next.t(`${i18nPrefix}.age`)}
           </Grid>
           <Grid item xs={6}>
@@ -152,7 +152,7 @@ export default function PersonalData(): JSX.Element {
               renderInput={(params) => <TextField variant="outlined" {...params} />}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={6} style={{ justifyContent: "flex-end", alignItems: "center", display: "flex" }}>
             {i18next.t(`${i18nPrefix}.gender`)}
           </Grid>
           <Grid item xs={6}>

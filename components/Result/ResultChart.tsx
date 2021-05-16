@@ -36,21 +36,30 @@ const defaultOptions = {
     show: false
   },
   annotations: {
+    position: "back",
     yaxis: [
       {
         y: 0,
         strokeDashArray: 0,
         borderColor: "#919191",
-        borderWidth: 2
+        borderWidth: 1
       }
     ]
   },
   dataLabels: {
+    position: "front",
     enabled: true,
     offsetY: -20,
     style: {
       fontSize: "12px",
       colors: ["#304758"]
+    },
+    background: {
+      enabled: true,
+      foreColor: "#fff",
+      borderColor: "#919191",
+      padding: 4,
+      dropShadow: {}
     }
   }
 };
@@ -134,6 +143,20 @@ function ResultChart({ height = 300 }: { height?: number; mobile?: boolean }): J
             dataLabels: {
               ...defaultOptions.dataLabels,
               formatter: (val: number) => getIcon(val, results)
+            },
+            annotations: {
+              ...defaultOptions.annotations,
+              yaxis: [
+                ...defaultOptions.annotations.yaxis,
+                {
+                  label: {
+                    text: " "
+                  },
+                  y: 0,
+                  y2: -absMax,
+                  fillColor: "rgba(255, 0, 0, 0.25)"
+                }
+              ]
             }
           }}
           series={[{ name: i18next.t("calculator.expected_utility"), data: results }]}

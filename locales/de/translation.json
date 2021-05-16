@@ -213,7 +213,7 @@
             "type1": "Hauptsache: nicht tot!",
             "type2": "Hauptsache: nicht dauerhaft krank!",
             "typecustom": "Eigene Werte",
-            "x_times_worse": "mal schlimmer als ein milder Verlauf",
+            "x_times_worse": "mal schlimmer",
             "hospitalised": "Krankenhaus ohne Intensivstation",
             "severely-hospitalised": "Krankenhaus mit Intensivstation",
             "death": "Tod",

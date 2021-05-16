@@ -1,7 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
   Button,
+  Card,
   Container,
+  Divider,
+  Grid,
   Paper,
   Table,
   TableBody,
@@ -9,8 +12,10 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography
+  Typography,
+  useMediaQuery
 } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
 import i18next from "i18next";
 
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
@@ -22,6 +27,9 @@ export default function ValuesProgressionSelection(): JSX.Element {
   const i18nPrefix = "presets.corona.questionnaire.3b";
   const { active, setValue } = useContext(GlobalDecisionContext);
   const [tasks, setTasks] = useState([]);
+  const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.down("sm"));
+
   const [custom, setCustom] = useState({
     type: "typecustom",
     hospitalised: 10,
@@ -106,10 +114,10 @@ export default function ValuesProgressionSelection(): JSX.Element {
 
   return (
     <>
-      <Typography variant="h6" gutterBottom>
-        {i18next.t(`${i18nPrefix}.title`)}
-      </Typography>
-      <Container maxWidth="md" style={{ marginTop: "1rem", padding: 0 }}>
+      <Container maxWidth="lg" style={{ padding: 0 }}>
+        <Typography variant="h6" gutterBottom>
+          {i18next.t(`${i18nPrefix}.title`)}
+        </Typography>
         <Typography variant="body1">
           {i18next.t(`${i18nPrefix}.subtitle`)}{" "}
           <CustomTooltip
@@ -127,60 +135,157 @@ export default function ValuesProgressionSelection(): JSX.Element {
             }
           />
         </Typography>
-        <TableContainer component={Paper} style={{ marginTop: "2rem" }}>
-          <Table aria-label="Type selection">
-            <TableHead>
-              <TableRow>
-                {tableColumns.map((key) =>
-                  key === "type" ? (
-                    <TableCell key={key} />
+        {isTablet ? (
+          <Grid container spacing={2} style={{ marginTop: "1.5rem" }}>
+            {tableData.map((item, key) => (
+              <Grid key={item.type} item sm={4} xs={12}>
+                <Card style={{ padding: "1rem" }}>
+                  <Typography variant="body2" style={{ fontWeight: 500 }}>
+                    {i18next.t(`${i18nPrefix}.calc.${item.type}`)}
+                  </Typography>
+                  <Divider style={{ margin: "1rem 0" }} />
+                  <Typography variant="caption" component="p" gutterBottom>
+                    {i18next.t(`${i18nPrefix}.calc.hospitalised`)}:
+                  </Typography>
+                  {item.type === "typecustom" ? (
+                    <>
+                      <ValidatedValueField
+                        value={custom["hospitalised"]}
+                        onChange={(value) => setCustom({ ...custom, ["hospitalised"]: value })}
+                      />
+                      <br />
+                    </>
                   ) : (
-                    <TableCell align="center" key={key}>
-                      {i18next.t(`${i18nPrefix}.calc.${key}`)}
-                    </TableCell>
-                  )
-                )}
-                <TableCell key="action" />
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {tableData.map((row, key) => (
-                <TableRow key={row.type}>
-                  {tableColumns.map((key) =>
-                    key === "type" ? (
-                      <TableCell key={row[key]} component="th" scope="row">
-                        {i18next.t(`${i18nPrefix}.calc.${row[key]}`)}
-                      </TableCell>
-                    ) : (
-                      <TableCell key={`${key}-${key}`}>
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          <Typography variant="subtitle1" component="div" style={{ fontSize: "1.5rem" }}>
-                            {row.type === "typecustom" ? (
-                              <ValidatedValueField
-                                value={custom[key]}
-                                onChange={(value) => setCustom({ ...custom, [key]: value })}
-                              />
-                            ) : (
-                              row[key]
-                            )}
-                          </Typography>
-                          <Typography variant="caption" component="div" style={{ marginLeft: ".5rem" }}>
-                            {i18next.t(`${i18nPrefix}.calc.x_times_worse`)}
-                          </Typography>
-                        </div>
-                      </TableCell>
-                    )
+                    <Typography variant="caption" style={{ fontSize: "1.2rem", fontWeight: 400, marginRight: ".2rem" }}>
+                      {item.hospitalised}
+                    </Typography>
                   )}
-                  <TableCell key={`action-${row.type}`}>
+                  <Typography variant="caption" style={{ fontSize: "0.7rem" }}>
+                    {i18next.t(`${i18nPrefix}.calc.x_times_worse`)}
+                  </Typography>
+                  <Typography variant="caption" component="p" gutterBottom style={{ marginTop: "1.5rem" }}>
+                    {i18next.t(`${i18nPrefix}.calc.severely-hospitalised`)}:
+                  </Typography>
+                  {item.type === "typecustom" ? (
+                    <>
+                      <ValidatedValueField
+                        value={custom["severely-hospitalised"]}
+                        onChange={(value) => setCustom({ ...custom, ["severely-hospitalised"]: value })}
+                      />
+                      <br />
+                    </>
+                  ) : (
+                    <Typography variant="caption" style={{ fontSize: "1.2rem", fontWeight: 400, marginRight: ".2rem" }}>
+                      {item["severely-hospitalised"]}
+                    </Typography>
+                  )}
+                  <Typography variant="caption" style={{ fontSize: "0.7rem" }}>
+                    {i18next.t(`${i18nPrefix}.calc.x_times_worse`)}
+                  </Typography>
+                  <Typography variant="caption" component="p" gutterBottom style={{ marginTop: "1.5rem" }}>
+                    {i18next.t(`${i18nPrefix}.calc.death`)}:
+                  </Typography>
+                  {item.type === "typecustom" ? (
+                    <>
+                      <ValidatedValueField
+                        value={custom["death"]}
+                        onChange={(value) => setCustom({ ...custom, ["death"]: value })}
+                      />
+                      <br />
+                    </>
+                  ) : (
+                    <Typography variant="caption" style={{ fontSize: "1.2rem", fontWeight: 400, marginRight: ".2rem" }}>
+                      {item.death}
+                    </Typography>
+                  )}
+                  <Typography variant="caption" style={{ fontSize: "0.7rem" }}>
+                    {i18next.t(`${i18nPrefix}.calc.x_times_worse`)}
+                  </Typography>
+                  <Typography variant="caption" component="p" gutterBottom style={{ marginTop: "1.5rem" }}>
+                    {i18next.t(`${i18nPrefix}.calc.vaccination-damage`)}:
+                  </Typography>
+                  {item.type === "typecustom" ? (
+                    <>
+                      <ValidatedValueField
+                        value={custom["vaccination-damage"]}
+                        onChange={(value) => setCustom({ ...custom, ["vaccination-damage"]: value })}
+                      />
+                      <br />
+                    </>
+                  ) : (
+                    <Typography variant="caption" style={{ fontSize: "1.2rem", fontWeight: 400, marginRight: ".2rem" }}>
+                      {item["vaccination-damage"]}
+                    </Typography>
+                  )}
+                  <Typography variant="caption" style={{ fontSize: "0.7rem" }}>
+                    {i18next.t(`${i18nPrefix}.calc.x_times_worse`)}
+                  </Typography>
+                  <Divider style={{ margin: "1rem 0" }} />
+                  <div style={{ display: "flex", justifyContent: "center" }}>
                     <Button size="small" color="primary" variant="contained" onClick={() => handleSave(key)}>
                       {i18next.t("presets.corona.save")}
                     </Button>
-                  </TableCell>
+                  </div>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        ) : (
+          <TableContainer component={Paper} style={{ marginTop: "2rem" }}>
+            <Table aria-label="Type selection">
+              <TableHead>
+                <TableRow>
+                  {tableColumns.map((key) =>
+                    key === "type" ? (
+                      <TableCell key={key} />
+                    ) : (
+                      <TableCell style={{ minWidth: 120 }} align="center" key={key}>
+                        {i18next.t(`${i18nPrefix}.calc.${key}`)}
+                      </TableCell>
+                    )
+                  )}
+                  <TableCell key="action" />
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+              </TableHead>
+              <TableBody>
+                {tableData.map((row, key) => (
+                  <TableRow key={row.type}>
+                    {tableColumns.map((key) =>
+                      key === "type" ? (
+                        <TableCell key={row[key]} component="th" scope="row" style={{ fontSize: "0.8rem" }}>
+                          {i18next.t(`${i18nPrefix}.calc.${row[key]}`)}
+                        </TableCell>
+                      ) : (
+                        <TableCell key={`${key}-${key}`}>
+                          <div style={{ display: "flex", flexDirection: "column", textAlign: "center" }}>
+                            <Typography variant="subtitle1" component="div" style={{ fontSize: "1.2rem" }}>
+                              {row.type === "typecustom" ? (
+                                <ValidatedValueField
+                                  value={custom[key]}
+                                  onChange={(value) => setCustom({ ...custom, [key]: value })}
+                                />
+                              ) : (
+                                row[key]
+                              )}
+                            </Typography>
+                            <Typography variant="caption" component="div" style={{ fontSize: "0.7rem" }}>
+                              {i18next.t(`${i18nPrefix}.calc.x_times_worse`)}
+                            </Typography>
+                          </div>
+                        </TableCell>
+                      )
+                    )}
+                    <TableCell key={`action-${row.type}`}>
+                      <Button size="small" color="primary" variant="contained" onClick={() => handleSave(key)}>
+                        {i18next.t("presets.corona.save")}
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
       </Container>
     </>
   );

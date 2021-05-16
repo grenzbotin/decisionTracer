@@ -218,36 +218,36 @@ export default function ValuesProgression({ handleClose }: { handleClose?: () =>
 
   return (
     <>
-      <Typography variant="h6" gutterBottom>
-        {i18next.t(`${i18nPrefix}.title`)}
-      </Typography>
-      {i18next
-        .t(`${i18nPrefix}.subtitle`)
-        .split("\n")
-        .map((c) => (
-          <Typography key={c} variant="body1" component="p" style={{ marginBottom: ".4rem" }}>
-            {applyFormatting(c)}
-          </Typography>
-        ))}
-      <Typography variant="body1">
-        {i18next.t(`${i18nPrefix}.tooltipText`)}{" "}
-        <CustomTooltip
-          content={
-            <>
-              {i18next
-                .t(`${i18nPrefix}.tooltip`)
-                .split("\n")
-                .map((c) => (
-                  <Typography key={c} variant="caption" component="p" style={{ marginBottom: ".4rem" }}>
-                    {applyFormatting(c)}
-                  </Typography>
-                ))}
-            </>
-          }
-        />
-      </Typography>
-      <Container maxWidth="md" style={{ marginTop: "3rem", padding: 0 }}>
-        <Grid container spacing={2} style={{ fontSize: "0.8rem" }}>
+      <Container maxWidth="lg" style={{ padding: 0 }}>
+        <Typography variant="h6" gutterBottom>
+          {i18next.t(`${i18nPrefix}.title`)}
+        </Typography>
+        {i18next
+          .t(`${i18nPrefix}.subtitle`)
+          .split("\n")
+          .map((c) => (
+            <Typography key={c} variant="body1" component="p" style={{ marginBottom: ".4rem" }}>
+              {applyFormatting(c)}
+            </Typography>
+          ))}
+        <Typography variant="body1">
+          {i18next.t(`${i18nPrefix}.tooltipText`)}{" "}
+          <CustomTooltip
+            content={
+              <>
+                {i18next
+                  .t(`${i18nPrefix}.tooltip`)
+                  .split("\n")
+                  .map((c) => (
+                    <Typography key={c} variant="caption" component="p" style={{ marginBottom: ".4rem" }}>
+                      {applyFormatting(c)}
+                    </Typography>
+                  ))}
+              </>
+            }
+          />
+        </Typography>
+        <Grid container spacing={2} style={{ marginTop: "3rem", fontSize: "0.8rem" }}>
           <Grid item xs={8}>
             {i18next.t(`${i18nPrefix}.calc.day_mild_value`)}
           </Grid>

@@ -123,7 +123,7 @@ export default function PersonalDataVaccinationInfo({ handleClose }: { handleClo
           style={{ marginLeft: ".5rem" }}
         />
       </Typography>
-      <Container maxWidth="md" style={{ marginTop: "2rem", fontSize: "1rem", padding: 0 }}>
+      <Container maxWidth="lg" style={{ marginTop: "2rem", fontSize: "1rem", padding: 0 }}>
         {i18next
           .t(`${i18nPrefix}.decreasing_probabilities`)
           .split("\n")

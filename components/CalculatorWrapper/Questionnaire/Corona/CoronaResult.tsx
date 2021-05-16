@@ -8,10 +8,10 @@ export default function CoronaResult(): JSX.Element {
 
   return (
     <>
-      <Typography variant="h6" gutterBottom>
-        {i18next.t(`${i18nPrefix}.title`)}
-      </Typography>
-      <Container maxWidth="md" style={{ marginTop: "1rem", padding: 0 }}>
+      <Container maxWidth="lg" style={{ padding: 0 }}>
+        <Typography variant="h6" gutterBottom>
+          {i18next.t(`${i18nPrefix}.title`)}
+        </Typography>
         <ResultChart />
       </Container>
     </>
