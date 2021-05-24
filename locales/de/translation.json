@@ -37,6 +37,7 @@
   },
   "home": {
     "intro": "Mit unserem Tool wollen wir Dich dabei unterstützen, eine rationale Entscheidung zu treffen. Du kannst Alternativen gegenüberstellen, Ihre Vor- und Nachteile bewerten und Dir ein Ergebnis berechnen lassen.\n Du kannst Dinge, die Du berücksichtigen möchtest, hinzufügen oder bestehende Elemente verändern. Alle Werte, die Du eingibst oder übernimmst, kannst Du später verändern und schauen, ob dadurch die Entscheidung kippt.\nNatürlich kann das Tool lediglich eine Hilfe sein. Wir wollen Dir helfen, Deine Entscheidung zu reflektieren. Das Ergebnis hängt von Deinen Eingaben ab. Du bist für Deine Entscheidung verantwortlich, Du musst sie treffen.\n Um das Prinzip zu verstehen, solltest Du Dir zunächst das Tutorial anschauen. (Siehe Karte: 'Kopf oder Zahl')\n Eine rationale Entscheidung bezüglich der Corona-Impfung kannst Du Dir mit Klick auf die zweite Karte herleiten. (Siehe Karte 'Corona')\n Du kannst aber auch etwas ganz Eigenes entwerfen. (Siehe Karte 'Eigener Entscheidungsbaum')\n Viel Spaß!",
+    "youtube": "Mit Klick auf das Abspielen-Symbol stellen wir eine Verbindung mit YouTube her um Euch ein Video zu zeigen. Dabei werden Daten mit den YouTube - Servern ausgetauscht.",
     "meta": {
       "description": "Entscheidungen mit Köpfchen treffen - Rational Decision hilft Dir, Deine Optionen durchdacht abzuwägen.",
       "keywords": "Rechner, Entscheidungshilfe, Richtig entscheiden, Corona",
@@ -122,7 +123,7 @@
                   "title": "Milder Verlauf"
                 },
                 "hospitalised": {
-                  "title": "Krankenhausaufenthalt"
+                  "title": "Krankenhaus"
                 },
                 "severelyHospitalised": {
                   "title": "Intensivstation"
@@ -150,7 +151,7 @@
                   "title": "Milder Verlauf"
                 },
                 "hospitalised": {
-                  "title": "Krankenhausaufenthalt"
+                  "title": "Krankenhaus"
                 },
                 "severelyHospitalised": {
                   "title": "Intensivstation"

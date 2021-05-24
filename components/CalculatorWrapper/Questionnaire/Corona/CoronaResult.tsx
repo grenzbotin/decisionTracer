@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography, Container } from "@material-ui/core";
 import i18next from "i18next";
-import ResultChart from "@/../components/Result/ResultChart";
+import ResultChartCorona from "@/../components/Result/ResultChartCorona";
 
 export default function CoronaResult(): JSX.Element {
   const i18nPrefix = "presets.corona.questionnaire.result";
@@ -12,7 +12,7 @@ export default function CoronaResult(): JSX.Element {
         <Typography variant="h6" gutterBottom>
           {i18next.t(`${i18nPrefix}.title`)}
         </Typography>
-        <ResultChart />
+        <ResultChartCorona />
       </Container>
     </>
   );

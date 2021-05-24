@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Card, CardMedia, Grid, Typography } from "@material-ui/core";
+import { Card, Grid, Typography } from "@material-ui/core";
 import i18next from "i18next";
 import dynamic from "next/dynamic";
 
@@ -7,6 +7,7 @@ import { getAllLanguageSlugs, getLanguage } from "../../lib/lang";
 import { PRESETS } from "@/../lib/presets";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import PresetCard from "@/../components/elements/PresetCard";
+import ConsentCardMedia from "@/../components/ConsentCardMedia";
 
 const HtmlHeader = dynamic(() => import("../../components/HtmlHeader"));
 
@@ -47,12 +48,7 @@ export default function LangIndex(): JSX.Element {
               ))}
           </Grid>
           <Grid item md={4} sm={6} xs={12} style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <CardMedia
-              component="iframe"
-              image="https://www.youtube-nocookie.com/embed/qRZys9H_ihc"
-              title="Tutorial video"
-              style={{ height: 200, width: 300 }}
-            />
+            <ConsentCardMedia />
           </Grid>
         </Grid>
       </Card>
