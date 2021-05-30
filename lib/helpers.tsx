@@ -5,9 +5,7 @@ import { Elements } from "react-flow-renderer";
 import i18next from "i18next";
 
 export function getPath(): string {
-  const isLocal = window.location.origin.includes("localhost");
-
-  return isLocal ? "" : "/decisionTracer";
+  return "";
 }
 
 export function getPresetValueByField(

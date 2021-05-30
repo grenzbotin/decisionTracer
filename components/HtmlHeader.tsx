@@ -11,8 +11,8 @@ interface Props {
 const HtmlHeader: React.FC<Props> = ({ title, description, keywords = "", metaImg = "meta_home" }) => {
   const { asPath } = useRouter();
 
-  // on github page, the site is available via /decisionTracer
-  const basePath = "https://grenzbotin.github.io/decisionTracer";
+  // on github page, the site is available via rational-decision.org
+  const basePath = "https://www.rational-decision.org";
   const lang = asPath.includes("de") ? "de" : "en";
 
   return (

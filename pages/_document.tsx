@@ -2,7 +2,7 @@ import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import i18next from "i18next";
 import { ServerStyleSheets } from "@material-ui/core/styles";
-const basePath = "https://grenzbotin.github.io/decisionTracer";
+const basePath = "https://www.rational-decision.org";
 
 export default class MyDocument extends Document {
   render(): JSX.Element {

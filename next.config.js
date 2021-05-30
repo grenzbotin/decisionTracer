@@ -5,8 +5,8 @@ const path = require('path')
 
 const nextConfig = {
   include: path.resolve(__dirname, 'assets/svg'),
-  basePath: '/decisionTracer',
-  assetPrefix: '/decisionTracer/',
+  basePath: '/',
+  assetPrefix: '/',
 }
 
 module.exports = withPlugins([
