@@ -30,6 +30,10 @@
     "navbar": {
       "home": "Übersicht"
     },
+    "footer": {
+      "disclosure": "Impressum",
+      "data_privacy": "Datenschutz"
+    },
     "route_leaving_confirm": "Bist Du sicher, dass Du die Seite verlassen willst? Deine Änderungen können nicht gespeichert werden.",
     "decision_tree": "Entscheidungsbaum",
     "to_start": "Neu starten",
@@ -42,6 +46,17 @@
       "description": "Entscheidungen mit Köpfchen treffen - Rational Decision hilft Dir, Deine Optionen durchdacht abzuwägen.",
       "keywords": "Rechner, Entscheidungshilfe, Richtig entscheiden, Corona",
       "title": "Rational Decision | Startseite"
+    }
+  },
+  "disclosure": {
+    "title": "Impressum",
+    "provider": "Anbieter",
+    "provider_phone": "Telefon",
+    "provider_email": "E-Mail",
+    "contact": "Kontakt",
+    "meta": {
+      "description": "Impressum von Rational Decision",
+      "title": "Impressum | Rational Decision"
     }
   },
   "presets": {

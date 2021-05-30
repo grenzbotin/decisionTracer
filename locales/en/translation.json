@@ -30,6 +30,10 @@
     "navbar": {
       "home": "Overview"
     },
+    "footer": {
+      "disclosure": "Legal notice",
+      "data_privacy": "Privacy"
+    },
     "route_leaving_confirm": "Are you sure that you want to leave the page? Your changes can not be saved.",
     "decision_tree": "Decision tree",
     "to_start": "Start again",
@@ -42,6 +46,17 @@
       "description": "Make decisions with confidence. Rational decision guides you through a rational based decision making process.",
       "keywords": "Calculator, Decision helper",
       "title": "Rational Decision | Home"
+    }
+  },
+  "disclosure": {
+    "title": "Legal notice",
+    "provider": "Content provider",
+    "provider_phone": "Phone",
+    "provider_email": "Email",
+    "contact": "Contact",
+    "meta": {
+      "description": "Legal disclosure of Rational Decision",
+      "title": "Legal disclosure | Rational Decision"
     }
   },
   "presets": {

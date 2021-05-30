@@ -14,6 +14,7 @@ import { GlobalDecisionContext } from "../hooks/GlobalDecisionsContextProvider";
 import { DRAWER_WIDTH } from "./theme";
 import SideBar from "./SideBar";
 import LanguageToggle from "./LanguageToggle";
+import Footer from "./Footer";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -135,6 +136,7 @@ export default function Layout({ children }: Props): JSX.Element {
             {children}
           </Container>
         </main>
+        <Footer />
       </div>
       <SideBar open={open} handleClose={handleDrawerClose} />
     </div>

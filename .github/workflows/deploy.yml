@@ -26,6 +26,17 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "14"
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_NEXT_PUBLIC_DISCLOSURE_PROVIDER_NAME: ${{ secrets.NEXT_PUBLIC_DISCLOSURE_PROVIDER_NAME }}
+          envkey_NEXT_PUBLIC_DISCLOSURE_PROVIDER_ADDRESS_1: ${{ secrets.NEXT_PUBLIC_DISCLOSURE_PROVIDER_ADDRESS_1 }}
+          envkey_NEXT_PUBLIC_DISCLOSURE_PROVIDER_ADDRESS_2: ${{ secrets.NEXT_PUBLIC_DISCLOSURE_PROVIDER_ADDRESS_2 }}
+          envkey_NEXT_PUBLIC_DISCLOSURE_PROVIDER_PHONE: ${{ secrets.NEXT_PUBLIC_DISCLOSURE_PROVIDER_PHONE }}
+          envkey_NEXT_PUBLIC_DISCLOSURE_PROVIDER_EMAIL: ${{ secrets.NEXT_PUBLIC_DISCLOSURE_PROVIDER_EMAIL }}
+          envkey_NEXT_PUBLIC_DEVELOPMENT: false
+          file_name: .env.local
+          directory: ./
       - run: npm install
       - run: npm run build
       - run: npm run export
