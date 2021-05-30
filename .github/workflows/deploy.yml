@@ -34,6 +34,7 @@ jobs:
           envkey_NEXT_PUBLIC_DISCLOSURE_PROVIDER_ADDRESS_2: ${{ secrets.NEXT_PUBLIC_DISCLOSURE_PROVIDER_ADDRESS_2 }}
           envkey_NEXT_PUBLIC_DISCLOSURE_PROVIDER_PHONE: ${{ secrets.NEXT_PUBLIC_DISCLOSURE_PROVIDER_PHONE }}
           envkey_NEXT_PUBLIC_DISCLOSURE_PROVIDER_EMAIL: ${{ secrets.NEXT_PUBLIC_DISCLOSURE_PROVIDER_EMAIL }}
+          envkey_NEXT_PUBLIC_ENV: ${{ secrets.NEXT_PUBLIC_ENV }}
           envkey_NEXT_PUBLIC_DEVELOPMENT: false
           file_name: .env.local
           directory: ./

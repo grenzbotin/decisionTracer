@@ -33,11 +33,13 @@ const ConsentCardMedia: React.FC = () => {
             textAlign: "center",
             background: PRIMARY,
             color: "#fff",
-            cursor: "pointer"
+            cursor: "pointer",
+            zIndex: 1
           }}
           aria-label="connect to youtube"
           tabIndex={0}
           onClick={handleClick}
+          onKeyPress={(e) => e.key === "Enter" && handleClick()}
         >
           <div>{i18next.t("home.youtube")}</div>
           <PlayCircleFilledIcon fontSize="default" style={{ marginTop: ".5rem" }} />
