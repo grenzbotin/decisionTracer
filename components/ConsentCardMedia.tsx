@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IconButton, Paper } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import i18next from "i18next";
 import { PRIMARY } from "./theme";
@@ -14,11 +14,11 @@ const ConsentCardMedia: React.FC = () => {
   return (
     <>
       {consent ? (
-        <Paper style={{ height: 168.75, width: 300 }}>
+        <Paper style={{ height: "168.75px", width: "300px" }}>
           <iframe
             title="Youtube Video: Tutorial Rational Decision"
-            width="300"
-            height="168.75"
+            width="300px"
+            height="168.75px"
             src="https://www.youtube-nocookie.com/embed/qRZys9H_ihc"
             frameBorder="0"
             allowFullScreen
@@ -27,18 +27,20 @@ const ConsentCardMedia: React.FC = () => {
       ) : (
         <Paper
           style={{
-            height: 168.75,
-            width: 300,
+            height: "168.75px",
+            width: "300px",
             padding: "1rem",
             textAlign: "center",
             background: PRIMARY,
-            color: "#fff"
+            color: "#fff",
+            cursor: "pointer"
           }}
+          aria-label="connect to youtube"
+          tabIndex={0}
+          onClick={handleClick}
         >
           <div>{i18next.t("home.youtube")}</div>
-          <IconButton color="inherit" aria-label="connect to youtube" component="div" onClick={handleClick}>
-            <PlayCircleFilledIcon fontSize="default" />
-          </IconButton>
+          <PlayCircleFilledIcon fontSize="default" style={{ marginTop: ".5rem" }} />
         </Paper>
       )}
     </>

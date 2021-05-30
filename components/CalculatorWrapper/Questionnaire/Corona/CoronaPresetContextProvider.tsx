@@ -65,6 +65,13 @@ export const CoronaPresetContextProvider: React.FC<T> = ({ children }) => {
       age: "50",
       sex: "F",
       vaccinationEfficiacy: VACCINATION_EFFICACY
+    },
+    valuesProgression: {
+      type: "typecustom",
+      hospitalised: 10,
+      "severely-hospitalised": 30,
+      death: 500,
+      "vaccination-damage": 50
     }
   });
 

@@ -7,6 +7,10 @@ function regex(value: string): boolean {
   return /^[+-]?\d+([.,]\d+)?$/.test(value);
 }
 
+function regexPositive(value: string): boolean {
+  return /^[+]?\d+([.,]\d+)?$/.test(value);
+}
+
 function usePrevious(value: number): number {
   const ref = useRef<number>();
   useEffect(() => {
@@ -19,9 +23,10 @@ interface Props {
   onChange: (_value: number) => void;
   value: number;
   disabled?: boolean;
+  onlyPositive?: boolean;
 }
 
-const ValidatedValueField: React.FC<Props> = ({ onChange, value, disabled = false }) => {
+const ValidatedValueField: React.FC<Props> = ({ onChange, value, disabled = false, onlyPositive = false }) => {
   const prevValue = usePrevious(value);
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const ref = useRef(null);
@@ -40,9 +45,10 @@ const ValidatedValueField: React.FC<Props> = ({ onChange, value, disabled = fals
     const newValue = e.target.value;
     setLocalValue(newValue);
 
+    const validate = onlyPositive ? regexPositive : regex;
     // set error if value is empty, float number regex not matching
     // if valid, set probability in global state
-    if (newValue === "" || !regex(newValue)) {
+    if (newValue === "" || !validate(newValue)) {
       setError(true);
     } else {
       setError(false);

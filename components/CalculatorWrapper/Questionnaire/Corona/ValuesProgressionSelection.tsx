@@ -22,21 +22,15 @@ import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider
 import { applyFormatting, getPresetValueByField } from "@/../lib/helpers";
 import ValidatedValueField from "@/../components/elements/ValidatedValueField";
 import CustomTooltip from "@/../components/elements/CustomTooltip";
+import { CoronaPresetContext } from "./CoronaPresetContextProvider";
 
 export default function ValuesProgressionSelection(): JSX.Element {
   const i18nPrefix = "presets.corona.questionnaire.3b";
   const { active, setValue } = useContext(GlobalDecisionContext);
+  const { valuesProgression, setValuesByStep } = useContext(CoronaPresetContext);
   const [tasks, setTasks] = useState([]);
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.down("sm"));
-
-  const [custom, setCustom] = useState({
-    type: "typecustom",
-    hospitalised: 10,
-    "severely-hospitalised": 30,
-    death: 500,
-    "vaccination-damage": 50
-  });
 
   useEffect(() => {
     // Ensure to change one by one
@@ -78,7 +72,7 @@ export default function ValuesProgressionSelection(): JSX.Element {
       death: 200,
       "vaccination-damage": 150
     },
-    custom
+    valuesProgression
   ];
 
   const tableColumns = Object.keys(tableData[0]);
@@ -150,8 +144,11 @@ export default function ValuesProgressionSelection(): JSX.Element {
                   {item.type === "typecustom" ? (
                     <>
                       <ValidatedValueField
-                        value={custom["hospitalised"]}
-                        onChange={(value) => setCustom({ ...custom, ["hospitalised"]: value })}
+                        value={valuesProgression["hospitalised"]}
+                        onChange={(value) =>
+                          setValuesByStep({ ...valuesProgression, hospitalised: value }, "valuesProgression")
+                        }
+                        onlyPositive
                       />
                       <br />
                     </>
@@ -169,8 +166,11 @@ export default function ValuesProgressionSelection(): JSX.Element {
                   {item.type === "typecustom" ? (
                     <>
                       <ValidatedValueField
-                        value={custom["severely-hospitalised"]}
-                        onChange={(value) => setCustom({ ...custom, ["severely-hospitalised"]: value })}
+                        value={valuesProgression["severely-hospitalised"]}
+                        onChange={(value) =>
+                          setValuesByStep({ ...valuesProgression, "severely-hospitalised": value }, "valuesProgression")
+                        }
+                        onlyPositive
                       />
                       <br />
                     </>
@@ -188,8 +188,11 @@ export default function ValuesProgressionSelection(): JSX.Element {
                   {item.type === "typecustom" ? (
                     <>
                       <ValidatedValueField
-                        value={custom["death"]}
-                        onChange={(value) => setCustom({ ...custom, ["death"]: value })}
+                        value={valuesProgression["death"]}
+                        onChange={(value) =>
+                          setValuesByStep({ ...valuesProgression, death: value }, "valuesProgression")
+                        }
+                        onlyPositive
                       />
                       <br />
                     </>
@@ -207,8 +210,11 @@ export default function ValuesProgressionSelection(): JSX.Element {
                   {item.type === "typecustom" ? (
                     <>
                       <ValidatedValueField
-                        value={custom["vaccination-damage"]}
-                        onChange={(value) => setCustom({ ...custom, ["vaccination-damage"]: value })}
+                        value={valuesProgression["vaccination-damage"]}
+                        onChange={(value) =>
+                          setValuesByStep({ ...valuesProgression, "vaccination-damage": value }, "valuesProgression")
+                        }
+                        onlyPositive
                       />
                       <br />
                     </>
@@ -261,8 +267,11 @@ export default function ValuesProgressionSelection(): JSX.Element {
                             <Typography variant="subtitle1" component="div" style={{ fontSize: "1.2rem" }}>
                               {row.type === "typecustom" ? (
                                 <ValidatedValueField
-                                  value={custom[key]}
-                                  onChange={(value) => setCustom({ ...custom, [key]: value })}
+                                  value={valuesProgression[key]}
+                                  onChange={(value) =>
+                                    setValuesByStep({ ...valuesProgression, [key]: value }, "valuesProgression")
+                                  }
+                                  onlyPositive
                                 />
                               ) : (
                                 row[key]
