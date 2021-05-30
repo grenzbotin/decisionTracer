@@ -31,6 +31,13 @@ export const CoronaPresetContext = React.createContext({
     sex: "F",
     vaccinationEfficiacy: VACCINATION_EFFICACY
   },
+  valuesProgression: {
+    type: "typecustom",
+    hospitalised: 10,
+    "severely-hospitalised": 30,
+    death: 500,
+    "vaccination-damage": 50
+  },
   setValuesByStep: (_value?: Record<string, number | string>, _step?: string) => undefined
 });
 
