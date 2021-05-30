@@ -5,7 +5,7 @@ const path = require('path')
 
 const nextConfig = {
   include: path.resolve(__dirname, 'assets/svg'),
-  basePath: '/',
+  basePath: '',
   assetPrefix: '/',
 }
 
