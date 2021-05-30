@@ -35,6 +35,14 @@ const Footer: React.FC = () => {
         >
           {i18next.t("common.footer.disclosure")}
         </Link>
+        <Link
+          href={{
+            pathname: `/[lang]/privacy`,
+            query: { lang: i18next.language }
+          }}
+        >
+          {i18next.t("common.footer.privacy")}
+        </Link>
       </Container>
     </footer>
   );
