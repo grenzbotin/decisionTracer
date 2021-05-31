@@ -104,6 +104,7 @@ export default function ValuesProgressionSelection(): JSX.Element {
       [tableData[key]["vaccination-damage"] * -14, "vaccinated", "vaccinated-vaccination_damage"]
     ];
     setTasks(tasks);
+    setValuesByStep({ ...valuesProgression, selected: tableData[key].type }, "valuesProgression");
   };
 
   return (
@@ -133,7 +134,12 @@ export default function ValuesProgressionSelection(): JSX.Element {
           <Grid container spacing={2} style={{ marginTop: "1.5rem" }}>
             {tableData.map((item, key) => (
               <Grid key={item.type} item sm={4} xs={12}>
-                <Card style={{ padding: "1rem" }}>
+                <Card
+                  style={{
+                    padding: "1rem",
+                    background: item.type === valuesProgression.selected && "rgba(255, 163, 51, 0.08)"
+                  }}
+                >
                   <Typography variant="body2" style={{ fontWeight: 500 }}>
                     {i18next.t(`${i18nPrefix}.calc.${item.type}`)}
                   </Typography>
@@ -146,7 +152,10 @@ export default function ValuesProgressionSelection(): JSX.Element {
                       <ValidatedValueField
                         value={valuesProgression["hospitalised"]}
                         onChange={(value) =>
-                          setValuesByStep({ ...valuesProgression, hospitalised: value }, "valuesProgression")
+                          setValuesByStep(
+                            { ...valuesProgression, hospitalised: value, selected: null },
+                            "valuesProgression"
+                          )
                         }
                         onlyPositive
                       />
@@ -168,7 +177,10 @@ export default function ValuesProgressionSelection(): JSX.Element {
                       <ValidatedValueField
                         value={valuesProgression["severely-hospitalised"]}
                         onChange={(value) =>
-                          setValuesByStep({ ...valuesProgression, "severely-hospitalised": value }, "valuesProgression")
+                          setValuesByStep(
+                            { ...valuesProgression, "severely-hospitalised": value, selected: null },
+                            "valuesProgression"
+                          )
                         }
                         onlyPositive
                       />
@@ -190,7 +202,7 @@ export default function ValuesProgressionSelection(): JSX.Element {
                       <ValidatedValueField
                         value={valuesProgression["death"]}
                         onChange={(value) =>
-                          setValuesByStep({ ...valuesProgression, death: value }, "valuesProgression")
+                          setValuesByStep({ ...valuesProgression, death: value, selected: null }, "valuesProgression")
                         }
                         onlyPositive
                       />
@@ -212,7 +224,10 @@ export default function ValuesProgressionSelection(): JSX.Element {
                       <ValidatedValueField
                         value={valuesProgression["vaccination-damage"]}
                         onChange={(value) =>
-                          setValuesByStep({ ...valuesProgression, "vaccination-damage": value }, "valuesProgression")
+                          setValuesByStep(
+                            { ...valuesProgression, "vaccination-damage": value, selected: null },
+                            "valuesProgression"
+                          )
                         }
                         onlyPositive
                       />
@@ -229,7 +244,9 @@ export default function ValuesProgressionSelection(): JSX.Element {
                   <Divider style={{ margin: "1rem 0" }} />
                   <div style={{ display: "flex", justifyContent: "center" }}>
                     <Button size="small" color="primary" variant="contained" onClick={() => handleSave(key)}>
-                      {i18next.t("presets.corona.save")}
+                      {item.type === valuesProgression.selected
+                        ? i18next.t("presets.corona.selected")
+                        : i18next.t("presets.corona.save")}
                     </Button>
                   </div>
                 </Card>
@@ -255,7 +272,7 @@ export default function ValuesProgressionSelection(): JSX.Element {
               </TableHead>
               <TableBody>
                 {tableData.map((row, key) => (
-                  <TableRow key={row.type}>
+                  <TableRow key={row.type} selected={row.type === valuesProgression.selected}>
                     {tableColumns.map((key) =>
                       key === "type" ? (
                         <TableCell key={row[key]} component="th" scope="row" style={{ fontSize: "0.8rem" }}>
@@ -269,7 +286,10 @@ export default function ValuesProgressionSelection(): JSX.Element {
                                 <ValidatedValueField
                                   value={valuesProgression[key]}
                                   onChange={(value) =>
-                                    setValuesByStep({ ...valuesProgression, [key]: value }, "valuesProgression")
+                                    setValuesByStep(
+                                      { ...valuesProgression, [key]: value, selected: null },
+                                      "valuesProgression"
+                                    )
                                   }
                                   onlyPositive
                                 />
@@ -286,7 +306,9 @@ export default function ValuesProgressionSelection(): JSX.Element {
                     )}
                     <TableCell key={`action-${row.type}`}>
                       <Button size="small" color="primary" variant="contained" onClick={() => handleSave(key)}>
-                        {i18next.t("presets.corona.save")}
+                        {row.type === valuesProgression.selected
+                          ? i18next.t("presets.corona.selected")
+                          : i18next.t("presets.corona.save")}
                       </Button>
                     </TableCell>
                   </TableRow>

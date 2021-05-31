@@ -214,7 +214,8 @@
         "keywords": "Corona, vaccination, decision, help, calculator",
         "title": "Should I get vaccinated? | Rational Decision"
       },
-      "save": "Save",
+      "save": "Select",
+      "selected": "Selected",
       "question": "Should I get vaccinated?",
       "questionnaire": {
         "0": {

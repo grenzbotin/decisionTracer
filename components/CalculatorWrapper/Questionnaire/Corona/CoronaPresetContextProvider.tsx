@@ -32,6 +32,7 @@ export const CoronaPresetContext = React.createContext({
     vaccinationEfficiacy: VACCINATION_EFFICACY
   },
   valuesProgression: {
+    selected: "type1",
     type: "typecustom",
     hospitalised: 10,
     "severely-hospitalised": 30,
@@ -74,6 +75,7 @@ export const CoronaPresetContextProvider: React.FC<T> = ({ children }) => {
       vaccinationEfficiacy: VACCINATION_EFFICACY
     },
     valuesProgression: {
+      selected: "type1",
       type: "typecustom",
       hospitalised: 10,
       "severely-hospitalised": 30,

@@ -214,7 +214,8 @@
         "keywords": "Corona, Impfung, Entscheidung, Hilfe, Entscheidungshilfe, Impffrage, Corona impfen, Rechner",
         "title": "Soll ich mich impfen lassen? | Rational Decision"
       },
-      "save": "Übernehmen",
+      "save": "Auswählen",
+      "selected": "Ausgewählt",
       "question": "Soll ich mich impfen lassen?",
       "questionnaire": {
         "0": {
