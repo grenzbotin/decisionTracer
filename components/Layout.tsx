@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
 import clsx from "clsx";
 import i18next from "i18next";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import Link from "next/link";
+import { makeStyles, Theme, useTheme, createStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -15,6 +16,7 @@ import { DRAWER_WIDTH } from "./theme";
 import SideBar from "./SideBar";
 import LanguageToggle from "./LanguageToggle";
 import Footer from "./Footer";
+import { useMediaQuery } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,6 +29,10 @@ const useStyles = makeStyles((theme: Theme) =>
         duration: theme.transitions.duration.leavingScreen
       })
     },
+    toolBar: {
+      display: "flex",
+      justifyContent: "space-between"
+    },
     appBarShift: {
       width: `calc(100% - ${DRAWER_WIDTH}px)`,
       transition: theme.transitions.create(["margin", "width"], {
@@ -36,7 +42,6 @@ const useStyles = makeStyles((theme: Theme) =>
       marginRight: DRAWER_WIDTH
     },
     title: {
-      flexGrow: 1,
       display: "flex",
       alignItems: "center",
       fontWeight: 500
@@ -85,6 +90,8 @@ interface Props {
 export default function Layout({ children }: Props): JSX.Element {
   const classes = useStyles();
   const { active } = useContext(GlobalDecisionContext);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = (): void => {
@@ -100,6 +107,8 @@ export default function Layout({ children }: Props): JSX.Element {
     title: active ? i18next.t(active.question) : "Rational Decision"
   };
 
+  const isHome = pageAttrs.icon === "question";
+
   return (
     <div className={classes.root}>
       <AppBar
@@ -108,21 +117,50 @@ export default function Layout({ children }: Props): JSX.Element {
           [classes.appBarShift]: open
         })}
       >
-        <Toolbar>
-          <Typography component="h1" variant="body1" noWrap className={classes.title}>
-            <CustomIcon name={pageAttrs.icon} fontSize="large" style={{ marginRight: "2rem" }} />
-            {pageAttrs.title}
-          </Typography>
-          <LanguageToggle />
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="end"
-            onClick={handleDrawerOpen}
-            className={clsx(open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
+        <Toolbar className={classes.toolBar}>
+          <div style={{ display: "flex" }}>
+            <Link
+              key="home"
+              href={{
+                pathname: `/[lang]`,
+                query: { lang: i18next.language }
+              }}
+              passHref
+            >
+              <IconButton color="inherit">
+                <CustomIcon name="question" fontSize="default" />
+              </IconButton>
+            </Link>
+            {isHome && (
+              <Typography
+                component="h1"
+                variant="body1"
+                noWrap
+                className={classes.title}
+                style={{ marginLeft: ".5rem" }}
+              >
+                Rational Decision
+              </Typography>
+            )}
+          </div>
+          {!isHome && (
+            <Typography component="h1" variant="body1" noWrap className={classes.title}>
+              {!isMobile && <CustomIcon name={pageAttrs.icon} fontSize="default" style={{ marginRight: ".5rem" }} />}
+              {pageAttrs.title}
+            </Typography>
+          )}
+          <div style={{ display: "flex" }}>
+            <LanguageToggle />
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="end"
+              onClick={handleDrawerOpen}
+              className={clsx(open && classes.hide)}
+            >
+              <MenuIcon />
+            </IconButton>
+          </div>
         </Toolbar>
       </AppBar>
       <div

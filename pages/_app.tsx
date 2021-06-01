@@ -4,6 +4,7 @@ import { ThemeProvider } from "@material-ui/styles";
 import theme from "../components/theme";
 import { CssBaseline } from "@material-ui/core";
 import i18next from "i18next";
+import { init, trackPages } from "insights-js";
 
 import "../i18n/init";
 import Layout from "../components/Layout";
@@ -16,6 +17,12 @@ export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
+    }
+
+    // only track page events if on production
+    if (process.env.NEXT_PUBLIC_ENV === "production") {
+      init("jrhvGLx1oC_dtZEN");
+      trackPages();
     }
   }, []);
 
