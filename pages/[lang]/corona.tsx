@@ -20,7 +20,7 @@ const FooterResult = dynamic(() => import("../../components/Result/FooterResult"
 const MobileSelectedNode = dynamic(() => import("../../components/SelectedNode/MobileSelectedNode"));
 
 export default function LangIndex(): JSX.Element {
-  const { mobileFooter, showResult, updateUIState, setLastAddedDecision } = useContext(GlobalUiContext);
+  const { mobileFooter, expert, updateUIState, setLastAddedDecision } = useContext(GlobalUiContext);
   const { active, setActiveFromPreset, addItem } = useContext(GlobalDecisionContext);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -28,7 +28,7 @@ export default function LangIndex(): JSX.Element {
 
   useEffect(() => {
     if (!active || active.key !== "corona") {
-      updateUIState({ visualMode: "questionnaire", showResult: false });
+      updateUIState({ visualMode: "questionnaire", expert: false });
       setActiveFromPreset("corona");
     }
   }, [active, setActiveFromPreset, updateUIState]);
@@ -53,12 +53,12 @@ export default function LangIndex(): JSX.Element {
             <Grid
               item
               xs={12}
-              md={showResult ? 9 : 12}
+              md={expert ? 9 : 12}
               style={{ position: "relative", marginBottom: mobileFooter && isMobile ? "220px" : "50px" }}
             >
               <CalculatorWrapper />
             </Grid>
-            {showResult && (
+            {expert && (
               <>
                 <Hidden smDown>
                   <Grid item xs={12} md={3} style={{ position: "relative" }}>

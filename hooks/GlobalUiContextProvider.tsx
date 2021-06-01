@@ -5,7 +5,7 @@ import React, { useState } from "react";
 export const GlobalUiContext = React.createContext({
   mobileFooter: false,
   visualMode: "card",
-  showResult: true,
+  expert: true,
   lastAddedDecision: null,
   setLastAddedDecision: (_value: string) => undefined,
   toggleMobileFooter: () => undefined,
@@ -22,7 +22,7 @@ export const GlobalUiContextProvider: React.FC<T> = ({ children }) => {
     lastAddedDecision: null,
     mobileFooter: false,
     visualMode: "card",
-    showResult: true
+    expert: true
   });
 
   const setVisualMode = (mode: string): void => {

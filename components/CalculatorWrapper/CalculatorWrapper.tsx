@@ -13,9 +13,17 @@ import Questionnaire from "./Questionnaire";
 import Calculation from "./Calculation";
 
 const activeSelectors = {
-  corona: ["questionnaire", "tree", "card", "calculation"],
-  ["coin-toss"]: ["questionnaire", "tree", "card", "calculation"],
-  custom: ["tree", "card", "calculation"]
+  corona: {
+    default: ["questionnaire"],
+    expert: ["tree", "card", "calculation"]
+  },
+  ["coin-toss"]: {
+    default: ["questionnaire", "tree", "card", "calculation"],
+    expert: ["questionnaire", "tree", "card", "calculation"]
+  },
+  custom: {
+    expert: ["tree", "card", "calculation"]
+  }
 };
 
 const SELECTORS = {
@@ -58,17 +66,19 @@ const getComponentFromMode = (
 
 export default function CalculatorWrapper(): JSX.Element {
   const { active } = useContext(GlobalDecisionContext);
-  const { visualMode, updateUIState, lastAddedDecision, setLastAddedDecision } = useContext(GlobalUiContext);
+  const { visualMode, updateUIState, expert, lastAddedDecision, setLastAddedDecision } = useContext(GlobalUiContext);
 
   const handleClick = (mode: string): void => {
-    updateUIState({ visualMode: mode, showResult: true });
+    updateUIState({ visualMode: mode, expert: true });
   };
+
+  const presetMode = expert ? "expert" : "default";
 
   return (
     <Grid container spacing={2}>
       <Grid container item xs={12} style={{ display: "flex", justifyContent: "flex-end" }}>
         <ButtonGroup color="primary" size="small" style={{ marginRight: ".5rem" }}>
-          {activeSelectors[active.key].map((selector: string) => (
+          {activeSelectors[active.key][presetMode].map((selector: string) => (
             <Button
               key={selector}
               variant={visualMode === SELECTORS[selector].id ? "contained" : "outlined"}

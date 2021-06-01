@@ -132,7 +132,7 @@ export default function FullWidthTabs(): JSX.Element {
                       size="small"
                       variant="contained"
                       color="primary"
-                      onClick={() => updateUIState({ visualMode: "tree", showResult: true })}
+                      onClick={() => updateUIState({ visualMode: "tree", expert: true })}
                     >
                       {i18next.t(active.key === "corona" ? "common.expert_mode" : "common.decision_tree")}
                     </Button>
