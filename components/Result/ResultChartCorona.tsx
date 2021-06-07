@@ -6,7 +6,7 @@ import i18next from "i18next";
 import { Decision as DecisionType } from "@/../lib/presets";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { generateColors } from "../theme";
-import { ChartType, TooltipItem } from "chart.js";
+import { ChartType, LegendItem, TooltipItem } from "chart.js";
 
 function getResultValues(decisions: Array<DecisionType>): Array<number> {
   const results = decisions.map((decision) => {
@@ -21,7 +21,11 @@ function getResultValues(decisions: Array<DecisionType>): Array<number> {
   return results;
 }
 
-function getBestAlternatives(results: Array<number>, val: number, categories: Array<string>): Array<string> {
+function getBestAlternatives(
+  results: Array<number>,
+  val: number,
+  categories: Array<string>
+): { winner: Array<string>; loser: Array<string>; ratio: number } {
   const indices = [] as Array<number>;
   let i = -1;
 
@@ -29,54 +33,83 @@ function getBestAlternatives(results: Array<number>, val: number, categories: Ar
     indices.push(i);
   }
 
-  return categories.filter((_, i) => indices.includes(i));
+  const winner = categories.filter((_, i) => indices.includes(i));
+  const loser = categories.filter((_, i) => !indices.includes(i));
+
+  return {
+    winner,
+    loser,
+    ratio: Math.round((Math.min(...results) / Math.max(...results)) * 100) / 100
+  };
 }
 
 function getIcon(title: string, best: Array<string>): string {
   if (best.includes(title)) {
     return "✅";
   }
-  {
-    return "❌";
-  }
-
-  return "";
+  return "❌";
 }
 
 function getSeriesFromData(
   decisions: Array<DecisionType>
 ): { labels: string[]; datasets: Array<{ label: string; data: number[]; backgroundColor: string }> } {
   const labels = decisions.map((decision) => decision.title);
-  const datasets = [] as Array<{ label: string; data: number[]; backgroundColor: string }>;
+  let datasets = [] as Array<{ label: string; data: number[]; backgroundColor: string }>;
 
-  const COLORS = generateColors(decisions.length);
-  const OPACITY = ["E6", "CC", "B3", "99", "80", "66", "4D", "33"];
+  const COLORS = generateColors(8);
 
   decisions.forEach(
     (dec, key) =>
       dec.sub?.length > 0 &&
-      dec.sub.forEach((sub) =>
-        sub.cases?.length > 0
-          ? sub.cases.forEach((item, ikey) =>
+      dec.sub.forEach((sub) => {
+        if (sub.cases?.length > 0) {
+          sub.cases.forEach((item) => {
+            const exist = datasets.some((dsItem) => dsItem.label === item.title);
+            if (exist) {
+              datasets = datasets.map((ds) =>
+                ds.label === item.title
+                  ? {
+                      ...ds,
+                      data: [
+                        ...ds.data,
+                        Math.round((item.probability / 100) * item.value * 100 * (sub.probability / 100)) / 100
+                      ]
+                    }
+                  : ds
+              );
+            } else {
               datasets.push({
-                label: `${item.title} (${dec.title})`,
-                data: labels.map((label) =>
-                  label === dec.title
-                    ? Math.round((item.probability / 100) * item.value * 100 * (sub.probability / 100)) / 100
-                    : null
-                ),
-                backgroundColor: `${COLORS[key]}${OPACITY[ikey]}`
-              })
-            )
-          : datasets.push({
-              label: `${sub.title} (${dec.title})`,
-              data: labels.map((label) =>
-                label === dec.title ? Math.round((sub.probability / 100) * sub.value * 100) / 100 : null
-              ),
-              backgroundColor: COLORS[key]
-            })
-      )
+                label: item.title,
+                data: [Math.round((item.probability / 100) * item.value * 100 * (sub.probability / 100)) / 100],
+                backgroundColor: COLORS[datasets.length]
+              });
+            }
+          });
+        } else {
+          const exist = datasets.some((dsItem) => dsItem.label === sub.title);
+          if (exist) {
+            datasets = datasets.map((ds) =>
+              ds.label === sub.title
+                ? {
+                    ...ds,
+                    data: [...ds.data, Math.round((sub.probability / 100) * sub.value * 100) / 100]
+                  }
+                : ds
+            );
+          } else {
+            datasets.push({
+              label: sub.title,
+              data: [
+                ...[...Array(key).keys()].map(() => null),
+                Math.round((sub.probability / 100) * sub.value * 10000) / 10000
+              ],
+              backgroundColor: COLORS[datasets.length]
+            });
+          }
+        }
+      })
   );
+
   return {
     labels,
     datasets
@@ -88,20 +121,26 @@ const ResultChartCorona = (): JSX.Element => {
   const decisions = active.decisions as DecisionType[];
   const results = getResultValues(decisions);
   const data = getSeriesFromData(decisions);
-  const bestAlternatives = getBestAlternatives(results, Math.max(...results), data.labels);
+  const { winner, loser, ratio } = getBestAlternatives(results, Math.max(...results), data.labels);
 
   return (
     <>
-      <div style={{ marginBottom: "1rem" }}>
+      <div style={{ marginBottom: "2rem" }}>
         <Typography variant="subtitle2" gutterBottom style={{ marginTop: "1rem" }}>
           {i18next.t("calculator.interpretation")}
         </Typography>
-        {i18next.t(
-          bestAlternatives.length > 1 ? "calculator.interpretation_text_pl" : "calculator.interpretation_text",
-          {
-            decision: bestAlternatives.join(" & ")
-          }
-        )}
+        <Typography variant="body2" gutterBottom>
+          {i18next.t(winner.length > 1 ? "calculator.interpretation_text_pl" : "calculator.interpretation_text", {
+            decision: winner.join(" & ")
+          })}
+        </Typography>
+        <Typography variant="body2" gutterBottom>
+          {i18next.t("calculator.interpretation_insights", {
+            value: ratio,
+            loser: loser[0],
+            winner: winner[0]
+          })}
+        </Typography>
       </div>
       <div style={{ position: "relative", height: "40vh", width: "90%" }}>
         <Bar
@@ -111,7 +150,21 @@ const ResultChartCorona = (): JSX.Element => {
             maintainAspectRatio: false,
             plugins: {
               legend: {
-                display: false
+                display: true,
+                position: "bottom",
+                labels: {
+                  usePointStyle: true,
+                  boxWidth: 6,
+                  filter: (
+                    legendItem: LegendItem,
+                    { datasets }: { datasets: Array<{ label: string; data: number[]; backgroundColor: string }> }
+                  ) => {
+                    const dataset = datasets.find((item) => item.label === legendItem.text);
+                    if (dataset.data.reduce((a, b) => a + b, 0) !== 0) {
+                      return true;
+                    }
+                  }
+                }
               },
               tooltip: {
                 callbacks: {
@@ -152,7 +205,11 @@ const ResultChartCorona = (): JSX.Element => {
                 ticks: {
                   callback: (_: number, index: number) => {
                     const title = data.labels[index];
-                    return `${title} ${getIcon(title, bestAlternatives)}`;
+                    let value = 0;
+                    data.datasets.map((item) => {
+                      value += item.data[index];
+                    });
+                    return `${getIcon(title, winner)} ${title} (${Math.round(value * 100) / 100})`;
                   }
                 }
               }

@@ -9,6 +9,7 @@
     "interpretation": "Interpretation",
     "interpretation_text": "{{ decision }} seems to be the better alternative for you.",
     "interpretation_text_pl": "{{ decision }} seem to be the better alternative for you.",
+    "interpretation_insights": "Beide Optionen sind negativ, Du solltest das geringere Übel wählen. \"{{ winner }}\" ist in Deinem Fall etwa {{ value }} mal besser als \"{{ loser }}\".",
     "new_decision": "Decision",
     "no_decisions_created": "No decisions created",
     "probability": "Occurence probability",
@@ -40,7 +41,7 @@
     "expert_mode": "Expert mode"
   },
   "home": {
-    "intro": "With our tool we want to support you to make a rational decision. You can compare alternatives, score their advantages and disadvanteges and calculate a result.\n You can add things you want to consider or modify existing elements.\nThis tool only can be an assistance, of course. We want to help you to reflect your decision making. The result depends on your inputs. You are responsible for your decision, you have to decide.\n For understanding the principle you should have a look at the tutorial. (card: 'Heads or tails')\nYou can have a look at a deduction for a rational decision regarding the corona vaccination with a click on the second card. (card: 'Corona')\n You can also conceive something completey new. (card: 'own decision tree')\n Have fun!",
+    "intro": "With our tool we want to support you to make a rational decision. You can compare alternatives, score their advantages and disadvanteges and calculate a result.\n You can add things you want to consider or modify existing elements.\nThis tool only can be an assistance, of course. We want to help you to reflect your decision making. The result depends on your inputs. You are responsible for your decision, you have to decide.\n For understanding the principle you should have a look at the tutorial. (card: \"Heads or tails\")\nYou can have a look at a deduction for a rational decision regarding the corona vaccination with a click on the second card. (card: \"Corona\")\n You can also conceive something completey new. (card: \"own decision tree\")\n Have fun!",
     "youtube": "With clicking on the play symbol we will establish a connection with YouTube to show you a video - given that, there will be a data transfer with the youtube servers.",
     "meta": {
       "description": "Make decisions with confidence. Rational decision guides you through a rational based decision making process.",
@@ -253,10 +254,13 @@
             "42": "Es gibt 42 vermutete Impfschäden durch Astra Zeneca.\n- Verdachtsfälle werden von Wissenschaftlern untersucht\n- kausaler Zusammenhang wahrscheinlich",
             "1100": "Es gibt 1100 Verdachtsfälle.\n- jeder kann Verdachtsfälle melden\n- zeitlicher Zusammenhang ist nicht klar",
             "5500000": "Impfungen insgesamt (Zeitpunkt: Ende April 2021)"
-          }
+          },
+          "tooltip": "Paul Ehrlich Institut: Verdachtsfälle nach Impfung (27.12.2020 - 02.04.2021) \n https://www.pei.de/SharedDocs/Downloads/DE/newsroom/dossiers/sicherheitsberichte/sicherheitsbericht-27-12-bis-02-04-21.pdf"
         },
         "result": {
-          "title": "Ergebnis"
+          "title": "Ergebnis",
+          "text_1": "Du kannst die Eingabe noch einmal neu starten und Dir anschauen, ob andere Eingaben das Ergebnis verändern.",
+          "text_2": "Wenn Du wissen möchtest, wie die Ergebnisse berechnet werden, oder wenn Du weitere Aspekte berücksichtigen möchtest, nimm Dir etwas Zeit und schaue Dir den Profi-Modus an!"
         },
         "3b": {
           "title": "What kind of person are you?",

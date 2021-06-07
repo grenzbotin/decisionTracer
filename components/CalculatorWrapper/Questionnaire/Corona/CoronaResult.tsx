@@ -13,6 +13,12 @@ export default function CoronaResult(): JSX.Element {
           {i18next.t(`${i18nPrefix}.title`)}
         </Typography>
         <ResultChartCorona />
+        <Typography variant="body2" gutterBottom style={{ marginTop: "2rem" }}>
+          {i18next.t(`${i18nPrefix}.text_1`)}
+        </Typography>
+        <Typography variant="body2" gutterBottom>
+          {i18next.t(`${i18nPrefix}.text_2`)}
+        </Typography>
       </Container>
     </>
   );

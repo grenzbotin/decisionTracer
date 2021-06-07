@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Button, Grid, Typography, Container } from "@material-ui/core";
+import { Grid, Typography, Container } from "@material-ui/core";
 import i18next from "i18next";
 
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
@@ -24,18 +24,22 @@ export default function ProbabilityVaccinationDamageSelection(): JSX.Element {
   const [vaccinationDamage, setVaccinationDamage] = useState(PRESET_VACCINATION_DAMAGE);
   const [damageAmount, setDamageAmount] = useState(STUDIES_VACCINATION_DAMAGE.supposedVaccinationDamage);
 
-  const handleSave = (): void => {
+  const handleSave = (value: number): void => {
     if (
       getPresetValueByField(active.decisions, "probability", "vaccinated", "vaccinated-vaccination_damage") !== null
     ) {
-      const valueToSet = vaccinationDamage > 100 ? 100 : vaccinationDamage;
+      const valueToSet = value > 100 ? 100 : value;
       setProbabilityByKey(valueToSet, "vaccinated", "vaccinated-vaccination_damage");
     }
   };
 
   const handleVaccinationDamageChange = (value: number): void => {
     setDamageAmount(Math.round(value));
-    setVaccinationDamage((Math.round(value) / STUDIES_VACCINATION_DAMAGE.totalVaccinated) * 100);
+    const newVaccinationDamage = (Math.round(value) / STUDIES_VACCINATION_DAMAGE.totalVaccinated) * 100;
+    setVaccinationDamage(newVaccinationDamage);
+
+    // Directly save new vaccination damage
+    handleSave(newVaccinationDamage);
   };
 
   return (
@@ -44,21 +48,35 @@ export default function ProbabilityVaccinationDamageSelection(): JSX.Element {
         <Typography variant="h6" gutterBottom>
           {i18next.t(`${i18nPrefix}.title`)}
         </Typography>
-        <Typography variant="body2" component="span">
+        <Typography variant="body1">
           {i18next
             .t(`${i18nPrefix}.subtitle`)
             .split("\n")
             .map((c) => (
-              <Typography key={c} style={{ marginBottom: ".4rem" }}>
+              <Typography key={c} component="span" style={{ marginBottom: ".4rem" }}>
                 {applyFormatting(c)}
               </Typography>
             ))}
+          <CustomTooltip
+            content={
+              <>
+                {i18next
+                  .t(`${i18nPrefix}.tooltip`)
+                  .split("\n")
+                  .map((c) => (
+                    <Typography key={c} variant="caption" component="p" style={{ marginBottom: ".4rem" }}>
+                      {applyFormatting(c)}
+                    </Typography>
+                  ))}
+              </>
+            }
+          />
         </Typography>
         <Typography variant="body2" style={{ marginTop: "2rem" }}>
           {i18next.t(`${i18nPrefix}.subtitle_2`)}
         </Typography>
         <Grid container spacing={3} style={{ marginTop: "1rem" }}>
-          <Grid item xs={12} sm={8} md={10}>
+          <Grid item xs={12} sm={8}>
             <NonLinearSlider
               marks={[
                 { value: 0 },
@@ -148,7 +166,7 @@ export default function ProbabilityVaccinationDamageSelection(): JSX.Element {
               numFormatter={(val: number) => Math.round(val)}
             />
           </Grid>
-          <Grid item xs={12} sm={4} md={2} style={{ textAlign: "right" }}>
+          <Grid item xs={12} sm={4}>
             <ValidatedInputField value={damageAmount} onChange={(value) => handleVaccinationDamageChange(value)} />
             <Typography variant="caption" component="div" style={{ marginTop: ".2rem" }}>
               entspricht {getRoundedValue(vaccinationDamage, 2)}%
@@ -161,11 +179,6 @@ export default function ProbabilityVaccinationDamageSelection(): JSX.Element {
               )}
             </Grid>
           )}
-          <Grid item xs={12} style={{ textAlign: "right" }}>
-            <Button color="primary" variant="contained" onClick={handleSave}>
-              {i18next.t("presets.corona.save")}
-            </Button>
-          </Grid>
         </Grid>
       </Container>
     </>
