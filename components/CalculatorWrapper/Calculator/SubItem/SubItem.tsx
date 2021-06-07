@@ -11,7 +11,6 @@ import LockIcon from "@material-ui/icons/Lock";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { SubItem as SubItemType } from "@/../lib/presets";
 import CaseItem from "../CaseItem";
-import CardMenu from "../../../elements/CardMenu";
 import { applyFormatting, getHasChangeableSiblings, getUniqueNumber } from "@/../lib/helpers";
 import EditableTitle from "@/../components/elements/EditableTitle";
 import ValidatedProbabilityField from "@/../components/elements/ValidatedProbabilityField";
@@ -93,20 +92,9 @@ export default function SubItem({
               />
             }
             action={
-              <CardMenu
-                listContent={[
-                  {
-                    text: i18next.t("calculator.add_case"),
-                    icon: <AddCircleIcon fontSize="small" />,
-                    onClick: () => addItem(getUniqueNumber(), decisionKey, item.key)
-                  },
-                  {
-                    text: i18next.t("calculator.remove_scenario"),
-                    icon: <DeleteIcon fontSize="small" />,
-                    onClick: () => removeItem(decisionKey, item.key)
-                  }
-                ]}
-              />
+              <IconButton onClick={() => removeItem(decisionKey, item.key)}>
+                <DeleteIcon fontSize="small" />
+              </IconButton>
             }
             style={{
               borderLeft: `10px solid ${color}`
@@ -241,6 +229,15 @@ export default function SubItem({
                 ))}
               </>
             )}
+            <Button
+              fullWidth
+              variant="outlined"
+              onClick={() => addItem(getUniqueNumber(), decisionKey, item.key)}
+              startIcon={<AddCircleIcon />}
+              style={{ margin: "1.5rem 0", borderColor: color, color: color }}
+            >
+              {i18next.t("calculator.add_case")}
+            </Button>
           </CardContent>
         </Card>
       </Grid>

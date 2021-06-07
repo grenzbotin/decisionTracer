@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Grid, Paper } from "@material-ui/core";
+import { Button, Grid, IconButton, Paper } from "@material-ui/core";
 import i18next from "i18next";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -10,7 +10,6 @@ import { Decision as DecisionType } from "@/../lib/presets";
 import EditableTitle from "@/../components/elements/EditableTitle";
 import SubItem from "../SubItem";
 import CustomIcon from "@/../assets/CustomIcon";
-import CardMenu from "../../../elements/CardMenu";
 import { getResult, getUniqueNumber, scrollToTargetOffset } from "@/../lib/helpers";
 
 export default function Decision({ decision, color }: { decision: DecisionType; color: string }): JSX.Element {
@@ -71,26 +70,24 @@ export default function Decision({ decision, color }: { decision: DecisionType; 
             variant="subtitle1"
             component="h2"
           />
-          <CardMenu
-            listContent={[
-              {
-                text: i18next.t("calculator.add_scenario"),
-                icon: <AddCircleIcon fontSize="small" />,
-                onClick: handleClickAddItem
-              },
-              {
-                text: i18next.t("calculator.remove_decision"),
-                icon: <DeleteIcon fontSize="small" />,
-                onClick: () => removeItem(decision.key)
-              }
-            ]}
-          />
+          <IconButton onClick={() => removeItem(decision.key)}>
+            <DeleteIcon fontSize="small" />
+          </IconButton>
         </div>
         <Grid container spacing={2}>
           {decision.sub.map((item) => (
             <SubItem key={item.key} color={color} decisionKey={decision.key} item={item} />
           ))}
         </Grid>
+        <Button
+          fullWidth
+          variant="outlined"
+          onClick={handleClickAddItem}
+          startIcon={<AddCircleIcon />}
+          style={{ margin: "1rem 0", borderColor: color, color: color }}
+        >
+          {i18next.t("calculator.add_scenario")}
+        </Button>
         <div
           style={{
             marginTop: "1rem",

@@ -12,7 +12,6 @@ import LockIcon from "@material-ui/icons/Lock";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { SubCaseItem as SubCaseItemType } from "@/../lib/presets";
 import EditableTitle from "@/../components/elements/EditableTitle";
-import CardMenu from "@/../components/elements/CardMenu";
 import ValidatedProbabilityField from "@/../components/elements/ValidatedProbabilityField";
 import NonLinearSlider from "@/../components/elements/NonLinearSlider";
 import ValidatedValueField from "@/../components/elements/ValidatedValueField";
@@ -129,16 +128,13 @@ export default function SubCaseItem({
             <Typography variant="caption" display="block">
               {getRoundedValue((subCaseItem.value * subCaseItem.probability) / 100, 2)}
             </Typography>
-            <CardMenu
+            <IconButton
+              style={{ marginLeft: ".2rem" }}
               size="small"
-              listContent={[
-                {
-                  text: i18next.t("calculator.remove_sub_case"),
-                  icon: <DeleteIcon fontSize="small" />,
-                  onClick: () => removeItem(decisionKey, itemKey, caseKey, subCaseItem.key)
-                }
-              ]}
-            />
+              onClick={() => removeItem(decisionKey, itemKey, caseKey, subCaseItem.key)}
+            >
+              <DeleteIcon fontSize="small" />
+            </IconButton>
           </div>
         </AccordionSummary>
         <AccordionDetails style={{ flexDirection: "column", padding: "1rem" }}>

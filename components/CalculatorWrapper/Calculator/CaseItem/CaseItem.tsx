@@ -12,7 +12,6 @@ import LockIcon from "@material-ui/icons/Lock";
 
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { CaseItem as CaseItemType } from "@/../lib/presets";
-import CardMenu from "../../../elements/CardMenu";
 import { getHasChangeableSiblings, getRoundedValue, getUniqueNumber } from "@/../lib/helpers";
 import SubCaseItem from "../SubCaseItem";
 import EditableTitle from "@/../components/elements/EditableTitle";
@@ -129,21 +128,13 @@ export default function CaseItem({
             <Typography variant="caption" display="block">
               {getRoundedValue(caseItem.value * (caseItem.probability / 100), 2)}
             </Typography>
-            <CardMenu
+            <IconButton
+              style={{ marginLeft: ".2rem" }}
               size="small"
-              listContent={[
-                {
-                  text: i18next.t("calculator.add_sub_case"),
-                  icon: <AddCircleIcon fontSize="small" />,
-                  onClick: () => addItem(getUniqueNumber(), decisionKey, itemKey, caseItem.key)
-                },
-                {
-                  text: i18next.t("calculator.remove_case"),
-                  icon: <DeleteIcon fontSize="small" />,
-                  onClick: () => removeItem(decisionKey, itemKey, caseItem.key)
-                }
-              ]}
-            />
+              onClick={() => removeItem(decisionKey, itemKey, caseItem.key)}
+            >
+              <DeleteIcon fontSize="small" />
+            </IconButton>
           </div>
         </AccordionSummary>
         <AccordionDetails style={{ flexDirection: "column", padding: "1rem" }}>
@@ -276,6 +267,15 @@ export default function CaseItem({
               ))}
             </>
           )}
+          <Button
+            fullWidth
+            variant="outlined"
+            onClick={() => addItem(getUniqueNumber(), decisionKey, itemKey, caseItem.key)}
+            startIcon={<AddCircleIcon />}
+            style={{ margin: "1rem 0", borderColor: color, color: color }}
+          >
+            {i18next.t("calculator.add_sub_case")}
+          </Button>
         </AccordionDetails>
       </Accordion>
     </>
