@@ -8,6 +8,7 @@ const useStyles = makeStyles({
   footer: {
     padding: "1rem 0",
     marginTop: "30px",
+    marginBottom: "40px",
     bottom: 0,
     "& > div > a": {
       color: "inherit",

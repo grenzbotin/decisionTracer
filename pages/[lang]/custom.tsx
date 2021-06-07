@@ -4,12 +4,14 @@ import { Button, Grid, Hidden, useMediaQuery } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import i18next from "i18next";
 import dynamic from "next/dynamic";
+import AddIcon from "@material-ui/icons/Add";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 import { getAllLanguageSlugs, getLanguage } from "../../lib/lang";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { useRouteLeavingCheck } from "@/../hooks/helpers";
 import { getUniqueNumber } from "@/../lib/helpers";
+import FloatingActionButton from "@/../components/elements/FloatingActionButton";
 
 const HtmlHeader = dynamic(() => import("../../components/HtmlHeader"));
 const CalculatorWrapper = dynamic(() => import("../../components/CalculatorWrapper"));
@@ -67,6 +69,11 @@ export default function LangIndex(): JSX.Element {
             </Grid>
           </Hidden>
           <Hidden mdUp>
+            <FloatingActionButton
+              handleAction={handleClickAddItem}
+              icon={<AddIcon />}
+              label={i18next.t("calculator.new_decision")}
+            />
             <FooterResult />
             <MobileSelectedNode />
           </Hidden>

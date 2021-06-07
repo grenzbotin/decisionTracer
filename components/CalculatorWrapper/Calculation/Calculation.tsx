@@ -107,7 +107,12 @@ export default function Calculation(): JSX.Element {
                                       <Grid
                                         item
                                         xs={12}
-                                        style={{ marginTop: "1rem", alignItems: "center", display: "flex" }}
+                                        style={{
+                                          marginTop: "1rem",
+                                          flexWrap: "wrap",
+                                          alignItems: "center",
+                                          display: "flex"
+                                        }}
                                       >
                                         {k !== c.subCases.length - 1 && <AddIcon style={{ color: colors[b] }} />}
                                       </Grid>
@@ -132,7 +137,12 @@ export default function Calculation(): JSX.Element {
                                   <Grid
                                     item
                                     xs={12}
-                                    style={{ marginTop: "1rem", alignItems: "center", display: "flex" }}
+                                    style={{
+                                      marginTop: "1rem",
+                                      flexWrap: "wrap",
+                                      alignItems: "center",
+                                      display: "flex"
+                                    }}
                                   >
                                     {getRoundedValue(c.value, 2)} * {getRoundedValue(c.probability, 2)}%
                                     <DragHandleIcon style={{ color: colors[b] }} />{" "}
@@ -140,12 +150,20 @@ export default function Calculation(): JSX.Element {
                                   </Grid>
                                 </Grid>
                               </Card>
-                              <Grid item xs={12} style={{ marginTop: "1rem", alignItems: "center", display: "flex" }}>
+                              <Grid
+                                item
+                                xs={12}
+                                style={{ marginTop: "1rem", flexWrap: "wrap", alignItems: "center", display: "flex" }}
+                              >
                                 {l !== sub.cases.length - 1 && <AddIcon style={{ color: colors[b] }} />}
                               </Grid>
                             </Grid>
                           ))}
-                          <Grid item xs={12} style={{ marginTop: "1rem", alignItems: "center", display: "flex" }}>
+                          <Grid
+                            item
+                            xs={12}
+                            style={{ marginTop: "1rem", flexWrap: "wrap", alignItems: "center", display: "flex" }}
+                          >
                             {sub.cases.map((c, k) => (
                               <Fragment key={c.key}>
                                 {getRoundedValue((c.probability / 100) * c.value, 2)}
@@ -168,7 +186,11 @@ export default function Calculation(): JSX.Element {
                         </Grid>
                       </Card>
                     </Grid>
-                    <Grid item xs={12} style={{ marginTop: "1rem", alignItems: "center", display: "flex" }}>
+                    <Grid
+                      item
+                      xs={12}
+                      style={{ marginTop: "1rem", flexWrap: "wrap", alignItems: "center", display: "flex" }}
+                    >
                       {i !== decision.sub.length - 1 && <AddIcon style={{ color: colors[b] }} />}
                     </Grid>
                   </Grid>

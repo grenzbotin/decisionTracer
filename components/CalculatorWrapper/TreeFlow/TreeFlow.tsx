@@ -63,7 +63,7 @@ function TreeFlow({ elements, setElements }: { elements: Elements<any>; setEleme
         snapGrid={[15, 15]}
         nodeTypes={nodeTypes}
       />
-      <Controls>
+      <Controls style={{ marginBottom: "1.5rem" }}>
         <ControlButton onClick={() => onLayout("TB")}>
           <SwapHorizIcon fontSize="small" />
         </ControlButton>
