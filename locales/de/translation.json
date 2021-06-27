@@ -82,7 +82,7 @@
     "user_objection_right_text": "Nutzer dieser Webseite können von ihrem Widerspruchsrecht Gebrauch machen und der Verarbeitung ihrer personenbezogenen Daten zu jeder Zeit widersprechen. Wenn Sie eine Berichtigung, Sperrung, Löschung oder Auskunft über die zu Ihrer Person gespeicherten personenbezogenen Daten wünschen oder Fragen bzgl. der Erhebung, Verarbeitung oder Verwendung Ihrer personenbezogenen Daten haben oder erteilte Einwilligungen widerrufen möchten, wenden Sie sich bitte an folgende E-Mail-Adresse:",
     "3rd_party_title": "Verweis auf Dritte",
     "3rd_party_text_youtube": "Wir binden an einigen Stellen unserer Website YouTube-Videos über den „erweiterten Datenschutzmodus“ ein. Nach dem Starten des Videos kann YouTube Cookies auf Ihrem Gerät speichern und auswerten. Weitere Informationen darüber finden Sie in der Datenschutzerklärung von Google unter:",
-    "3rd_party_text_fonts": "Wir binden in unserer Website Schriftarten vom CDN (Content delivery network) von Google Fonts ein. Informationen zur Verwendung des damit aufkommenden Datentransfers zu Google finden Sie in der Datenschutzerklärung von Google: Weitere Informationen darüber finden Sie in der Datenschutzerklärung von Google unter:"
+    "3rd_party_text_fonts": "Wir binden in unserer Website Schriftarten vom CDN (Content delivery network) von Google Fonts ein. Informationen zur Verwendung des damit aufkommenden Datentransfers zu Google finden Sie in der Datenschutzerklärung von Google:"
   },
   "presets": {
     "coin-toss": {
