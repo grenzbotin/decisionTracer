@@ -37,16 +37,25 @@ export default function Disclosure(): JSX.Element {
         {i18next.t("privacy.basic_text")}
       </Typography>
       <Typography gutterBottom variant="subtitle2" style={{ marginTop: "1rem" }}>
-        {i18next.t("privacy.access_title")}
+        {i18next.t("privacy.hosting_title")}
       </Typography>
       <Typography gutterBottom variant="body2" className={classes.link}>
-        {i18next.t("privacy.access_text")}
+        {i18next.t("privacy.hosting_text")}
         <a
           href="https://help.github.com/en/github/site-policy/global-privacy-practices"
           target="_blank"
           rel="noreferrer"
         >
           https://help.github.com/en/github/site-policy/global-privacy-practices
+        </a>
+      </Typography>
+      <Typography gutterBottom variant="subtitle2" style={{ marginTop: "1rem" }}>
+        {i18next.t("privacy.access_title")}
+      </Typography>
+      <Typography gutterBottom variant="body2" className={classes.link}>
+        {i18next.t("privacy.access_text")}
+        <a href="https://getinsights.io/what-data-we-collect" target="_blank" rel="noreferrer">
+          https://getinsights.io/what-data-we-collect
         </a>
       </Typography>
       <Typography gutterBottom variant="subtitle2" style={{ marginTop: "1rem" }}>

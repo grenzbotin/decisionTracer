@@ -62,25 +62,27 @@
   },
   "privacy": {
     "meta": {
-      "description": "Datenschutzerklärung von Rational Decision",
-      "title": "Datenschutzerklärung | Rational Decision"
+      "description": "Data privacy statement, Rational Decision",
+      "title": "Data privacy statement | Rational Decision"
     },
-    "title": "Datenschutzerklärung",
-    "basic_title": "Grundlegendes",
-    "basic_text": "Diese Datenschutzerklärung soll die Nutzer dieser Website über die Art, den Umfang und den Zweck der Erhebung und Verwendung personenbezogener Daten durch den Websitebetreiber Falk Zedler informieren. Der Websitebetreiber nimmt Ihren Datenschutz sehr ernst und behandelt Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Vorschriften. Da durch neue Technologien und die ständige Weiterentwicklung dieser Webseite Änderungen an dieser Datenschutzerklärung vorgenommen werden können, empfehlen wir Ihnen sich die Datenschutzerklärung in regelmäßigen Abständen wieder durchzulesen. Definitionen der verwendeten Begriffe (z.B. “personenbezogene Daten” oder “Verarbeitung”) finden Sie in Art. 4 DSGVO.",
-    "access_title":"Zugriffsdaten & Hosting",
-    "access_text": "Diese Website wird auf Github als Github Pages gehostet. Alle etwaigen Zugriffsdaten des Besuchers werden gemäß der der Github Global Privacy Practices verarbeitet. Die Github Global Privacy Practices sind hier zu finden:",
-    "contact_data_title": "Umgang mit Kontaktdaten",
-    "contact_data_text": "Nehmen Sie mit uns als Websitebetreiber durch die angebotenen Kontaktmöglichkeiten Verbindung auf, werden Ihre Angaben gespeichert, damit auf diese zur Bearbeitung und Beantwortung Ihrer Anfrage zurückgegriffen werden kann. Ohne Ihre Einwilligung werden diese Daten nicht an Dritte weitergegeben.",
-    "user_rights_title": "Rechte des Nutzers",
-    "user_rights_text": "Sie haben als Nutzer das Recht, auf Antrag eine kostenlose Auskunft darüber zu erhalten, welche personenbezogenen Daten über Sie gespeichert wurden. Sie haben außerdem das Recht auf Berichtigung falscher Daten und auf die Verarbeitungseinschränkung oder Löschung Ihrer personenbezogenen Daten. Falls zutreffend, können Sie auch Ihr Recht auf Datenportabilität geltend machen. Sollten Sie annehmen, dass Ihre Daten unrechtmäßig verarbeitet wurden, können Sie eine Beschwerde bei der zuständigen Aufsichtsbehörde einreichen.",
-    "user_data_delete_title": "Löschung von Daten",
-    "user_data_delete_text": "Sofern Ihr Wunsch nicht mit einer gesetzlichen Pflicht zur Aufbewahrung von Daten (z. B. Vorratsdatenspeicherung) kollidiert, haben Sie ein Anrecht auf Löschung Ihrer Daten. Von uns gespeicherte Daten werden, sollten sie für ihre Zweckbestimmung nicht mehr vonnöten sein und es keine gesetzlichen Aufbewahrungsfristen geben, gelöscht. Falls eine Löschung nicht durchgeführt werden kann, da die Daten für zulässige gesetzliche Zwecke erforderlich sind, erfolgt eine Einschränkung der Datenverarbeitung. In diesem Fall werden die Daten gesperrt und nicht für andere Zwecke verarbeitet.",
-    "user_objection_right_title": "Widerspruchsrecht",
-    "user_objection_right_text": "Nutzer dieser Webseite können von ihrem Widerspruchsrecht Gebrauch machen und der Verarbeitung ihrer personenbezogenen Daten zu jeder Zeit widersprechen. Wenn Sie eine Berichtigung, Sperrung, Löschung oder Auskunft über die zu Ihrer Person gespeicherten personenbezogenen Daten wünschen oder Fragen bzgl. der Erhebung, Verarbeitung oder Verwendung Ihrer personenbezogenen Daten haben oder erteilte Einwilligungen widerrufen möchten, wenden Sie sich bitte an folgende E-Mail-Adresse:",
-    "3rd_party_title": "Verweis auf Dritte",
-    "3rd_party_text_youtube": "Wir binden an einigen Stellen unserer Website YouTube-Videos über den „erweiterten Datenschutzmodus“ ein. Nach dem Starten des Videos kann YouTube Cookies auf Ihrem Gerät speichern und auswerten. Weitere Informationen darüber finden Sie in der Datenschutzerklärung von Google unter:",
-    "3rd_party_text_fonts": "Wir binden in unserer Website Schriftarten vom CDN (Content delivery network) von Google Fonts ein. Informationen zur Verwendung des damit aufkommenden Datentransfers zu Google finden Sie in der Datenschutzerklärung von Google: Weitere Informationen darüber finden Sie in der Datenschutzerklärung von Google unter:"
+    "title": "Data privacy statement",
+    "basic_title": "Basics",
+    "basic_text": "This data privacy statement informes users of this website about the usage, the extent and the purpose of personal data by the website operator Falk Zedler. We take the protection of your personal data very serious and comply with certain legal frameworks.",
+    "hosting_title":"Hosting",
+    "hosting_text": "This website is hostet on GitHub Pages. Access data are used after Github Global Privacy Practices which can be found here:",
+    "access_title": "Privacy data",
+    "access_text": "In order to be able to improve our website we are using the cookie-less tracking service from get-insights.io. This service collects the following data with every page access: IP Adress, Device dimensions (e.g.: viewport size, browser, operating system), referrers (how did the user access the page) and time of access. Official information from the service provider can be found here:",
+    "contact_data_title": "Contact data",
+    "contact_data_text": "If you contact us we will save data to be able to answer your enquiry. We don’t give the data to third parties.",
+    "user_rights_title": "User rights",
+    "user_rights_text": "You have the right to obtain the information about the data we saved. Furthermore you have the right to correct or delete your saved personal data.",
+    "user_data_delete_title": "Data cancellation",
+    "user_data_delete_text": "We delete the data collected after its storage is no longer necessary or we limit its processing.",
+    "user_objection_right_title": "Recall",
+    "user_objection_right_text": "You have the right to recall the processing of your personal data by our website. If you want us to do this or to delete or correct your personal data please contact us at:",
+    "3rd_party_title": "Youtube and Google Fonts",
+    "3rd_party_text_youtube": "We integrate Youtube Videos on our website. After starting the video google can save and use cookies on your device. You can find information about the data transfer here:",
+    "3rd_party_text_fonts": "Furthermore we use fonts provided by CDN (content delivery network) of Google Fonts. You can find Information about which data is collected and processed by Google here: "
   },
   "presets": {
     "coin-toss": {
