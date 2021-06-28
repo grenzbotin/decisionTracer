@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { Card, Grid, Typography } from "@material-ui/core";
 import i18next from "i18next";
 import dynamic from "next/dynamic";
@@ -8,11 +8,22 @@ import { PRESETS } from "@/../lib/presets";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import PresetCard from "@/../components/elements/PresetCard";
 import ConsentCardMedia from "@/../components/ConsentCardMedia";
+import { useState } from "react";
 
 const HtmlHeader = dynamic(() => import("../../components/HtmlHeader"));
 
 export default function LangIndex(): JSX.Element {
   const { active, setActiveFromPreset } = useContext(GlobalDecisionContext);
+  const videoRef = useRef(null);
+  const [availableWidth, setAvailableWidth] = useState(null);
+
+  useEffect(() => {
+    if (videoRef?.current) {
+      const { width } = videoRef.current.getBoundingClientRect();
+      setAvailableWidth(width);
+    }
+  }, [videoRef]);
+
   useEffect(() => {
     if (active) {
       setActiveFromPreset(null);
@@ -29,7 +40,7 @@ export default function LangIndex(): JSX.Element {
       />
       <Card variant="outlined" style={{ margin: "1rem 0 2rem 0", padding: "1rem" }}>
         <Grid container spacing={3}>
-          <Grid item md={8} sm={6} xs={12}>
+          <Grid item md={7} sm={6} xs={12}>
             <Typography variant="h6" gutterBottom>
               Howdy!
             </Typography>
@@ -47,8 +58,16 @@ export default function LangIndex(): JSX.Element {
                 </Typography>
               ))}
           </Grid>
-          <Grid item md={4} sm={6} xs={12} style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <ConsentCardMedia />
+          <Grid
+            ref={videoRef}
+            id="video"
+            item
+            md={5}
+            sm={6}
+            xs={12}
+            style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+          >
+            <ConsentCardMedia width={availableWidth} />
           </Grid>
         </Grid>
       </Card>

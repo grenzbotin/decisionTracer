@@ -26,7 +26,11 @@ export default function Disclosure(): JSX.Element {
 
   return (
     <>
-      <HtmlHeader title={i18next.t("privacy.meta.title")} description={i18next.t("privacy.meta.description")} />
+      <HtmlHeader
+        noRobots
+        title={i18next.t("privacy.meta.title")}
+        description={i18next.t("privacy.meta.description")}
+      />
       <Typography variant="h4" gutterBottom>
         {i18next.t("privacy.title")}
       </Typography>

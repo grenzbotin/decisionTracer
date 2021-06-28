@@ -4,22 +4,24 @@ import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import i18next from "i18next";
 import { PRIMARY } from "./theme";
 
-const ConsentCardMedia: React.FC = () => {
+function ConsentCardMedia({ width = 300 }: { width?: number }): JSX.Element {
   const [consent, setConsent] = useState(false);
 
   const handleClick = (): void => {
     setConsent(true);
   };
 
+  const actualWidth = width - 24;
+
   return (
     <>
       {consent ? (
-        <Paper style={{ height: "168.75px", width: "300px" }}>
+        <Paper style={{ height: (actualWidth / 16) * 9, width: actualWidth }}>
           <iframe
             title="Youtube Video: Tutorial Rational Decision"
-            width="300px"
-            height="168.75px"
-            src="https://www.youtube-nocookie.com/embed/qRZys9H_ihc"
+            width={actualWidth}
+            height={(actualWidth / 16) * 9}
+            src="https://www.youtube-nocookie.com/embed/lu_sFoHWP14"
             frameBorder="0"
             allowFullScreen
           ></iframe>
@@ -27,9 +29,13 @@ const ConsentCardMedia: React.FC = () => {
       ) : (
         <Paper
           style={{
-            height: "168.75px",
-            width: "300px",
+            height: (actualWidth / 16) * 9,
+            width: actualWidth,
             padding: "1rem",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
             textAlign: "center",
             background: PRIMARY,
             color: "#fff",
@@ -47,6 +53,6 @@ const ConsentCardMedia: React.FC = () => {
       )}
     </>
   );
-};
+}
 
 export default ConsentCardMedia;

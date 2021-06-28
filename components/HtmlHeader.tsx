@@ -6,9 +6,16 @@ interface Props {
   description: string;
   keywords?: string;
   metaImg?: string;
+  noRobots?: boolean;
 }
 
-const HtmlHeader: React.FC<Props> = ({ title, description, keywords = "", metaImg = "meta_home" }) => {
+const HtmlHeader: React.FC<Props> = ({
+  title,
+  description,
+  keywords = "",
+  metaImg = "meta_home",
+  noRobots = false
+}) => {
   const { asPath } = useRouter();
 
   // on github page, the site is available via rational-decision.org
@@ -18,6 +25,7 @@ const HtmlHeader: React.FC<Props> = ({ title, description, keywords = "", metaIm
   return (
     <Head>
       <title>{title}</title>
+      <meta name="robots" content={noRobots ? "noindex,nofollow" : "index,follow"} />
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords || ""} />
 

@@ -9,8 +9,6 @@ export default class MyDocument extends Document {
     return (
       <Html lang={i18next.language}>
         <Head>
-          {/* Until release, we keep robots out */}
-          <meta name="robots" content="noindex" />
           <meta property="og:site_name" content="Rational Decision" key="ogsitename" />
 
           <meta httpEquiv="Content-Type" content="text/html" charSet="utf-8" />
