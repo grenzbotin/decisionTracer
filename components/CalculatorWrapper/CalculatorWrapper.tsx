@@ -4,6 +4,7 @@ import AccountTreeIcon from "@material-ui/icons/AccountTree";
 import ViewAgendaIcon from "@material-ui/icons/ViewAgenda";
 import LiveHelpIcon from "@material-ui/icons/LiveHelp";
 import ExposureIcon from "@material-ui/icons/Exposure";
+import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { GlobalUiContext } from "@/../hooks/GlobalUiContextProvider";
@@ -11,11 +12,13 @@ import TreeFlow from "./TreeFlow";
 import Calculator from "./Calculator";
 import Questionnaire from "./Questionnaire";
 import Calculation from "./Calculation";
+import Tutorial from "./Tutorial";
+import CalculatorSnackbar from "./CalculatorSnackbar";
 
 const activeSelectors = {
   corona: {
     default: ["questionnaire"],
-    expert: ["tree", "card", "calculation"]
+    expert: ["tutorial", "tree", "card", "calculation"]
   },
   ["coin-toss"]: {
     default: ["questionnaire", "tree", "card", "calculation"],
@@ -42,6 +45,10 @@ const SELECTORS = {
   calculation: {
     id: "calculation",
     icon: <ExposureIcon />
+  },
+  tutorial: {
+    id: "tutorial",
+    icon: <PlayCircleFilledIcon />
   }
 };
 
@@ -51,6 +58,8 @@ const getComponentFromMode = (
   setLastAddedDecision: (_value: string | null) => void
 ): JSX.Element => {
   switch (mode) {
+    case "tutorial":
+      return <Tutorial />;
     case "tree":
       return <TreeFlow />;
     case "card":
@@ -75,21 +84,24 @@ export default function CalculatorWrapper(): JSX.Element {
   const presetMode = expert ? "expert" : "default";
 
   return (
-    <Grid container spacing={2}>
-      <Grid container item xs={12} style={{ display: "flex", justifyContent: "flex-end" }}>
-        <ButtonGroup color="primary" size="small" style={{ marginRight: ".5rem" }}>
-          {activeSelectors[active.key][presetMode].map((selector: string) => (
-            <Button
-              key={selector}
-              variant={visualMode === SELECTORS[selector].id ? "contained" : "outlined"}
-              onClick={() => handleClick(SELECTORS[selector].id)}
-            >
-              {SELECTORS[selector].icon}
-            </Button>
-          ))}
-        </ButtonGroup>
+    <>
+      <Grid container spacing={2}>
+        <Grid container item xs={12} style={{ display: "flex", justifyContent: "flex-end" }}>
+          <ButtonGroup color="primary" size="small" style={{ marginRight: ".5rem" }}>
+            {activeSelectors[active.key][presetMode].map((selector: string) => (
+              <Button
+                key={selector}
+                variant={visualMode === SELECTORS[selector].id ? "contained" : "outlined"}
+                onClick={() => handleClick(SELECTORS[selector].id)}
+              >
+                {SELECTORS[selector].icon}
+              </Button>
+            ))}
+          </ButtonGroup>
+        </Grid>
+        {getComponentFromMode(visualMode, lastAddedDecision, setLastAddedDecision)}
       </Grid>
-      {getComponentFromMode(visualMode, lastAddedDecision, setLastAddedDecision)}
-    </Grid>
+      <CalculatorSnackbar />
+    </>
   );
 }

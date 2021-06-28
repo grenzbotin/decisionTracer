@@ -147,6 +147,7 @@
       "title": "Kopf oder Zahl?"
     },
     "corona": {
+      "video_tutorial_snackbar": "Wir haben ein Hilfsvideo vorbereitet. Du kannst es mit Klick auf den Play-Button über dem Entscheidungsbaum finden.",
       "data_loaded": "Aktualisiert",
       "decisions": {
         "unvaccinated": {

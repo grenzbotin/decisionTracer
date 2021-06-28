@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Paper } from "@material-ui/core";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import i18next from "i18next";
-import { PRIMARY } from "./theme";
 
-function ConsentCardMedia({ width = 300 }: { width?: number }): JSX.Element {
+import { PRIMARY } from "../../theme";
+
+function CoronaTutorial({ width = 300 }: { width?: number }): JSX.Element {
   const [consent, setConsent] = useState(false);
 
   const handleClick = (): void => {
@@ -55,4 +56,4 @@ function ConsentCardMedia({ width = 300 }: { width?: number }): JSX.Element {
   );
 }
 
-export default ConsentCardMedia;
+export default CoronaTutorial;

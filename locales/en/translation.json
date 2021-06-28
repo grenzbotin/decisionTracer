@@ -147,6 +147,7 @@
       "title": "Heads or Tails?"
     },
     "corona": {
+      "video_tutorial_snackbar": "We prepared a tutorial. You can find it with clicking the play button above the decision tree.",
       "data_loaded": "Updated",
       "decisions": {
         "unvaccinated": {
