@@ -75,6 +75,12 @@ export default function FullWidthTabs(): JSX.Element {
 
   const handleChangeIndex = (index: number): void => {
     setValue(index);
+    // scroll to top automatically
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
   };
 
   return (

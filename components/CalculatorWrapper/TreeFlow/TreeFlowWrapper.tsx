@@ -45,6 +45,15 @@ function TreeFlowWrapper(): JSX.Element {
   const [prevDecisions, setPrevDecisions] = useState([]);
 
   useEffect(() => {
+    // Scroll to top
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  }, [active.key]);
+
+  useEffect(() => {
     if (hasLengthChange(prevDecisions, active.decisions)) {
       setElements(null);
       const layoutedElements = getLayoutedElements(createTreeDataFromPreset(active.decisions));
@@ -61,8 +70,8 @@ function TreeFlowWrapper(): JSX.Element {
     <Grid item xs={12}>
       <Card
         style={{
-          height: "calc(100vh - 200px)",
-          minHeight: "500px",
+          height: "calc(100vh - 280px)",
+          minHeight: "478px",
           position: "relative",
           background: "rgba(255,255,255,0.5)"
         }}
