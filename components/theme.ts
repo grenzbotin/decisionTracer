@@ -45,6 +45,9 @@ const theme = createMuiTheme({
       main: SECONDARY,
       contrastText: BACKGROUND,
     },
+    info: {
+      main: SECONDARY,
+    }
   },
 });
 

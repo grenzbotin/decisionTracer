@@ -6,10 +6,9 @@
     "add_sub_case": "Add sub case",
     "expected_utility": "Expected utility",
     "independent": "independent",
-    "interpretation": "Interpretation",
-    "interpretation_text": "{{ decision }} seems to be the better alternative for you.",
-    "interpretation_text_pl": "{{ decision }} seem to be the better alternative for you.",
-    "interpretation_insights": "Beide Optionen sind negativ, Du solltest das geringere Übel wählen. \"{{ winner }}\" ist in Deinem Fall etwa {{ value }} mal besser als \"{{ loser }}\".",
+    "interpretation_text": "_{{ decision }}_ is the best alternative for you.",
+    "interpretation_text_pl": "_{{ decision }}_ are the best alternatives for you.",
+    "interpretation_insights": "Beide Optionen sind negativ, Du solltest das geringere Übel wählen. _{{ winner }}_ ist in Deinem Fall etwa {{ value }} mal besser als _{{ loser }}_.",
     "new_decision": "Decision",
     "no_decisions_created": "No decisions created",
     "probability": "Occurence probability",
@@ -41,6 +40,8 @@
     "expert_mode": "Expert mode"
   },
   "home": {
+    "title": "The Rational Decision decision tracer",
+    "subtitle": "A tool to calculate rational decisions",
     "intro": "With our tool we want to support you to make a rational decision. You can compare alternatives, score their advantages and disadvanteges and calculate a result.\n You can add things you want to consider or modify existing elements.\nThis tool only can be an assistance, of course. We want to help you to reflect your decision making. The result depends on your inputs. You are responsible for your decision, you have to decide.\n For understanding the principle you should have a look at the tutorial. (card: \"Heads or tails\")\nYou can have a look at a deduction for a rational decision regarding the corona vaccination with a click on the second card. (card: \"Corona\")\n You can also conceive something completey new. (card: \"own decision tree\")\n Have fun!",
     "youtube": "With clicking on the play symbol we will establish a connection with YouTube to show you a video - given that, there will be a data transfer with the youtube servers.",
     "meta": {
@@ -236,7 +237,6 @@
             "potential_infected": "Probability that a person is infected"
           },
           "intro": "With our little tool we want to approach the vaccination decision as rational as possible. All your relevant aspects should be considered and assessed. To make it easier we prepared a base configuration you can modify and extend as you want. You can change all values you entered or took over later and see if the decision overturns.",
-          "subtitle": "In a first step we want to calculate the risk to meet an infected person.",
           "title": "How likely is it to meet an infected person?",
           "tooltip": "_To meet a person_ means in this case to meet a person in a way that you can get infected if the person is contagious.\nAfter a vaccination we will quickly behave like before the pandemic. If we wouldn't get the vaccination we would behave normal as well (or isolate ourself durable from society).\nWe want to compare _vaccination_ with _no vaccination_ so we have to know how many people we will meet in the period until the next corona vaccination. If we think we have to refresh the vaccination once a year we have to consider how many persons we will meet in this period.\nThe vaccination will possibly lower the infection probability for many years, we don't know this yet. If we don't want to compare apples and oranges we have to compare the two possibilities for the same period. We have to ask ourselves how many people we will meet until we have to get our next vaccination.\nThe calculated (!) probability can exceed 100% so. This is not wrong. If the virus is still in the world and we will act like before the pandemic we will get infected sooner or later. In this case we will take a probability of 100%. You can change that if you want."
         },
@@ -261,9 +261,9 @@
           "tooltip": "Paul Ehrlich Institut: Verdachtsfälle nach Impfung (27.12.2020 - 02.04.2021) \n https://www.pei.de/SharedDocs/Downloads/DE/newsroom/dossiers/sicherheitsberichte/sicherheitsbericht-27-12-bis-02-04-21.pdf"
         },
         "result": {
-          "title": "Ergebnis",
+          "title": "Result",
           "text_1": "Du kannst die Eingabe noch einmal neu starten und Dir anschauen, ob andere Eingaben das Ergebnis verändern.",
-          "text_2": "Wenn Du wissen möchtest, wie die Ergebnisse berechnet werden, oder wenn Du weitere Aspekte berücksichtigen möchtest, nimm Dir etwas Zeit und schaue Dir den Profi-Modus an!"
+          "text_2": "Wenn Du wissen möchtest, wie die Ergebnisse berechnet werden, oder wenn Du weitere Aspekte berücksichtigen möchtest, nimm Dir etwas Zeit und schaue Dir den Profi-Modus an! Du solltest ungefähr 10 Minuten einplanen."
         },
         "3b": {
           "title": "What kind of person are you?",
@@ -312,7 +312,7 @@
         "5": {
           "subtitle": "Um die Wahrscheinlichkeiten der verschiedenen Krankheitsverläufe durch Covid-19 zu bestimmen, benötigen wir die Angabe von Alter und Geschlecht.",
           "title": "Personal data",
-          "tooltip": "Die zugrunde liegenden Daten werden regelmäßig vom European Centre for Disease Prevention and Control (ecdc) entnommen. https://covid19-surveillance-report.ecdc.europa.eu",
+          "tooltip": "Die Wahrscheinlichkeiten haben wir anhand von Daten des European Centre for Disease Prevention and Control (ecdc) berechnet. https://covid19-surveillance-report.ecdc.europa.eu",
           "female": "female",
           "male": "male",
           "age": "Age",

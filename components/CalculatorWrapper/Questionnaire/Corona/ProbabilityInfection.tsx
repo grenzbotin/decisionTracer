@@ -147,23 +147,6 @@ export default function ProbabilityInfection({ handleClose }: { handleClose?: ()
       <Typography variant="h6" gutterBottom>
         {i18next.t(`${i18nPrefix}.title`)}
       </Typography>
-      <Typography variant="body2" style={{ display: "flex", alignItems: "center" }}>
-        {applyFormatting(i18next.t(`${i18nPrefix}.subtitle`))}
-        <CustomTooltip
-          content={
-            <>
-              {i18next
-                .t(`${i18nPrefix}.tooltip`)
-                .split("\n")
-                .map((c) => (
-                  <Typography key={c} variant="caption" component="p" style={{ marginBottom: ".4rem" }}>
-                    {applyFormatting(c)}
-                  </Typography>
-                ))}
-            </>
-          }
-        />
-      </Typography>
       <Container maxWidth="lg" style={{ marginTop: "2rem", fontSize: "0.8rem", padding: 0 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>

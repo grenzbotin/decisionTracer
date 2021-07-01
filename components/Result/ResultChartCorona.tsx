@@ -7,6 +7,7 @@ import { Decision as DecisionType } from "@/../lib/presets";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import { generateColors } from "../theme";
 import { ChartType, LegendItem, TooltipItem } from "chart.js";
+import { applyFormatting } from "@/../lib/helpers";
 
 function getResultValues(decisions: Array<DecisionType>): Array<number> {
   const results = decisions.map((decision) => {
@@ -126,20 +127,21 @@ const ResultChartCorona = (): JSX.Element => {
   return (
     <>
       <div style={{ marginBottom: "2rem" }}>
-        <Typography variant="subtitle2" gutterBottom style={{ marginTop: "1rem" }}>
-          {i18next.t("calculator.interpretation")}
+        <Typography variant="body2" gutterBottom>
+          {applyFormatting(
+            i18next.t(winner.length > 1 ? "calculator.interpretation_text_pl" : "calculator.interpretation_text", {
+              decision: winner.join(" & ")
+            })
+          )}
         </Typography>
         <Typography variant="body2" gutterBottom>
-          {i18next.t(winner.length > 1 ? "calculator.interpretation_text_pl" : "calculator.interpretation_text", {
-            decision: winner.join(" & ")
-          })}
-        </Typography>
-        <Typography variant="body2" gutterBottom>
-          {i18next.t("calculator.interpretation_insights", {
-            value: ratio,
-            loser: loser[0],
-            winner: winner[0]
-          })}
+          {applyFormatting(
+            i18next.t("calculator.interpretation_insights", {
+              value: ratio,
+              loser: loser[0],
+              winner: winner[0]
+            })
+          )}
         </Typography>
       </div>
       <div style={{ position: "relative", height: "40vh", width: "90%" }}>

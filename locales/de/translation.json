@@ -6,10 +6,9 @@
     "add_sub_case": "Fall hinzufügen",
     "expected_utility": "Erwartungsnutzen",
     "independent": "Unabhängig",
-    "interpretation": "Interpretation",
-    "interpretation_text": "{{ decision }} scheint für Dich die bessere Alternative zu sein.",
-    "interpretation_text_pl": "{{ decision }} scheinen für Dich die besseren Alternativen zu sein.",
-    "interpretation_insights": "Beide Optionen sind negativ, Du solltest das geringere Übel wählen. \"{{ winner }}\" ist in Deinem Fall etwa {{ value }} mal besser als \"{{ loser }}\".",
+    "interpretation_text": "_{{ decision }}_ ist die beste Alternative!",
+    "interpretation_text_pl": "_{{ decision }}_ sind die besten Alternativen!",
+    "interpretation_insights": "Beide Optionen sind negativ, Du solltest das geringere Übel wählen. _{{ winner }}_ ist in Deinem Fall etwa {{ value }} mal besser als _{{ loser }}_.",
     "new_decision": "Entscheidung",
     "no_decisions_created": "Keine Entscheidungen erstellt",
     "probability": "Wahrscheinlichkeit",
@@ -41,7 +40,9 @@
     "expert_mode": "Profi-Modus"
   },
   "home": {
-    "intro": "Mit unserem Tool wollen wir Dich dabei unterstützen, eine rationale Entscheidung zu treffen. Du kannst Alternativen gegenüberstellen, Ihre Vor- und Nachteile bewerten und Dir ein Ergebnis berechnen lassen.\n Du kannst Dinge, die Du berücksichtigen möchtest, hinzufügen oder bestehende Elemente verändern. Alle Werte, die Du eingibst oder übernimmst, kannst Du später verändern und schauen, ob dadurch die Entscheidung kippt.\nNatürlich kann das Tool lediglich eine Hilfe sein. Wir wollen Dir helfen, Deine Entscheidung zu reflektieren. Das Ergebnis hängt von Deinen Eingaben ab. Du bist für Deine Entscheidung verantwortlich, Du musst sie treffen.\n Um das Prinzip zu verstehen, solltest Du Dir zunächst das Tutorial anschauen. (Siehe Karte: \"Kopf oder Zahl\")\n Eine rationale Entscheidung bezüglich der Corona-Impfung kannst Du Dir mit Klick auf die zweite Karte herleiten. (Siehe Karte \"Corona\")\n Du kannst aber auch etwas ganz Eigenes entwerfen. (Siehe Karte \"Eigener Entscheidungsbaum\")\n Viel Spaß!",
+    "title": "Die Rational Decision Entscheidungshilfe",
+    "subtitle": "Ein Tool um rationale Entscheidungen zu berechnen",
+    "intro": "Mit unserem Tool wollen wir Dich dabei unterstützen, eine rationale Entscheidung zu treffen. Du kannst Alternativen gegenüberstellen, Ihre Vor- und Nachteile bewerten und Dir ein Ergebnis berechnen lassen.\nEingegebene Werte kannst und sollst Du verändern und schauen, ob dadurch die Entscheidung kippt. So kannst Du reflektieren, unter welchen Annahmen eine Entscheidung eindeutig ist.\nNatürlich kann das Tool lediglich eine Hilfe sein. Wir wollen Dir helfen, Deine Entscheidung zu reflektieren. Das Ergebnis hängt von Deinen Eingaben ab. Du bist für Deine Entscheidung verantwortlich, Du musst sie treffen.\n Viel Spaß!",
     "youtube": "Mit Klick auf das Abspielen-Symbol stellen wir eine Verbindung mit YouTube her um Euch ein Video zu zeigen. Dabei werden Daten mit den YouTube - Servern ausgetauscht.",
     "meta": {
       "description": "Entscheidungen mit Köpfchen treffen - Rational Decision hilft Dir, Deine Optionen durchdacht abzuwägen.",
@@ -118,30 +119,30 @@
           "title": "Spiel 2"
         }
       },
-      "description": "Ein kleines Tutorial zum Verstehen und Ausprobieren des Tools",
+      "description": "Die Mathematik und das Prinzip verstehen",
       "meta": {
         "description": "Kopf oder Zahl: Spielen oder nicht? Das Tutorial von Rational Decision",
         "keywords": "Kopf oder Zahl, Tutorial, Entscheidung, Hilfe, Rechner",
         "title": "Kopf oder Zahl? | Rational Decision"
       },
-      "question": "Tutorial",
+      "question": "Ausführliches Tutorial",
       "questionnaire": {
         "0": {
           "text": "Unser kleines Tool soll Euch eine Entscheidungshilfe sein. Es soll Euch dabei unterstützen, in komplizierten Situationen den Überblick zu bewahren und Eure Entscheidung zu reflektieren.\nVor allem, wenn viele Aspekte zu berücksichtigen sind und das Gesamtbild schwer zu überblicken ist, verlassen sich Menschen auf ihr Bauchgefühl. Geht es um die Wandfarbe im Flur, ist das völlig in Ordnung. Geht es wie bei Corona um Fragen mit enormer Tragweite, so sollte die Entscheidung möglichst rational sein. Wir sollten möglichst alle relevanten Informationen berücksichtigen.\nInsbesondere, wenn kleine Wahrscheinlichkeiten ins Spiel kommen, können uns Bauchentscheidungen hinters Licht führen. Wir können intuitiv kaum zwischen einer 0,001%igen und einer 0,00001%igen Eintrittswahrscheinlichkeit unterscheiden, obwohl die eine Variante 100 mal wahrscheinlicher ist. Beide sind für uns _extrem unwahrscheinlich_.\nWas unser Tool macht, ist eigentlich einfache Wahrscheinlichkeitsrechnung. Da bekanntlich Stochastik nicht für alle das Highlight des Mathe-Unterrichts war, möchten wir Euch erklären, wie unser Tool und die Berechnungen dahinter funktionieren."
         },
         "1": {
-          "text_1": "Nehmen wir an, jemand bietet uns eine kleine Wette an: Eine Münze wird geworfen, bei Kopf bekommen wir 10,- Euro, bei Zahl bekommen wir nichts. Die beiden Möglichkeiten – Kopf oder Zahl – die eintreten können, heißen bei uns _Szenarien_. Die Möglichkeit, dass die Münze genau auf der Kante stehenbleibt, ignorieren wir. Beide Szenarien haben jeweils eine Eintrittswahrscheinlichkeit von 50%. In unserem Tool wird die Situation so dargestellt:",
+          "text_1": "Nehmen wir an, jemand bietet uns eine kleine Wette an (Spiel 1): Eine Münze wird geworfen, bei Kopf bekommen wir 10,- Euro, bei Zahl bekommen wir nichts. Die beiden Möglichkeiten – Kopf oder Zahl – die eintreten können, heißen bei uns _Szenarien_. Die Möglichkeit, dass die Münze genau auf der Kante stehenbleibt, ignorieren wir. Beide Szenarien haben jeweils eine Eintrittswahrscheinlichkeit von 50%. In unserem Tool wird die Situation so dargestellt:",
           "text_2": "Eine Eintrittswahrscheinlichkeit von 50%, bedeutet, dass in 50 von 100 Fällen das jeweilige Ereignis eintritt. (_Prozent_ bedeutet _von hundert_). 50%, also 50 von 100 sind in der Mathematik 50 geteilt durch 100, also 50 / 100 = 0,5. Da sich die Ereignisse Kopf und Zahl gegenseitig ausschließen, aber eins von beiden eintreten wird, ist die Summe der Wahrscheinlichkeiten 100% oder 1.\nWas wir berechnen wollen, ist der sogenannte _Erwartungswert_. Dazu muss die Eintrittswahrscheinlichkeit mit der Auszahlung in Euro – also 0,- bzw. 10,- Euro – multipliziert werden. Der Erwartungswert von Kopf ist demnach 0,5 x 10 = 5. Der Erwartungswert von Zahl ist 0,5 x 0 = 0. Der Erwartungswert von Spiel 1, also des Münzwurfs, ist die Summe der beiden einzelnen Erwartungswerte, also 5 + 0 = 5.\nDoch was bedeutet dieses Ergebnis? Bei einem einzigen Münzwurf ist die Wahrscheinlichkeit, 10,- Euro oder gar nichts zu bekommen fifty-fifty. Die Möglichkeit, 5,- Euro zu bekommen, gibt es nicht. Doch je häufiger ich die Münze werfe, desto mehr wird sich der _Durchschnitt_ der Ergebnisse der 5 annähern."
         },
         "2": {
-          "text_1": "Wenn die Teilnahme an diesem Münzwurf-Spiel also Geld kostet, dann sollten wir nur spielen, wenn der Preis unter 5,- Euro liegt. Bei diesem einfachen Beispiel wäre das vermutlich auch ohne komplizierte Berechnung klar gewesen.\nDie Alternative zum Spiel ist natürlich, dass wir nicht spielen. Dann bleiben die 5,- Euro mit hundertprozentiger Sicherheit bei uns in der Tasche. Der Erwartungswert dieser Entscheidung ist also 5. Natürlich sollten wir uns für die Alternative mit dem höchsten Erwartungswert entscheiden. In unserem Tool sieht die Situation so aus:"
+          "text_1": "Wenn die Teilnahme an diesem Münzwurf-Spiel also Geld kostet, dann sollten wir nur spielen, wenn der Preis unter 5,- Euro liegt. Bei diesem einfachen Beispiel wäre das vermutlich auch ohne komplizierte Berechnung klar gewesen.\nDie Alternative zum Spiel ist natürlich, dass wir nicht spielen. Dann bleiben die 5,- Euro mit hundertprozentiger Sicherheit bei uns in der Tasche. Der Erwartungswert dieser Entscheidung ist also auch 5. Natürlich sollten wir uns für die Alternative mit dem höchsten Erwartungswert entscheiden. In unserem Tool sieht die Situation so aus:"
         },
         "3": {
           "text_1": "Doch was ist, wenn die Münze gezinkt ist, so dass Kopf eine Wahrscheinlichkeit von 53% hat? Und wenn außerdem die Auszahlung bei Kopf nicht 10,- Euro, sondern 12,- Euro ist und wir bei Zahl zusätzlich 2,- Euro zahlen müssen? Sollten wir das Spiel für 5,- Euro spielen? Hilft uns jetzt unser Bauchgefühl weiter?",
-          "text_2": "Der Erwartungswert ist jetzt (0,53 x 12) + (0,47 x -2) = 5,42. Bei einem Preis von 5,- Euro pro Spiel sollten wir also spielen, es wird sich langfristig auszahlen, zumindest bei sehr vielen Spielen."
+          "text_2": "Der Erwartungswert ist jetzt (0,53 x 12) + (0,47 x -2) = 5,42. Bei einem Preis von 5,- Euro pro Spiel sollten wir also spielen. Es wird sich langfristig auszahlen, zumindest bei sehr vielen Spielen."
         },
         "4": {
-          "text_1": "Doch wir wollen Euch ja nicht bei Münzwurf-Spielen, sondern bei ganz allgemeinen Entscheidungen (wie der Impfentscheidung) unterstützen. Und da gibt es keine Ein- oder Auszahlungen. Wie kommen wir hier weiter?\nFür die Entscheidung ist eigentlich nicht der absolute Wert der Auszahlung, sondern nur das Verhältnis der Werte zueinander entscheidend! Wir können die Auszahlungen und den Preis des Spiels verdoppeln, am Ergebnis ändert sich nichts. Diese Tatsache können wir nutzen, indem wir den verschiedenen Szenarien Punkte zuordnen: Pluspunkte für Dinge, die uns freuen, Minuspunkte für Dinge, die wir nicht wollen. Ist uns etwas egal, bekommt es 0 Punkte. Je mehr wir etwas wollen oder nicht wollen, desto mehr Plus- oder Minuspunkte bekommt es. Hier könnt und müsst Ihr mit den Eingaben spielen, bis sie Eurer eigenen Bewertung entsprechen.\nWahrscheinlichkeiten solltet Ihr aus seriösen Studien entnehmen; wir haben Euch einige verlinkt. Es ist gewollt, dass Ihr Werte verändert und mit ihnen spielt. Bleibt aber realistisch, damit ihr Euch nicht selbst betrügt. Passt auf, dass ihr nicht nur das seht, was ihr sehen wollt!\nIm nächsten Bildschirm gelangt Ihr zu den Münzwurf-Spielen. Wenn Ihr das Prinzip verstanden habt, könnt Ihr auch ganz eigene Szenarien oder Sub-Szenarien hinzufügen.\nÜber den Button _+ Entscheidung_ könnt Ihr eine weitere Entscheidungsalternative hinzufügen. Daneben gelangt Ihr mit den vier Buttons in die verschiedenen Ansichten: \n1.(dieses) Eingabe-Formular\n2. die Entscheidungsbaum-Ansicht\n3. die Kartenansicht mit allen Werten\n4. die Ergebnisansicht mit dem Rechenweg.\nGeht Ihr zurück zur Startseite oder in das Menü rechts oben, könnt Ihr Euch anschauen, unter welchen Bedingungen man sich gegen Corona impfen lassen sollte oder nicht. Und selbstverständlich könnt Ihr das Tool auch völlig frei verwenden und eigene Entscheidungsbäume entwerfen: Masern-Impfung, Wandfarbe im Flur oder die nächste Investitions-Entscheidung in Eurem Unternehmen. Viel Spaß!"
+          "text_1": "Doch wir wollen Euch ja nicht bei Münzwurf-Spielen, sondern bei ganz allgemeinen Entscheidungen (wie der Impfentscheidung) unterstützen. Und da gibt es keine Ein- oder Auszahlungen. Wie kommen wir hier weiter?\nFür die Entscheidung ist eigentlich nicht der absolute Wert der Auszahlung, sondern nur das Verhältnis der Werte zueinander entscheidend! Wir können die Auszahlungen und den Preis des Spiels verdoppeln, am Ergebnis ändert sich nichts. Diese Tatsache können wir nutzen, indem wir den verschiedenen Szenarien Punkte zuordnen: Pluspunkte für Dinge, die uns freuen, Minuspunkte für Dinge, die wir nicht wollen. Ist uns etwas egal, bekommt es 0 Punkte. Je mehr wir etwas wollen oder nicht wollen, desto mehr Plus- oder Minuspunkte bekommt es. Hier könnt und müsst Ihr mit den Eingaben spielen, bis sie Eurer eigenen Bewertung entsprechen.\n Es ist gewollt, dass Ihr Werte verändert und mit ihnen spielt. Bleibt aber realistisch, damit ihr Euch nicht selbst betrügt. Passt auf, dass ihr nicht nur das seht, was ihr sehen wollt!\nIm nächsten Bildschirm gelangt Ihr zu den Münzwurf-Spielen. Wenn Ihr das Prinzip verstanden habt, könnt Ihr eigene Szenarien oder Sub-Szenarien hinzufügen.\nÜber den Button _+ Entscheidung_ könnt Ihr eine weitere Entscheidungsalternative hinzufügen. Daneben gelangt Ihr mit den vier Buttons in die verschiedenen Ansichten: \n1. diese Einleitung\n2. die Entscheidungsbaum-Ansicht\n3. die Kartenansicht mit allen Werten\n4. die Ergebnisansicht mit dem Rechenweg.\nGeht Ihr zurück zur Startseite oder in das Menü rechts oben, könnt Ihr Euch anschauen, unter welchen Bedingungen man sich gegen Corona impfen lassen sollte oder nicht. Und selbstverständlich könnt Ihr das Tool auch völlig frei verwenden und eigene Entscheidungsbäume entwerfen: Masern-Impfung, Wandfarbe im Flur oder die nächste Investitions-Entscheidung in Eurem Unternehmen. Viel Spaß!"
         }
       },
       "title": "Kopf oder Zahl?"
@@ -210,7 +211,7 @@
           "title": "Impfen"
         }
       },
-      "description": "Entscheidungshilfe mit einfachem Entscheidungsbaum",
+      "description": "Eine Impf-Entscheidungshilfe",
       "get_data_for": "Lade Daten für",
       "get_data_tooltip": "Mit Klick auf diesen Button lädst Du die aktuellen Corona-Daten in Deutschland vom Robert Koch-Institut (RKI). Wir berechnen die aktuelle Infiziertenanzahl (aktive Fälle) als Differenz der Anzahl der Infizierten abzüglich der Genesenen und der Todesfälle in Deutschland . \n Die Daten wurden bereitgestellt durch Marlon Lueckert \n https://github.com/marlon360/rki-covid-api",
       "meta": {
@@ -236,7 +237,6 @@
             "potential_infected": "Wahrscheinlichkeit, dass ein Mensch infiziert ist"
           },
           "intro": "Mit unserem kleinen Tool wollen wir so rational wie möglich an die Impfentscheidung herangehen. Alle für Dich relevanten Aspekte sollen berücksichtigt und bewertet werden. Um den Einstieg zu erleichtern haben wir eine Basis-Konfiguration erstellt, die Du nach Belieben anpassen und erweitern kannst. Alle Werte, die Du eingibst oder übernimmst, kannst Du später verändern und schauen, ob dadurch die Entscheidung kippt.",
-          "subtitle": "In einem ersten Schritt wollen wir die Wahrscheinlichkeit berechnen, einer infizierten Person zu begegnen.",
           "title": "Wie wahrscheinlich ist es, dass man sich mit Corona infiziert?",
           "tooltip": "_Personen treffen_ bedeutet in diesem Zusammenhang mit Menschen Kontakt zu haben, so dass ich mich bei ihnen anstecken könnte, wenn sie infektiös sind.\n Nach einer Impfung würden wir uns bald wieder normal verhalten und andere Menschen treffen. Lässt man sich nicht impfen, so wird man sich auf absehbare Zeit trotzdem normal verhalten (oder auf Dauer von der Gesellschaft isolieren).\nDa wir _Impfen_ mit _Nicht Impfen_ vergleichen wollen, müssen wir das für den gleichen Zeitraum tun. Wenn wir glauben, dass die Impfung einmal pro Jahr aufgefrischt werden muss, dann sollten wir uns überlegen, wie viele Menschen wir in einem Jahr treffen.\nDie Impfung senkt die Infektionswahrscheinlichkeit möglicherweise über viele Jahre. Verändert sich das Virus, kann auch eine jährliche Impfung notwendig werden, das wissen wir jetzt noch nicht. Wenn wir nicht Äpfel mit Birnen vergleichen wollen, müssen wir den gleichen Zeitraum für die beiden Möglichkeiten betrachten. Wir müssen uns also fragen, wie viele Menschen wir treffen, bevor wir uns erneut impfen lassen.\nSo kann die rechnerische (!) Wahrscheinlichkeit einer Infektion leicht 100% überschreiten. Das ist nicht falsch. Wenn das Virus weiterhin in der Welt kursiert und wir uns verhalten wie vor der Pandemie, werden wir uns früher oder später anstecken. In diesem Fall nehmen wir als Voreinstellung eine Wahrscheinlichkeit von 100% an, Du kannst das gern ändern."
         },
@@ -278,7 +278,7 @@
         "result": {
           "title": "Ergebnis",
           "text_1": "Du kannst die Eingabe noch einmal neu starten und Dir anschauen, ob andere Eingaben das Ergebnis verändern.",
-          "text_2": "Wenn Du wissen möchtest, wie die Ergebnisse berechnet werden, oder wenn Du weitere Aspekte berücksichtigen möchtest, nimm Dir etwas Zeit und schaue Dir den Profi-Modus an!"
+          "text_2": "Wenn Du wissen möchtest, wie die Ergebnisse berechnet werden, oder wenn Du weitere Aspekte berücksichtigen möchtest, nimm Dir etwas Zeit und schaue Dir den Profi-Modus an! Du solltest ungefähr 10 Minuten einplanen."
         },
         "3": {
           "calc": {
@@ -312,7 +312,7 @@
         "5": {
           "subtitle": "Um die Wahrscheinlichkeiten der verschiedenen Krankheitsverläufe durch Covid-19 zu bestimmen, benötigen wir die Angabe von Alter und Geschlecht.",
           "title": "Persönliche Daten",
-          "tooltip": "Die zugrunde liegenden Daten werden regelmäßig vom European Centre for Disease Prevention and Control (ecdc) entnommen. \n https://covid19-surveillance-report.ecdc.europa.eu",
+          "tooltip": "Die Wahrscheinlichkeiten haben wir anhand von Daten des European Centre for Disease Prevention and Control (ecdc) berechnet. \n https://covid19-surveillance-report.ecdc.europa.eu",
           "female": "weiblich",
           "male": "männlich",
           "age": "Alter",
@@ -340,7 +340,7 @@
           "question": "Mit welchem Wert möchtest Du rechnen?"
         }
       },
-      "title": "Corona"
+      "title": "Covid-19"
     },
     "custom": {
       "description": "Erstelle einen eigenen Entscheidungsbaum ohne Voreinstellungen",
@@ -349,7 +349,7 @@
         "keywords": "Entscheidungsbaum, individuell, erstellen, Entscheidungshilfe, Tool, Richtig entscheiden, Rechner",
         "title": "Eigener Entscheidungsbaum | Rational Decision"
       },
-      "question": "Was sollte ich tun?",
+      "question": "Eigene Entscheidungen anlegen",
       "title": "Eigener Entscheidungsbaum"
     }
   }

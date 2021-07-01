@@ -28,8 +28,11 @@ export default function LangIndex(): JSX.Element {
         metaImg="meta_home"
       />
       <Card variant="outlined" style={{ margin: "1rem 0 2rem 0", padding: "1rem" }}>
-        <Typography variant="h6" gutterBottom>
-          Howdy!
+        <Typography variant="h5" gutterBottom component="h1">
+          {i18next.t("home.title")}
+        </Typography>
+        <Typography variant="subtitle2" gutterBottom component="h2">
+          {i18next.t("home.subtitle")}
         </Typography>
         {i18next
           .t("home.intro")

@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import dynamic from "next/dynamic";
 import i18next from "i18next";
 import { GlobalDecisionContext } from "../../hooks/GlobalDecisionsContextProvider";
-import { Typography } from "@material-ui/core";
 import SentimentDissatisfiedOutlinedIcon from "@material-ui/icons/SentimentDissatisfiedOutlined";
 import SentimentSatisfiedOutlinedIcon from "@material-ui/icons/SentimentSatisfiedOutlined";
 
 import { generateColors, PRIMARY, SECONDARY } from "../theme";
 import { Decision as DecisionType } from "@/../lib/presets";
+import { applyFormatting } from "@/../lib/helpers";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -111,14 +111,13 @@ function ResultChart({ height = 300 }: { height?: number; mobile?: boolean }): J
   return decisions.length > 0 ? (
     <>
       <div style={{ marginBottom: "1rem" }}>
-        <Typography variant="subtitle2" gutterBottom style={{ marginTop: "1rem" }}>
-          {i18next.t("calculator.interpretation")}
-        </Typography>
-        {i18next.t(
-          bestAlternatives.length > 1 ? "calculator.interpretation_text_pl" : "calculator.interpretation_text",
-          {
-            decision: bestAlternatives.join(" & ")
-          }
+        {applyFormatting(
+          i18next.t(
+            bestAlternatives.length > 1 ? "calculator.interpretation_text_pl" : "calculator.interpretation_text",
+            {
+              decision: bestAlternatives.join(" & ")
+            }
+          )
         )}
       </div>
       <div style={{ position: "relative" }}>

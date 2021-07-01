@@ -70,7 +70,7 @@ export default function ValuesProgressionSelection(): JSX.Element {
       hospitalised: 8,
       "severely-hospitalised": 20,
       death: 200,
-      "vaccination-damage": 150
+      "vaccination-damage": 250
     },
     valuesProgression
   ];
