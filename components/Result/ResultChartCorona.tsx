@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Bar } from "react-chartjs-2";
+import Chart from "react-chartjs-2";
 import { Typography } from "@material-ui/core";
 import i18next from "i18next";
 
@@ -145,7 +145,7 @@ const ResultChartCorona = (): JSX.Element => {
         </Typography>
       </div>
       <div style={{ position: "relative", height: "40vh", width: "90%" }}>
-        <Bar
+        <Chart
           type="bar"
           data={data}
           options={{
@@ -153,7 +153,7 @@ const ResultChartCorona = (): JSX.Element => {
             plugins: {
               legend: {
                 display: true,
-                position: "bottom",
+                position: "top",
                 labels: {
                   usePointStyle: true,
                   boxWidth: 6,
