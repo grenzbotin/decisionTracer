@@ -79,6 +79,38 @@ const useStyles = makeStyles((theme: Theme) =>
         duration: theme.transitions.duration.enteringScreen
       }),
       marginRight: 0
+    },
+    badge: {
+      position: "absolute",
+      left: "-7px",
+      top: "19px",
+      backgroundColor: "#F70000",
+      transform: "rotate(-45deg) scale(1) skew(0deg) translate(10px)",
+      textAlign: "center",
+      textTransform: "uppercase",
+      fontWeight: 600,
+      color: "white",
+      padding: "0 .5em",
+      borderTop: "0px",
+      lineHeight: "20px",
+      margin: "0",
+      zIndex: 1100,
+      "&::after": {
+        content: '""',
+        position: "absolute",
+        right: "-19px",
+        top: "0px",
+        borderRight: "20px solid transparent",
+        borderBottom: "20px solid #F70000"
+      },
+      "&::before": {
+        content: '""',
+        position: "absolute",
+        left: "-19px",
+        top: "0px",
+        borderLeft: "20px solid transparent",
+        borderBottom: "20px solid #F70000"
+      }
     }
   })
 );
@@ -163,6 +195,7 @@ export default function Layout({ children }: Props): JSX.Element {
           </div>
         </Toolbar>
       </AppBar>
+      <div className={classes.badge}>Beta</div>
       <div
         className={clsx(classes.content, {
           [classes.contentShift]: open
