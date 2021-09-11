@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://rational-decision.org
+
+# Sitemaps
+Sitemap: https://rational-decision.org/sitemap.xml

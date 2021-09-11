@@ -165,7 +165,7 @@ export default function Layout({ children }: Props): JSX.Element {
             </Link>
             {isHome && (
               <Typography
-                component="h1"
+                component="p"
                 variant="body1"
                 noWrap
                 className={classes.title}

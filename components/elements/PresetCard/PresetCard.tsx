@@ -57,7 +57,11 @@ export default function PresetCard({ preset }: { preset: Preset }): JSX.Element 
               <CustomIcon name={preset.icon} />
             </Avatar>
           }
-          title={i18next.t(preset.title)}
+          title={
+            <Typography variant="body2" component="h3">
+              {i18next.t(preset.title)}
+            </Typography>
+          }
         />
         <CardMedia
           component="img"
@@ -68,7 +72,7 @@ export default function PresetCard({ preset }: { preset: Preset }): JSX.Element 
         />
         <CardContent className={classes.content}>
           <div>
-            <Typography variant="body2" component="p">
+            <Typography variant="body2" component="h4">
               {i18next.t(preset.question)}
             </Typography>
             <Typography variant="caption" color="textSecondary" component="p">
