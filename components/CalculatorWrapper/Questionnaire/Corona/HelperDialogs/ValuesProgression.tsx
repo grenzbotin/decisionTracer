@@ -7,7 +7,7 @@ import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider
 import ValidatedInputField from "@/../components/elements/ValidatedInputField";
 import { applyFormatting, getPresetValueByField, getRoundedValue } from "@/../lib/helpers";
 import ValidatedValueField from "@/../components/elements/ValidatedValueField";
-import { CoronaPresetContext } from "./CoronaPresetContextProvider";
+import { CoronaPresetContext } from "../CoronaPresetContextProvider";
 
 const getInterpretationValues = (
   {

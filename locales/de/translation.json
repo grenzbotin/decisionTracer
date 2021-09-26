@@ -8,7 +8,8 @@
     "independent": "Unabhängig",
     "interpretation_text": "_{{ decision }}_ ist die beste Alternative!",
     "interpretation_text_pl": "_{{ decision }}_ sind die besten Alternativen!",
-    "interpretation_insights": "Beide Optionen sind negativ, Du solltest das geringere Übel wählen. _{{ winner }}_ ist in Deinem Fall etwa {{ value }} mal besser als _{{ loser }}_.",
+    "interpretation_insights_1": "Beide Optionen sind negativ, Du solltest das geringere Übel wählen. _{{ winner }}_ ist in Deinem Fall etwa",
+    "interpretation_insights_2": "mal besser als _{{ loser }}_.",
     "new_decision": "Entscheidung",
     "no_decisions_created": "Keine Entscheidungen erstellt",
     "probability": "Wahrscheinlichkeit",
@@ -45,8 +46,8 @@
     "intro": "Mit unserem Tool wollen wir Dich dabei unterstützen, eine rationale Entscheidung zu treffen. Du kannst Alternativen gegenüberstellen, Ihre Vor- und Nachteile bewerten und Dir ein Ergebnis berechnen lassen.\nEingegebene Werte kannst und sollst Du verändern und schauen, ob dadurch die Entscheidung kippt. So kannst Du reflektieren, unter welchen Annahmen eine Entscheidung eindeutig ist.\nNatürlich kann das Tool lediglich eine Hilfe sein. Wir wollen Dir helfen, Deine Entscheidung zu reflektieren. Das Ergebnis hängt von Deinen Eingaben ab. Du bist für Deine Entscheidung verantwortlich, Du musst sie treffen.\n Viel Spaß!",
     "youtube": "Mit Klick auf das Abspielen-Symbol stellen wir eine Verbindung mit YouTube her um Euch ein Video zu zeigen. Dabei werden Daten mit den YouTube - Servern ausgetauscht.",
     "meta": {
-      "description": "Entscheidungen mit Köpfchen treffen - Rational Decision hilft Dir, Deine Optionen durchdacht abzuwägen.",
-      "keywords": "Rechner, Entscheidungshilfe, Richtig entscheiden, Corona",
+      "description": "Entscheidungen rational fällen - Rational Decision hilft Dir, Deine Optionen durchdacht abzuwägen.",
+      "keywords": "Rechner, Entscheidungshilfe, rational, Covid-19, Impfen",
       "title": "Rational Decision | Startseite"
     }
   },
@@ -216,13 +217,19 @@
       "get_data_tooltip": "Mit Klick auf diesen Button lädst Du die aktuellen Corona-Daten in Deutschland vom Robert Koch-Institut (RKI). Wir berechnen die aktuelle Infiziertenanzahl (aktive Fälle) als Differenz der Anzahl der Infizierten abzüglich der Genesenen und der Todesfälle in Deutschland . \n Die Daten wurden bereitgestellt durch Marlon Lueckert \n https://github.com/marlon360/rki-covid-api",
       "meta": {
         "description": "Impfung: Ja oder nein? Sind die Nachteile einer Impfung es wert, nicht geimpft zu werden?",
-        "keywords": "Corona, Impfung, Entscheidung, Hilfe, Entscheidungshilfe, Impffrage, Corona impfen, Rechner",
+        "keywords": "Corona, impfen, Entscheidungshilfe, Rechner",
         "title": "Soll ich mich impfen lassen? | Rational Decision"
       },
       "save": "Auswählen",
       "selected": "Ausgewählt",
       "question": "Soll ich mich impfen lassen?",
       "questionnaire": {
+        "welcome": {
+          "title": "Impfen oder nicht impfen?",
+          "subtitle": "Wie Dir dieser Rechner helfen kann.",
+          "description_1": "Die Entscheidung, sich impfen zu lassen, ist nicht für jeden leicht zu fällen.",
+          "description_2": "Mit diesem Rechner möchten wir Dich dabei unterstützen, Deine Entscheidung für oder wider eine Impfung auf logischen Schlussfolgerungen und Einschätzungen fußen zu lassen, indem wir Dir Deinen persönlichen Nutzen gegenüber den möglichen Risiken stellen."
+        },
         "0": {
           "calc": {
             "dark_figure": "Dunkelziffer (x mal so viele Infizierte wie offiziell bekannt)",
@@ -346,7 +353,7 @@
       "description": "Erstelle einen eigenen Entscheidungsbaum ohne Voreinstellungen",
       "meta": {
         "description": "Eigener Entscheidungsbaum ohne Voreinstellungen",
-        "keywords": "Entscheidungsbaum, individuell, erstellen, Entscheidungshilfe, Tool, Richtig entscheiden, Rechner",
+        "keywords": "Entscheidungsbaum, erstellen, Entscheidungshilfe, Rechner",
         "title": "Eigener Entscheidungsbaum | Rational Decision"
       },
       "question": "Eigene Entscheidungen anlegen",

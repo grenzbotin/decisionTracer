@@ -1,8 +1,8 @@
-import ProbabilityInfection from "../Questionnaire/Corona/ProbabilityInfection";
-import ProbabilityVaccinationDamage from "../Questionnaire/Corona/ProbabilityVaccinationDamage";
-import ValuesProgression from "../Questionnaire/Corona/ValuesProgression";
-import PersonalDataSelectedInfo from "../Questionnaire/Corona/PersonalDataSelectedInfo";
-import PersonalDataVaccinationInfo from "../Questionnaire/Corona/PersonalDataVaccinationInfo";
+import ProbabilityInfection from "../Questionnaire/Corona/HelperDialogs/ProbabilityInfection";
+import ProbabilityVaccinationDamage from "../Questionnaire/Corona/HelperDialogs/ProbabilityVaccinationDamage";
+import ValuesProgression from "../Questionnaire/Corona/HelperDialogs/ValuesProgression";
+import PersonalDataSelectedInfo from "../Questionnaire/Corona/HelperDialogs/PersonalDataSelectedInfo";
+import PersonalDataVaccinationInfo from "../Questionnaire/Corona/HelperDialogs/PersonalDataVaccinationInfo";
 
 export function getHelperDialog(mode: string, props: Record<string, undefined | (() => void)>): JSX.Element {
   switch (mode) {

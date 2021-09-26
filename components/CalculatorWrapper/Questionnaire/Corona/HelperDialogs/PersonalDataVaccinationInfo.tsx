@@ -4,7 +4,7 @@ import i18next from "i18next";
 import Papa from "papaparse";
 
 import { applyFormatting, getPath } from "@/../lib/helpers";
-import { CoronaPresetContext } from "./CoronaPresetContextProvider";
+import { CoronaPresetContext } from "../CoronaPresetContextProvider";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import ValidatedProbabilityField from "@/../components/elements/ValidatedProbabilityField";
 import CustomTooltip from "@/../components/elements/CustomTooltip";

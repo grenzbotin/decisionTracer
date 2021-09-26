@@ -7,7 +7,7 @@ import ValidatedInputField from "@/../components/elements/ValidatedInputField";
 import { applyFormatting, getPresetValueByField, getRoundedValue } from "@/../lib/helpers";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 import CoronaCases from "./CoronaCases";
-import { CoronaPresetContext } from "./CoronaPresetContextProvider";
+import { CoronaPresetContext } from "../CoronaPresetContextProvider";
 
 export default function ProbabilityInfection({ handleClose }: { handleClose?: () => void }): JSX.Element {
   const i18nPrefix = "presets.corona.questionnaire.0";

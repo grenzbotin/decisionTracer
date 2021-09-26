@@ -7,6 +7,7 @@ interface Props {
   keywords?: string;
   metaImg?: string;
   noRobots?: boolean;
+  showSchema?: boolean;
 }
 
 const HtmlHeader: React.FC<Props> = ({
@@ -14,7 +15,8 @@ const HtmlHeader: React.FC<Props> = ({
   description,
   keywords = "",
   metaImg = "meta_home",
-  noRobots = false
+  noRobots = false,
+  showSchema = false
 }) => {
   const { asPath } = useRouter();
 
@@ -39,6 +41,23 @@ const HtmlHeader: React.FC<Props> = ({
         // eslint-disable-next-line max-len
         content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,shrink-to-fit=no"
       />
+      {showSchema && (
+        <>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "@id": `${basePath}/#organization`,
+                name: "Rational Decision",
+                url: `${basePath}/${lang}`,
+                logo: `${basePath}/img/meta_home_${lang}.png`
+              })
+            }}
+          />
+        </>
+      )}
     </Head>
   );
 };

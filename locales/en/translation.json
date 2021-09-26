@@ -8,7 +8,8 @@
     "independent": "independent",
     "interpretation_text": "_{{ decision }}_ is the best alternative for you.",
     "interpretation_text_pl": "_{{ decision }}_ are the best alternatives for you.",
-    "interpretation_insights": "Beide Optionen sind negativ, Du solltest das geringere Übel wählen. _{{ winner }}_ ist in Deinem Fall etwa {{ value }} mal besser als _{{ loser }}_.",
+    "interpretation_insights_1": "Beide Optionen sind negativ, Du solltest das geringere Übel wählen. _{{ winner }}_ ist in Deinem Fall etwa",
+    "interpretation_insights_2": "mal besser als _{{ loser }}_.",
     "new_decision": "Decision",
     "no_decisions_created": "No decisions created",
     "probability": "Occurence probability",
@@ -40,13 +41,13 @@
     "expert_mode": "Expert mode"
   },
   "home": {
-    "title": "The Rational Decision decision tracer",
+    "title": "The Rational Decision Making Helper",
     "subtitle": "A tool to calculate rational decisions",
-    "intro": "With our tool we want to support you to make a rational decision. You can compare alternatives, score their advantages and disadvanteges and calculate a result.\n You can add things you want to consider or modify existing elements.\nThis tool only can be an assistance, of course. We want to help you to reflect your decision making. The result depends on your inputs. You are responsible for your decision, you have to decide.\n For understanding the principle you should have a look at the tutorial. (card: \"Heads or tails\")\nYou can have a look at a deduction for a rational decision regarding the corona vaccination with a click on the second card. (card: \"Corona\")\n You can also conceive something completey new. (card: \"own decision tree\")\n Have fun!",
+    "intro": "With our tool we want to support you to make a rational decision. You can compare alternatives, score their advantages and disadvanteges and calculate a result.\n You can add things you want to consider or modify existing elements.\nThis tool only can be an assistance, of course. We want to help you to reflect your decision making. The result depends on your inputs. You are responsible for your decision, you have to decide.\n For understanding the principle you should have a look at the tutorial. (card: \"Heads or tails\")\nYou can have a look at a deduction for a rational decision regarding the corona vaccination with a click on the second card. (card: \"Covid-19\")\n You can also conceive something completey new. (card: \"own decision tree\")\n Have fun!",
     "youtube": "With clicking on the play symbol we will establish a connection with YouTube to show you a video - given that, there will be a data transfer with the youtube servers.",
     "meta": {
-      "description": "Make decisions with confidence. Rational decision guides you through a rational based decision making process.",
-      "keywords": "Calculator, Decision helper",
+      "description": "Make decisions with confidence. Rational Decision guides you through a rational based decision making process.",
+      "keywords": "Calculator, Rational decision, decision making, Covid-19",
       "title": "Rational Decision | Home"
     }
   },
@@ -122,7 +123,7 @@
       "description": "A little tutorial for understanding the tool",
       "meta": {
         "description": "Heads or Tails: Should I bet or not? The tutorial from Rational Decision",
-        "keywords": "Heads or Tails, Tutorial, Decision, Help, Calculator",
+        "keywords": "Heads or Tails, Tutorial, Rational Decision, Help, Calculator",
         "title": "Heads or Tails? | Rational Decision"
       },
       "question": "Tutorial",
@@ -216,13 +217,19 @@
       "get_data_tooltip": "Clicking this button will load data about the current corona situation in Germany (Robert Koch-Institut). We calculate the number of currently infected persons as difference of the complete number of infected persons minus recovered persons and deaths.\n Data provided by Marlon Lueckert \n https://github.com/marlon360/rki-covid-api",
       "meta": {
         "description": "Vaccination: Yes or no? Are disadvantages of a vaccination higher than the benefits?",
-        "keywords": "Corona, vaccination, decision, help, calculator",
+        "keywords": "Corona, vaccinated, rational decision, help",
         "title": "Should I get vaccinated? | Rational Decision"
       },
       "save": "Select",
       "selected": "Selected",
       "question": "Should I get vaccinated?",
       "questionnaire": {
+        "welcome": {
+          "title": "Impfen oder nicht impfen?",
+          "subtitle": "Wie Dir dieser Rechner helfen kann.",
+          "description_1": "Die Entscheidung, sich impfen zu lassen, ist nicht für jeden leicht zu fällen.",
+          "description_2": "Mit diesem Rechner möchten wir Dich dabei unterstützen, Deine Entscheidung für oder wider eine Impfung auf logischen Schlussfolgerungen und Einschätzungen fußen zu lassen, indem wir Dir Deinen persönlichen Nutzen gegenüber den möglichen Risiken stellen."
+        },
         "0": {
           "calc": {
             "dark_figure": "Dark figure (x times as many cases as known)",
@@ -340,13 +347,13 @@
           "question": "Mit welchem Wert möchtest Du rechnen?"
         }
       },
-      "title": "Corona"
+      "title": "Covid-19"
     },
     "custom": {
       "description": "Create an own decision tree without presettings.",
       "meta": {
         "description": "Own decision tree without presettings",
-        "keywords": "Decision tree, individual, create, decision helper, calculator",
+        "keywords": "Decision tree, create, decision helper, calculator",
         "title": "Own decision tree | Rational Decision"
       },
       "question": "What should I do?",

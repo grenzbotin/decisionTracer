@@ -5,7 +5,7 @@ import Papa from "papaparse";
 
 import CustomTooltip from "@/../components/elements/CustomTooltip";
 import { applyFormatting, getPath, getRoundedValue } from "@/../lib/helpers";
-import { CoronaPresetContext } from "./CoronaPresetContextProvider";
+import { CoronaPresetContext } from "../CoronaPresetContextProvider";
 import { GlobalDecisionContext } from "@/../hooks/GlobalDecisionsContextProvider";
 
 async function fetchCsv(): Promise<string> {

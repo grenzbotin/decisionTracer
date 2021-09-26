@@ -50,9 +50,6 @@ i18next.use(LanguageDetector).init({
 	defaultNS: 'translations',
 	returnObjects: true,
 	debug: false,
-	interpolation: {
-		escapeValue: false, // not needed for react!!
-	},
 	react: {
 		wait: true,
 	},

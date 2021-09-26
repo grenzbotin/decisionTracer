@@ -26,6 +26,7 @@ export default function LangIndex(): JSX.Element {
         description={i18next.t("home.meta.description")}
         keywords={i18next.t("home.meta.keywords")}
         metaImg="meta_home"
+        showSchema
       />
       <Card variant="outlined" style={{ margin: "1rem 0 2rem 0", padding: "1rem" }}>
         <Typography variant="h5" gutterBottom component="h1">
